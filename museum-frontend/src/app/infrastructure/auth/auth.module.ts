@@ -7,8 +7,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from '../routing/app-routing.module';
 
-
-
 @NgModule({
   declarations: [
     LoginComponent,

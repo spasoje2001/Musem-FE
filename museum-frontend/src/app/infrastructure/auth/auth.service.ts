@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TokenStorage } from './jwt/token.service';
 import { environment } from 'src/env/environment';
-//import { JwtHelperService } from '@auth0/angular-jwt';
-//import { Login } from './model/login.model';
-//import { AuthenticationResponse } from './model/authentication-response.model';
-//import { User } from './model/user.model';
-//import { Registration } from './model/registration.model';
+import { AuthenticationResponse } from './model/authentication-response.model';
+import { Login } from './model/login.model';
+import { Registration } from './model/registration.model';
+import { User } from './model/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
