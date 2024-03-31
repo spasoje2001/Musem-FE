@@ -2,44 +2,72 @@
   <div>
     <p>Museum</p>
     <div id="buttons">
-      <button
-        *ngIf="user && user.username === ''"
-        color="accent"
-        mat-raised-button
-        [routerLink]="['login']"
+      <button 
+              *ngIf="user && user.username === ''"
+              color="accent"
+              mat-raised-button
+              [routerLink]="['login']"
       >
       <fa-icon [icon]="faSignIn" />    
         &nbsp;Login
       </button>
 
-      <button color="primary" mat-raised-button [routerLink]="['home']">
+      <button 
+              color="white"
+              mat-raised-button 
+              [routerLink]="['home']">
         <fa-icon [icon]="faHome" />    
         &nbsp;Home
       </button>
     
-      <button *ngIf="user && user.role !== 'ROLE_COMPANY_ADMINISTRATOR'" 
-              color="primary" 
+      <button 
+              color="white" 
+              mat-raised-button 
+              [routerLink]="['home']"> 
+        <fa-icon [icon]="faInstitution" />    
+        &nbsp;Exhibitions
+      </button>
+
+      <button 
+              color="white" 
+              mat-raised-button 
+              [routerLink]="['home']"> <!-- PROMENITI PUTANJU -->
+        <fa-icon [icon]="faBinoculars" />    
+        &nbsp;Tours
+      </button>
+
+      <button 
+              color="white"
+              mat-raised-button 
+              [routerLink]="['home']"> <!-- PROMENITI PUTANJU -->
+        <fa-icon [icon]="faCalendar" />    
+        &nbsp;Events
+      </button>
+
+      <button 
+              *ngIf="user" 
+              color="white"
               mat-raised-button 
               [routerLink]="['register']"
       >
-      <fa-icon [icon]="faUser" />    
+      <fa-icon [icon]="faPencilSquare" />    
         &nbsp;Register
       </button>
       
-      <button
-        *ngIf="user && user.role === 'ROLE_REGISTERED_USER'"
-        color="primary"
-        mat-raised-button
-        [routerLink]="['userProfile']"
+      <button 
+              *ngIf="user"
+              color="white"
+              mat-raised-button
+              [routerLink]="['userProfile']"
       >
       <fa-icon [icon]="faUser" />    
         &nbsp;My profile
       </button>
-      <button
-        *ngIf="user && user.username !== ''"
-        color="accent"
-        mat-raised-button
-        (click)="onLogout()"
+
+      <button *ngIf="user && user.username !== ''"
+              color="accent"
+              mat-raised-button
+              (click)="onLogout()"
       >
       <fa-icon [icon]="faSignOut" />    
         &nbsp;Logout

@@ -5,8 +5,13 @@ import {
   faUser,
   faSignOut,
   faSignIn,
-  faFileText,
-  faHome
+  faHome,
+  faInstitution,
+  faCalendar,
+  faBuilding,
+  faBookmark,
+  faBinoculars,
+  faPencilSquare
  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -33,6 +38,11 @@ export class NavbarComponent {
   faUser = faUser;
   faSignOut = faSignOut;
   faSignIn = faSignIn;
-  faFileText = faFileText;
+  faPencilSquare = faPencilSquare;
   faHome = faHome;
+  faInstitution = faInstitution;
+  faCalendar = faCalendar;
+  faBuilding = faBuilding;
+  faBookmark = faBookmark;
+  faBinoculars = faBinoculars;
 }
