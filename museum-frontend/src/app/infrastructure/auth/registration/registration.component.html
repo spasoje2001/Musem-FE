@@ -1,25 +1,67 @@
-<form [formGroup]="registrationForm" (ngSubmit)="register()">
-  <div>
-      <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" type="text"/>
-      </mat-form-field>
-      <mat-form-field>
-          <mat-label>Surname</mat-label>
-          <input matInput formControlName="surname" type="text"/>
-      </mat-form-field>
-      <mat-form-field>
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" type="text"/>
-      </mat-form-field>
-      <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="text"/>
-      </mat-form-field>
-      <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" type="password"/>
-      </mat-form-field>
-  <button color="primary" type="submit" mat-raised-button>Register</button>
-  </div>
-</form>
+<body>
+    <div class="wrapper" [@fadeInOut]>
+        <form [formGroup]="registrationForm" (ngSubmit)="register()">
+            <h1>Register</h1>
+            <div class="input-box">
+                <input 
+                        type="text" 
+                        formControlName="name" 
+                        required
+                />
+                <label [class.active]="registrationForm.get('name')?.value || focused === 'name'">Name</label>
+            </div>
+            <div class="input-box">
+                <input 
+                        type="text" 
+                        formControlName="surname"
+                        required
+                />
+                <label [class.active]="registrationForm.get('surname')?.value || focused === 'surname'">Surname</label>
+            </div>
+            <div class="input-box">
+                <input 
+                        type="text" 
+                        formControlName="email"
+                        required
+                />
+                <label [class.active]="registrationForm.get('email')?.value || focused === 'email'">E-Mail</label>
+            </div>
+            <div class="input-box">
+                <input 
+                        type="text" 
+                        formControlName="username"
+                        required
+                />
+                <label [class.active]="registrationForm.get('username')?.value || focused === 'username'">Username</label>
+            </div>
+            <div class="input-box">
+                <input 
+                        [type]="isPasswordVisible ? 'text' : 'password'"
+                        formControlName="password"
+                        required
+                />
+                <label [class.active]="registrationForm.get('password')?.value || focused === 'password'">Password</label>
+                <fa-icon 
+                        class="login-password-eye"
+                        [icon]="isPasswordVisible ? faEyeSlash : faEye" 
+                        (click)="togglePasswordVisibility()"
+                />
+            </div>
+            <div class="input-box">
+                <input 
+                        [type]="isRepeatPasswordVisible ? 'text' : 'password'"
+                        formControlName="repeatpassword" 
+                        required
+                />
+                <label [class.active]="registrationForm.get('repeatpassword')?.value || focused === 'repeatpassword'">Repeat Password</label>
+                <fa-icon 
+                        class="login-password-eye"
+                        [icon]="isRepeatPasswordVisible ? faEyeSlash : faEye" 
+                        (click)="toggleRepeatPasswordVisibility()"
+                />
+            </div>
+
+            <button type="submit" class="btn" [@buttonState]="buttonState">Register</button>
+        </form>
+    </div>
+</body>
