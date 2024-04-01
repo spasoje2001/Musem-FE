@@ -44,8 +44,8 @@ export class RegistrationComponent {
   }
 
   registrationForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -57,12 +57,14 @@ export class RegistrationComponent {
 
   register(): void {
     const registration: Registration = {
-      name: this.registrationForm.value.name || "",
-      surname: this.registrationForm.value.surname || "",
+      firstName: this.registrationForm.value.firstName || "",
+      lastName: this.registrationForm.value.lastName || "",
       email: this.registrationForm.value.email || "",
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
     };
+
+    console.log(registration);
 
     if (this.registrationForm.valid) {
       if(this.registrationForm.value.password === this.registrationForm.value.repeatpassword){
