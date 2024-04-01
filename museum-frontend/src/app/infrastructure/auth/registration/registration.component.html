@@ -5,18 +5,18 @@
             <div class="input-box">
                 <input 
                         type="text" 
-                        formControlName="name" 
+                        formControlName="firstName" 
                         required
                 />
-                <label [class.active]="registrationForm.get('name')?.value || focused === 'name'">Name</label>
+                <label [class.active]="registrationForm.get('firstName')?.value || focused === 'firstName'">First name</label>
             </div>
             <div class="input-box">
                 <input 
                         type="text" 
-                        formControlName="surname"
+                        formControlName="lastName"
                         required
                 />
-                <label [class.active]="registrationForm.get('surname')?.value || focused === 'surname'">Surname</label>
+                <label [class.active]="registrationForm.get('lastName')?.value || focused === 'lastName'">Last name</label>
             </div>
             <div class="input-box">
                 <input 
