@@ -1,15 +1,148 @@
-form {
-  margin-top:150px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffree4kwallpapers.com%2Fuploads%2Foriginals%2F2019%2F08%2F26%2Flouvre-art-museum-at-paris-france-wallpaper.jpg&f=1&nofb=1&ipt=b28831e6a60b4dfcb64bc2bcb7845d546afe52da47207fee7d0fe2cd60275fa5&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-div {
-  width: 400px;
-  display:flex;
-  flex-direction: column;
+.wrapper {
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
 }
 
-p {
-  margin-top: 10px;
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.wrapper .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder {
+  color: #fff;
+}
+
+.input-box fa-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.wrapper .remember-forgot {
+  display: flex;
+  justify-content: center;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.remember-forgot label input{
+  accent-color: #fff;
+  margin-right: 3px;
+}
+
+.remember-forgot a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+
+.wrapper .register-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+.register-link p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+.login-password-eye {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  font-size: 1.25rem;
+  color: rgba(var(--clr-primary-500), 1);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.login-password-eye:hover {
+  color: rgba(var(--clr-primary-500), 0.9);
+}
+
+.input-box label {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.input-box input:focus + label,
+.input-box label.active {
+  top: -13px;
+  left: 10px;
+  font-size: 13px;
+  color: #fff;
 }

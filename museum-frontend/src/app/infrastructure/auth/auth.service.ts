@@ -14,7 +14,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
+
   user$ = new BehaviorSubject<User>({ username: '', id: 0, role: '' });
+  basePath = environment.apiHost + 'auth/';
 
   constructor(
     private http: HttpClient,
@@ -24,10 +26,10 @@ export class AuthService {
 
   login(login: Login): Observable<AuthenticationResponse> {
     return this.http
-      .post<AuthenticationResponse>(environment.apiHost + 'auth/login', login)
+      .post<AuthenticationResponse>(this.basePath + 'login', login)
       .pipe(
         tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
+          this.tokenStorage.saveAccessToken(authenticationResponse.token);
           this.setUser();
         })
       );
@@ -35,10 +37,10 @@ export class AuthService {
 
   register(registration: Registration): Observable<AuthenticationResponse> {
     return this.http
-      .post<AuthenticationResponse>(environment.apiHost + 'users', registration)
+      .post<AuthenticationResponse>(this.basePath + 'register', registration)
       .pipe(
         tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse.accessToken);
+          this.tokenStorage.saveAccessToken(authenticationResponse.token);
           this.setUser();
         })
       );
@@ -72,6 +74,7 @@ export class AuthService {
 
   getJwtToken(): string | null {
     // Retrieve the JWT token from wherever it is stored (e.g., localStorage)
-    return localStorage.getItem('jwtToken');
+    // return localStorage.getItem('jwtToken');
+    return this.tokenStorage.getAccessToken(); // VELJKO PROMENIO!
   }
 }

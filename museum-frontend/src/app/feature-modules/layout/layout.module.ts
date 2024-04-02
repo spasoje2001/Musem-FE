@@ -6,7 +6,7 @@ import { MaterialModule } from 'src/app/infrastructure/material/material-module'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FooterComponent } from './footer/footer.component'; 
+import { FooterComponent } from './footer/footer.component';  
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FontAwesomeModule, 
+    FontAwesomeModule,  
     MaterialModule
   ],
   exports: [

@@ -1,0 +1,15 @@
+div {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+#buttons {
+  width: auto;
+  margin-left: auto;
+}
+
+.mat-toolbar {
+  backdrop-filter: blur(20px);
+  background: black;
+}
