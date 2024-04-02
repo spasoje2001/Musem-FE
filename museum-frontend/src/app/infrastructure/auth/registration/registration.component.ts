@@ -82,7 +82,7 @@ export class RegistrationComponent {
       }
     }
     else{
-      console.log('Register form not valid!'); // Treba dodati neki vid validacije
+      console.log('Sign up form not valid!'); // Treba dodati neki vid validacije
     }
   }
 
@@ -104,7 +104,7 @@ export class RegistrationComponent {
 
     const zoom = 100 + scrollPercent * 0.1; 
 
-    this.backgroundSize = `${zoom}% ${zoom}%`;
+    this.backgroundSize = `${zoom}% ${zoom+10}%`;
   }
 
   faEye = faEye;
