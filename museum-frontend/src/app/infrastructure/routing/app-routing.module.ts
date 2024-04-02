@@ -6,7 +6,7 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 
 const routes: Routes = [
   { 
-    path: 'home', 
+    path: '', 
     component: HomeComponent 
   },
   { 
