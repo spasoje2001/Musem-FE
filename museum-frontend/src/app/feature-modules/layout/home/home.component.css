@@ -7,45 +7,69 @@
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp7534685.jpg&f=1&nofb=1&ipt=9cdc9d4da9d86888fe6245ba648d7b93e88f57ab5b910151687b86cfca66d9a3&ipo=images') no-repeat;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Flouvre_museum_at_sunset-wide.jpg&f=1&nofb=1&ipt=09d86ad89b4b874b4b5142e2f9bf8483b548972f18c8102b8a2ce97ba03950af&ipo=images') no-repeat;
   background-position: center;
   background-size: cover;
   transition: background-size 0.3s ease;
-
 }
 
 .overlay {
   z-index: 3;
-  height: 40%;
-  width: 100%;
+  height: 20%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 2rem;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  margin-left: 25%;
+  margin-top: 5%;
 }
 
 .banner h1 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 3rem;
-  color: black;
 }
 
 .banner p {
   max-width: 70ch;
   text-align: center;
   font-size: 1rem;
-  color: black;
+}
+
+.wrapper {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+h2 {
+  margin: 0;
 }
 
 .card-container-headers {
-  margin-top: -50px;
+  margin-top: 5%;
+  margin-bottom: 3%;
   align-self: center;
   display: flex;
   flex-direction: row;
-  width: 66.5%;
-  gap: 27rem;
+  width: 70%;
+  gap: 20rem;
   height: 7%;
 }
 
@@ -163,7 +187,7 @@
 }
 
 .card-group:hover > .little-card:nth-child(3) {
-  transform: translate(160%, 240%) rotate(15deg);
+  transform: translate(280%, 240%) rotate(15deg);
 }
 
 .card-group:hover > .little-card:nth-child(5) {
@@ -172,22 +196,4 @@
 
 .card-group:hover > .little-card:nth-child(7) {
   transform: translate(-250%, 140%) rotate(-15deg);
-}
-
-.card-swiper-buttons {
-  margin-top: 38vmin;
-  display: flex;
-  justify-content: space-around;
-  padding: 0vmin 4vmin;
-}
-
-.card-swiper-buttons > button {
-  font-size: 2.5vmin;
-  border: 0.4vmin solid rgb(200, 200, 200);
-  border-radius: 100%;
-  color: white;
-  background-color: transparent;
-  height: 7vmin;
-  width: 7vmin;
-  cursor: pointer;
 }
