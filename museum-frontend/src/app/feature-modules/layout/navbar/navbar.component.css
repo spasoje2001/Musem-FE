@@ -13,3 +13,23 @@ div {
   backdrop-filter: blur(20px);
   background: #1b1b1b;
 }
+
+button {
+  position: relative; 
+  overflow: hidden; 
+}
+
+button.feat-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0; 
+  left: 15;
+  width: 0%; 
+  height: 2px; 
+  background-color: #fff; 
+  transition: width 0.4s ease; 
+}
+
+button.feat-button:hover::after {
+  width: 100%; 
+}
