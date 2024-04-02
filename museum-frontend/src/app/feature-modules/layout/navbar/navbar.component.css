@@ -37,5 +37,5 @@ button.feat-button::after {
 }
 
 button.feat-button:hover::after {
-  width: 100%; 
+  width: 90%; 
 }

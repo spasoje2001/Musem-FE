@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Registration } from '../model/registration.model';
 import { AuthService } from '../auth.service';
@@ -54,6 +54,7 @@ export class RegistrationComponent {
 
   buttonState: string = 'idle'; 
   focused: string = '';
+  backgroundSize: string = '100% 110%';
 
   register(): void {
     const registration: Registration = {
@@ -91,6 +92,19 @@ export class RegistrationComponent {
 
   toggleRepeatPasswordVisibility() {
     this.isRepeatPasswordVisible = !this.isRepeatPasswordVisible;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
+
+    const zoom = 100 + scrollPercent * 0.1; 
+
+    this.backgroundSize = `${zoom}% ${zoom}%`;
   }
 
   faEye = faEye;
