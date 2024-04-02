@@ -79,9 +79,9 @@ export class LoginComponent {
 
     const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
 
-    const zoom = 100 + scrollPercent * 0.15; 
+    const zoom = 100 + scrollPercent * 0.1; 
 
-    this.backgroundSize = `${zoom}% ${zoom}%`;
+    this.backgroundSize = `${zoom}% ${zoom+10}%`;
   }
 
   faUser = faUser;
