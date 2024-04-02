@@ -1,20 +1,23 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { faArrowLeft, faArrowRight, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'xp-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('500ms ease-in', style({ opacity: 0 })),
+      ]),
+    ]),
+  ]
 })
 export class HomeComponent {
-  
-  activeIndex = 0;
-  cardGroups = [
-    { index: 0, status: 'active' },
-    { index: 1, status: 'unknown' },
-    { index: 2, status: 'unknown' }
-  ];
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
   }
@@ -23,30 +26,18 @@ export class HomeComponent {
     console.log('click');
   }
 
-  onRightButtonClicked() {
-    console.log('DESNI KLIK')
-    console.log('Aktivni indeks pre promene ' + this.activeIndex)
+  backgroundSize: string = '100% 100%';
 
-    const nextIndex = this.activeIndex + 1 <= this.cardGroups.length - 1 ? this.activeIndex + 1 : 0;
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
 
-    this.cardGroups[this.activeIndex].status = 'after';
-    
-      this.cardGroups[nextIndex].status = 'becoming-active-from-before';
-    
-      // Introduce another slight delay before setting the next card group to 'active'
-      setTimeout(() => {
-        this.cardGroups[nextIndex].status = 'active';
-        this.activeIndex = nextIndex;
-      }, 250); // Adjust delay time as needed
+    const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
 
-    console.log('Aktivni indeks posle promene ' + this.activeIndex)
+    const zoom = 100 + scrollPercent * 0.3; 
+
+    this.backgroundSize = `${zoom}% ${zoom}%`;
   }
-
-  onLeftButtonClicked() {
-    console.log('LEVI KLIK');
-  }
-
-  faSearch = faSearch;
-  faArrowLeft = faArrowLeft;
-  faArrowRight = faArrowRight;
 }

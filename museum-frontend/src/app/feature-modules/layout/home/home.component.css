@@ -2,26 +2,27 @@
   position: relative;
   width: 100%;
   height: clamp(30rem, 60%, 50rem);
-  height: 100%;
+  height: 130%;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
   display: flex;
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp1953464.jpg&f=1&nofb=1&ipt=422ba8f8bf08877cc154748f916aba5768061619f601bf9a00a4390925f9eac3&ipo=images') no-repeat;
+  flex-direction: column;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp7534685.jpg&f=1&nofb=1&ipt=9cdc9d4da9d86888fe6245ba648d7b93e88f57ab5b910151687b86cfca66d9a3&ipo=images') no-repeat;
   background-position: center;
   background-size: cover;
-  /* blur(3px) */
+  transition: background-size 0.3s ease; /* Smooth transition for background size changes */
+
 }
 
 .overlay {
   z-index: 3;
-  height: 100%;
+  height: 40%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  margin-left: -100px;
 }
 
 .banner h1 {
@@ -38,10 +39,22 @@
   color: black;
 }
 
+.card-container-headers {
+  margin-top: -50px;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  width: 66.5%;
+  gap: 27rem;
+  height: 7%;
+}
+
 .card-container {
-  align-self: center  ;
-  align-content: center;
-  width: 35%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  gap: 20rem;
 }
 
 .card-container
@@ -58,25 +71,7 @@
 }
 
 .card-group {
-  position: absolute;
   transition: transform 400ms ease;
-}
-
-.card-group[data-status="active"] {
-  transition-delay: 300ms;
-}
-
-.card-group[data-status="unknown"] {
-  transform: scale(0);
-}
-
-.card-group[data-status="after"] {
-  transform: translateX(50%) scale(0);
-}
-
-.card-group[data-status="becoming-active-from-before"] {
-  transform: translateX(50%) scale(0);
-  transition: none;
 }
 
 .card {
@@ -164,19 +159,19 @@
 }
 
 .card-group:hover > .little-card:nth-child(1) {
-  transform: translate(200%, -160%) rotate(-15deg);
+  transform: translate(200%, -120%) rotate(-15deg);
 }
 
 .card-group:hover > .little-card:nth-child(3) {
-  transform: translate(160%, 170%) rotate(15deg);
+  transform: translate(160%, 240%) rotate(15deg);
 }
 
 .card-group:hover > .little-card:nth-child(5) {
-  transform: translate(-200%, -170%) rotate(15deg);
+  transform: translate(-200%, -130%) rotate(15deg);
 }
 
 .card-group:hover > .little-card:nth-child(7) {
-  transform: translate(-280%, 140%) rotate(-15deg);
+  transform: translate(-250%, 140%) rotate(-15deg);
 }
 
 .card-swiper-buttons {

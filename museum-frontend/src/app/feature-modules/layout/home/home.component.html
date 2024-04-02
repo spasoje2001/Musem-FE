@@ -1,4 +1,4 @@
-<div class="banner">
+<div class="banner" [ngStyle]="{'background-size': backgroundSize}">
   <div class="overlay">
       <h1>Lorem ipsum dolor sit amet.</h1>
       <p>
@@ -6,73 +6,63 @@
           fugiat eos eligendi optio non possimus nesciunt minima deserunt
           aliquid totam.
       </p>
-      <p>
-          Explore your opportunities. 
-      </p>
   </div>
-  <div class="card-swiper">
-    <div class="card-container">
-        <h2>Explore your opportunities</h2>
-        <div class="card-group" data-index="0" data-status="active" (click)="cardGroupClicked()"> 
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>
-            
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>   
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-        </div>
-        <div class="card-group" data-index="1" data-status="unknown" (click)="cardGroupClicked()"> 
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>
-            
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>   
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-        </div>
-        <div class="card-group" data-index="2" data-status="unknown" (click)="cardGroupClicked()"> 
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>
-            
-            <div class="little-card card"></div>
-            
-            <div class="big-card card"></div>   
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-            
-            <div class="little-card card"></div>  
-            
-            <div class="big-card card"></div>  
-        </div>
+  <div class="card-container-headers">
+    <h2>Exhibitions</h2>
+    <h2>Tours</h2>
+    <h2>Events</h2>
+  </div>
+  <div class="card-container">
+    <div class="card-group" data-index="0" (click)="cardGroupClicked()" [@fadeInOut]> 
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>
+        
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>   
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
     </div>
-    <div class="card-swiper-buttons">
-        <button id="left-button" (click)="onLeftButtonClicked()">
-            <fa-icon [icon]="faArrowLeft" />    
-        </button>
-
-        <button id="right-button" (click)="onRightButtonClicked()">
-            <fa-icon [icon]="faArrowRight" />    
-        </button>
-    </div> 
-  </div>
+    <div class="card-group" data-index="1" (click)="cardGroupClicked()" [@fadeInOut]> 
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>
+        
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>   
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
+    </div>
+    <div class="card-group" data-index="2" (click)="cardGroupClicked()" [@fadeInOut]> 
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>
+        
+        <div class="little-card card"></div>
+        
+        <div class="big-card card"></div>   
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
+        
+        <div class="little-card card"></div>  
+        
+        <div class="big-card card"></div>  
+    </div>
+</div>
 </div>
