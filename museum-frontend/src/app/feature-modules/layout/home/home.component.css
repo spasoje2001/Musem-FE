@@ -1,0 +1,198 @@
+.banner {
+  position: relative;
+  width: 100%;
+  height: clamp(30rem, 60%, 50rem);
+  height: 100%;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp1953464.jpg&f=1&nofb=1&ipt=422ba8f8bf08877cc154748f916aba5768061619f601bf9a00a4390925f9eac3&ipo=images') no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* blur(3px) */
+}
+
+.overlay {
+  z-index: 3;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  margin-left: -100px;
+}
+
+.banner h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: black;
+}
+
+.banner p {
+  max-width: 70ch;
+  text-align: center;
+  font-size: 1rem;
+  color: black;
+}
+
+.card-container {
+  align-self: center  ;
+  align-content: center;
+  width: 35%;
+}
+
+.card-container
+.card-group,
+.card {
+  aspect-ratio: 5/7;
+  width: 24vmin;
+}
+
+.card-container
+.card-group,
+.big-card {
+  width: 24vmin;
+}
+
+.card-group {
+  position: absolute;
+  transition: transform 400ms ease;
+}
+
+.card-group[data-status="active"] {
+  transition-delay: 300ms;
+}
+
+.card-group[data-status="unknown"] {
+  transform: scale(0);
+}
+
+.card-group[data-status="after"] {
+  transform: translateX(50%) scale(0);
+}
+
+.card-group[data-status="becoming-active-from-before"] {
+  transform: translateX(50%) scale(0);
+  transition: none;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  transition: transform 800ms cubic-bezier(.05, .43, .25, .95);
+}
+
+.big-card {
+  width: 24vmin;
+  border-radius: 1vmin;
+}
+
+.little-card {
+  width: 12vmin;
+  border-radius: 2vmin;
+}
+
+.big-card:nth-child(2) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.wallpaperflare.com%2Fstatic%2F92%2F577%2F133%2Fmona-lisa-leonardo-da-vinci-la-gioconda-oil-painting-wallpaper.jpg&f=1&nofb=1&ipt=820f672efb231b5e6805925f74652892357db41dc10fc9fcee568949a47059d2&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-10%) rotate(-1deg);
+}
+
+.big-card:nth-child(4) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp9474216.jpg&f=1&nofb=1&ipt=b1a15d7cea7182c043c75db4afa996fc7e92ee00426edaec1c9c2b0c7f2a15e4&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: rotate(2deg);
+}
+
+.big-card:nth-child(6) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.fineartamerica.com%2Fimages%2Fartworkimages%2Fmediumlarge%2F3%2Fscream-on-a-starry-night-vincent-van-gogh.jpg&f=1&nofb=1&ipt=8513b908e88535d11ec0ea1dd64c19d801ef8c8d5b584d264f08ea8c5c4d240e&ipo=images');
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-6%) rotate(-3deg);
+}
+
+.big-card:nth-child(8) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F19101276%2Fr%2Fil%2F6aa18b%2F3270042824%2Fil_fullxfull.3270042824_aqh9.jpg&f=1&nofb=1&ipt=2949e01734ecb197cbb83fc2d4bb850ee960a2981f9f62d62a90eb1e580f328b&ipo=images');
+  background-size: cover;
+  background-position: center;
+  transform: translateX(10%, 3%) rotate(5deg);
+}
+
+.little-card:nth-child(1) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.wallpaperflare.com%2Fstatic%2F92%2F577%2F133%2Fmona-lisa-leonardo-da-vinci-la-gioconda-oil-painting-wallpaper.jpg&f=1&nofb=1&ipt=820f672efb231b5e6805925f74652892357db41dc10fc9fcee568949a47059d2&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.little-card:nth-child(3) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp9474216.jpg&f=1&nofb=1&ipt=b1a15d7cea7182c043c75db4afa996fc7e92ee00426edaec1c9c2b0c7f2a15e4&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.little-card:nth-child(5) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.fineartamerica.com%2Fimages%2Fartworkimages%2Fmediumlarge%2F3%2Fscream-on-a-starry-night-vincent-van-gogh.jpg&f=1&nofb=1&ipt=8513b908e88535d11ec0ea1dd64c19d801ef8c8d5b584d264f08ea8c5c4d240e&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.little-card:nth-child(7) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F19101276%2Fr%2Fil%2F6aa18b%2F3270042824%2Fil_fullxfull.3270042824_aqh9.jpg&f=1&nofb=1&ipt=2949e01734ecb197cbb83fc2d4bb850ee960a2981f9f62d62a90eb1e580f328b&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.card-group:hover > .big-card:nth-child(2) {
+  transform: translate(-75%, 16%) rotate(-24deg);
+}
+
+.card-group:hover > .big-card:nth-child(4) {
+  transform: translate(-25%, 8%) rotate(-8deg);
+}
+
+.card-group:hover > .big-card:nth-child(6) {
+  transform: translate(25%, 8%) rotate(8deg);
+}
+
+.card-group:hover > .big-card:nth-child(8) {
+  transform: translate(75%, 16%) rotate(24deg);
+}
+
+.card-group:hover > .little-card:nth-child(1) {
+  transform: translate(200%, -160%) rotate(-15deg);
+}
+
+.card-group:hover > .little-card:nth-child(3) {
+  transform: translate(160%, 170%) rotate(15deg);
+}
+
+.card-group:hover > .little-card:nth-child(5) {
+  transform: translate(-200%, -170%) rotate(15deg);
+}
+
+.card-group:hover > .little-card:nth-child(7) {
+  transform: translate(-280%, 140%) rotate(-15deg);
+}
+
+.card-swiper-buttons {
+  margin-top: 38vmin;
+  display: flex;
+  justify-content: space-around;
+  padding: 0vmin 4vmin;
+}
+
+.card-swiper-buttons > button {
+  font-size: 2.5vmin;
+  border: 0.4vmin solid rgb(200, 200, 200);
+  border-radius: 100%;
+  color: white;
+  background-color: transparent;
+  height: 7vmin;
+  width: 7vmin;
+  cursor: pointer;
+}
