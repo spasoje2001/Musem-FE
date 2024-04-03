@@ -1,10 +1,8 @@
 <div class="banner" [ngStyle]="{'background-size': backgroundSize}">
   <div class="overlay">
-      <h1>Lorem ipsum dolor sit amet.</h1>
+      <h1>Museum</h1>
       <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro
-          fugiat eos eligendi optio non possimus nesciunt minima deserunt
-          aliquid totam.
+        "Uncover the Past, Navigate the Present: Explore with Our Museum Information System!"
       </p>
   </div>
   <div class="card-container-headers">
@@ -70,5 +68,46 @@
         
         <div class="big-card card"></div>  
     </div>
-</div>
+  </div>
+  <div class="content-description">
+    <div class="wrapper">
+        <p>Dive into a world of discovery and inspiration with our museum's exhibitions! 
+        Each exhibition is thoughtfully curated to offer visitors a profound journey through various themes, eras, and stories.<br><br>
+        Our exhibitions are designed not just to educate but to enchant and provoke thought, inviting you to see the world through a new lens. </p>
+    </div>
+    <div class="wrapper">
+        <p>Embark on an unforgettable journey through history and culture with our guided tours at the museum!
+        Our tours offer immersive experiences, bringing to life the stories behind our diverse collections<br><br>
+        Join us, as you are lead by knowledgeable and passionate guides and uncover the wonders of the past, present, 
+        and future on a guided tour that's as educational as it is inspiring!</p>
+    </div>
+    <div class="wrapper">
+        <p>Experience the wonders of history, nature and art come alive at our museum events! 
+        Explore captivating exhibitions featuring stunning artworks and fascinating artifacts. <br><br> 
+        Discover, learn, and be inspired at our museum – where every event is an opportunity to embark on a journey of exploration and enrichment!</p>
+    </div>
+  </div>
+  <div class="card-buttons">
+    <button 
+            type="submit" 
+            class="btn"
+            (click)="exhibitionsButtonClicked()"
+            [@buttonState]="exhibitionsButtonState" 
+            >Visit Exhibitions
+    </button>
+    <button 
+            type="submit" 
+            class="btn" 
+            (click)="toursButtonClicked()"
+            [@buttonState]="toursButtonState"
+            >Visit Tours
+    </button>
+    <button 
+            type="submit" 
+            class="btn" 
+            (click)="eventsButtonClicked()"
+            [@buttonState]="eventsButtonState"
+            >Visit Events
+    </button>
+  </div>
 </div>
