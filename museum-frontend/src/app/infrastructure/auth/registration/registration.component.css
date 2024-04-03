@@ -118,6 +118,13 @@ body {
   font-weight: 600;
 }
 
+.wrapper .btn:hover {
+  background-color: #f2f2f2; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
+}
+
 .wrapper .register-link {
   font-size: 14.5px;
   text-align: center;
