@@ -228,18 +228,22 @@ h2 {
   transform: translate(75%, 16%) rotate(24deg);
 }
 
+/* Gore desno*/
 .card-group:hover > .little-card:nth-child(1) {
-  transform: translate(200%, -120%) rotate(-15deg);
+  transform: translate(200%, -100%) rotate(-15deg);
 }
 
+/* Dole desno*/
 .card-group:hover > .little-card:nth-child(3) {
-  transform: translate(280%, 240%) rotate(15deg);
+  transform: translate(320%, 160%) rotate(17deg);
 }
 
+/* Gore levo*/
 .card-group:hover > .little-card:nth-child(5) {
-  transform: translate(-200%, -130%) rotate(15deg);
+  transform: translate(-200%, -80%) rotate(15deg);
 }
 
+/* Dole levo*/
 .card-group:hover > .little-card:nth-child(7) {
-  transform: translate(-250%, 140%) rotate(-15deg);
+  transform: translate(-245%, 140%) rotate(-10deg);
 }
