@@ -1,4 +1,4 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 @Component({
@@ -14,22 +14,53 @@ import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
       transition(':leave', [
         animate('500ms ease-in', style({ opacity: 0 })),
       ]),
+    ]), 
+    trigger('buttonState', [
+      state('clicked', style({
+        transform: 'scale(0.9)',
+        opacity: 0.5
+      })),
+      transition('* => clicked', [
+        animate('200ms')
+      ]),
+      transition('clicked => idle', [
+        animate('200ms')
+      ])
     ]),
   ]
 })
 export class HomeComponent {
+  
+  exhibitionsButtonState: string = 'idle'; 
+  toursButtonState: string = 'idle'; 
+  eventsButtonState: string = 'idle'; 
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  constructor() {
   }
   
   cardGroupClicked(){
     console.log('click');
   }
 
+  exhibitionsButtonClicked(){
+    this.exhibitionsButtonState = 'clicked'; 
+    setTimeout(() => { this.exhibitionsButtonState = 'idle'; }, 200);
+  }
+
+  toursButtonClicked(){
+    this.toursButtonState = 'clicked'; 
+    setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
+  }
+
+  eventsButtonClicked(){
+    this.eventsButtonState = 'clicked'; 
+    setTimeout(() => { this.eventsButtonState = 'idle'; }, 200);
+  }
+
   backgroundSize: string = '100% 100%';
 
   @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
+  onScroll() {
     const scrollPosition = window.pageYOffset;
     const windowHeight = window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
