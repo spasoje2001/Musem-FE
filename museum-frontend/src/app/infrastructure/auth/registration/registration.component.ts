@@ -73,7 +73,7 @@ export class RegistrationComponent {
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
         this.authService.register(registration).subscribe({
           next: () => {
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
           },
         });
       } 

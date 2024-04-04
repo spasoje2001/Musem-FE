@@ -61,7 +61,7 @@ export class LoginComponent {
       setTimeout(() => { this.buttonState = 'idle'; }, 200); 
       this.authService.login(login).subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['']);
         },
       });
     }
