@@ -11,7 +11,8 @@ import {
   faBuilding,
   faBookmark,
   faBinoculars,
-  faPencilSquare
+  faPencilSquare,
+  faAddressBook
  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -45,4 +46,5 @@ export class NavbarComponent {
   faBuilding = faBuilding;
   faBookmark = faBookmark;
   faBinoculars = faBinoculars;
+  faAdressBook = faAddressBook;
 }
