@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';  
+import { AdministrationModule } from '../administration/administration.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule,
     ReactiveFormsModule,
     FontAwesomeModule,  
-    MaterialModule
+    MaterialModule,
+    AdministrationModule
   ],
   exports: [
     NavbarComponent,
