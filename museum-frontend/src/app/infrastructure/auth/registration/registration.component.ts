@@ -1,6 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Registration } from '../model/registration.model';
+import { Registration, Role } from '../model/registration.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate, state } from '@angular/animations';
@@ -63,6 +63,7 @@ export class RegistrationComponent {
       email: this.registrationForm.value.email || "",
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
+      role: 0
     };
 
     console.log(registration);
