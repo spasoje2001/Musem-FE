@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { Registration } from 'src/app/infrastructure/auth/model/registration.model';
@@ -9,13 +10,17 @@ import { Registration } from 'src/app/infrastructure/auth/model/registration.mod
   templateUrl: './add-employee-form.component.html',
   styleUrls: ['./add-employee-form.component.css']
 })
-export class AddEmployeeFormComponent {
+export class AddEmployeeFormComponent implements OnInit{
   isPasswordVisible: boolean;
   isRepeatPasswordVisible: boolean;
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private dialogRef: MatDialogRef<AddEmployeeFormComponent>){
     this.isPasswordVisible = false;
     this.isRepeatPasswordVisible = false;
+  }
+
+  ngOnInit(): void {
+    
   }
 
   registrationForm = new FormGroup({
@@ -31,7 +36,7 @@ export class AddEmployeeFormComponent {
   buttonState: string = 'idle'; 
   focused: string = '';
 
-  addEmployee(): void {
+  addEmployeeButtonClicked(): void {
     const registration: Registration = {
       firstName: this.registrationForm.value.firstName || "",
       lastName: this.registrationForm.value.lastName || "",
@@ -60,6 +65,10 @@ export class AddEmployeeFormComponent {
     else{
       console.log('Sign up form not valid!'); // Treba dodati neki vid validacije
     }
+  }
+
+  cancelButtonClicked() {
+    this.dialogRef.close();
   }
 
   togglePasswordVisibility() {
