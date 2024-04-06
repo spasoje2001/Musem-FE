@@ -48,13 +48,7 @@ export class AuthService {
 
   registerEmployee(registration: Registration): Observable<AuthenticationResponse> {
     return this.http
-      .post<AuthenticationResponse>(this.basePath + 'registerEmployee', registration)
-      .pipe(
-        tap((authenticationResponse) => {
-          this.tokenStorage.saveAccessToken(authenticationResponse.token);
-          this.setUser();
-        })
-      );
+      .post<AuthenticationResponse>(this.basePath + 'registerEmployee', registration);
   }
 
   logout(): void {
@@ -84,8 +78,6 @@ export class AuthService {
   }
 
   getJwtToken(): string | null {
-    // Retrieve the JWT token from wherever it is stored (e.g., localStorage)
-    // return localStorage.getItem('jwtToken');
-    return this.tokenStorage.getAccessToken(); // VELJKO PROMENIO!
+    return this.tokenStorage.getAccessToken(); 
   }
 }

@@ -52,16 +52,6 @@ export class AddEmployeeFormComponent implements OnInit{
   focused: string = '';
 
   addEmployeeButtonClicked(): void {
-
-    /*let selectedRoleString: string;
-    if (this.registrationForm.value.role !== null && this.registrationForm.value.role !== undefined) {
-        selectedRoleString = this.registrationForm.value.role;
-    } else {
-        // Handle the situation where the role value is undefined or null
-        console.error("Role value is undefined or null.");
-        return; // Exit the function early or handle the error accordingly
-    }*/
-
     const selectedRoleString: string = this.registrationForm.value.role ?? '';
     let selectedRole: Role;
 
@@ -97,9 +87,7 @@ export class AddEmployeeFormComponent implements OnInit{
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
         this.authService.registerEmployee(registration).subscribe({
           next: () => {
-            //this.router.navigate(['']);
             this.dialogRef.close();
-            console.log('POSLAT JE ZAHTEV');
           },
         });
       } 
