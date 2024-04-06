@@ -65,7 +65,7 @@
 
       <button 
               class="feat-button"
-              *ngIf="user" 
+              *ngIf="user && user.username === ''" 
               color="white"
               mat-raised-button 
               [routerLink]="['register']"
