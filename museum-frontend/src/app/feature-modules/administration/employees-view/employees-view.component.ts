@@ -35,7 +35,6 @@ export class EmployeesViewComponent {
     setTimeout(() => { this.addEmployeeButtonState = 'idle'; }, 200);
     
     this.dialogRef = this.dialog.open(AddEmployeeFormComponent, {
-      //data: contract,
     });
   }
 }

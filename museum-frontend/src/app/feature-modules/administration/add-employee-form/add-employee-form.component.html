@@ -61,12 +61,12 @@
             />
         </div>
         <div class="input-box">
-                <select formControlName="role" required>
-                    <option value="" disabled selected>Select Role</option>
+            <select formControlName="role" required>
                     <option value="Organizer">Organizer</option>
                     <option value="Curator">Curator</option>
                     <option value="Restaurateur">Restaurateur</option>
-                </select>
+            </select>
+            <label>Select Role</label>
         </div>
         <div class="buttons">
           <button type="submit" class="btn" [@buttonState]="buttonState" (click)="addEmployeeButtonClicked()">Add</button>
