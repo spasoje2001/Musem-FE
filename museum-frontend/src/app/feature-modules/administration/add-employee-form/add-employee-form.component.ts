@@ -1,3 +1,4 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -8,7 +9,21 @@ import { Registration, Role } from 'src/app/infrastructure/auth/model/registrati
 @Component({
   selector: 'app-add-employee-form',
   templateUrl: './add-employee-form.component.html',
-  styleUrls: ['./add-employee-form.component.css']
+  styleUrls: ['./add-employee-form.component.css'],
+  animations: [
+    trigger('buttonState', [
+      state('clicked', style({
+        transform: 'scale(0.9)',
+        opacity: 0.5
+      })),
+      transition('* => clicked', [
+        animate('200ms')
+      ]),
+      transition('clicked => idle', [
+        animate('200ms')
+      ])
+    ]),
+  ]
 })
 export class AddEmployeeFormComponent implements OnInit{
   isPasswordVisible: boolean;
@@ -61,9 +76,8 @@ export class AddEmployeeFormComponent implements OnInit{
             selectedRole = Role.Restaurateur;
             break;
         default:
-            // Handle the error condition if the selected role is invalid
             console.error("Invalid role selected.");
-            return; // Exit the function early
+            return; 
     }
 
     const registration: Registration = {
