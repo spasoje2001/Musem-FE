@@ -54,7 +54,7 @@
 
       <button 
             class="feat-button"
-            *ngIf="user"
+            *ngIf="user && user.role === 'ADMIN'"
             color="white"
             mat-raised-button
             [routerLink]="['employee-view']" 

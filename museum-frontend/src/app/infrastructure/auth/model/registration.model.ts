@@ -11,5 +11,6 @@ export enum Role {
   Guest = 0,
   Organizer = 1,
   Curator = 2,
-  Restaurateur = 3
+  Restaurateur = 3,
+  Administrator = 4,
 }

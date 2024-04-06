@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
-import { Registration } from 'src/app/infrastructure/auth/model/registration.model';
+import { Registration, Role } from 'src/app/infrastructure/auth/model/registration.model';
 
 @Component({
   selector: 'app-add-employee-form',
@@ -37,13 +37,42 @@ export class AddEmployeeFormComponent implements OnInit{
   focused: string = '';
 
   addEmployeeButtonClicked(): void {
+
+    /*let selectedRoleString: string;
+    if (this.registrationForm.value.role !== null && this.registrationForm.value.role !== undefined) {
+        selectedRoleString = this.registrationForm.value.role;
+    } else {
+        // Handle the situation where the role value is undefined or null
+        console.error("Role value is undefined or null.");
+        return; // Exit the function early or handle the error accordingly
+    }*/
+
+    const selectedRoleString: string = this.registrationForm.value.role ?? '';
+    let selectedRole: Role;
+
+    switch (selectedRoleString) {
+        case 'Curator':
+            selectedRole = Role.Curator;
+            break;
+        case 'Organizer':
+            selectedRole = Role.Organizer;
+            break;
+        case 'Restaurateur':
+            selectedRole = Role.Restaurateur;
+            break;
+        default:
+            // Handle the error condition if the selected role is invalid
+            console.error("Invalid role selected.");
+            return; // Exit the function early
+    }
+
     const registration: Registration = {
       firstName: this.registrationForm.value.firstName || "",
       lastName: this.registrationForm.value.lastName || "",
       email: this.registrationForm.value.email || "",
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
-      role: 0
+      role: selectedRole,
     };
 
     console.log(registration);
@@ -52,9 +81,11 @@ export class AddEmployeeFormComponent implements OnInit{
       if(this.registrationForm.value.password === this.registrationForm.value.repeatpassword){
         this.buttonState = 'clicked'; 
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
-        this.authService.register(registration).subscribe({
+        this.authService.registerEmployee(registration).subscribe({
           next: () => {
             //this.router.navigate(['']);
+            this.dialogRef.close();
+            console.log('POSLAT JE ZAHTEV');
           },
         });
       } 

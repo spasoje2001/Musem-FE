@@ -94,3 +94,42 @@
   display: flex;
   gap: 10%;
 }
+
+.input-box select {
+  width: 100%;
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 40px; /* Rounded corners */
+  font-size: 16px;
+  padding: 10px;
+  background-color: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #1b1b1b;
+}
+
+/* Style options when combo box is open */
+.input-box select:focus option {
+  background-color: #f2f2f2; /* Background color */
+  color: #1b1b1b; /* Text color */
+  border-radius: 10px; /* Rounded corners */
+  padding: 8px; /* Adjust padding for spacing */
+}
+
+/* Hide default arrow */
+.input-box select::-ms-expand,
+.input-box select::-webkit-select-arrow {
+  display: none;
+}
+
+/* Style custom arrow */
+.input-box select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #1b1b1b;
+}
+

@@ -61,6 +61,14 @@
             />
         </div>
         <!-- OVDE TREBA DODATI COMBO BOX ZA ROLE -->
+        <div class="input-box">
+                <select formControlName="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Organizer">Organizer</option>
+                    <option value="Curator">Curator</option>
+                    <option value="Restaurateur">Restaurateur</option>
+                </select>
+        </div>
         <div class="buttons">
           <button type="submit" class="btn" [@buttonState]="buttonState" (click)="addEmployeeButtonClicked()">Add</button>
           <button type="submit" class="btn" [@buttonState]="buttonState" (click)="cancelButtonClicked()">Cancel</button>

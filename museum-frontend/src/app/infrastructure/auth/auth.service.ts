@@ -46,6 +46,17 @@ export class AuthService {
       );
   }
 
+  registerEmployee(registration: Registration): Observable<AuthenticationResponse> {
+    return this.http
+      .post<AuthenticationResponse>(this.basePath + 'registerEmployee', registration)
+      .pipe(
+        tap((authenticationResponse) => {
+          this.tokenStorage.saveAccessToken(authenticationResponse.token);
+          this.setUser();
+        })
+      );
+  }
+
   logout(): void {
     this.router.navigate(['/']).then((_) => {
       this.tokenStorage.clear();

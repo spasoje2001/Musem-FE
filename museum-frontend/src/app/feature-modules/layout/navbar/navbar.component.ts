@@ -14,6 +14,7 @@ import {
   faPencilSquare,
   faAddressBook
  } from "@fortawesome/free-solid-svg-icons";
+import { Role } from 'src/app/infrastructure/auth/model/registration.model';
 
 @Component({
   selector: 'xp-navbar',
