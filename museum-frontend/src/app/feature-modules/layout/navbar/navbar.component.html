@@ -53,7 +53,19 @@
       </button>
 
       <button 
-              *ngIf="user" 
+            class="feat-button"
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['employee-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;See employees
+      </button>
+
+      <button 
+              class="feat-button"
+              *ngIf="user && user.username === ''" 
               color="white"
               mat-raised-button 
               [routerLink]="['register']"

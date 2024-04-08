@@ -1,25 +1,16 @@
-import { Component, HostListener } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Registration, Role } from '../model/registration.model';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import { MatDialogRef } from '@angular/material/dialog';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { Registration, Role } from 'src/app/infrastructure/auth/model/registration.model';
 
 @Component({
-  selector: 'xp-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  selector: 'app-add-employee-form',
+  templateUrl: './add-employee-form.component.html',
+  styleUrls: ['./add-employee-form.component.css'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms ease-out', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('500ms ease-in', style({ opacity: 0 })),
-      ]),
-    ]),
     trigger('buttonState', [
       state('clicked', style({
         transform: 'scale(0.9)',
@@ -34,13 +25,17 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
     ]),
   ]
 })
-export class RegistrationComponent {
+export class AddEmployeeFormComponent implements OnInit{
   isPasswordVisible: boolean;
   isRepeatPasswordVisible: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private dialogRef: MatDialogRef<AddEmployeeFormComponent>){
     this.isPasswordVisible = false;
     this.isRepeatPasswordVisible = false;
+  }
+
+  ngOnInit(): void {
+    
   }
 
   registrationForm = new FormGroup({
@@ -50,20 +45,38 @@ export class RegistrationComponent {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     repeatpassword: new FormControl('', [Validators.required]),
+    role: new FormControl('', [Validators.required]),
   });
 
   buttonState: string = 'idle'; 
   focused: string = '';
-  backgroundSize: string = '100% 110%';
 
-  register(): void {
+  addEmployeeButtonClicked(): void {
+    const selectedRoleString: string = this.registrationForm.value.role ?? '';
+    let selectedRole: Role;
+
+    switch (selectedRoleString) {
+        case 'Curator':
+            selectedRole = Role.Curator;
+            break;
+        case 'Organizer':
+            selectedRole = Role.Organizer;
+            break;
+        case 'Restaurateur':
+            selectedRole = Role.Restaurateur;
+            break;
+        default:
+            console.error("Invalid role selected.");
+            return; 
+    }
+
     const registration: Registration = {
       firstName: this.registrationForm.value.firstName || "",
       lastName: this.registrationForm.value.lastName || "",
       email: this.registrationForm.value.email || "",
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
-      role: 0
+      role: selectedRole,
     };
 
     console.log(registration);
@@ -72,9 +85,9 @@ export class RegistrationComponent {
       if(this.registrationForm.value.password === this.registrationForm.value.repeatpassword){
         this.buttonState = 'clicked'; 
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
-        this.authService.register(registration).subscribe({
+        this.authService.registerEmployee(registration).subscribe({
           next: () => {
-            this.router.navigate(['']);
+            this.dialogRef.close();
           },
         });
       } 
@@ -87,25 +100,16 @@ export class RegistrationComponent {
     }
   }
 
+  cancelButtonClicked() {
+    this.dialogRef.close();
+  }
+
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   toggleRepeatPasswordVisibility() {
     this.isRepeatPasswordVisible = !this.isRepeatPasswordVisible;
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    const scrollPosition = window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.documentElement.scrollHeight;
-
-    const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
-
-    const zoom = 100 + scrollPercent * 0.1; 
-
-    this.backgroundSize = `${zoom}% ${zoom+10}%`;
   }
 
   faEye = faEye;
