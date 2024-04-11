@@ -1,0 +1,75 @@
+<div
+    class="tour-card"
+>
+    <div class="tour-card-left">
+        <div class="tour-image-container">
+          <!-- KARUSEL HAHA -->
+            <img
+                class="tour-image"
+                *ngIf="!tour"
+                src="https://imgs.search.brave.com/udmDGOGRJTYO6lmJ0ADA03YoW4CdO6jPKGzXWvx1XRI/rs:fit:860:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAyLzY4LzU1LzYw/LzM2MF9GXzI2ODU1/NjAxMl9jMVdCYUtG/TjVyalJ4UjJleVYz/M3puSzRxblllS1pq/bS5qcGc"
+            />
+        </div>
+    </div>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+          <!-- OVDE SU BILE ONA KANTICA I TA SRANJA-->
+        </div>
+        <div class="tour-card-information">
+            <div class="tour-card-center">
+                <div class="tour-title">{{ tour.name }}</div>
+                <div class="tour-description">
+                    {{ tour.description }}
+                </div>
+                <div class="tour-guide">
+                    <div class="tour-guide-label">Guide:</div>
+                    <div class="tour-guide-value">
+                        {{ tour.guide.username }}
+                    </div>
+                </div>
+                <div class="tour-date">
+                  <div class="tour-date-label">Date and time:</div>
+                  <div class="tour-date-value">
+                      {{ tour.occurrenceDateTime }}
+                  </div>
+                </div>
+                <div class="tour-capacity">
+                  <div class="tour-capacity-label">Capacity:</div>
+                  <div class="tour-capacity-value">
+                      {{ tour.capacity }} people
+                  </div>
+                </div>
+            </div>
+            <div class="tour-card-right">
+                <div class="tour-price"> <!-- *ngIf="user && user.role === 'author'"> -->
+                    <!-- <div *ngIf="discount" class="tour-price-value">
+                        <s>{{ tour.price }}</s>
+                    </div> 
+                    <div *ngIf="!discount" class="tour-price-value">
+                        {{ tour.price }}
+                    </div>-->
+                    <div class="tour-price-value">
+                      {{ tour.adultTicketPrice }}
+                    </div>
+                    <fa-icon class="tour-price-tokens" [icon]="faCoins" />
+                </div>
+
+                <div
+                    class="btn edit"
+                    (click)="edit();$event.stopPropagation()"
+                >
+                    <fa-icon [icon]="faPen" />
+                    <div class="edit-text">&nbsp;Edit</div>
+                </div>
+
+                <div
+                    class="btn remove"
+                    (click)="remove(tour.id!);$event.stopPropagation()"
+                >
+                    <fa-icon [icon]="faRemove" />
+                    &nbsp;Add to wishlist
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
