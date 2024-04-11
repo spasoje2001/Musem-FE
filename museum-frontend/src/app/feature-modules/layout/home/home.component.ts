@@ -52,7 +52,7 @@ export class HomeComponent {
   toursButtonClicked(){
     this.toursButtonState = 'clicked'; 
     setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
-    this.router.navigate(['/tours']); // Proveriti samo kada se dodaju ture da li je dobra putanja
+    this.router.navigate(['/tour-view']); 
   }
 
   eventsButtonClicked(){
