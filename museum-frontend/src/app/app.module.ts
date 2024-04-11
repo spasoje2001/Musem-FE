@@ -10,10 +10,11 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToursModule } from './feature-modules/tours/tours.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
+    ToursModule
   ],
   providers: [
     {
