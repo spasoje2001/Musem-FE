@@ -2,6 +2,8 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Tour } from '../model/tour.model';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'xp-tour-view',
@@ -35,8 +37,9 @@ export class TourViewComponent implements OnInit{
   tours: Tour[] = [];
   tour: Tour[] = [];
   toursButtonState: string = "";
+  private dialogRef: any;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
 
   }
 
@@ -47,6 +50,8 @@ export class TourViewComponent implements OnInit{
   addToursButtonClicked() {
     this.toursButtonState = 'clicked'; 
     setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(AddTourFormComponent, {
+    });
   }
 
   backgroundSize: string = '100% 100%';
