@@ -1,0 +1,60 @@
+<div class="dialogue">
+  <div class="wrapper">
+    <form [formGroup]="addTourForm">
+        <h1>Add employee</h1>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="name" 
+                    required
+            />
+            <label [class.active]="addTourForm.get('name')?.value || focused === 'name'">Name</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="description"
+                    required
+            />
+            <label [class.active]="addTourForm.get('description')?.value || focused === 'description'">Description</label>
+        </div>
+        <!-- <div class="input-box">
+            <select formControlName="role" required>
+                    <option value="Organizer">Organizer</option>
+                    <option value="Curator">Curator</option>
+                    <option value="Restaurateur">Restaurateur</option>
+            </select>
+            <label>Select Role</label>
+        </div>              OVO TREBA DA BUDE NACIN DA SE ODABERE VODIC. MOZDA I DA BUDE NOVI MODALNI SA PUNIM PRIKAZOM -->
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="occurrenceDateTime"
+                    required
+            />
+            <label [class.active]="addTourForm.get('occurrenceDateTime')?.value || focused === 'occurrenceDateTime'">Date and time</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="number" 
+                    formControlName="capacity"
+                    required
+            />
+            <label [class.active]="addTourForm.get('capacity')?.value || focused === 'capacity'">Capacity</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="number"
+                    formControlName="price"
+                    required
+            />
+            <label [class.active]="addTourForm.get('price')?.value || focused === 'price'">Price</label>
+        </div>
+        <div class="buttons">
+          <button type="submit" class="btn" [@buttonState]="buttonState" (click)="uploadImageButtonClicked()">Upload Image</button>
+          <button type="submit" class="btn" [@buttonState]="buttonState" (click)="selectRouteButtonClicked()">Select route</button>
+        </div>
+        <button type="submit" class="btn" [@buttonState]="buttonState" (click)="addTourButtonClicked()">Add</button>
+    </form>
+  </div>
+</div>

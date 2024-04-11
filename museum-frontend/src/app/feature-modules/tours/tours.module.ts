@@ -7,11 +7,13 @@ import { MaterialModule } from "src/app/infrastructure/material/material-module"
 import { AdministrationModule } from "../administration/administration.module";
 import { TourViewComponent } from "./tour-view/tour-view.component";
 import { TourCardViewComponent } from './tour-card-view/tour-card-view.component';
+import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
 
 @NgModule({
   declarations: [
     TourViewComponent,
-    TourCardViewComponent
+    TourCardViewComponent,
+    AddTourFormComponent
   ],
   imports: [
     CommonModule,
