@@ -1,0 +1,22 @@
+<div class="overview" [ngStyle]="{'background-size': backgroundSize}">
+  <h2>Tours</h2>
+  <p>Neki opis veoma vazan kako se ova stranica uopste i koristi</p>
+  &nbsp;
+  <button
+          type="submit" 
+          class="btn" 
+          (click)="addToursButtonClicked()"
+          [@buttonState]="toursButtonState">
+    <fa-icon [icon]="faPlus" />
+    Add tour
+  </button>
+  <div class="tour-search-results">
+    <div class="tour-search-result-tours">
+        <xp-tour-card-view
+            [@fadeIn]
+            *ngFor="let tour of tours"
+            [tour]="tour"
+        ></xp-tour-card-view>
+    </div>
+  </div>
+</div>
