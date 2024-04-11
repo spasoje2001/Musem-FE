@@ -4,6 +4,7 @@ import { HomeComponent } from "src/app/feature-modules/layout/home/home.componen
 import { LoginComponent } from "../auth/login/login.component";
 import { RegistrationComponent } from "../auth/registration/registration.component";
 import { EmployeesViewComponent } from "src/app/feature-modules/administration/employees-view/employees-view.component";
+import { TourViewComponent } from "src/app/feature-modules/tours/tour-view/tour-view.component";
 
 const routes: Routes = [
   { 
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'employee-view',
     component: EmployeesViewComponent
+  },
+  {
+    path: 'tour-view',
+    component: TourViewComponent
   }
 ];
 
