@@ -1,0 +1,39 @@
+<div class="form">
+    <img class="profile-picture" src="../../../../../assets/default-profile-picture.png">
+    <form [formGroup]="profileForm" (ngSubmit)="update()">
+        <div class="input-fields">
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="first-name">First name</label>
+                    <input type="text" id="first-name" formControlName="firstName" autocomplete="given-name">
+                </div>
+                <div class="input-group">
+                    <label for="last-name">Last name</label>
+                    <input type="text" id="last-name" formControlName="lastName" autocomplete="family-name">
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="username" class="required">Username</label>
+                <input type="text" id="username" formControlName="username" autocomplete="username" required (change)="canChangeUsernameCheck()">
+                <div class="errors" *ngIf="profileForm.controls['username'].dirty">
+                    <p *ngIf="profileForm.controls['username'].errors?.['required']">This field is required.</p>
+                    <p *ngIf="!canChangeUsername">This username is already taken.</p>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="email" class="required">Email</label>
+                <input type="text" id="email" formControlName="email" autocomplete="email" required (change)="canChangeEmailCheck()">
+                <div class="errors" *ngIf="profileForm.controls['email'].dirty">
+                    <p *ngIf="profileForm.controls['email'].errors?.['required']">This field is required.</p>
+                    <p *ngIf="profileForm.controls['email'].errors?.['email']">Provide a valid email address.</p>
+                    <p *ngIf="!canChangeEmail">This email is already taken.</p>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="biography">Biography</label>
+                <textarea id="biography" formControlName="biography"></textarea>
+            </div>
+        </div>
+        <button type="submit" [disabled]="profileForm.invalid">Save changes</button>
+    </form>
+</div>
