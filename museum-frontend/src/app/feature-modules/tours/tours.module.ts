@@ -5,12 +5,12 @@ import { RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MaterialModule } from "src/app/infrastructure/material/material-module";
 import { AdministrationModule } from "../administration/administration.module";
-import { TourViewComponent } from "./tour-view/tour-view.component";
-import { TourCardViewComponent } from './tour-card-view/tour-card-view.component';
-import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { AddTourFormComponent } from "./components/add-tour-form/add-tour-form.component";
+import { TourCardViewComponent } from "./components/tour-card-view/tour-card-view.component";
+import { TourViewComponent } from "./components/tour-view/tour-view.component";
 
 @NgModule({
   declarations: [

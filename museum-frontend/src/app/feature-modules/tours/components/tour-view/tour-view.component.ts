@@ -1,9 +1,9 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Tour } from '../model/tour.model';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Tour } from '../../model/tour.model';
 
 @Component({
   selector: 'xp-tour-view',

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
@@ -18,6 +17,7 @@ export class AddTourFormComponent implements OnInit{
   tourImage: string | null = null;
   tourImageFile: File | null = null;
   curators: Curator[] = [];
+  selectedCurator: Curator | undefined;
 
   constructor(private toursService: ToursService, private dialogRef: MatDialogRef<AddTourFormComponent>) {
     const today = new Date();
@@ -29,11 +29,8 @@ export class AddTourFormComponent implements OnInit{
           this.curators = result;
           console.log(this.curators);
         }
-        console.log('nesto')
       }
     })
-    console.log('posle');
-    console.log(this.curators);
   }
 
   ngOnInit(): void {
@@ -48,7 +45,7 @@ export class AddTourFormComponent implements OnInit{
     occurrenceDate: new FormControl(null, [Validators.required]),
     adultTicketPrice: new FormControl('', [Validators.required]),
     minorTicketPrice: new FormControl('', [Validators.required]),
-    guide: new FormControl('', [Validators.required]),
+    //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
   });
@@ -61,6 +58,7 @@ export class AddTourFormComponent implements OnInit{
       adultTicketPrice: this.addTourForm.value.adultTicketPrice || "",
       minorTicketPrice: this.addTourForm.value.minorTicketPrice || "",
       capacity: this.addTourForm.value.capacity || "",
+      picturePath: this.addTourForm.value.picturePath || "",
     };
 
     console.log(tour);
@@ -84,11 +82,17 @@ export class AddTourFormComponent implements OnInit{
 
         tour.occurrenceDateTime = dateTime;
 
-        this.toursService.addTour(tour).subscribe({
-          next: () => {
-            this.dialogRef.close();
-          },
-        });
+        if(this.selectedCurator != null){
+          //tour.guide = this.selectedCurator;
+          tour.guideId = this.selectedCurator.id;
+          // za sad ovako dok s ene dodaju sobe
+          tour.duration = "0";
+          this.toursService.addTour(tour).subscribe({
+            next: () => {
+              this.dialogRef.close();
+            },
+          });
+        }
     }
     else{
       console.log('Add tour form not valid!'); // Treba dodati neki vid validacije
@@ -113,12 +117,12 @@ export class AddTourFormComponent implements OnInit{
         reader.readAsDataURL(this.tourImageFile);
         reader.onload = (e: ProgressEvent<FileReader>) => {
             this.tourImage = reader.result as string;
-            this.addTourForm.value.picturePath = "";
+            //this.addTourForm.value.picturePath = "";
         };
     }
   }
 
   onChooseClicked(curator: Curator){
-
+    this.selectedCurator = curator;
   }
 }

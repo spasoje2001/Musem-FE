@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/env/environment";
 import { Tour } from "./model/tour.model";
-import { User } from "src/app/infrastructure/auth/model/user.model";
+import { Curator } from "../stakeholder/model/curator.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class ToursService {
     return this.http.put<Tour>(environment.apiHost + 'tours/' + tour.id, tour);
   }
 
-  getCurators(): Observable<User>{
-    return this.http.get<User>(environment.apiHost + 'users/curators');
+  getCurators(): Observable<Curator>{
+    return this.http.get<Curator>(environment.apiHost + 'users/curators');
   }
 }

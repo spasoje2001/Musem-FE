@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Tour } from '../model/tour.model';
 import { faCoins, faPen, faRemove } from "@fortawesome/free-solid-svg-icons";
+import { Tour } from '../../model/tour.model';
 
 @Component({
   selector: 'xp-tour-card-view',

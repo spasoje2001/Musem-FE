@@ -1,6 +1,6 @@
 .dialogue {
   width: 32rem;
-  height: 45rem;
+  height: 50rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,11 +10,8 @@
   width: 90%;
   height: 90%;
   border: 2px solid rgba(255, 255, 255, .2);
-  /*backdrop-filter: blur(20px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, .2);*/
   color: #1b1b1b;
   border-radius: 10px;
-  /* padding: 30px 40px; */ 
   gap: 15px;
 }
 
@@ -228,7 +225,8 @@ img {
 }
 
 .curator-choosing{
-  margin-bottom: 15px;
+  margin-top: 25px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
