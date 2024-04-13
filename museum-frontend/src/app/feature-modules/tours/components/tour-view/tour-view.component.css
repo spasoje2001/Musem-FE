@@ -489,7 +489,6 @@ input[type="range"] {
 }
 
 .tour-search-result-tours {
-  margin-top: 10%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -591,10 +590,75 @@ input[type="range"] {
 
 .overview {
   height: auto;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F39%2F34%2Ftjr9d7.jpg&f=1&nofb=1&ipt=e6ea890cb4a5119b7839e0247ca90f91ac8d079e394e1b69e9741cc3852d96a0&ipo=images') no-repeat;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fkolkata-marble-museum-7wmw0gmg8aibqee2.jpg&f=1&nofb=1&ipt=bb81295396b2ae21a01d8fffe17b956028be4ec82dd4c2e4f8898b07ebb69f96&ipo=images') no-repeat;
   background-position: center;
   background-size: cover;
   transition: background-size 0.3s ease;
+}
+
+.h2-wrapper {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: auto;
+  width: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  padding: 1% 1%;
+}
+
+.p-wrapper {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  color: #fff;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: auto;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  padding: 1% 1%;
+}
+
+h2 {
+  margin: 0;
+}
+
+.add-tour-btn {
+  width: 300px;
+  height: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 2%;
+  margin-left: 71.5%;
+  margin-bottom: 2%;
+}
+
+.add-tour-btn:hover {
+  background-color: #f2f2f2; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
 }

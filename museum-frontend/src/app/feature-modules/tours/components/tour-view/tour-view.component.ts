@@ -1,10 +1,12 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
 
 @Component({
   selector: 'xp-tour-view',
@@ -37,21 +39,27 @@ import { ToursService } from '../../tours.service';
 export class TourViewComponent implements OnInit{
   tours: Tour[] = [];
   tour: Tour[] = [];
+  user: User | undefined;
   toursButtonState: string = "";
   private dialogRef: any;
 
-  constructor(private dialog: MatDialog, private toursService: ToursService) {
-
+  constructor(private dialog: MatDialog, 
+              private toursService: ToursService,
+              private authService: AuthService) {
+                
   }
 
   ngOnInit(): void {
-    this.toursService.getTours().subscribe({
-      next: (result: Tour[] | Tour) => {
-        if(Array.isArray(result)){
-          this.tours = result;
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+      this.toursService.getOrganizersTours(this.user.id).subscribe({
+        next: (result: Tour[] | Tour) => {
+          if(Array.isArray(result)){
+            this.tours = result;
+          }
         }
-      }
-    })
+      });
+    });
   }
 
   addToursButtonClicked() {
@@ -59,6 +67,18 @@ export class TourViewComponent implements OnInit{
     setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(AddTourFormComponent, {
     });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.toursService.getOrganizersTours(this.user!.id).subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
+          }
+        });
+      });
+    }
   }
 
   backgroundSize: string = '100% 100%';

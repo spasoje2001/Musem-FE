@@ -1,14 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-add-tour-form',
   templateUrl: './add-tour-form.component.html',
-  styleUrls: ['./add-tour-form.component.css']
+  styleUrls: ['./add-tour-form.component.css'],
+  animations: [
+      trigger('buttonState', [
+        state('clicked', style({
+          transform: 'scale(0.9)',
+          opacity: 0.5
+        })),
+        transition('* => clicked', [
+          animate('200ms')
+        ]),
+        transition('clicked => idle', [
+          animate('200ms')
+        ])
+      ]),
+],
 })
 export class AddTourFormComponent implements OnInit{
   buttonState: string = 'idle'; 
