@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Tour } from '../model/tour.model';
-import { ToursService } from '../tours.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
+import { Tour } from '../../model/tour.model';
+import { ToursService } from '../../tours.service';
 
 @Component({
   selector: 'app-add-tour-form',
@@ -16,23 +17,27 @@ export class AddTourFormComponent implements OnInit{
   minDate: string;  
   tourImage: string | null = null;
   tourImageFile: File | null = null;
-  curators: User[] = [];
+  curators: Curator[] = [];
 
-  constructor(private tourService: ToursService, private dialogRef: MatDialogRef<AddTourFormComponent>) {
+  constructor(private toursService: ToursService, private dialogRef: MatDialogRef<AddTourFormComponent>) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
 
-    
+    this.toursService.getCurators().subscribe({
+      next: (result: Curator[] | Curator) => {
+        if (Array.isArray(result)) {
+          this.curators = result;
+          console.log(this.curators);
+        }
+        console.log('nesto')
+      }
+    })
+    console.log('posle');
+    console.log(this.curators);
   }
 
   ngOnInit(): void {
-    this.tourService.getCurators().subscribe({
-      next: (result: User[] | User) => {
-        if (Array.isArray(result)) {
-          this.curators = result;
-        }
-      }
-    })
+    
   }
 
   addTourForm = new FormGroup({
@@ -79,7 +84,7 @@ export class AddTourFormComponent implements OnInit{
 
         tour.occurrenceDateTime = dateTime;
 
-        this.tourService.addTour(tour).subscribe({
+        this.toursService.addTour(tour).subscribe({
           next: () => {
             this.dialogRef.close();
           },
@@ -113,7 +118,7 @@ export class AddTourFormComponent implements OnInit{
     }
   }
 
-  onAddAdminClicked(user: User){
+  onChooseClicked(curator: Curator){
 
   }
 }

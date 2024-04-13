@@ -1,6 +1,6 @@
 .dialogue {
-  width: 30rem;
-  height: 40rem;
+  width: 32rem;
+  height: 45rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@
 }
 
 .input-box input {
-  width: 95%;
+  width: 100%;
   height: 100%;
   border-radius: 40px;
   font-size: 16px;
@@ -202,7 +202,7 @@ img {
 }
 
 .wrapper .submit-btn {
-  margin-top: 6%;
+  margin-top: 5%;
   width: 100%;
   height: 45px;
   background: rgb(178, 178, 178);
@@ -214,7 +214,6 @@ img {
   font-size: 16px;
   color: #1b1b1b;
   font-weight: 600;
-  margin-top: -15px;
 }
 
 .wrapper .submit-btn:hover {
@@ -228,13 +227,40 @@ img {
   align-self: center;
 }
 
-.admin-choosing{
-  background-color:aliceblue;
+.curator-choosing{
   margin-bottom: 15px;
+  font-weight: 600;
 }
 
-#choose-admin{
+.curator-choosing button{
+  width: 120%;
+  height: 30px;
+  background: rgb(178, 178, 178);
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #1b1b1b;
+  font-weight: 600;
+}
+
+.curator-choosing button:hover{
+  background-color: rgb(172, 172, 172); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
+}
+
+#choose-curator{
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+
+#curator-table {
+  margin-left: auto;
+  margin-right: auto;
 }
