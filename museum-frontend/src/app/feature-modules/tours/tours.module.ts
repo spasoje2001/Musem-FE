@@ -8,6 +8,9 @@ import { AdministrationModule } from "../administration/administration.module";
 import { TourViewComponent } from "./tour-view/tour-view.component";
 import { TourCardViewComponent } from './tour-card-view/tour-card-view.component';
 import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AddTourFormComponent } from './add-tour-form/add-tour-form.component';
     ReactiveFormsModule,
     FontAwesomeModule,  
     MaterialModule,
-    AdministrationModule
+    AdministrationModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   exports: [
     TourViewComponent

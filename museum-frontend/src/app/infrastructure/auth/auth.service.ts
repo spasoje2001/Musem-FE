@@ -9,6 +9,7 @@ import { Login } from './model/login.model';
 import { Registration } from './model/registration.model';
 import { User } from './model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BooleanResponseDTO } from 'src/app/feature-modules/stakeholder/model/boolean-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +78,23 @@ export class AuthService {
     this.user$.next(user);
   }
 
+  setToken(authenticationResponse: AuthenticationResponse) {
+    this.tokenStorage.saveAccessToken(authenticationResponse.token);
+    this.setUser();
+  }
+
   getJwtToken(): string | null {
     return this.tokenStorage.getAccessToken(); 
   }
+
+  canChangeUsername(username: string): Observable<BooleanResponseDTO> {
+    const path = this.basePath + 'can-change-username/' + username;
+    return this.http.get<BooleanResponseDTO>(path);
+  }
+
+  canChangeEmail(email: string): Observable<BooleanResponseDTO> {
+    const path = this.basePath + 'can-change-email/' + email;
+    return this.http.get<BooleanResponseDTO>(path);
+  }
+
 }

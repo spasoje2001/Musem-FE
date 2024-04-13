@@ -29,6 +29,7 @@
   width: 100%;
   height: 10%;
   border-radius: 40px;
+  display: flex;
 }
 
 .input-box input {
@@ -70,7 +71,7 @@
 
 .wrapper .btn {
   margin-top: 6%;
-  width: 45%;
+  width: 50%;
   height: 45px;
   background: rgb(178, 178, 178);
   border: none;
@@ -92,7 +93,7 @@
 
 .wrapper .buttons {
   display: flex;
-  gap: 15%;
+  gap: 9%;
 }
 
 .input-box select {
@@ -128,4 +129,112 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: #1b1b1b;
+}
+
+.date-picker-input {
+  width: 80%;
+  height: 90%;
+  border: 2px solid rgba(255, 255, 255, .2);
+  color: #1b1b1b;
+  gap: 15px;
+  border-radius: 40px;
+  font-size: 16px;
+  padding: 2% 3%;
+}
+
+.date-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ticket-prices {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.toggle {
+  margin-top: -9px;
+  height: 0.5px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  display: flex;
+  padding: 2px 13px;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(var(--clr-primary-300), 1);
+}
+
+img {
+  object-fit: contain;
+  width: 23rem;
+  height: 31.06rem;
+  background-color: rgba(var(--clr-primary-300), 1);
+  align-self: center;
+}
+
+.image-form-field {
+  display: flex;
+  position: relative;
+  width: 23rem;
+}
+
+.image-form-field label {
+  position: relative;
+  border-radius: 1rem;
+  color: #1b1b1b;
+  bottom: 2.4rem;
+  z-index: 1;
+  height: auto;
+  width: 8rem;
+  text-align: center;
+  margin-left: 10%;
+  margin-top: 1%;
+  font-weight: 600;
+}
+
+.wrapper .submit-btn {
+  margin-top: 6%;
+  width: 100%;
+  height: 45px;
+  background: rgb(178, 178, 178);
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #1b1b1b;
+  font-weight: 600;
+  margin-top: -15px;
+}
+
+.wrapper .submit-btn:hover {
+  background-color: rgb(172, 172, 172); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
+}
+
+#date-time-label {
+  align-self: center;
+}
+
+.admin-choosing{
+  background-color:aliceblue;
+  margin-bottom: 15px;
+}
+
+#choose-admin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
