@@ -4,6 +4,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Tour } from '../../model/tour.model';
+import { ToursService } from '../../tours.service';
 
 @Component({
   selector: 'xp-tour-view',
@@ -39,12 +40,18 @@ export class TourViewComponent implements OnInit{
   toursButtonState: string = "";
   private dialogRef: any;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private toursService: ToursService) {
 
   }
 
   ngOnInit(): void {
-  
+    this.toursService.getTours().subscribe({
+      next: (result: Tour[] | Tour) => {
+        if(Array.isArray(result)){
+          this.tours = result;
+        }
+      }
+    })
   }
 
   addToursButtonClicked() {

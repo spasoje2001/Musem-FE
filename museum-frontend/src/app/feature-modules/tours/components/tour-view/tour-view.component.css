@@ -489,10 +489,12 @@ input[type="range"] {
 }
 
 .tour-search-result-tours {
+  margin-top: 10%;
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 0.5rem;
+  margin-bottom: 7%;
 }
 
 .tour-card {
@@ -539,45 +541,6 @@ input[type="range"] {
   width: 10rem;
   border-top-left-radius: 0.3125rem;
   border-bottom-left-radius: 0.3125rem;
-}
-
-.tour-search-map-distance-labels {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-}
-
-.tour-search-map-distance-min {
-  font-family: var(--fnt-body);
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(var(--clr-text), 1);
-  transition: color 0.15s;
-  position: absolute;
-  left: 0;
-  transition: color 0.15s;
-}
-
-.tour-search-map-distance-value {
-  font-family: var(--fnt-body);
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(var(--clr-text), 1);
-  transition: color 0.15s;
-  transition: color 0.15s;
-}
-
-.tour-search-map-distance-max {
-  font-family: var(--fnt-body);
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(var(--clr-text), 1);
-  transition: color 0.15s;
-  position: absolute;
-  right: 0;
-  transition: color 0.15s;
 }
 
 .margin-bottom {
@@ -627,10 +590,10 @@ input[type="range"] {
 }
 
 .overview {
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdwallpapers.in%2Fdownload%2Flouvre_museum_at_sunset-wide.jpg&f=1&nofb=1&ipt=09d86ad89b4b874b4b5142e2f9bf8483b548972f18c8102b8a2ce97ba03950af&ipo=images') no-repeat;
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.wallpapersafari.com%2F39%2F34%2Ftjr9d7.jpg&f=1&nofb=1&ipt=e6ea890cb4a5119b7839e0247ca90f91ac8d079e394e1b69e9741cc3852d96a0&ipo=images') no-repeat;
   background-position: center;
   background-size: cover;
   transition: background-size 0.3s ease;
