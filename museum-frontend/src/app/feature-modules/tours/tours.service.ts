@@ -31,4 +31,8 @@ export class ToursService {
   getCurators(): Observable<Curator>{
     return this.http.get<Curator>(environment.apiHost + 'users/curators');
   }
+  
+  getOrganizersTours(organizerId: number): Observable<Tour> {
+    return this.http.get<Tour>(environment.apiHost + 'tours/organizers/' + organizerId);
+  }
 }
