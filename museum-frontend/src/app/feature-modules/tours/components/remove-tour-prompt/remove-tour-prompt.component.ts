@@ -1,6 +1,7 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToursService } from '../../tours.service';
 
 @Component({
   selector: 'app-remove-tour-prompt',
@@ -24,15 +25,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class RemoveTourPromptComponent {
   cancelButtonState: string = 'idle';   
   removeButtonState: string = 'idle'; 
+  tourId: number = 0;
   @Output() closeModalEvent = new EventEmitter<void>();
 
-  constructor(private dialogRef: MatDialogRef<RemoveTourPromptComponent>){
-
+  constructor(private dialogRef: MatDialogRef<RemoveTourPromptComponent>,
+              private toursService: ToursService,
+              @Inject(MAT_DIALOG_DATA) public data: any){
+    this.tourId = data;
   }
 
   removeButtonClicked(){
     this.removeButtonState = 'clicked'; 
     setTimeout(() => { this.removeButtonState = 'idle'; }, 200); 
+    this.toursService.deleteTour(this.tourId).subscribe({
+      next: () => {
+        this.dialogRef.close();
+      }
+    });
   }
 
   cancelButtonClicked(){

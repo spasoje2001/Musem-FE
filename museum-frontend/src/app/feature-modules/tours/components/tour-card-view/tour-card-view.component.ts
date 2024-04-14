@@ -47,7 +47,7 @@ export class TourCardViewComponent implements OnChanges{
     this.removeButtonState = 'clicked'; 
     setTimeout(() => { this.removeButtonState = 'idle'; }, 200); 
     this.dialogRef = this.dialog.open(RemoveTourPromptComponent, {
-      
+      data: id
     });
 
   }
