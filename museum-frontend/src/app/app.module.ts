@@ -10,10 +10,12 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArtifactsComponent
   ],
   imports: [
     BrowserModule,
