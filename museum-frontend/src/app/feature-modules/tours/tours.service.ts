@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "src/env/environment";
 import { Tour } from "./model/tour.model";
 import { Curator } from "../stakeholder/model/curator.model";
+import { PersonalTourRequest } from "./model/personalTourRequest.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,13 @@ export class ToursService {
   
   getOrganizersTours(organizerId: number): Observable<Tour> {
     return this.http.get<Tour>(environment.apiHost + 'tours/organizers/' + organizerId);
+  }
+
+  addTourRequest(request: PersonalTourRequest): Observable<PersonalTourRequest> {
+    return this.http.post<PersonalTourRequest>(environment.apiHost + 'personalTourRequests', request);
+  }
+
+  getGuestsTours(guestId: number): Observable<PersonalTourRequest> {
+    return this.http.get<PersonalTourRequest>(environment.apiHost + 'personalTourRequests/' + guestId);
   }
 }
