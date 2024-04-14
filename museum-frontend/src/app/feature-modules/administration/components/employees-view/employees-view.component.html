@@ -9,7 +9,5 @@
     </button>
   <app-search-filter (searchChange)="onFilterChange($event)"></app-search-filter>
   <app-sort-dropdown (sortChange)="onSortChange($event)"></app-sort-dropdown>
-  <app-employees-table [employees]="sortedEmployees"></app-employees-table>
-
-  
+  <app-employees-table [employees]="sortedEmployees" (toggleLock)="toggleLockStatus($event)"></app-employees-table>
 </div>

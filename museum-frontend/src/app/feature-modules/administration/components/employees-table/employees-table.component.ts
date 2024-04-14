@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Employee } from '../../model/employee.model';
 
 @Component({
@@ -8,5 +8,10 @@ import { Employee } from '../../model/employee.model';
 })
 export class EmployeesTableComponent {
   @Input() employees: Employee[] = [];
+  @Output() toggleLock = new EventEmitter<number>();
   
+  onToggleLock(employeeId: number): void {
+    this.toggleLock.emit(employeeId);
+  }
+
 }

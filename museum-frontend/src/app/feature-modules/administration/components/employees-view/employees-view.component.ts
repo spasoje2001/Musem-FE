@@ -33,6 +33,7 @@ export class EmployeesViewComponent implements OnInit {
   employees: Employee[] = [];
   filteredEmployees: Employee[] = [];
   sortKey = '';
+  searchTerm = '';
   sortedEmployees: Employee[] = [];
 
   constructor(private dialog: MatDialog, private employeeManagementService: EmployeeManagementService){
@@ -54,8 +55,13 @@ export class EmployeesViewComponent implements OnInit {
   }
 
   onFilterChange(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.filterEmployees();
+  }
+
+  filterEmployees(): void {
     this.filteredEmployees = this.employees.filter(employee =>
-      employee.role.toLowerCase().includes(searchTerm.toLowerCase())
+      employee.role.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
 
     this.sortEmployees();
@@ -84,6 +90,37 @@ export class EmployeesViewComponent implements OnInit {
           return 0; // If no sortKey or unrecognized sortKey, don't sort
       }
     });
+  }
+
+  toggleLockStatus(employeeId: number): void {
+    this.employeeManagementService.toggleEmployeeLockStatus(employeeId).subscribe({
+      next: (res) => {
+        // Handle response here, e.g., refreshing the list or showing a message
+        console.log('Lock status toggled', res);
+        this.refreshEmployeeList(); // If you have a method to refresh the list
+      },
+      error: (error) => {
+        // Handle error here
+        console.error('Error toggling lock status', error);
+      }
+    });
+  }
+
+  private refreshEmployeeList(): void {
+    // Call the method to refresh the list of employees
+    this.employeeManagementService.getAllEmployees().subscribe(
+      (data) => {
+        this.employees = data;
+        this.filterEmployees();
+        this.sortEmployees();
+        console.log('uspeo');
+        console.log(this.sortedEmployees);
+      },
+      (error) => {
+        // Handle the error here
+        console.error('There was an error!', error);
+      }
+    );
   }
 
   addEmployeeButtonClicked(){

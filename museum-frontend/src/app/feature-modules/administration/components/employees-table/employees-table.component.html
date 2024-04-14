@@ -16,6 +16,7 @@
         <td>{{ employee.role }}</td>
         <td>{{ employee.email }}</td>
         <td>
+          <button (click)="onToggleLock(employee.id)">Lock/Unlock</button>
           <!-- ... action buttons ... -->
         </td>
       </tr>

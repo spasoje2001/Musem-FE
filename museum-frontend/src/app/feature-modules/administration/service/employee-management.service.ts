@@ -14,4 +14,8 @@ export class EmployeeManagementService {
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.baseUrl);
   }
+
+  toggleEmployeeLockStatus(employeeId: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/toggle-lock/${employeeId}`, {});
+  }
 }
