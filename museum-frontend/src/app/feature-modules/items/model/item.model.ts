@@ -1,0 +1,35 @@
+export interface Item {
+    id?: number;
+    name : string;
+    description : string;
+    authorsName : string;
+    yearOfCreation : string;
+    period : string;
+    category : ItemCategory;
+    picture :  string;
+    status?: ItemStatus;
+  }
+
+export enum ItemCategory {
+    Painting = 0,
+    Drawing = 1,
+    Sculpture = 2,
+    Print = 3,
+    Photograph = 4,
+    Artifact = 5,
+    Clothing = 6,
+    Specimen = 7,
+    Fossil = 8,
+    Animal = 9,
+    Mineral = 10,
+    Pottery = 11,
+    Jewelry = 12
+}
+
+export enum ItemStatus {
+    New = 0,
+    Approved = 1,
+    Incleaning = 2,
+    Cleansed = 3,
+    Fordisplay = 4,
+}

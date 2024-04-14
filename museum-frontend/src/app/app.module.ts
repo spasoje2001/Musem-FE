@@ -24,12 +24,12 @@ import { GuestEditProfileComponent } from './feature-modules/stakeholder/compone
 import { OrganizerEditProfileComponent } from './feature-modules/stakeholder/components/organizer-edit-profile/organizer-edit-profile.component';
 import { AdministratorEditProfileComponent } from './feature-modules/stakeholder/components/administrator-edit-profile/administrator-edit-profile.component';
 import { AdministratorProfileComponent } from './feature-modules/stakeholder/components/administrator-profile/administrator-profile.component';
+import { ItemsModule } from './feature-modules/items/items.module';
 
 
 @NgModule({
   declarations: [
     AppComponent, 
-    ArtifactsComponent,
     UserProfileComponent,
     EditProfileComponent,
     GuestProfileComponent,
@@ -59,7 +59,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     {
