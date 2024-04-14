@@ -1,0 +1,39 @@
+/* employee-list.component.css */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Adjust as needed */
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px; /* Adjust as needed */
+  }
+  
+  th {
+    color: #666; /* Adjust to match wireframe */
+    font-weight: normal;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9; /* Adjust to match wireframe */
+  }
+  
+  .employee-info {
+    display: flex;
+    align-items: center; /* Vertically center the contents */
+  }
+  
+  .employee-image {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px; /* Space between image and name */
+  }
+  
+  .employee-name {
+    /* Add any additional styling for the name text here */
+  }
+  
+  /* Add styles for the search filter, sort dropdown, add employee button, and action buttons */

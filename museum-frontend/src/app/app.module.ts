@@ -12,7 +12,7 @@ import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
 import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GuestProfileComponent } from './feature-modules/stakeholder/components/guest-profile/guest-profile.component';
 import { OrganizerProfileComponent } from './feature-modules/stakeholder/components/organizer-profile/organizer-profile.component';
 import { CuratorProfileComponent } from './feature-modules/stakeholder/components/curator-profile/curator-profile.component';

@@ -1,0 +1,23 @@
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td class="employee-info">
+          <img src="https://cc-prod.scene7.com/is/image/CCProdAuthor/What-is-Stock-Photography_P1_mobile?$pjpeg$&jpegSize=200&wid=720" alt="Profile Picture" class="employee-image">
+          <span class="employee-name">{{ employee.name }}</span>
+        </td>
+        <td>{{ employee.role }}</td>
+        <td>{{ employee.email }}</td>
+        <td>
+          <!-- ... action buttons ... -->
+        </td>
+      </tr>
+    </tbody>
+</table>
