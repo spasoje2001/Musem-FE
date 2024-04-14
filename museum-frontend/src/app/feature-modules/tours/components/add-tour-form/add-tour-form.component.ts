@@ -34,7 +34,8 @@ export class AddTourFormComponent implements OnInit{
   curators: Curator[] = [];
   selectedCurator: Curator | undefined;
 
-  constructor(private toursService: ToursService, private dialogRef: MatDialogRef<AddTourFormComponent>) {
+  constructor(private toursService: ToursService, 
+              private dialogRef: MatDialogRef<AddTourFormComponent>) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
 
@@ -139,5 +140,9 @@ export class AddTourFormComponent implements OnInit{
 
   onChooseClicked(curator: Curator){
     this.selectedCurator = curator;
+  }
+
+  overviewClicked(){
+    this.dialogRef.close();
   }
 }
