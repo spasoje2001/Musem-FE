@@ -6,6 +6,7 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 import { EmployeesViewComponent } from "src/app/feature-modules/administration/employees-view/employees-view.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
+import { TourViewComponent } from "src/app/feature-modules/tours/components/tour-view/tour-view.component";
 
 const routes: Routes = [
   { 
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'employee-view',
     component: EmployeesViewComponent
+  },
+  {
+    path: 'tour-view',
+    component: TourViewComponent
   },
   {
     path: 'profile',

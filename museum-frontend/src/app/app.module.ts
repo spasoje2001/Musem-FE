@@ -10,6 +10,7 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToursModule } from './feature-modules/tours/tours.module';
 import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
 import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
+    ToursModule,
     ReactiveFormsModule
   ],
   providers: [
