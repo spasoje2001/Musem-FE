@@ -11,12 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { AddTourFormComponent } from "./components/add-tour-form/add-tour-form.component";
 import { TourCardViewComponent } from "./components/tour-card-view/tour-card-view.component";
 import { TourViewComponent } from "./components/tour-view/tour-view.component";
+import { RemoveTourPromptComponent } from './components/remove-tour-prompt/remove-tour-prompt.component';
 
 @NgModule({
   declarations: [
     TourViewComponent,
     TourCardViewComponent,
-    AddTourFormComponent
+    AddTourFormComponent,
+    RemoveTourPromptComponent
   ],
   imports: [
     CommonModule,

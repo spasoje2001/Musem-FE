@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { faCoins, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Tour } from '../../model/tour.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { RemoveTourPromptComponent } from '../remove-tour-prompt/remove-tour-prompt.component';
 
 @Component({
   selector: 'xp-tour-card-view',
@@ -26,11 +28,14 @@ export class TourCardViewComponent implements OnChanges{
   editButtonState: string = 'idle';   
   removeButtonState: string = 'idle'; 
   @Input() tour!: Tour;
+  private dialogRef: any;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  constructor(private dialog: MatDialog) {
+
   }
 
-  constructor() {
+  ngOnChanges(changes: SimpleChanges,): void {
+
   }
 
   editButtonClicked() {
@@ -41,6 +46,10 @@ export class TourCardViewComponent implements OnChanges{
   removeButtonClicked(id: number) {
     this.removeButtonState = 'clicked'; 
     setTimeout(() => { this.removeButtonState = 'idle'; }, 200); 
+    this.dialogRef = this.dialog.open(RemoveTourPromptComponent, {
+      
+    });
+
   }
 
   faCoins = faCoins;

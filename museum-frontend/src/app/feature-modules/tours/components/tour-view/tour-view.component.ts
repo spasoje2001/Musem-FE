@@ -83,6 +83,10 @@ export class TourViewComponent implements OnInit{
 
   backgroundSize: string = '100% 100%';
 
+  handleModalClose() {
+    this.dialogRef = this.dialog.closeAll();
+  }
+
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const scrollPosition = window.pageYOffset;
