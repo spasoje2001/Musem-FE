@@ -41,7 +41,19 @@ export class ToursService {
     return this.http.post<PersonalTourRequest>(environment.apiHost + 'personalTourRequests', request);
   }
 
-  getGuestsTours(guestId: number): Observable<PersonalTourRequest> {
+  updateTourRequest(request: PersonalTourRequest): Observable<PersonalTourRequest> {
+    return this.http.put<PersonalTourRequest>(environment.apiHost + 'personalTourRequests', request);
+  }
+
+  getGuestsTourRequests(guestId: number): Observable<PersonalTourRequest> {
     return this.http.get<PersonalTourRequest>(environment.apiHost + 'personalTourRequests/' + guestId);
+  }
+
+  getTourRequests(): Observable<PersonalTourRequest> {
+    return this.http.get<PersonalTourRequest>(environment.apiHost + 'personalTourRequests');
+  }
+
+  getTourRequestsOnHold(): Observable<PersonalTourRequest> {
+    return this.http.get<PersonalTourRequest>(environment.apiHost + 'personalTourRequests/onHold');
   }
 }
