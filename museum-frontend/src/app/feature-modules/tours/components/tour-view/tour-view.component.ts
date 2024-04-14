@@ -7,6 +7,7 @@ import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { AddTourRequestFormComponent } from '../add-tour-request-form/add-tour-request-form.component';
 
 @Component({
   selector: 'xp-tour-view',
@@ -41,6 +42,7 @@ export class TourViewComponent implements OnInit{
   tour: Tour[] = [];
   user: User | undefined;
   toursButtonState: string = "";
+  tourRequestsButtonState: string = "";
   private dialogRef: any;
 
   constructor(private dialog: MatDialog, 
@@ -52,13 +54,24 @@ export class TourViewComponent implements OnInit{
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      this.toursService.getOrganizersTours(this.user.id).subscribe({
-        next: (result: Tour[] | Tour) => {
-          if(Array.isArray(result)){
-            this.tours = result;
+      if(this.user.role == 'ORGANIZER'){
+        this.toursService.getOrganizersTours(this.user.id).subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
           }
-        }
-      });
+        });
+      }
+      else{
+        this.toursService.getTours().subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
+          }
+        });
+      }
     });
   }
 
@@ -80,6 +93,26 @@ export class TourViewComponent implements OnInit{
       });
     }
   }
+
+  addTourRequestButtonClicked() {
+    this.toursButtonState = 'clicked'; 
+    setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(AddTourRequestFormComponent, {
+    });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.toursService.getTours().subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
+          }
+        });   
+      });
+    }
+  }
+
 
   backgroundSize: string = '100% 100%';
 

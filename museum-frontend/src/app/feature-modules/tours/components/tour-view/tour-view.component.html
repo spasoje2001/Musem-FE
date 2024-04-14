@@ -18,11 +18,11 @@
     <fa-icon [icon]="faPlus" />
     &nbsp;Add tour
   </button>
-  <button *ngIf="user!.role != 'ORGANIZER'"
+  <button *ngIf="user!.role == 'GUEST'"
           type="submit" 
           class="add-tour-btn" 
-          (click)="addToursButtonClicked()"
-          [@buttonState]="toursButtonState">
+          (click)="addTourRequestButtonClicked()"
+          [@buttonState]="tourRequestsButtonState">
     <fa-icon [icon]="faPlus" />
     &nbsp;Request personal tour
   </button>
