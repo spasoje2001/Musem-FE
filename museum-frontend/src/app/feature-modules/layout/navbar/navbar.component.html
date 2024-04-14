@@ -64,6 +64,17 @@
       </button>
 
       <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'ORGANIZER' || user?.role === 'GUEST'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['request-view']" 
+      >         
+      <fa-icon [icon]="faEnvelopeOpen" />    
+      &nbsp;Tour Requests
+      </button>
+
+      <button 
               class="feat-button"
               *ngIf="user && user.username === ''" 
               color="white"
