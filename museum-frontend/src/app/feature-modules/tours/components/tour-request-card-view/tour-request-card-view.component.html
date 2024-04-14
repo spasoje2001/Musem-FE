@@ -1,0 +1,51 @@
+<div
+    class="tour-card"
+>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+        </div>
+        <div class="tour-card-information">
+            <div class="tour-card-center">
+                <div class="tour-guide-value">
+                    <strong>User: </strong> {{ request.proposer?.firstName }} {{ request.proposer?.lastName }}
+                </div>
+                <div class="tour-date">
+                  <div class="tour-date-value">
+                    <strong>Date and time: </strong> {{ request.occurrenceDateTime }}
+                  </div>
+                </div>
+                <div class="tour-capacity">
+                  <div class="tour-capacity-value">
+                      <strong>Guest number: </strong> {{ request.guestNumber }} people
+                  </div>
+                </div>
+                <div class="tour-rooms-occupied">
+                  <div class="tour-rooms-value">
+                      <strong>Rooms occupied: </strong> TO DO :/
+                  </div>
+                </div>
+            </div>
+            <div class="tour-card-right">
+                <button
+                    class="btn"
+                    *ngIf="user?.role == 'ORGANIZER'"
+                    (click)="acceptButtonClicked(request.id!);$event.stopPropagation()"
+                    [@buttonState]="acceptButtonState"
+                >
+                    <fa-icon [icon]="faCheck" />
+                    &nbsp;Accept
+                </button>
+
+                <button
+                    class="btn"
+                    *ngIf="user?.role == 'ORGANIZER'"
+                    (click)="declineButtonClicked(request);$event.stopPropagation()"
+                    [@buttonState]="declineButtonState"
+                >
+                    <fa-icon [icon]="faTimes" />
+                    &nbsp;Decline
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
