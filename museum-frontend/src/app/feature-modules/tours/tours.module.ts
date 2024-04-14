@@ -12,13 +12,15 @@ import { AddTourFormComponent } from "./components/add-tour-form/add-tour-form.c
 import { TourCardViewComponent } from "./components/tour-card-view/tour-card-view.component";
 import { TourViewComponent } from "./components/tour-view/tour-view.component";
 import { RemoveTourPromptComponent } from './components/remove-tour-prompt/remove-tour-prompt.component';
+import { AddTourRequestFormComponent } from './components/add-tour-request-form/add-tour-request-form.component';
 
 @NgModule({
   declarations: [
     TourViewComponent,
     TourCardViewComponent,
     AddTourFormComponent,
-    RemoveTourPromptComponent
+    RemoveTourPromptComponent,
+    AddTourRequestFormComponent
   ],
   imports: [
     CommonModule,
