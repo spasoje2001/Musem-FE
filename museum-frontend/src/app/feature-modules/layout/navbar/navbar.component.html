@@ -43,11 +43,11 @@
     <div id="account-buttons">
       <button 
             class="feat-button"
-            *ngIf="user"
+            *ngIf="user?.username != ''"
             color="white"
             mat-raised-button
             [routerLink]="['profile']" 
-      >         <!-- PROMENITI PUTANJU -->
+      >       
       <fa-icon [icon]="faUser" />    
       &nbsp;My profile
       </button>
