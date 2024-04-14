@@ -1,0 +1,77 @@
+<div class="dialogue">
+  <div class="wrapper">
+    <form [formGroup]="registrationForm">
+        <h1>Add employee</h1>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="firstName" 
+                    required
+            />
+            <label [class.active]="registrationForm.get('firstName')?.value || focused === 'firstName'">First name</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="lastName"
+                    required
+            />
+            <label [class.active]="registrationForm.get('lastName')?.value || focused === 'lastName'">Last name</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="email"
+                    required
+            />
+            <label [class.active]="registrationForm.get('email')?.value || focused === 'email'">E-Mail</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="username"
+                    required
+            />
+            <label [class.active]="registrationForm.get('username')?.value || focused === 'username'">Username</label>
+        </div>
+        <div class="input-box">
+            <input 
+                    [type]="isPasswordVisible ? 'text' : 'password'"
+                    formControlName="password"
+                    required
+            />
+            <label [class.active]="registrationForm.get('password')?.value || focused === 'password'">Password</label>
+            <fa-icon 
+                    class="login-password-eye"
+                    [icon]="isPasswordVisible ? faEyeSlash : faEye" 
+                    (click)="togglePasswordVisibility()"
+            />
+        </div>
+        <div class="input-box">
+            <input 
+                    [type]="isRepeatPasswordVisible ? 'text' : 'password'"
+                    formControlName="repeatpassword" 
+                    required
+            />
+            <label [class.active]="registrationForm.get('repeatpassword')?.value || focused === 'repeatpassword'">Repeat Password</label>
+            <fa-icon 
+                    class="login-password-eye"
+                    [icon]="isRepeatPasswordVisible ? faEyeSlash : faEye" 
+                    (click)="toggleRepeatPasswordVisibility()"
+            />
+        </div>
+        <div class="input-box">
+            <select formControlName="role" required>
+                    <option value="Organizer">Organizer</option>
+                    <option value="Curator">Curator</option>
+                    <option value="Restaurateur">Restaurateur</option>
+            </select>
+            <label>Select Role</label>
+        </div>
+        <div class="buttons">
+          <button type="submit" class="btn" [@buttonState]="buttonState" (click)="addEmployeeButtonClicked()">Add</button>
+          <button type="submit" class="btn" [@buttonState]="buttonState" (click)="cancelButtonClicked()">Cancel</button>
+        </div>
+    </form>
+  </div>
+</div>

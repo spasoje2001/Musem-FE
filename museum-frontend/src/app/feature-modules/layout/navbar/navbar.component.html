@@ -1,67 +1,87 @@
 <mat-toolbar color="primary">
   <div>
+    <!-- TREBA DODATI NEKI LOGO I MOZDA IZRAVNATI PARAGRAF-->
     <p>Museum</p>
     <div id="buttons">
       <button 
-              *ngIf="user && user.username === ''"
-              color="accent"
-              mat-raised-button
-              [routerLink]="['login']"
-      >
-      <fa-icon [icon]="faSignIn" />    
-        &nbsp;Login
-      </button>
-
-      <button 
+              class="feat-button"
               color="white"
               mat-raised-button 
-              [routerLink]="['home']">
+              [routerLink]="['']">
         <fa-icon [icon]="faHome" />    
         &nbsp;Home
       </button>
     
       <button 
+              class="feat-button"
               color="white" 
               mat-raised-button 
-              [routerLink]="['home']"> 
+              [routerLink]="['']"> <!-- PROMENITI PUTANJU -->
         <fa-icon [icon]="faInstitution" />    
         &nbsp;Exhibitions
       </button>
 
       <button 
+              class="feat-button"
               color="white" 
               mat-raised-button 
-              [routerLink]="['home']"> <!-- PROMENITI PUTANJU -->
+              [routerLink]="['']"> <!-- PROMENITI PUTANJU -->
         <fa-icon [icon]="faBinoculars" />    
         &nbsp;Tours
       </button>
 
       <button 
+              class="feat-button"
               color="white"
               mat-raised-button 
-              [routerLink]="['home']"> <!-- PROMENITI PUTANJU -->
+              [routerLink]="['']"> <!-- PROMENITI PUTANJU -->
         <fa-icon [icon]="faCalendar" />    
         &nbsp;Events
       </button>
+    </div>
+
+    <div id="account-buttons">
+      <button 
+            class="feat-button"
+            *ngIf="user?.username != ''"
+            color="white"
+            mat-raised-button
+            [routerLink]="['profile']" 
+      >       
+      <fa-icon [icon]="faUser" />    
+      &nbsp;My profile
+      </button>
 
       <button 
-              *ngIf="user" 
+            class="feat-button"
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['employee-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;See employees
+      </button>
+
+      <button 
+              class="feat-button"
+              *ngIf="user && user.username === ''" 
               color="white"
               mat-raised-button 
               [routerLink]="['register']"
       >
       <fa-icon [icon]="faPencilSquare" />    
-        &nbsp;Register
+        &nbsp;Sign up
       </button>
       
       <button 
-              *ngIf="user"
-              color="white"
-              mat-raised-button
-              [routerLink]="['userProfile']"
+            *ngIf="user && user.username === ''"
+            color="accent"
+            mat-raised-button
+            [routerLink]="['login']"
       >
-      <fa-icon [icon]="faUser" />    
-        &nbsp;My profile
+      <fa-icon [icon]="faSignIn" />    
+      &nbsp;Login
       </button>
 
       <button *ngIf="user && user.username !== ''"
@@ -72,7 +92,6 @@
       <fa-icon [icon]="faSignOut" />    
         &nbsp;Logout
       </button>
-
     </div>
   </div>
 </mat-toolbar>

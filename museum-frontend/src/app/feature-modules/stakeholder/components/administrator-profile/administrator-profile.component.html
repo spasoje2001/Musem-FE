@@ -1,0 +1,9 @@
+<div class="container profile-grid">
+    <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
+    <div class="user-data">
+        <p class="name">{{administrator?.firstName}} {{administrator?.lastName}}</p>
+        <p class="username">&#64;{{administrator?.username}}</p>
+        <p class="bio">{{administrator?.biography}}</p>
+    </div>
+    <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
+</div>

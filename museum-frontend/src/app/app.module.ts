@@ -10,12 +10,38 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.component';
+import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.component'; 
+import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
+import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GuestProfileComponent } from './feature-modules/stakeholder/components/guest-profile/guest-profile.component';
+import { OrganizerProfileComponent } from './feature-modules/stakeholder/components/organizer-profile/organizer-profile.component';
+import { CuratorProfileComponent } from './feature-modules/stakeholder/components/curator-profile/curator-profile.component';
+import { RestaurateurProfileComponent } from './feature-modules/stakeholder/components/restaurateur-profile/restaurateur-profile.component';
+import { RestaurateurEditProfileComponent } from './feature-modules/stakeholder/components/restaurateur-edit-profile/restaurateur-edit-profile.component';
+import { CuratorEditProfileComponent } from './feature-modules/stakeholder/components/curator-edit-profile/curator-edit-profile.component';
+import { GuestEditProfileComponent } from './feature-modules/stakeholder/components/guest-edit-profile/guest-edit-profile.component';
+import { OrganizerEditProfileComponent } from './feature-modules/stakeholder/components/organizer-edit-profile/organizer-edit-profile.component';
+import { AdministratorEditProfileComponent } from './feature-modules/stakeholder/components/administrator-edit-profile/administrator-edit-profile.component';
+import { AdministratorProfileComponent } from './feature-modules/stakeholder/components/administrator-profile/administrator-profile.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ArtifactsComponent
+    AppComponent, 
+    ArtifactsComponent,
+    UserProfileComponent,
+    EditProfileComponent,
+    GuestProfileComponent,
+    OrganizerProfileComponent,
+    CuratorProfileComponent,
+    RestaurateurProfileComponent,
+    RestaurateurEditProfileComponent,
+    CuratorEditProfileComponent,
+    GuestEditProfileComponent,
+    OrganizerEditProfileComponent,
+    AdministratorEditProfileComponent,
+    AdministratorProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +59,7 @@ import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
