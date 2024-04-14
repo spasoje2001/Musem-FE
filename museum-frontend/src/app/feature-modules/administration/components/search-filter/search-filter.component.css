@@ -1,8 +1,20 @@
-.filter-search input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* filter-search.component.css */
+/* filter-search.component.css */
+.filter-search .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
   }
+  
+  .filter-search .input-wrapper fa-icon {
+    position: absolute;
+    left: 12px; /* Adjust as needed */
+    z-index: 10;
+  }
+  
+  .filter-search .input-wrapper input[type="text"] {
+    padding-left: 35px; /* Adjust this value based on the size of your icon */
+    width: 100%;
+    /* Add other styles such as border, padding, etc., to match your design */
+  }
+  

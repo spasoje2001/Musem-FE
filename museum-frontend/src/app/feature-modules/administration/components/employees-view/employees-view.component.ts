@@ -32,6 +32,8 @@ export class EmployeesViewComponent implements OnInit {
   private dialogRef: any;
   employees: Employee[] = [];
   filteredEmployees: Employee[] = [];
+  sortKey = '';
+  sortedEmployees: Employee[] = [];
 
   constructor(private dialog: MatDialog, private employeeManagementService: EmployeeManagementService){
 
@@ -42,6 +44,7 @@ export class EmployeesViewComponent implements OnInit {
       (data) => {
         this.employees = data;
         this.filteredEmployees = this.employees;
+        this.sortedEmployees = this.employees;
       },
       (error) => {
         // Handle the error here
@@ -54,6 +57,33 @@ export class EmployeesViewComponent implements OnInit {
     this.filteredEmployees = this.employees.filter(employee =>
       employee.role.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    this.sortEmployees();
+    
+  }
+
+  onSortChange(sortKey: string): void {
+    this.sortKey = sortKey;
+    this.sortEmployees();
+  }
+
+  sortEmployees(): void{
+    this.sortedEmployees = [...this.filteredEmployees].sort((a, b) => {
+      switch (this.sortKey) {
+        case 'name-asc':
+          // Assuming 'name' is a concatenated string of 'firstName' and 'lastName'
+          return (a.name).localeCompare(b.name);
+        case 'name-desc':
+          // Assuming 'name' is a concatenated string of 'firstName' and 'lastName'
+          return (b.name).localeCompare(a.name);
+        case 'role-asc':
+          return a.role.localeCompare(b.role);
+        case 'role-desc':
+          return b.role.localeCompare(a.role);
+        default:
+          return 0; // If no sortKey or unrecognized sortKey, don't sort
+      }
+    });
   }
 
   addEmployeeButtonClicked(){

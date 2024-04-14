@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-search-filter',
@@ -23,4 +24,6 @@ export class SearchFilterComponent {
         this.searchChange.emit(value || '');
       });
   }
+
+  faSearch = faSearch;
 }

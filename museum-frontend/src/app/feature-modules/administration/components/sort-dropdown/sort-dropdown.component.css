@@ -1,0 +1,41 @@
+/* sort-dropdown.component.css */
+.sort-dropdown {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sort-label {
+    margin-right: 8px; /* Adjust as needed */
+    font-weight: lighter; /* Adjust based on your wireframe */
+    /* Add additional styling based on your wireframe */
+  }
+  
+  .select-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px 32px 8px 12px; /* Adjust padding to make room for the icon */
+    border: 1px solid #ccc; /* Style as needed */
+    border-radius: 4px;
+    font-size: 16px; /* Adjust as needed */
+    /* Add other styles such as background-color, font-family, etc. */
+  }
+  
+  .select-wrapper .dropdown-icon {
+    position: absolute;
+    right: 10px; /* Align inside the select, adjust as needed */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    pointer-events: none;
+  }
+  
+  /* You might add states or effects like hover or focus as needed */
+  .select-wrapper select:hover,
+  .select-wrapper select:focus {
+    border-color: #888; /* Example hover/focus color */
+  }

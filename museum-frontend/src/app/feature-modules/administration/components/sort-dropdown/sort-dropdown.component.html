@@ -1,1 +1,14 @@
-<p>sort-dropdown works!</p>
+<!-- sort-dropdown.component.html -->
+<div class="sort-dropdown">
+    <label for="sortSelect" class="sort-label">Sort by:</label>
+    <div class="select-wrapper">
+      <select id="sortSelect" (change)="onSortChange($event)">
+        <option value="">Default</option>
+        <option value="name-asc">Name A-Z</option>
+        <option value="name-desc">Name Z-A</option>
+        <option value="role-asc">Role A-Z</option>
+        <option value="role-desc">Role Z-A</option>
+      </select>
+      <fa-icon [icon]="faCaretDown" class="dropdown-icon"></fa-icon>
+    </div>
+  </div>
