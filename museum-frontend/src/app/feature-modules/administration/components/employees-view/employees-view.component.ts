@@ -7,6 +7,9 @@ import { SortDropdownComponent } from '../sort-dropdown/sort-dropdown.component'
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EmployeeManagementService } from '../../service/employee-management.service';
 import { Employee } from '../../model/employee.model';
+import { EditEmployeeFormComponent } from '../edit-employee-form/edit-employee-form.component';
+import { LockConfirmationDialogComponent } from '../lock-confirmation-dialog/lock-confirmation-dialog.component';
+import { ToggleLockEvent } from '../../model/toggle-lock.model';
 
 @Component({
   selector: 'app-employees-view',
@@ -92,16 +95,28 @@ export class EmployeesViewComponent implements OnInit {
     });
   }
 
-  toggleLockStatus(employeeId: number): void {
-    this.employeeManagementService.toggleEmployeeLockStatus(employeeId).subscribe({
-      next: (res) => {
-        // Handle response here, e.g., refreshing the list or showing a message
-        console.log('Lock status toggled', res);
-        this.refreshEmployeeList(); // If you have a method to refresh the list
-      },
-      error: (error) => {
-        // Handle error here
-        console.error('Error toggling lock status', error);
+  toggleLockStatus(event: ToggleLockEvent): void {
+    
+    const dialogRef = this.dialog.open(LockConfirmationDialogComponent, {
+      width: '250px',
+      data: {
+        employeeName: event.name,
+        isLocking: !event.isAccountLocked // Pass true if you're locking, false if unlocking
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        // Only proceed if the user confirmed the action
+        this.employeeManagementService.toggleEmployeeLockStatus(event.employeeId).subscribe({
+          next: (res) => {
+            console.log('Lock status toggled', res);
+            this.refreshEmployeeList();
+          },
+          error: (error) => {
+            console.error('Error toggling lock status', error);
+          }
+        });
       }
     });
   }
@@ -127,7 +142,28 @@ export class EmployeesViewComponent implements OnInit {
     this.addEmployeeButtonState = 'clicked'; 
     setTimeout(() => { this.addEmployeeButtonState = 'idle'; }, 200);
     
-    this.dialogRef = this.dialog.open(AddEmployeeFormComponent, {
+    const dialogRef = this.dialog.open(AddEmployeeFormComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // If you receive any data back from the dialog, you can check it here with 'result'
+      // For now, we'll just refresh the list regardless
+      this.refreshEmployeeList();
+    });
+  }
+
+  updateEmployeeButtonClicked(employeeId: number){
+    console.log(employeeId);
+    //this.EmployeeButtonState = 'clicked'; 
+    //setTimeout(() => { this.addEmployeeButtonState = 'idle'; }, 200);
+    const dialogRef = this.dialog.open(EditEmployeeFormComponent, {
+      data: { employeeId: employeeId } // Pass the employeeId here
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // If you receive any data back from the dialog, you can check it here with 'result'
+      // For now, we'll just refresh the list regardless
+      this.refreshEmployeeList();
     });
   }
 }

@@ -1,13 +1,19 @@
 <div class="overlay">
-  <h1>Employee Directory</h1>
-  <button 
+  <div class="header-controls">
+    <h1>Employee Directory</h1>
+    <button 
             type="submit" 
             class="btn" 
             (click)="addEmployeeButtonClicked()"
             [@buttonState]="addEmployeeButtonState"
             >+ Add employee
     </button>
-  <app-search-filter (searchChange)="onFilterChange($event)"></app-search-filter>
+  </div>
+  
+  <div class="top-controls">
+    <app-search-filter (searchChange)="onFilterChange($event)"></app-search-filter>
   <app-sort-dropdown (sortChange)="onSortChange($event)"></app-sort-dropdown>
-  <app-employees-table [employees]="sortedEmployees" (toggleLock)="toggleLockStatus($event)"></app-employees-table>
+  </div>
+  
+  <app-employees-table [employees]="sortedEmployees" (toggleLock)="toggleLockStatus($event)" (editEmployee)="updateEmployeeButtonClicked($event)"></app-employees-table>
 </div>

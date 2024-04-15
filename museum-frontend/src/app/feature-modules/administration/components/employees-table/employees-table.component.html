@@ -4,19 +4,24 @@
         <th>Name</th>
         <th>Role</th>
         <th>Email</th>
-        <th>Actions</th>
+        
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees">
         <td class="employee-info">
-          <img src="https://cc-prod.scene7.com/is/image/CCProdAuthor/What-is-Stock-Photography_P1_mobile?$pjpeg$&jpegSize=200&wid=720" alt="Profile Picture" class="employee-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkEoj1GeX62olo7jcP3_gzsCbPUWRKZ2Kncn_H4ureoEQh_9qWxUfiyCOLFw&s" alt="Profile Picture" class="employee-image">
           <span class="employee-name">{{ employee.name }}</span>
         </td>
         <td>{{ employee.role }}</td>
         <td>{{ employee.email }}</td>
-        <td>
-          <button (click)="onToggleLock(employee.id)">Lock/Unlock</button>
+        <td class="employee-actions">
+          <button (click)="onToggleLock(employee.id, employee.name, employee.isAccountLocked)" class="action-button">
+            <fa-icon [icon]="employee.isAccountLocked ? faUnlock : faLock"></fa-icon>
+          </button>
+          <button (click)="onEditEmployeeClicked(employee.id)" class="action-button">
+            <fa-icon [icon]="faPen"></fa-icon>
+          </button>
           <!-- ... action buttons ... -->
         </td>
       </tr>

@@ -10,6 +10,7 @@ import { Registration } from './model/registration.model';
 import { User } from './model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BooleanResponseDTO } from 'src/app/feature-modules/stakeholder/model/boolean-response.model';
+import { EditEmployee } from './model/editEmployee.model';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,16 @@ export class AuthService {
   registerEmployee(registration: Registration): Observable<AuthenticationResponse> {
     return this.http
       .post<AuthenticationResponse>(this.basePath + 'registerEmployee', registration);
+  }
+
+  getEmployeeById(id: number): Observable<EditEmployee> {
+    console.log('get employee');
+    console.log(id);
+    return this.http.get<EditEmployee>(this.basePath + `${id}`)
+  }
+
+  updateEmployee(employee: EditEmployee, id: number): Observable<Registration> {
+    return this.http.put<Registration>(this.basePath + `updateEmployee/${id}`, employee);
   }
 
   logout(): void {
