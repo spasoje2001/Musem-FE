@@ -29,7 +29,7 @@
                 <button
                     class="btn"
                     *ngIf="user?.role == 'ORGANIZER'"
-                    (click)="acceptButtonClicked(request.id!);$event.stopPropagation()"
+                    (click)="acceptButtonClicked(request);$event.stopPropagation()"
                     [@buttonState]="acceptButtonState"
                 >
                     <fa-icon [icon]="faCheck" />

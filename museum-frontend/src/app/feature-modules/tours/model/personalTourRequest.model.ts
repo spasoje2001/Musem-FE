@@ -20,7 +20,7 @@ export enum PersonalTourRequestStatus {
   ON_HOLD = 0,
   ACCEPTED = 1,
   DECLINED = 2,
-  CANCELED = 3,
-  EXPIRED = 4,
-  PROPOSED_TERMS = 5
+  // CANCELED = 3,
+  // EXPIRED = 4,
+  // PROPOSED_TERMS = 5
 }

@@ -4,11 +4,26 @@ import { PersonalTourRequest } from '../../model/personalTourRequest.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { ToursService } from '../../tours.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-tour-requests-view',
   templateUrl: './tour-requests-view.component.html',
-  styleUrls: ['./tour-requests-view.component.css']
+  styleUrls: ['./tour-requests-view.component.css'],
+  animations: [
+      trigger('buttonState', [
+        state('clicked', style({
+          transform: 'scale(0.9)',
+          opacity: 0.5
+        })),
+        transition('* => clicked', [
+          animate('200ms')
+        ]),
+        transition('clicked => idle', [
+          animate('200ms')
+        ])
+      ]),
+  ],
 })
 export class TourRequestsViewComponent implements OnInit{
   user: User | undefined;

@@ -1,14 +1,29 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-decline-request-prompt',
   templateUrl: './decline-request-prompt.component.html',
-  styleUrls: ['./decline-request-prompt.component.css']
+  styleUrls: ['./decline-request-prompt.component.css'],
+  animations: [
+      trigger('buttonState', [
+        state('clicked', style({
+          transform: 'scale(0.9)',
+          opacity: 0.5
+        })),
+        transition('* => clicked', [
+          animate('200ms')
+        ]),
+        transition('clicked => idle', [
+          animate('200ms')
+        ])
+      ]),
+  ],
 })
-export class DeclineRequestPromptComponent implements OnInit{
+export class DeclineRequestPromptComponent{
   cancelButtonState: string = 'idle';   
   declineButtonState: string = 'idle'; 
   request: PersonalTourRequest | undefined;
@@ -17,10 +32,6 @@ export class DeclineRequestPromptComponent implements OnInit{
               private dialogRef: MatDialogRef<DeclineRequestPromptComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.request = data;
-  }
-
-  ngOnInit(): void {
-    
   }
 
   declineButtonClicked(){
