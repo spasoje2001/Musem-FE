@@ -1,0 +1,78 @@
+<p>edit-employee-form works!</p>
+<div class="dialogue">
+    <div class="wrapper">
+      <form [formGroup]="editEmployeeForm">
+          <h1>Edit employee</h1>
+          <div class="input-box">
+              <input 
+                      type="text" 
+                      formControlName="firstName" 
+                      required
+              />
+              <label [class.active]="editEmployeeForm.get('firstName')?.value || focused === 'firstName'">First name</label>
+          </div>
+          <div class="input-box">
+              <input 
+                      type="text" 
+                      formControlName="lastName"
+                      required
+              />
+              <label [class.active]="editEmployeeForm.get('lastName')?.value || focused === 'lastName'">Last name</label>
+          </div>
+          <div class="input-box">
+              <input 
+                      type="text" 
+                      formControlName="email"
+                      required
+              />
+              <label [class.active]="editEmployeeForm.get('email')?.value || focused === 'email'">E-Mail</label>
+          </div>
+          <div class="input-box">
+              <input 
+                      type="text" 
+                      formControlName="username"
+                      required
+              />
+              <label [class.active]="editEmployeeForm.get('username')?.value || focused === 'username'">Username</label>
+          </div>
+          <div class="input-box">
+              <input 
+                      [type]="isPasswordVisible ? 'text' : 'password'"
+                      formControlName="password"
+                      
+              />
+              <label [class.active]="editEmployeeForm.get('password')?.value || focused === 'password'">Password</label>
+              <fa-icon 
+                      class="login-password-eye"
+                      [icon]="isPasswordVisible ? faEyeSlash : faEye" 
+                      (click)="togglePasswordVisibility()"
+              />
+          </div>
+          <div class="input-box">
+              <input 
+                      [type]="isRepeatPasswordVisible ? 'text' : 'password'"
+                      formControlName="repeatpassword" 
+                      
+              />
+              <label [class.active]="editEmployeeForm.get('repeatpassword')?.value || focused === 'repeatpassword'">Repeat Password</label>
+              <fa-icon 
+                      class="login-password-eye"
+                      [icon]="isRepeatPasswordVisible ? faEyeSlash : faEye" 
+                      (click)="toggleRepeatPasswordVisibility()"
+              />
+          </div>
+          <div class="input-box">
+              <select formControlName="role" required>
+                      <option value="ORGANIZER">Organizer</option>
+                      <option value="CURATOR">Curator</option>
+                      <option value="RESTAURATEUR">Restaurateur</option>
+              </select>
+          </div>
+          <div class="buttons">
+            <button type="submit" class="btn" [@buttonState]="buttonState" (click)="editEmployeeButtonClicked()">Edit</button>
+            <button type="submit" class="btn" [@buttonState]="buttonState" (click)="cancelButtonClicked()">Cancel</button>
+          </div>
+      </form>
+    </div>
+  </div>
+  

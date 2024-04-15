@@ -1,0 +1,89 @@
+/* New container for the header */
+.header-controls {
+  display: flex;
+  justify-content: space-between; /* Aligns items on opposite ends */
+  align-items: center; /* Vertically centers items in the container */
+  margin-bottom: 1rem; /* Space below the header */
+}
+
+h1 {
+  font-size: 24px; /* Adjust size as needed */
+  color: #333; /* Dark text color */
+  margin-bottom: 0; /* Remove bottom margin to align with the button */
+  flex-grow: 1; /* Allows the title to take up the available space */
+}
+
+.btn {
+  width: 240px; /* Set a specific width for consistency */
+  height: auto; /* Adjust height to content */
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 600;
+  padding: 10px 20px; /* Padding for button content */
+  margin-top: 0; /* Align with the title */
+  margin-left: auto; /* Pushes the button to the right */
+  margin-bottom: 0; /* Align with the title */
+  /* Other styles remain the same */
+}
+
+
+
+
+
+.btn:hover {
+  background-color: #f2f2f2; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
+}
+
+.overlay {
+  /* Assuming the overlay is a centered container for your directory */
+  width: 90%; /* Adjust based on your layout */
+  margin: 0 auto; /* Center the overlay */
+  padding: 2rem; /* Add some padding */
+  background: #FFFFFF; /* Assuming a white background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow around the overlay */
+  border-radius: 8px; /* Slight rounding of corners */
+}
+
+
+
+/* Adjust the button size relative to its container for a more responsive design */
+
+
+/* Consider adding styles for your app-search-filter and app-sort-dropdown components */
+.search-filter, .sort-dropdown {
+  /* Shared styles for filter and sort components */
+  margin-bottom: 1rem; /* Space below each component */
+}
+
+/* Assuming .top-controls is the container for both the search and sort components */
+.top-controls {
+  display: flex;
+  justify-content: space-between; /* This will place them on opposite ends */
+  /* Add padding or margins as necessary */
+  margin-bottom: 1rem; /* Space below the controls */
+}
+
+
+/* You may need to adjust the width of the sort-dropdown if it takes up too much space */
+.sort-dropdown {
+  margin-left: 1rem; /* Space between search and sort if needed */
+  flex-grow: 1; /* Allow it to grow as needed */
+  margin-right: 2rem;
+  /* other styles */
+}
+
+/* Style for the employee table component */
+.employees-table {
+  margin-top: 1rem; /* Space above the table */
+}
+
+

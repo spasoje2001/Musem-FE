@@ -9,6 +9,8 @@ import { Login } from './model/login.model';
 import { Registration } from './model/registration.model';
 import { User } from './model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BooleanResponseDTO } from 'src/app/feature-modules/stakeholder/model/boolean-response.model';
+import { EditEmployee } from './model/editEmployee.model';
 
 @Injectable({
   providedIn: 'root',
@@ -46,8 +48,23 @@ export class AuthService {
       );
   }
 
+  registerEmployee(registration: Registration): Observable<AuthenticationResponse> {
+    return this.http
+      .post<AuthenticationResponse>(this.basePath + 'registerEmployee', registration);
+  }
+
+  getEmployeeById(id: number): Observable<EditEmployee> {
+    console.log('get employee');
+    console.log(id);
+    return this.http.get<EditEmployee>(this.basePath + `${id}`)
+  }
+
+  updateEmployee(employee: EditEmployee, id: number): Observable<Registration> {
+    return this.http.put<Registration>(this.basePath + `updateEmployee/${id}`, employee);
+  }
+
   logout(): void {
-    this.router.navigate(['/home']).then((_) => {
+    this.router.navigate(['/']).then((_) => {
       this.tokenStorage.clear();
       this.user$.next({ username: '', id: 0, role: '' });
     });
@@ -72,9 +89,23 @@ export class AuthService {
     this.user$.next(user);
   }
 
-  getJwtToken(): string | null {
-    // Retrieve the JWT token from wherever it is stored (e.g., localStorage)
-    // return localStorage.getItem('jwtToken');
-    return this.tokenStorage.getAccessToken(); // VELJKO PROMENIO!
+  setToken(authenticationResponse: AuthenticationResponse) {
+    this.tokenStorage.saveAccessToken(authenticationResponse.token);
+    this.setUser();
   }
+
+  getJwtToken(): string | null {
+    return this.tokenStorage.getAccessToken(); 
+  }
+
+  canChangeUsername(username: string): Observable<BooleanResponseDTO> {
+    const path = this.basePath + 'can-change-username/' + username;
+    return this.http.get<BooleanResponseDTO>(path);
+  }
+
+  canChangeEmail(email: string): Observable<BooleanResponseDTO> {
+    const path = this.basePath + 'can-change-email/' + email;
+    return this.http.get<BooleanResponseDTO>(path);
+  }
+
 }

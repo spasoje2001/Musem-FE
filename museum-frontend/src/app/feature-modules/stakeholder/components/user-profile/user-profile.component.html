@@ -1,0 +1,5 @@
+<app-guest-profile *ngIf="user?.role === 'GUEST'"></app-guest-profile>
+<app-organizer-profile *ngIf="user?.role === 'ORGANIZER'"></app-organizer-profile>
+<app-administrator-profile *ngIf="user?.role === 'ADMIN'"></app-administrator-profile>
+<app-curator-profile *ngIf="user?.role === 'CURATOR'"></app-curator-profile>
+<app-restaurateur-profile *ngIf="user?.role === 'RESTAURATEUR'"></app-restaurateur-profile>

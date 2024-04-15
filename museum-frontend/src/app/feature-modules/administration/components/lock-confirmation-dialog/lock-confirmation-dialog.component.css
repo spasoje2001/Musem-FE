@@ -1,0 +1,43 @@
+/* lock-confirmation-dialog.component.css */
+.mat-dialog-container {
+    border-radius: 8px; /* Rounded corners as per wireframe */
+    padding: 24px; /* Padding around the dialog content */
+    font-family: 'Arial', sans-serif; /* Font family as per your design */
+  }
+  
+  .mat-dialog-title {
+    font-size: 1.25rem; /* Slightly larger title */
+    font-weight: bold; /* Bold title font */
+    margin-bottom: 16px; /* Space below the title */
+    text-align: center;
+  }
+  
+  .mat-dialog-content {
+    font-size: 1rem; /* Standard text size */
+    color: #333; /* Text color for content */
+    margin-bottom: 24px; /* Space below the content */
+  }
+  
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+  }
+  
+  /* Style for the action buttons */
+  .mat-dialog-actions button {
+    min-width: 64px; /* Minimum button width */
+    margin-left: 8px; /* Space between buttons */
+    border-radius: 20px; /* Rounded buttons as per wireframe */
+    padding: 8px 16px; /* Padding inside buttons */
+  }
+  
+  /* Styles for the primary action button (e.g., Block or Unlock) */
+  .mat-dialog-actions button.mat-primary {
+    color: #fff; /* White text for primary button */
+    background-color: #007bff; /* Example primary color */
+  }
+  
+  /* Styles for the cancel button */
+  .mat-dialog-actions button.mat-warn {
+    color: #333; /* Dark text for cancel button */
+  }

@@ -11,8 +11,10 @@ import {
   faBuilding,
   faBookmark,
   faBinoculars,
-  faPencilSquare
+  faPencilSquare,
+  faAddressBook
  } from "@fortawesome/free-solid-svg-icons";
+import { Role } from 'src/app/infrastructure/auth/model/registration.model';
 
 @Component({
   selector: 'xp-navbar',
@@ -45,4 +47,5 @@ export class NavbarComponent {
   faBuilding = faBuilding;
   faBookmark = faBookmark;
   faBinoculars = faBinoculars;
+  faAdressBook = faAddressBook;
 }

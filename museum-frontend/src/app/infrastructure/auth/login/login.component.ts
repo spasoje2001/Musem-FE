@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -36,6 +36,9 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 })
 export class LoginComponent {
   isPasswordVisible: boolean;
+  buttonState: string = 'idle'; 
+  focused: string = '';
+  backgroundSize: string = '100% 110%';
 
   constructor(private authService: AuthService, private router: Router) {
     this.isPasswordVisible = false;
@@ -45,9 +48,6 @@ export class LoginComponent {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-
-  buttonState: string = 'idle'; 
-  focused: string = '';
 
   login(): void {
     const login: Login = {
@@ -60,14 +60,33 @@ export class LoginComponent {
       setTimeout(() => { this.buttonState = 'idle'; }, 200); 
       this.authService.login(login).subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['']);
+        },
+        error: err => {
+          alert('Invalid username and password combination');
         },
       });
+    }
+    else{
+      alert('Please fill out the form correctly');
     }
   }
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
+
+    const zoom = 100 + scrollPercent * 0.1; 
+
+    this.backgroundSize = `${zoom}% ${zoom+10}%`;
   }
 
   faUser = faUser;

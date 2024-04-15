@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Registration } from '../model/registration.model';
+import { Registration, Role } from '../model/registration.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate, state } from '@angular/animations';
@@ -54,6 +54,7 @@ export class RegistrationComponent {
 
   buttonState: string = 'idle'; 
   focused: string = '';
+  backgroundSize: string = '100% 110%';
 
   register(): void {
     const registration: Registration = {
@@ -62,6 +63,7 @@ export class RegistrationComponent {
       email: this.registrationForm.value.email || "",
       username: this.registrationForm.value.username || "",
       password: this.registrationForm.value.password || "",
+      role: 0
     };
 
     console.log(registration);
@@ -72,16 +74,35 @@ export class RegistrationComponent {
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
         this.authService.register(registration).subscribe({
           next: () => {
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
           },
+          error: (error) => {
+            if (error.error instanceof ErrorEvent) {
+                alert('An error occurred: ' + error.error.message);
+            } else {
+              if (error.status === 400) { 
+                const errorMessage: string = error.error.message || "";
+
+                if (errorMessage.includes('email')) {
+                    alert('Email already exists. Please use a different one.');
+                } else if (errorMessage.includes('username')) {
+                    alert('Username already exists. Please use a different one.');
+                } else {
+                    alert('Email and username already exist. Please try different ones.');
+                }
+            } else {
+                alert('Server error occurred. Please try again later.');
+            }
+            }
+        }
         });
       } 
       else{
-        console.log('Passwords do not match!'); // Treba dodati neki vid validacije
+        alert('Passwords do not match!'); 
       }
     }
     else{
-      console.log('Register form not valid!'); // Treba dodati neki vid validacije
+      alert('Sign up form not valid!');
     }
   }
 
@@ -91,6 +112,19 @@ export class RegistrationComponent {
 
   toggleRepeatPasswordVisibility() {
     this.isRepeatPasswordVisible = !this.isRepeatPasswordVisible;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
+
+    const zoom = 100 + scrollPercent * 0.1; 
+
+    this.backgroundSize = `${zoom}% ${zoom+10}%`;
   }
 
   faEye = faEye;

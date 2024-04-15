@@ -6,22 +6,29 @@ import { MaterialModule } from 'src/app/infrastructure/material/material-module'
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './footer/footer.component';  
+import { AdministrationModule } from '../administration/administration.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    FontAwesomeModule,  
     MaterialModule,
-    FontAwesomeModule
+    AdministrationModule
   ],
   exports: [
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule { 
+
+}
