@@ -64,7 +64,7 @@ export class LoginComponent {
         },
         error: err => {
           alert('Invalid username and password combination');
-      },
+        },
       });
     }
     else{

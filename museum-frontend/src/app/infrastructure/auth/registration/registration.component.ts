@@ -76,14 +76,33 @@ export class RegistrationComponent {
           next: () => {
             this.router.navigate(['']);
           },
+          error: (error) => {
+            if (error.error instanceof ErrorEvent) {
+                alert('An error occurred: ' + error.error.message);
+            } else {
+              if (error.status === 400) { 
+                const errorMessage: string = error.error.message || "";
+
+                if (errorMessage.includes('email')) {
+                    alert('Email already exists. Please use a different one.');
+                } else if (errorMessage.includes('username')) {
+                    alert('Username already exists. Please use a different one.');
+                } else {
+                    alert('Email and username already exist. Please try different ones.');
+                }
+            } else {
+                alert('Server error occurred. Please try again later.');
+            }
+            }
+        }
         });
       } 
       else{
-        console.log('Passwords do not match!'); // Treba dodati neki vid validacije
+        alert('Passwords do not match!'); 
       }
     }
     else{
-      console.log('Sign up form not valid!'); // Treba dodati neki vid validacije
+      alert('Sign up form not valid!');
     }
   }
 
