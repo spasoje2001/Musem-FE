@@ -1,6 +1,6 @@
 <div class="modal-overlay" (click)="overviewClicked()"></div>
 <div class="modal-container">
-  <div class="prompt">
+  <div class="prompt" [formGroup]="acceptRequestForm">
     <h1>Accept Request</h1>
     
     <div class="curator-choosing">
@@ -37,7 +37,7 @@
                   formControlName="minorTicketPrice"
                   required
           />
-          <label [class.active]="acceptRequestForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor Ticker Price</label>
+          <label [class.active]="acceptRequestForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor Ticket Price</label>
       </div>
     </div>
 
