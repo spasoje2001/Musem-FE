@@ -1,11 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
 import { DeclineRequestPromptComponent } from '../decline-request-prompt/decline-request-prompt.component';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { PersonalTour } from '../../model/personalTour.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-accept-request-form',
@@ -26,7 +27,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       ]),
   ],
 })
-export class AcceptRequestFormComponent {
+export class AcceptRequestFormComponent{
   cancelButtonState: string = 'idle';   
   acceptButtonState: string = 'idle'; 
   request: PersonalTourRequest | undefined;
@@ -59,16 +60,34 @@ export class AcceptRequestFormComponent {
   }
 
   acceptButtonClicked(){
-    this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    if (this.acceptRequestForm.valid) {
+      this.acceptButtonState = 'clicked'; 
+      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
 
-    this.request!.status = PersonalTourRequestStatus.ACCEPTED;
-    
-    this.toursService.updateTourRequest(this.request!).subscribe({
-      next: () => {
-        this.dialogRef.close();
-      }
-    });
+      this.request!.status = PersonalTourRequestStatus.ACCEPTED;
+      
+      this.toursService.updateTourRequest(this.request!).subscribe({
+        next: () => {
+
+          const tour: PersonalTour = {
+            occurrenceDateTime: this.request!.occurrenceDateTime || new Date(),
+            adultTicketPrice: this.acceptRequestForm.value.adultTicketPrice?.toString() || "",
+            minorTicketPrice: this.acceptRequestForm.value.minorTicketPrice?.toString() || "",
+            guestNumber: this.request!.guestNumber || "",
+            proposerId: this.request!.proposerId || 0,
+            duration: "0",
+            //guideId: this.selectedCurator!.id || 7,
+            guideId: 7,
+          };
+
+          this.toursService.addPersonalTour(tour).subscribe({
+            next: () => {
+              this.dialogRef.close();
+            }
+          })
+        }
+      });
+    }
   }
 
   cancelButtonClicked(){

@@ -5,6 +5,7 @@ import { environment } from "src/env/environment";
 import { Tour } from "./model/tour.model";
 import { Curator } from "../stakeholder/model/curator.model";
 import { PersonalTourRequest } from "./model/personalTourRequest.model";
+import { PersonalTour } from "./model/personalTour.model";
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,9 @@ export class ToursService {
 
   getTourRequestsOnHold(): Observable<PersonalTourRequest> {
     return this.http.get<PersonalTourRequest>(environment.apiHost + 'personalTourRequests/onHold');
+  }
+
+  addPersonalTour(tour: PersonalTour): Observable<PersonalTour> {
+    return this.http.post<PersonalTour>(environment.apiHost + 'personalTours', tour);
   }
 }
