@@ -12,7 +12,7 @@ import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
 import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GuestProfileComponent } from './feature-modules/stakeholder/components/guest-profile/guest-profile.component';
 import { OrganizerProfileComponent } from './feature-modules/stakeholder/components/organizer-profile/organizer-profile.component';
 import { CuratorProfileComponent } from './feature-modules/stakeholder/components/curator-profile/curator-profile.component';
@@ -23,6 +23,7 @@ import { GuestEditProfileComponent } from './feature-modules/stakeholder/compone
 import { OrganizerEditProfileComponent } from './feature-modules/stakeholder/components/organizer-edit-profile/organizer-edit-profile.component';
 import { AdministratorEditProfileComponent } from './feature-modules/stakeholder/components/administrator-edit-profile/administrator-edit-profile.component';
 import { AdministratorProfileComponent } from './feature-modules/stakeholder/components/administrator-profile/administrator-profile.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     GuestEditProfileComponent,
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
-    AdministratorProfileComponent
+    AdministratorProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,9 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     {
