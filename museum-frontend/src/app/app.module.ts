@@ -23,6 +23,7 @@ import { GuestEditProfileComponent } from './feature-modules/stakeholder/compone
 import { OrganizerEditProfileComponent } from './feature-modules/stakeholder/components/organizer-edit-profile/organizer-edit-profile.component';
 import { AdministratorEditProfileComponent } from './feature-modules/stakeholder/components/administrator-edit-profile/administrator-edit-profile.component';
 import { AdministratorProfileComponent } from './feature-modules/stakeholder/components/administrator-profile/administrator-profile.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     GuestEditProfileComponent,
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
-    AdministratorProfileComponent
+    AdministratorProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,9 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [
     {

@@ -98,10 +98,12 @@ export class EmployeesViewComponent implements OnInit {
   toggleLockStatus(event: ToggleLockEvent): void {
     
     const dialogRef = this.dialog.open(LockConfirmationDialogComponent, {
-      width: '250px',
+      width: '450px',
+      
+      height: '270px',
       data: {
         employeeName: event.name,
-        isLocking: !event.isAccountLocked // Pass true if you're locking, false if unlocking
+        isLocked: event.isAccountLocked 
       }
     });
 

@@ -11,6 +11,8 @@ import { EmployeesTableComponent } from './components/employees-table/employees-
 import { SortDropdownComponent } from './components/sort-dropdown/sort-dropdown.component';
 import { EditEmployeeFormComponent } from './components/edit-employee-form/edit-employee-form.component';
 import { LockConfirmationDialogComponent } from './components/lock-confirmation-dialog/lock-confirmation-dialog.component';
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { LockConfirmationDialogComponent } from './components/lock-confirmation-
     RouterModule,
     ReactiveFormsModule,
     FontAwesomeModule,  
-    MaterialModule
+    MaterialModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     EmployeesViewComponent
