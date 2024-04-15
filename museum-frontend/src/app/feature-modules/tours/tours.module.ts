@@ -16,6 +16,7 @@ import { AddTourRequestFormComponent } from './components/add-tour-request-form/
 import { TourRequestsViewComponent } from './components/tour-requests-view/tour-requests-view.component';
 import { TourRequestCardViewComponent } from './components/tour-request-card-view/tour-request-card-view.component';
 import { DeclineRequestPromptComponent } from './components/decline-request-prompt/decline-request-prompt.component';
+import { AcceptRequestFormComponent } from './components/accept-request-form/accept-request-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DeclineRequestPromptComponent } from './components/decline-request-prom
     AddTourRequestFormComponent,
     TourRequestsViewComponent,
     TourRequestCardViewComponent,
-    DeclineRequestPromptComponent
+    DeclineRequestPromptComponent,
+    AcceptRequestFormComponent
   ],
   imports: [
     CommonModule,
