@@ -1,1 +1,59 @@
-<p>accept-request-form works!</p>
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="modal-container">
+  <div class="prompt">
+    <h1>Accept Request</h1>
+    
+    <div class="curator-choosing">
+      <mat-label id="choose-curator">Choose Guide</mat-label>
+      <table id="curator-table">
+        <tbody>
+          <tr *ngFor="let curator of curators">
+            <td>{{ curator.firstName }}</td>
+            <td>{{ curator.lastName }}</td>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+              <button (click)="onChooseClicked(curator)" 
+                      type="submit">
+                Choose
+              </button>          
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ticket-prices">
+      <div class="input-box adult">
+          <input 
+                  type="number"
+                  formControlName="adultTicketPrice"
+                  required
+          />
+          <label [class.active]="acceptRequestForm.get('adultTicketPrice')?.value || focused === 'adultTicketPrice'">Adult Ticket Price</label>
+      </div>
+      <div class="input-box minor">
+          <input 
+                  type="number"
+                  formControlName="minorTicketPrice"
+                  required
+          />
+          <label [class.active]="acceptRequestForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor Ticker Price</label>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button type="submit" 
+              class="btn"
+              (click)="acceptButtonClicked()"
+              [@buttonState]="acceptButtonState" 
+              >Accept
+      </button>
+      <button type="submit" 
+              class="btn"
+              (click)="cancelButtonClicked()"
+              [@buttonState]="cancelButtonState" 
+              >Cancel
+      </button>
+    </div>
+  </div>
+</div>
