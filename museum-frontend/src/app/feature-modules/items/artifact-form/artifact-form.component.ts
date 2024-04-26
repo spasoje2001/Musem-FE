@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Item, ItemCategory, ItemStatus } from '../model/item.model';
+import { Item, ItemCategory } from '../model/item.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -46,11 +46,63 @@ export class ArtifactFormComponent {
     authorsName: new FormControl('', [Validators.required]),
     yearOfCreation: new FormControl('', [Validators.required]),
     period: new FormControl('', [Validators.required]),
-    category: new FormControl(null, [Validators.required]),
-    picture: new FormControl(null, [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    picture: new FormControl('', [Validators.required]),
   });
 
   addItemButtonClicked() {
+
+    const selectedCategoryString: string = this.addItemForm.value.category ?? '';
+    let selectedCategory: ItemCategory;
+
+    switch (selectedCategoryString) {
+        case 'Painting':
+            selectedCategory = ItemCategory.Painting;
+            break;
+        case 'Drawing':
+            selectedCategory = ItemCategory.Drawing;
+            break;
+        case 'Sculpture':
+            selectedCategory = ItemCategory.Sculpture;
+            break;
+        case 'Print':
+            selectedCategory = ItemCategory.Print;
+            break;
+        case 'Photograph':
+            selectedCategory = ItemCategory.Photograph;
+            break;
+        case 'Artifact':
+            selectedCategory = ItemCategory.Artifact;
+            break;
+        case 'Clothing':
+            selectedCategory = ItemCategory.Clothing;
+            break;
+        case 'Specimen':
+            selectedCategory = ItemCategory.Specimen;
+            break;
+        case 'Fossil':
+            selectedCategory = ItemCategory.Fossil;
+            break;
+        case 'Animal':
+            selectedCategory = ItemCategory.Animal;
+            break;
+        case 'Mineral':
+            selectedCategory = ItemCategory.Mineral;
+            break;
+        case 'Pottery':
+            selectedCategory = ItemCategory.Pottery;
+            break;
+        case 'Jewelry':
+            selectedCategory = ItemCategory.Jewelry;
+            break;
+        default:
+            console.error("Invalid category selected.");
+            return; 
+    }
+
+
+
+
     const item: Item = {
       name: this.addItemForm.value.name || "",
       description: this.addItemForm.value.description || "",
@@ -58,12 +110,12 @@ export class ArtifactFormComponent {
       authorsName: this.addItemForm.value.authorsName || "",
       yearOfCreation: this.addItemForm.value.yearOfCreation || "",
       period: this.addItemForm.value.period || "",
-      category: this.addItemForm.value.category || ItemCategory.Painting,
+      category: selectedCategory,
     };
 
     console.log(item);
 
-    if (this.addItemForm.valid) {
+   
         this.buttonState = 'clicked'; 
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
 
@@ -75,10 +127,8 @@ export class ArtifactFormComponent {
             },
           });
         
-    }
-    else{
-      console.log('Add item form not valid!'); // Treba dodati neki vid validacije
-    }
+    
+    
   }
 
 

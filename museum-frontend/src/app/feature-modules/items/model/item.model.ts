@@ -7,7 +7,6 @@ export interface Item {
     period : string;
     category : ItemCategory;
     picture :  string;
-    status?: ItemStatus;
   }
 
 export enum ItemCategory {
@@ -24,12 +23,4 @@ export enum ItemCategory {
     Mineral = 10,
     Pottery = 11,
     Jewelry = 12
-}
-
-export enum ItemStatus {
-    New = 0,
-    Approved = 1,
-    Incleaning = 2,
-    Cleansed = 3,
-    Fordisplay = 4,
 }
