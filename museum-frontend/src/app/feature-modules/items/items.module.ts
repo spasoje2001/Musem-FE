@@ -6,7 +6,6 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MaterialModule } from "src/app/infrastructure/material/material-module";
-import { EmployeesViewComponent } from "../administration/employees-view/employees-view.component";
 import { ArtifactCardComponent } from './artifact-card/artifact-card.component';
 
 

@@ -1,0 +1,60 @@
+/* sort-dropdown.component.css */
+.sort-dropdown {
+    
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif; /* Use the font that matches your design */
+    color: #333; /* A standard text color, adjust as needed */
+  }
+  
+  .sort-label {
+    margin-right: 8px; /* Space between the label and the dropdown */
+    font-weight: normal; /* Adjust based on your wireframe */
+    font-size: 16px; /* Match the font size to your design */
+  }
+  
+  .select-wrapper {
+    width: 240px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #FFF; /* Assuming a white background for the dropdown */
+    border: 1px solid #ccc; /* A light grey border */
+    border-radius: 4px; /* Slightly rounded corners */
+    overflow: hidden; /* Ensures the dropdown arrow icon is contained within the border */
+    border-radius: 20px;
+}
+  
+  .select-wrapper select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px 36px 10px 12px; /* Padding adjusted for arrow icon space */
+    border: none; /* Remove individual border since wrapper has it */
+    font-size: 16px; /* Keep font size consistent */
+    cursor: pointer; /* Change cursor to indicate it's selectable */
+    background-color: transparent; /* No background to allow wrapper's color to be seen */
+    width: 100%; /* Make sure the select fills its container */
+    border-radius: 20px;
+}
+  
+  .select-wrapper .dropdown-icon {
+    position: absolute;
+    right: 12px; /* Slightly adjust position for the icon within the select */
+    color: #333; /* Icon color should match the text */
+    pointer-events: none; /* Icon should not interfere with select functionality */
+    border-radius: 20px;
+}
+  
+  /* Style adjustments for hover and focus states */
+  .select-wrapper select:hover,
+  .select-wrapper select:focus {
+    border-color: #888; /* Slightly darker border color on hover/focus */
+    outline: none; /* Remove the default focus outline */
+  }
+  
+  /* Since we're removing the outline, we can use a box-shadow to indicate focus */
+  .select-wrapper select:focus {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
