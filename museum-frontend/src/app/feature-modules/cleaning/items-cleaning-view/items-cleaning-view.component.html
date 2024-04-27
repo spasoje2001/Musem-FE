@@ -1,0 +1,33 @@
+<div class="overlay">
+<h1>Items for cleaning</h1>
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Period</th>
+        <th>Category</th>
+        <th>Action</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td class="employee-info">
+          <img *ngIf="item"
+          [src]=item.picture alt="Profile Picture" class="employee-image">
+          <span class="employee-name">{{ item.name }}</span>
+        </td>
+        <td>{{ item.authorsName }}</td>
+        <td>{{ item.period }}</td>
+        <td>{{ item.category }}</td>
+        <td class="employee-actions">
+          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning">
+                Write proposal
+          </button>
+          <!-- ... action buttons ... -->
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,49 @@
+<div
+    class="tour-card"
+>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+        </div>
+        <div class="tour-card-information">
+            <div class="tour-card-center">
+                <div class="tour-guide-value">
+                    <strong>Restaurateur: </strong> {{ cleaning.restaurateur?.firstName }} {{ cleaning.restaurateur?.lastName }}
+                </div>
+                <div class="tour-date">
+                  <div class="tour-date-value">
+                    <strong>Start date: </strong> {{ cleaning.startDate }}
+                  </div>
+                  <div class="tour-date-value">
+                    <strong>End date: </strong> {{ cleaning.endDate }}
+                  </div>
+                </div>
+                <div class="tour-capacity">
+                  <div class="tour-capacity-value">
+                      <strong>Description: </strong> {{ cleaning.text }} people
+                  </div>
+                </div>
+            </div>
+            <div class="tour-card-right">
+                <button
+                    class="btn"
+                    *ngIf="user?.role == 'CURATOR'"
+                    (click)="acceptButtonClicked(cleaning.itemId);$event.stopPropagation()"
+                    [@buttonState]="acceptButtonState"
+                >
+                    <fa-icon [icon]="faCheck" />
+                    &nbsp;Accept
+                </button>
+
+                <button
+                    class="btn"
+                    *ngIf="user?.role == 'CURATOR'"
+                    (click)="declineButtonClicked(cleaning.itemId);$event.stopPropagation()"
+                    [@buttonState]="declineButtonState"
+                >
+                    <fa-icon [icon]="faTimes" />
+                    &nbsp;Decline
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

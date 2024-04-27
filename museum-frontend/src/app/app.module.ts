@@ -27,6 +27,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
 
 import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
+import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { MatButtonModule } from '@angular/material/button';
     FontAwesomeModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
 
   ],
   providers: [

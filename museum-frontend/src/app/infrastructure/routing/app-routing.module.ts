@@ -7,6 +7,8 @@ import { EmployeesViewComponent } from "src/app/feature-modules/administration/c
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
+import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
+import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 
 const routes: Routes = [
   { 
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: 'item-view',
     component: ArtifactsComponent
+  },
+  {
+    path: 'cleaning-proposals-view',
+    component: CleaningHandlingViewComponent
+  },
+  {
+    path: 'items-for-cleaning-view',
+    component: ItemsCleaningViewComponent
   },
 ];
 
