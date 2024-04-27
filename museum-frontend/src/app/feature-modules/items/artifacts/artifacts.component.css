@@ -1,10 +1,10 @@
 .overlay {
-    height: 50%;
+    height: 200%;
   }
   
   .btn {
-    width: 10%;
-    height: 15%;
+    width: 10rem;
+    height: 5rem;
     background: #fff;
     border: none;
     outline: none;
@@ -16,6 +16,7 @@
     font-weight: 600;
     margin-top: 5%;
     margin-left: 80%;
+    margin-bottom: 2%;
   }
   
   .btn:hover {
@@ -24,4 +25,29 @@
     transform: scale(1.03);
     transition: transform 300ms ease;
   }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Start from the left */
+    gap: 20px; /* Set a fixed gap between cards */
+}
+
+.card {
+    width: calc(25% - 20px); /* Adjust margin */
+    /* Margin to create space between cards */
+    margin-right: 20px; 
+    margin-bottom: 20px; /* Adjust as needed */
+    /* Additional styling for your card component */
+}
+  
+  .row {
+    width: 100%; /* Ensure each row spans the full width */
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Adjust as needed */
+    margin-left: 12rem;
+  }
+  
+
   

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ItemsService } from '../items.service';
+import { Item } from '../model/item.model';
 
 @Component({
   selector: 'app-artifacts',
@@ -25,9 +27,30 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class ArtifactsComponent {
   addItemButtonState: string = 'idle'; 
   private dialogRef: any;
+  items: Item[] = [];
+  slicedItems: Item[][] = [];
+  constructor(private dialog: MatDialog, private itemService: ItemsService){
 
-  constructor(private dialog: MatDialog){
+  }
 
+
+  ngOnInit(): void {
+      this.itemService.getItems().subscribe({
+        next: (result: Item[] | Item) => {
+          if(Array.isArray(result)){
+            this.items = result;
+            this.sliceItems();
+          }
+        }
+      });
+  };
+  
+  sliceItems() {
+    const itemsPerRow = 4;
+    this.slicedItems = [];
+    for (let i = 0; i < this.items.length; i += itemsPerRow) {
+        this.slicedItems.push(this.items.slice(i, i + itemsPerRow));
+    }
   }
 
   addItemButtonClicked(){
@@ -35,6 +58,18 @@ export class ArtifactsComponent {
     setTimeout(() => { this.addItemButtonState = 'idle'; }, 200);
     
     this.dialogRef = this.dialog.open(ArtifactFormComponent, {
+    });
+    this.dialogRef.afterClosed().subscribe(() => {
+      // If you receive any data back from the dialog, you can check it here with 'result'
+      // For now, we'll just refresh the list regardless
+      this.itemService.getItems().subscribe({
+        next: (result: Item[] | Item) => {
+          if(Array.isArray(result)){
+            this.items = result;
+            this.sliceItems();
+          }
+        }
+      });
     });
   }
 }

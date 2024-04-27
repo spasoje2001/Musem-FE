@@ -16,7 +16,7 @@ export class ItemsService {
     return this.http.post<Item>(environment.apiHost + 'items', item);
   }
 
-  getItem(): Observable<Item> {
+  getItems(): Observable<Item> {
     return this.http.get<Item>(environment.apiHost + 'items');
   }
 }
