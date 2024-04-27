@@ -1,0 +1,34 @@
+<div class="item-card">
+    <div class="image-container">
+      <img class="item-image" *ngIf="item"
+      [src]=item.picture alt="Item Image">
+    </div>
+    <div class="info-container">
+      <div class="info-row">
+        <label for="item-name">Name:</label>
+        <p class="item-name">{{item.name}}</p>
+      </div>
+      <div class="info-row">
+        <label for="description">Description:</label>
+        <p class="description">{{item.description}}</p>
+      </div>
+      <div class="info-row">
+        <label for="period">Period:</label>
+        <p class="period">{{item.period}}</p>
+      </div>
+      <div class="info-row" *ngIf = "item.authorsName">
+        <label for="autorsName">Authors name:</label>
+        <p class="autorsName">{{item.authorsName}}</p>
+      </div>
+      <div class="info-row" *ngIf = "item.yearOfCreation">
+        <label for="yearOfCreation">Year of creation:</label>
+        <p class="yearOfCreation">{{item.yearOfCreation}}</p>
+      </div>
+      <div class="info-row">
+        <label for="category">Category:</label>
+        <p class="category">{{item.category}}</p>
+      </div>
+
+    </div>
+  </div>
+  

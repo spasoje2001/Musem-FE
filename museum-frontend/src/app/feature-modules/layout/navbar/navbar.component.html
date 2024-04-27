@@ -64,6 +64,17 @@
       </button>
 
       <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['item-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;See items
+      </button>
+
+      <button 
               class="feat-button"
               *ngIf="user && user.username === ''" 
               color="white"

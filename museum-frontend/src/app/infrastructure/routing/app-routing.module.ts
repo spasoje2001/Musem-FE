@@ -6,6 +6,7 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 import { EmployeesViewComponent } from "src/app/feature-modules/administration/components/employees-view/employees-view.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
+import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
 
 const routes: Routes = [
   { 
@@ -36,7 +37,11 @@ const routes: Routes = [
         component: EditProfileComponent
       }
     ]
-  }
+  },
+  {
+    path: 'item-view',
+    component: ArtifactsComponent
+  },
 ];
 
 @NgModule({
