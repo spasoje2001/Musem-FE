@@ -43,11 +43,11 @@
     <div id="account-buttons">
       <button 
             class="feat-button"
-            *ngIf="user"
+            *ngIf="user?.username != ''"
             color="white"
             mat-raised-button
             [routerLink]="['profile']" 
-      >         <!-- PROMENITI PUTANJU -->
+      >       
       <fa-icon [icon]="faUser" />    
       &nbsp;My profile
       </button>
@@ -62,6 +62,40 @@
       <fa-icon [icon]="faAdressBook" />    
       &nbsp;See employees
       </button>
+
+      <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['item-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;See items
+      </button>
+
+      <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'CURATOR'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['cleaning-proposals-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;See proposals
+      </button>
+
+      <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'RESTAURATEUR'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['items-for-cleaning-view']" 
+      >         
+      <fa-icon [icon]="faAdressBook" />    
+      &nbsp;Items for cleaning
+      </button>
+
 
       <button 
               class="feat-button"

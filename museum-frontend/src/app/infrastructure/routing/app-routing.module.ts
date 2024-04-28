@@ -3,10 +3,13 @@ import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "src/app/feature-modules/layout/home/home.component";
 import { LoginComponent } from "../auth/login/login.component";
 import { RegistrationComponent } from "../auth/registration/registration.component";
-import { EmployeesViewComponent } from "src/app/feature-modules/administration/employees-view/employees-view.component";
+import { EmployeesViewComponent } from "src/app/feature-modules/administration/components/employees-view/employees-view.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
 import { TourViewComponent } from "src/app/feature-modules/tours/components/tour-view/tour-view.component";
+import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
+import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
+import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 
 const routes: Routes = [
   { 
@@ -41,7 +44,19 @@ const routes: Routes = [
         component: EditProfileComponent
       }
     ]
-  }
+  },
+  {
+    path: 'item-view',
+    component: ArtifactsComponent
+  },
+  {
+    path: 'cleaning-proposals-view',
+    component: CleaningHandlingViewComponent
+  },
+  {
+    path: 'items-for-cleaning-view',
+    component: ItemsCleaningViewComponent
+  },
 ];
 
 @NgModule({

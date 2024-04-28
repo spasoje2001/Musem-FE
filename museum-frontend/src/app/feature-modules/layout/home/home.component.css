@@ -160,54 +160,158 @@ h2 {
   border-radius: 2vmin;
 }
 
-.big-card:nth-child(2) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.wallpaperflare.com%2Fstatic%2F92%2F577%2F133%2Fmona-lisa-leonardo-da-vinci-la-gioconda-oil-painting-wallpaper.jpg&f=1&nofb=1&ipt=820f672efb231b5e6805925f74652892357db41dc10fc9fcee568949a47059d2&ipo=images') no-repeat;
+.exhibition-cards .big-card:nth-child(2) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.NiIrEvjnh5p-ELwvGe0gigHaDz%26pid%3DApi&f=1&ipt=f307ab0f4e381e25e2408525c12a349773ec7d2e52bb2f99632224fcc9180f4a&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
   transform: translateX(-10%) rotate(-1deg);
 }
 
-.big-card:nth-child(4) {
+.tour-cards .big-card:nth-child(2) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvistapointe.net%2Fimages%2Fmuseum-8.jpg&f=1&nofb=1&ipt=91ff4e11519bf0d9cf3d931b0c172d52795c7186a31caca48e5b7323cde549d6&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-10%) rotate(-1deg);
+} 
+
+.event-cards .big-card:nth-child(2) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flp-cms-production.imgix.net%2F2021-06%2FshutterstockRF_300803246.jpg%3Fauto%3Dformat%26fit%3Dcrop%26sharp%3D10%26vib%3D20%26ixlib%3Dreact-8.6.4%26w%3D850%26q%3D23%26dpr%3D4&f=1&nofb=1&ipt=7b6752b5048465dc61f1d3809422843422e53e365240ed268133a2a929f8d40a&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-10%) rotate(-1deg);
+}
+
+.exhibition-cards .big-card:nth-child(4) {
   background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp9474216.jpg&f=1&nofb=1&ipt=b1a15d7cea7182c043c75db4afa996fc7e92ee00426edaec1c9c2b0c7f2a15e4&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
   transform: rotate(2deg);
 }
 
-.big-card:nth-child(6) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.fineartamerica.com%2Fimages%2Fartworkimages%2Fmediumlarge%2F3%2Fscream-on-a-starry-night-vincent-van-gogh.jpg&f=1&nofb=1&ipt=8513b908e88535d11ec0ea1dd64c19d801ef8c8d5b584d264f08ea8c5c4d240e&ipo=images');
+.tour-cards .big-card:nth-child(4) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp1953448.jpg&f=1&nofb=1&ipt=a4984996b061faea222a7433333e08eef41e58163836ad777ec6e257285d9041&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: rotate(2deg);
+}
+
+.event-cards .big-card:nth-child(4) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fc1.wallpaperflare.com%2Fpreview%2F545%2F223%2F831%2Fsamothrace-greek-sculpture-marble-louvre.jpg&f=1&nofb=1&ipt=3d17f669e3ce005b082c524c3bcbbd25be10cbc22a9be176b5787f3896eecea5&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: rotate(2deg);
+} 
+
+.exhibition-cards .big-card:nth-child(6) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.artmuseumofsouthtexas.org%2Fwp-content%2Fuploads%2F120617_AMoST-7834-Web.jpg&f=1&nofb=1&ipt=0519ae10808234e6dac214546ec849206677595269355632622aa24915888eba&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
   transform: translateX(-6%) rotate(-3deg);
 }
 
-.big-card:nth-child(8) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F19101276%2Fr%2Fil%2F6aa18b%2F3270042824%2Fil_fullxfull.3270042824_aqh9.jpg&f=1&nofb=1&ipt=2949e01734ecb197cbb83fc2d4bb850ee960a2981f9f62d62a90eb1e580f328b&ipo=images');
+.tour-cards .big-card:nth-child(6) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fmuseumcrush.org%2Fwp-content%2Fuploads%2F2020%2F04%2FBMAG_1400-1024x475.jpg&f=1&nofb=1&ipt=1bfbb0d899060169e148743eb2bd2ef4403cee8471dc5108758bff7c81ddb8f6&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-6%) rotate(-3deg);
+}
+
+.event-cards .big-card:nth-child(6) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp1953464.jpg&f=1&nofb=1&ipt=7283437e1ed4e7c859ab40016e70ff6310bf1de871e086bd0a1fbe0a85d649e0&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(-6%) rotate(-3deg);
+}
+
+.exhibition-cards .big-card:nth-child(8) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F19101276%2Fr%2Fil%2F6aa18b%2F3270042824%2Fil_fullxfull.3270042824_aqh9.jpg&f=1&nofb=1&ipt=2949e01734ecb197cbb83fc2d4bb850ee960a2981f9f62d62a90eb1e580f328b&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
   transform: translateX(10%, 3%) rotate(5deg);
 }
 
-.little-card:nth-child(1) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.wallpaperflare.com%2Fstatic%2F92%2F577%2F133%2Fmona-lisa-leonardo-da-vinci-la-gioconda-oil-painting-wallpaper.jpg&f=1&nofb=1&ipt=820f672efb231b5e6805925f74652892357db41dc10fc9fcee568949a47059d2&ipo=images') no-repeat;
+.tour-cards .big-card:nth-child(8) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.totallythebomb.com%2Fwp-content%2Fuploads%2F2020%2F03%2Fshutterstock_396724789-scaled.jpg&f=1&nofb=1&ipt=5b1c463cc3c1c941d4ec3fa6a84f11254b7fdfccd8f4e9469685c533077567b0&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(10%, 3%) rotate(5deg);
+}
+
+.event-cards .big-card:nth-child(8) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.lsFyAXSIW-xrLYaGV5FMgQHaE7%26pid%3DApi&f=1&ipt=e097015d4b78c1dff56d5ef55d1b40c3aa001b24f50d68084f70895e43594bff&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: translateX(10%, 3%) rotate(5deg);
+}
+
+.exhibition-cards .little-card:nth-child(1) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmediad.publicbroadcasting.net%2Fp%2Fshared%2Fnpr%2Fstyles%2Fx_large%2Fnprshared%2F202007%2F887568430.jpg&f=1&nofb=1&ipt=89a6e508349938f54618f44d30eaaeccfd8052a0a1174da7985e59e011cc7fdc&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.little-card:nth-child(3) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp9474216.jpg&f=1&nofb=1&ipt=b1a15d7cea7182c043c75db4afa996fc7e92ee00426edaec1c9c2b0c7f2a15e4&ipo=images') no-repeat;
+.tour-cards .little-card:nth-child(1) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.uniacco.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F06%2F08121858%2Flandscape.jpg&f=1&nofb=1&ipt=22e47ae9cb0da02ae93a0eaae3970ff66b3a8612ce15d8b2a0ba6129254704ad&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.little-card:nth-child(5) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.fineartamerica.com%2Fimages%2Fartworkimages%2Fmediumlarge%2F3%2Fscream-on-a-starry-night-vincent-van-gogh.jpg&f=1&nofb=1&ipt=8513b908e88535d11ec0ea1dd64c19d801ef8c8d5b584d264f08ea8c5c4d240e&ipo=images');
+.event-cards .little-card:nth-child(1) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.britishmuseum.org%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Funcropped_huge%2Fpublic%2F2019-10%2FGreat-Court-Corporate-Entertaining-Autumnal.jpg%3Fitok%3D6X2GxFDB&f=1&nofb=1&ipt=51ba242906be31bd145bf3ba6269f91f7867637984193e9288f4bcc1a7122cf7&ipo=images') no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.little-card:nth-child(7) {
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.etsystatic.com%2F19101276%2Fr%2Fil%2F6aa18b%2F3270042824%2Fil_fullxfull.3270042824_aqh9.jpg&f=1&nofb=1&ipt=2949e01734ecb197cbb83fc2d4bb850ee960a2981f9f62d62a90eb1e580f328b&ipo=images');
+.exhibition-cards .little-card:nth-child(3) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fstatic.guim.co.uk%2Fsys-images%2FGuardian%2FPix%2Fpictures%2F2014%2F8%2F18%2F1408383429515%2FThe-bronze-age-exhibition-014.jpg&f=1&nofb=1&ipt=f057cf6a7f4005790e60450d78bebeb3ae9f3560032cc35386ea67a3d00faa07&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.tour-cards .little-card:nth-child(3) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.wego.com%2Fwp-content%2Fuploads%2Fshutterstock_235506019.jpg&f=1&nofb=1&ipt=b3cb8b5e1c88fb41d49ecd2d00afb8ea20398cfbd48b1909c2332650d86b8055&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.event-cards .little-card:nth-child(3) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.guggenheim.org%2Fwp-content%2Fuploads%2F2016%2F11%2Fguggenheim-ubs-map-on-the-map-mena-symposium-feature.jpg&f=1&nofb=1&ipt=b6a9bcbd2e8d10720a7ace673c32de6b8d1e35ec531935e5db2f71aafcb8ad6f&ipo=images') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.exhibition-cards .little-card:nth-child(5) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi2-prod.liverpoolecho.co.uk%2Fincoming%2Farticle9976279.ece%2FALTERNATES%2Fs1227b%2FJS71185208.jpg&f=1&nofb=1&ipt=7f613e6f59a20b5dbcdb0d2d8f6a3ce9f4f51cae686a391373c6601cf1cd25dd&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.tour-cards .little-card:nth-child(5) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.timeout.com%2Fimages%2F105625670%2Fimage.jpg&f=1&nofb=1&ipt=0b0695c9d2d88c43d996cc15b38e2c10f29b303f8678a961cacf6fbde51d6b61&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.event-cards .little-card:nth-child(5) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.metmuseum.org%2F-%2Fmedia%2Fimages%2Fjoin-and-give%2Fhost-an-event%2Fhost-an-event_block.jpg%3Fsc_lang%3Den&f=1&nofb=1&ipt=664a5b8ac2f2d77688d6c4349311931d4c35eacf19454718e8fd1dde34eb2dce&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.exhibition-cards .little-card:nth-child(7) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthebruinnews.kellogg.edu%2Fwp-content%2Fuploads%2F2019%2F04%2Fstudent-art-exhibit-2019.jpg&f=1&nofb=1&ipt=1bb25425f88273a713349fe2c0ed8d3b1e1bf72238c7f99a2c5aa278ce45e3e8&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.tour-cards .little-card:nth-child(7) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fxoxobella.com%2Fwp-content%2Fuploads%2F2021%2F02%2Fvirtual_museum_tour_around_world_online-4.jpg&f=1&nofb=1&ipt=9a7c1be2c2793db6fd0542f93498113b0149cc0819e3d08af536cabdcfe233fe&ipo=images');
+  background-size: cover;
+  background-position: center;
+}
+
+.event-cards .little-card:nth-child(7) {
+  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fprestigiousstarawards.com%2Fwp-content%2Fuploads%2F2017%2F03%2FGallery-Event-Spaces-The-VA-Prestigious-Venues.jpg&f=1&nofb=1&ipt=ec8c01ac106065c1fc4487077f9598ceedc922b8489dd64debbc9ebd178bce22&ipo=images');
   background-size: cover;
   background-position: center;
 }
@@ -218,6 +322,14 @@ h2 {
 
 .card-group:hover > .big-card:nth-child(4) {
   transform: translate(-25%, 8%) rotate(-8deg);
+}
+
+.card-group:hover > .big-card:nth-child(6) {
+  transform: translate(25%, 8%) rotate(8deg);
+}
+
+.card-group:hover > .big-card:nth-child(6) {
+  transform: translate(25%, 8%) rotate(8deg);
 }
 
 .card-group:hover > .big-card:nth-child(6) {

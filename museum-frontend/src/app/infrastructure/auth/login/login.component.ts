@@ -36,6 +36,9 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 })
 export class LoginComponent {
   isPasswordVisible: boolean;
+  buttonState: string = 'idle'; 
+  focused: string = '';
+  backgroundSize: string = '100% 110%';
 
   constructor(private authService: AuthService, private router: Router) {
     this.isPasswordVisible = false;
@@ -45,10 +48,6 @@ export class LoginComponent {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-
-  buttonState: string = 'idle'; 
-  focused: string = '';
-  backgroundSize: string = '100% 110%';
 
   login(): void {
     const login: Login = {
@@ -63,7 +62,13 @@ export class LoginComponent {
         next: () => {
           this.router.navigate(['']);
         },
+        error: err => {
+          alert('Invalid username and password combination');
+        },
       });
+    }
+    else{
+      alert('Please fill out the form correctly');
     }
   }
 
