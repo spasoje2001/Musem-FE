@@ -65,7 +65,7 @@
 
       <button 
             class="feat-button"
-            *ngIf="user && user.role === 'ORGANIZER' || user?.role === 'GUEST'"
+            *ngIf="user && user?.role === 'ORGANIZER' || user?.role === 'GUEST'"
             color="white"
             mat-raised-button
             [routerLink]="['request-view']" 
