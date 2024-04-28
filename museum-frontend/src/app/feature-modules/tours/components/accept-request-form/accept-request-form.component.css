@@ -158,7 +158,7 @@
 }
 
 .input-box, .adult input:focus + label,
-.input-box label.active {
+.input-box, .adult label.active {
   top: 175px;
   left: 60px;
   font-size: 13px;
@@ -166,12 +166,12 @@
 }
 
 .input-box, .minor input:focus + label,
-.input-box label.active {
+.input-box, .minor label.active {
   top: 175px;
   left: 290px;
   font-size: 13px;
   color: #fff;
-}
+} 
 
 .ticket-prices {
   display: flex;
