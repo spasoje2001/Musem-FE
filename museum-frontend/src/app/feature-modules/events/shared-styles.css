@@ -1,0 +1,17 @@
+.container {
+    background-color: rgb(87, 87, 87);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.container * {
+    color: white;
+}
+
+.container h1 {
+    font-weight: bold;
+}
+
+.container p {
+    font-size: 1rem;
+}
