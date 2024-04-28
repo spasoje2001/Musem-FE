@@ -26,14 +26,17 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 ],
 })
 export class CleaningProposalFormComponent {
-
   buttonState: string = 'idle'; 
   focused: string = '';
   itemId: number;
+  minDate: string;  
 
   constructor(private cleaningService: CleaningService, 
-    private dialogRef: MatDialogRef<CleaningProposalFormComponent>,  @Inject(MAT_DIALOG_DATA) public data: any) {
+              private dialogRef: MatDialogRef<CleaningProposalFormComponent>,  
+              @Inject(MAT_DIALOG_DATA) public data: any) {
       this.itemId = data;
+      const today = new Date();
+      this.minDate = today.toISOString().split('T')[0];
   }
 
   ngOnInit(): void {

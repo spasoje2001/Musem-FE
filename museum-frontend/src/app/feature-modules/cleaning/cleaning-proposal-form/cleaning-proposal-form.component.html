@@ -8,7 +8,6 @@
         <div class="input-box">
             <input 
                     type="text" 
-
                     formControlName="tekst" 
                     required
             />
@@ -23,6 +22,7 @@
                     id="datepicker" 
                     name="datepicker"
                     formControlName="startDate"
+                    [min]="minDate"
                     required
             />
             
@@ -36,6 +36,7 @@
                     id="datepicker" 
                     name="datepicker"
                     formControlName="endDate"
+                    [min]="minDate"
                     required
             />
         </div>
