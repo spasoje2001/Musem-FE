@@ -52,27 +52,6 @@ export class TourViewComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
-      if(this.user.role == 'ORGANIZER'){
-        this.toursService.getOrganizersTours(this.user.id).subscribe({
-          next: (result: Tour[] | Tour) => {
-            if(Array.isArray(result)){
-              this.tours = result;
-            }
-          }
-        });
-      }
-      else{
-        this.toursService.getTours().subscribe({
-          next: (result: Tour[] | Tour) => {
-            if(Array.isArray(result)){
-              this.tours = result;
-            }
-          }
-        });
-      }
-    });
     this.getTours();  
   }
 
@@ -98,25 +77,26 @@ export class TourViewComponent implements OnInit{
   getTours(){
     this.authService.user$.subscribe(user => {
       this.user = user;
-      if(this.user.role == "ORGANIZER"){
-        this.toursService.getOrganizersTours(this.user.id).subscribe({
-          next: (result: Tour[] | Tour) => {
-            if(Array.isArray(result)){
-              this.tours = result;
-            }
-          }
-        });
-      }
-      else if(this.user.role == "GUEST") {
-        this.toursService.getTours().subscribe({
-          next: (result: Tour[] | Tour) => {
-            if(Array.isArray(result)){
-              this.tours = result;
-            }
-          }
-        });
-      }
     });
+
+    if(this.user && this.user.role == "ORGANIZER"){
+      this.toursService.getOrganizersTours(this.user.id).subscribe({
+        next: (result: Tour[] | Tour) => {
+          if(Array.isArray(result)){
+            this.tours = result;
+          }
+        }
+      });
+    }
+    else{
+      this.toursService.getTours().subscribe({
+        next: (result: Tour[] | Tour) => {
+          if(Array.isArray(result)){
+            this.tours = result;
+          }
+        }
+      });
+    }
   }
 
   handleModalClose() {
