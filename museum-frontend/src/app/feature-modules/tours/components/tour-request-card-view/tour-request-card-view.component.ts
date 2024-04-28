@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { PersonalTourRequest } from '../../model/personalTourRequest.model';
 import { MatDialog } from '@angular/material/dialog';
@@ -33,6 +33,7 @@ export class TourRequestCardViewComponent implements OnInit{
   @Input() request!: PersonalTourRequest;
   private dialogRef: any;
   user: User | undefined;
+  @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>(); // Define event emitter
 
   constructor(private dialog: MatDialog,
               private authService: AuthService) {
@@ -51,6 +52,9 @@ export class TourRequestCardViewComponent implements OnInit{
     this.dialogRef = this.dialog.open(AcceptRequestFormComponent, {
       data: request
     });
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.dialogRefClosed.emit(result);
+    });
   }
 
   declineButtonClicked(request: PersonalTourRequest) {
@@ -58,6 +62,9 @@ export class TourRequestCardViewComponent implements OnInit{
     setTimeout(() => { this.declineButtonState = 'idle'; }, 200); 
     this.dialogRef = this.dialog.open(DeclineRequestPromptComponent, {
       data: request
+    });
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.dialogRefClosed.emit(result);
     });
   }
 

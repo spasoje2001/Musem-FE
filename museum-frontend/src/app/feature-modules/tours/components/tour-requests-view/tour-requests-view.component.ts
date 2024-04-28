@@ -7,6 +7,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTourRequestFormComponent } from '../add-tour-request-form/add-tour-request-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tour-requests-view',
@@ -36,7 +37,8 @@ export class TourRequestsViewComponent implements OnInit{
 
   constructor(private toursService: ToursService,
               private authService: AuthService,
-              private dialog: MatDialog,) {
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar,) {
 
   }
 
@@ -83,6 +85,14 @@ export class TourRequestsViewComponent implements OnInit{
         this.getRequests();   
       });
     }
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
   @HostListener('window:scroll', ['$event'])

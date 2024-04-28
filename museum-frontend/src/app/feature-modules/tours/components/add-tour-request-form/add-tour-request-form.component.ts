@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
 import { ToursService } from '../../tours.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'xp-add-tour-request-form',
@@ -31,7 +32,8 @@ export class AddTourRequestFormComponent implements OnInit{
   minDate: string;  
   
   constructor(private toursService: ToursService,
-              private dialogRef: MatDialogRef<AddTourRequestFormComponent>){
+              private dialogRef: MatDialogRef<AddTourRequestFormComponent>,
+              private snackBar: MatSnackBar,){
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
   }
@@ -85,6 +87,7 @@ export class AddTourRequestFormComponent implements OnInit{
 
       this.toursService.addTourRequest(request).subscribe({
         next: () => {
+          this.showNotification('Tour request successfully sent!');
           this.dialogRef.close();
         },
       });
@@ -96,6 +99,14 @@ export class AddTourRequestFormComponent implements OnInit{
   
   overviewClicked() {
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
 }

@@ -49,7 +49,10 @@ export class TourCardViewComponent implements OnChanges{
     this.dialogRef = this.dialog.open(RemoveTourPromptComponent, {
       data: id
     });
-
+    
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Dialog result:', result);
+    });
   }
 
   faCoins = faCoins;
