@@ -25,7 +25,7 @@ export class ToursService {
   }
 
   updateTour(tour: Tour): Observable<Tour> {
-    return this.http.put<Tour>(environment.apiHost + 'tours/' + tour.id, tour);
+    return this.http.put<Tour>(environment.apiHost + 'tours', tour);
   }
 
   getCurators(): Observable<Curator>{
