@@ -13,6 +13,7 @@ import { TourCardViewComponent } from "./components/tour-card-view/tour-card-vie
 import { TourViewComponent } from "./components/tour-view/tour-view.component";
 import { RemoveTourPromptComponent } from './components/remove-tour-prompt/remove-tour-prompt.component';
 import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-for
     AdministrationModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule,
   ],
   exports: [
     TourViewComponent
