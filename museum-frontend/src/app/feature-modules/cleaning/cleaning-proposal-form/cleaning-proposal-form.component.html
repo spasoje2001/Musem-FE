@@ -15,9 +15,9 @@
             <label [class.active]="addCleaningForm.get('tekst')?.value || focused === 'tekst'">Text</label>
         </div>
 
-        <label>Start date</label>
+        <label class="date-labels">Start date</label>
+
         <div class="input-box">
-            
             <input 
                     type="date" 
                     id="datepicker" 
@@ -28,9 +28,9 @@
             
         </div>
 
-        <label>End date</label>
+        <label class="date-labels">End date</label>
+
         <div class="input-box">
-            
             <input 
                     type="date" 
                     id="datepicker" 
@@ -40,7 +40,6 @@
             />
         </div>
 
-        
         <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="addCleaningButtonClicked()">Add</button>
     </form>
   </div>
