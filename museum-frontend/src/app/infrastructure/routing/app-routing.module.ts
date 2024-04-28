@@ -11,6 +11,7 @@ import { TourRequestsViewComponent } from "src/app/feature-modules/tours/compone
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
 import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
+import { CreateEventComponent } from "src/app/feature-modules/events/create-event/create-event.component";
 
 const routes: Routes = [
   { 
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'items-for-cleaning-view',
     component: ItemsCleaningViewComponent
+  },
+  {
+    path: 'events/create',
+    component: CreateEventComponent
   },
 ];
 

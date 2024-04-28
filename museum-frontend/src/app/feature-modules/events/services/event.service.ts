@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
 import { Event } from '../model/event.model';
+import { NewEvent } from '../model/new-event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,11 @@ export class EventService {
   archiveEvent(event: Event): Observable<any> {
     const path = this.basePath + '/' + event.id + '/archive';
     return this.http.patch<any>(path, {});
+  }
+  
+  saveEvent(newEvent: NewEvent): Observable<any> {
+    const path = this.basePath;
+    return this.http.post<any>(path, newEvent);
   }
 
 }

@@ -1,8 +1,36 @@
-.wrapper div.container {
+.wrapper .container {
     margin-bottom: 3rem;
 }
 
 .wrapper h1 {
     font-weight: bolder;
     font-size: xx-large;
+}
+
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.events-header button {
+    font-size: x-large;
+    
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+    
+    color: white;
+    background-color: gray;
+
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.event-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1rem;
 }

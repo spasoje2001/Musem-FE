@@ -8,9 +8,13 @@
         </div>
         <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
-    <h1>My events</h1>
 
-    <div *ngFor="let event of events">
+    <div class="events-header">
+        <h1>My events</h1>
+        <button [routerLink]="['/events/create']">+</button>
+    </div>
+
+    <div class="event-cards" *ngFor="let event of events">
         <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)"></app-oragnizer-event-card>
     </div>
     
