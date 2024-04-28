@@ -6,6 +6,7 @@ import { RegistrationComponent } from "../auth/registration/registration.compone
 import { EmployeesViewComponent } from "src/app/feature-modules/administration/components/employees-view/employees-view.component";
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
+import { TourViewComponent } from "src/app/feature-modules/tours/components/tour-view/tour-view.component";
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
 import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'employee-view',
     component: EmployeesViewComponent
+  },
+  {
+    path: 'tour-view',
+    component: TourViewComponent
   },
   {
     path: 'profile',

@@ -10,6 +10,7 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToursModule } from './feature-modules/tours/tours.module';
 import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.component'; 
 import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
 import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
@@ -62,10 +63,10 @@ import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
+    ToursModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
-
   ],
   providers: [
     {
