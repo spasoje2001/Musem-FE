@@ -38,6 +38,8 @@ export class TourCardViewComponent implements OnInit{
   private dialogRef: any;
   @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
   user: User | undefined;
+  tourOccurrenceTime: string = "";
+  tourOccurrenceDate: string = "";
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -56,6 +58,9 @@ export class TourCardViewComponent implements OnInit{
         this.tour.guide = curator;
       }
     })
+
+    const tourOccurrenceDateTimeString = this.tour.occurrenceDateTime.toString();
+    [this.tourOccurrenceDate, this.tourOccurrenceTime] = tourOccurrenceDateTimeString.split('T');
   }
 
   editButtonClicked() {
