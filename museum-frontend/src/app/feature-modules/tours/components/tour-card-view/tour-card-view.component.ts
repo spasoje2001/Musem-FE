@@ -52,6 +52,7 @@ export class TourCardViewComponent implements OnChanges{
     });
     this.dialogRef.afterClosed().subscribe((result: any) => {
       this.dialogRefClosed.emit(result);
+      alert('Tour is successfully removed');
     });
   }
 
