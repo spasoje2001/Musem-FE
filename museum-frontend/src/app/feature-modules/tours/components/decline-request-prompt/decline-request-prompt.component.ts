@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-decline-request-prompt',
@@ -29,6 +30,7 @@ export class DeclineRequestPromptComponent{
   request: PersonalTourRequest | undefined;
 
   constructor(private toursService: ToursService,
+              private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<DeclineRequestPromptComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.request = data;
@@ -42,6 +44,7 @@ export class DeclineRequestPromptComponent{
     
     this.toursService.updateTourRequest(this.request!).subscribe({
       next: () => {
+        this.showNotification('Tour request successfully declined!');
         this.dialogRef.close();
       }
     });
@@ -55,5 +58,13 @@ export class DeclineRequestPromptComponent{
 
   overviewClicked(){
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 }

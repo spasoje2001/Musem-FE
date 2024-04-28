@@ -91,10 +91,10 @@ export class AddTourRequestFormComponent implements OnInit{
           this.dialogRef.close();
         },
       });
-  }
-  else{
-    console.log('Add tour form not valid!'); // Treba dodati neki vid validacije
-  }
+    }
+    else{
+      this.showNotification('Please fill out the form correctly!');
+    }
   }
   
   overviewClicked() {

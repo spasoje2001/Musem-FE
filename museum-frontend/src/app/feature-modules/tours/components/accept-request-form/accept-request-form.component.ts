@@ -7,6 +7,7 @@ import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PersonalTour } from '../../model/personalTour.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-accept-request-form',
@@ -36,6 +37,7 @@ export class AcceptRequestFormComponent{
   focused: string = '';
 
   constructor(private toursService: ToursService,
+              private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<DeclineRequestPromptComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.request = data;
@@ -82,6 +84,7 @@ export class AcceptRequestFormComponent{
 
           this.toursService.addPersonalTour(tour).subscribe({
             next: () => {
+              this.showNotification('Tour request successfully accepted!');
               this.dialogRef.close();
             }
           })
@@ -98,6 +101,14 @@ export class AcceptRequestFormComponent{
 
   overviewClicked(){
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
 }
