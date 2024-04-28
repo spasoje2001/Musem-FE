@@ -17,6 +17,7 @@ import { TourRequestsViewComponent } from './components/tour-requests-view/tour-
 import { TourRequestCardViewComponent } from './components/tour-request-card-view/tour-request-card-view.component';
 import { DeclineRequestPromptComponent } from './components/decline-request-prompt/decline-request-prompt.component';
 import { AcceptRequestFormComponent } from './components/accept-request-form/accept-request-form.component';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { AcceptRequestFormComponent } from './components/accept-request-form/acc
     TourRequestsViewComponent,
     TourRequestCardViewComponent,
     DeclineRequestPromptComponent,
-    AcceptRequestFormComponent
+    AcceptRequestFormComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +40,8 @@ import { AcceptRequestFormComponent } from './components/accept-request-form/acc
     AdministrationModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule,
   ],
   exports: [
     TourViewComponent
