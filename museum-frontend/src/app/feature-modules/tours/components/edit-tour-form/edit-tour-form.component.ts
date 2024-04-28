@@ -125,7 +125,7 @@ export class EditTourFormComponent implements OnChanges{
           tour.guideId = this.selectedCurator.id;
         }
         else{
-          tour.guideId = this.tour.guideId;
+          tour.guideId = this.tour.guide?.id;
         }
 
         // za sad ovako dok s ene dodaju sobe
