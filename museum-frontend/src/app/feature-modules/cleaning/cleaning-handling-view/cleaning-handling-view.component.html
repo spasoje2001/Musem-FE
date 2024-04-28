@@ -1,0 +1,17 @@
+<div class="overview" >
+    <div class="h2-wrapper">
+      <h2>Cleaning proposals</h2>
+    </div>
+    <br>
+    
+    <div class="tour-search-results">
+      <div class="tour-search-result-tours">
+           <app-cleaning-proposal-card
+              [@fadeIn]
+              *ngFor="let cleaning of cleanings"
+              [cleaning]="cleaning"
+              (dialogRefClosed)="handleDialogClosed($event)"
+          ></app-cleaning-proposal-card>
+      </div>
+    </div>
+</div>

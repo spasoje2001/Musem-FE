@@ -24,6 +24,7 @@
             [@fadeIn]
             *ngFor="let tour of tours"
             [tour]="tour"
+            (dialogRefClosed)="handleDialogClosed($event)"
         ></xp-tour-card-view>
     </div>
   </div>

@@ -17,6 +17,7 @@ import { TourRequestsViewComponent } from './components/tour-requests-view/tour-
 import { TourRequestCardViewComponent } from './components/tour-request-card-view/tour-request-card-view.component';
 import { DeclineRequestPromptComponent } from './components/decline-request-prompt/decline-request-prompt.component';
 import { AcceptRequestFormComponent } from './components/accept-request-form/accept-request-form.component';
+import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     TourRequestCardViewComponent,
     DeclineRequestPromptComponent,
     AcceptRequestFormComponent,
+    EditTourFormComponent
   ],
   imports: [
     CommonModule,

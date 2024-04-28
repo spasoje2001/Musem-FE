@@ -43,6 +43,7 @@ export class TourViewComponent implements OnInit{
   user: User | undefined;
   toursButtonState: string = "";
   private dialogRef: any;
+  backgroundSize: string = '100% 100%';
 
   constructor(private dialog: MatDialog, 
               private toursService: ToursService,
@@ -72,6 +73,7 @@ export class TourViewComponent implements OnInit{
         });
       }
     });
+    this.getTours();  
   }
 
   addToursButtonClicked() {
@@ -93,10 +95,36 @@ export class TourViewComponent implements OnInit{
     }
   }
 
-  backgroundSize: string = '100% 100%';
+  getTours(){
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+      if(this.user.role == "ORGANIZER"){
+        this.toursService.getOrganizersTours(this.user.id).subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
+          }
+        });
+      }
+      else if(this.user.role == "GUEST") {
+        this.toursService.getTours().subscribe({
+          next: (result: Tour[] | Tour) => {
+            if(Array.isArray(result)){
+              this.tours = result;
+            }
+          }
+        });
+      }
+    });
+  }
 
   handleModalClose() {
     this.dialogRef = this.dialog.closeAll();
+  }
+
+  handleDialogClosed(result: any) {
+    this.getTours();
   }
 
   @HostListener('window:scroll', ['$event'])

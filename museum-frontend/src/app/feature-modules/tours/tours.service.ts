@@ -28,13 +28,17 @@ export class ToursService {
   }
 
   updateTour(tour: Tour): Observable<Tour> {
-    return this.http.put<Tour>(environment.apiHost + 'tours/' + tour.id, tour);
+    return this.http.put<Tour>(environment.apiHost + 'tours', tour);
   }
 
   getCurators(): Observable<Curator>{
     return this.http.get<Curator>(environment.apiHost + 'users/curators');
   }
   
+  getCuratorById(curatorId: number): Observable<Curator>{
+    return this.http.get<Curator>(environment.apiHost + 'users/curators/' + curatorId);
+  }
+
   getOrganizersTours(organizerId: number): Observable<Tour> {
     return this.http.get<Tour>(environment.apiHost + 'tours/organizers/' + organizerId);
   }

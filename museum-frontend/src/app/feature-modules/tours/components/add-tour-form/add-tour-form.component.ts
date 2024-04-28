@@ -5,6 +5,7 @@ import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-tour-form',
@@ -35,6 +36,7 @@ export class AddTourFormComponent implements OnInit{
   selectedCurator: Curator | undefined;
 
   constructor(private toursService: ToursService, 
+              private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<AddTourFormComponent>) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
@@ -105,6 +107,7 @@ export class AddTourFormComponent implements OnInit{
           tour.duration = "0";
           this.toursService.addTour(tour).subscribe({
             next: () => {
+              this.showNotification('Tour successfully added!')
               this.dialogRef.close();
             },
           });
@@ -121,6 +124,15 @@ export class AddTourFormComponent implements OnInit{
 
   onChooseClicked(curator: Curator){
     this.selectedCurator = curator;
+    this.showNotification('Curator successfully chosen!')
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
   overviewClicked(){

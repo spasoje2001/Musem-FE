@@ -268,6 +268,7 @@ input[type="range"] {
   flex-direction: column;
   margin-left: 2rem;
   width: 100%;
+  margin-top: 2%;
 }
 
 .tour-search-results-count {
@@ -589,8 +590,10 @@ input[type="range"] {
 }
 
 .overview {
+  position: relative;
   height: auto;
   min-height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fkolkata-marble-museum-7wmw0gmg8aibqee2.jpg&f=1&nofb=1&ipt=bb81295396b2ae21a01d8fffe17b956028be4ec82dd4c2e4f8898b07ebb69f96&ipo=images') no-repeat;
@@ -653,7 +656,6 @@ h2 {
   font-weight: 600;
   margin-top: 2%;
   margin-left: 71.5%;
-  margin-bottom: 2%;
 }
 
 .add-tour-btn:hover {
