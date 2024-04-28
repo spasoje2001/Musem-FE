@@ -10,6 +10,7 @@
               [@fadeIn]
               *ngFor="let cleaning of cleanings"
               [cleaning]="cleaning"
+              (dialogRefClosed)="handleDialogClosed($event)"
           ></app-cleaning-proposal-card>
       </div>
     </div>

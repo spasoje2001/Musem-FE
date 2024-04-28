@@ -6,10 +6,10 @@ export interface Cleaning {
     text : string;
     startDate : string;
     endDate : string;
-    restaurateur : Restaurateur;
-    curator : Curator;
-    category : CleaningStatus;
-    itemId : number;
+    restaurateur?: Restaurateur;
+    curator?: Curator;
+    status : CleaningStatus;
+    itemId?: number;
   }
 
 export enum CleaningStatus{

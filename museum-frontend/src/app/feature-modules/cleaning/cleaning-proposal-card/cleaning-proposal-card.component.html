@@ -19,15 +19,18 @@
                 </div>
                 <div class="tour-capacity">
                   <div class="tour-capacity-value">
-                      <strong>Description: </strong> {{ cleaning.text }} people
+                      <strong>Description: </strong> {{ cleaning.text }}
                   </div>
+                </div>
+                <div class="tour-guide-value">
+                    <strong>Item name: </strong> {{ item?.name}}
                 </div>
             </div>
             <div class="tour-card-right">
                 <button
                     class="btn"
                     *ngIf="user?.role == 'CURATOR'"
-                    (click)="acceptButtonClicked(cleaning.itemId);$event.stopPropagation()"
+                    (click)="acceptButtonClicked(cleaning);$event.stopPropagation()"
                     [@buttonState]="acceptButtonState"
                 >
                     <fa-icon [icon]="faCheck" />
@@ -37,7 +40,7 @@
                 <button
                     class="btn"
                     *ngIf="user?.role == 'CURATOR'"
-                    (click)="declineButtonClicked(cleaning.itemId);$event.stopPropagation()"
+                    (click)="declineButtonClicked(cleaning);$event.stopPropagation()"
                     [@buttonState]="declineButtonState"
                 >
                     <fa-icon [icon]="faTimes" />

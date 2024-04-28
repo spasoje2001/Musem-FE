@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from 'src/app/infrastructure/material/material-module';
+import { AcceptCleaningPromptComponent } from './accept-cleaning-prompt/accept-cleaning-prompt.component';
+import { DeclineCleaningPromptComponent } from './decline-cleaning-prompt/decline-cleaning-prompt.component';
 
 
 
@@ -18,7 +20,9 @@ import { MaterialModule } from 'src/app/infrastructure/material/material-module'
     ItemsCleaningViewComponent,
     CleaningProposalFormComponent,
     CleaningHandlingViewComponent,
-    CleaningProposalCardComponent
+    CleaningProposalCardComponent,
+    AcceptCleaningPromptComponent,
+    DeclineCleaningPromptComponent
   ],
   imports: [
     CommonModule,

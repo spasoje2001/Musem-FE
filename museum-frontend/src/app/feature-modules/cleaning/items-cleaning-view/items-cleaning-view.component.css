@@ -2,7 +2,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px; /* Adjust as needed */
+    margin-top: 7rem; /* Adjust as needed */
   }
   
   th, td {
@@ -68,6 +68,7 @@ h1 {
   color: #333; /* Dark text color */
   margin-bottom: 0; /* Remove bottom margin to align with the button */
   flex-grow: 1; /* Allows the title to take up the available space */
+  margin-top: 2rem;
 }
   
 .overlay {
@@ -78,5 +79,6 @@ h1 {
   background: #FFFFFF; /* Assuming a white background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow around the overlay */
   border-radius: 8px; /* Slight rounding of corners */
+  height: 70%;
 }
   /* Add styles for the search filter, sort dropdown, add employee button, and action buttons */

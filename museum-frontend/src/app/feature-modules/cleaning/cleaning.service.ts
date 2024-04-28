@@ -13,12 +13,12 @@ export class CleaningService {
 
   constructor(private http: HttpClient,private router: Router) { }
 
-  declineCleaning(itemId : number, curatorId : number): Observable<Cleaning> {
-    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/decline/' + itemId + '/' + curatorId, null);
+  declineCleaning(cleaningId : number, curatorId : number): Observable<Cleaning> {
+    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/decline/' + cleaningId + '/' + curatorId, null);
   }
 
-  acceptCleaning(itemId : number, curatorId : number): Observable<Cleaning> {
-    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/approve/' + itemId + '/' + curatorId, null);
+  acceptCleaning(cleaningId : number, curatorId : number): Observable<Cleaning> {
+    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/approve/' + cleaningId + '/' + curatorId, null);
   }
 
   getNewCleanings(): Observable<Cleaning>{

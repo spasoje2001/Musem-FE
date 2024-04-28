@@ -62,4 +62,15 @@ export class CleaningHandlingViewComponent {
 
     this.backgroundSize = `${zoom}% ${zoom}%`;
   }
+
+  handleDialogClosed(result: any) {
+    this.cleaningService.getNewCleanings().subscribe({
+      next: (result: Cleaning[] | Cleaning) => {
+        if(Array.isArray(result)){
+          this.cleanings = result;
+        }
+      }
+    });
+  }
+
 }

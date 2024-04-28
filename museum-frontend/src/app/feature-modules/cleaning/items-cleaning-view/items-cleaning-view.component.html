@@ -22,7 +22,7 @@
         <td>{{ item.period }}</td>
         <td>{{ item.category }}</td>
         <td class="employee-actions">
-          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning">
+          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning || item.cleaning.status.toString() == 'REJECTED'">
                 Write proposal
           </button>
           <!-- ... action buttons ... -->
