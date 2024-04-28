@@ -4,6 +4,7 @@ import { Tour } from '../../model/tour.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveTourPromptComponent } from '../remove-tour-prompt/remove-tour-prompt.component';
+import { EditTourFormComponent } from '../edit-tour-form/edit-tour-form.component';
 
 @Component({
   selector: 'xp-tour-card-view',
@@ -42,6 +43,12 @@ export class TourCardViewComponent implements OnChanges{
   editButtonClicked() {
     this.editButtonState = 'clicked'; 
     setTimeout(() => { this.editButtonState = 'idle'; }, 200); 
+    this.dialogRef = this.dialog.open(EditTourFormComponent, {
+      data: this.tour
+    });
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.dialogRefClosed.emit(result);
+    });
   }
 
   removeButtonClicked(id: number) {
