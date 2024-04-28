@@ -17,7 +17,7 @@ export interface PersonalTourRequest {
 }
 
 export enum PersonalTourRequestStatus {
-  ON_HOLD = 0,
+  IN_PROGRESS = 0,
   ACCEPTED = 1,
   DECLINED = 2,
   // CANCELED = 3,
