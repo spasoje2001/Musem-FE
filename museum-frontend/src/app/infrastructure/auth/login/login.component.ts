@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Login } from '../model/login.model';
 import { faUser, faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'xp-login',
@@ -40,7 +41,9 @@ export class LoginComponent {
   focused: string = '';
   backgroundSize: string = '100% 110%';
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, 
+              private router: Router,
+              private snackBar: MatSnackBar,) {
     this.isPasswordVisible = false;
   }
 
@@ -60,20 +63,29 @@ export class LoginComponent {
       setTimeout(() => { this.buttonState = 'idle'; }, 200); 
       this.authService.login(login).subscribe({
         next: () => {
+          this.showNotification('Successfully logged in!');
           this.router.navigate(['']);
         },
         error: err => {
-          alert('Invalid username and password combination');
+          this.showNotification('Invalid username and password combination');
         },
       });
     }
     else{
-      alert('Please fill out the form correctly');
+      this.showNotification('Please fill out the form correctly');
     }
   }
 
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
   @HostListener('window:scroll', ['$event'])
