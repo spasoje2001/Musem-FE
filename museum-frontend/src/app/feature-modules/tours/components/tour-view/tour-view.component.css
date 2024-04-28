@@ -268,6 +268,7 @@ input[type="range"] {
   flex-direction: column;
   margin-left: 2rem;
   width: 100%;
+  margin-top: 2%;
 }
 
 .tour-search-results-count {
@@ -655,7 +656,6 @@ h2 {
   font-weight: 600;
   margin-top: 2%;
   margin-left: 71.5%;
-  margin-bottom: 2%;
 }
 
 .add-tour-btn:hover {
