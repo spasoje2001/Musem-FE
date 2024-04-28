@@ -19,4 +19,8 @@ export class ItemsService {
   getItems(): Observable<Item> {
     return this.http.get<Item>(environment.apiHost + 'items');
   }
+
+  getItem(itemId : number) : Observable<Item>{
+    return this.http.get<Item>(environment.apiHost + 'items/' + itemId);
+  }
 }
