@@ -1,10 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { faCoins, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Tour } from '../../model/tour.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveTourPromptComponent } from '../remove-tour-prompt/remove-tour-prompt.component';
 import { EditTourFormComponent } from '../edit-tour-form/edit-tour-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToursService } from '../../tours.service';
+import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 
 @Component({
   selector: 'xp-tour-card-view',
@@ -25,19 +28,25 @@ import { EditTourFormComponent } from '../edit-tour-form/edit-tour-form.componen
     ]),
   ]
 })
-export class TourCardViewComponent implements OnChanges{
+export class TourCardViewComponent implements OnInit{
   editButtonState: string = 'idle';   
   removeButtonState: string = 'idle'; 
   @Input() tour!: Tour;
   private dialogRef: any;
   @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private toursService: ToursService) {
 
   }
 
-  ngOnChanges(changes: SimpleChanges,): void {
-
+  ngOnInit(): void {
+    this.toursService.getCuratorById(this.tour.guideId!).subscribe({
+      next: (curator: Curator) => {
+        this.tour.guide = curator;
+      }
+    })
   }
 
   editButtonClicked() {
@@ -59,7 +68,14 @@ export class TourCardViewComponent implements OnChanges{
     });
     this.dialogRef.afterClosed().subscribe((result: any) => {
       this.dialogRefClosed.emit(result);
-      alert('Tour is successfully removed');
+    });
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
     });
   }
 

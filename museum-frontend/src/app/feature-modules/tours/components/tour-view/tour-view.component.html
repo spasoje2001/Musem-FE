@@ -18,14 +18,6 @@
     <fa-icon [icon]="faPlus" />
     &nbsp;Add tour
   </button>
-  <button *ngIf="user!.role != 'ORGANIZER'"
-          type="submit" 
-          class="add-tour-btn" 
-          (click)="addToursButtonClicked()"
-          [@buttonState]="toursButtonState">
-    <fa-icon [icon]="faPlus" />
-    &nbsp;Request personal tour
-  </button>
   <div class="tour-search-results">
     <div class="tour-search-result-tours">
         <xp-tour-card-view

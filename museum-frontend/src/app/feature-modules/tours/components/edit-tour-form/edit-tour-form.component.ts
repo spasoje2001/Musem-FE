@@ -6,6 +6,7 @@ import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-tour-form',
@@ -37,6 +38,7 @@ export class EditTourFormComponent implements OnChanges{
   @Input() tour: Tour;
 
   constructor(private toursService: ToursService, 
+              private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<AddTourFormComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.tour = data;
@@ -130,6 +132,7 @@ export class EditTourFormComponent implements OnChanges{
         tour.duration = "0";
         this.toursService.updateTour(tour).subscribe({
           next: () => {
+            this.showNotification('Tour successfully edited!')
             this.dialogRef.close();
           },
         });
@@ -160,6 +163,15 @@ export class EditTourFormComponent implements OnChanges{
 
   onChooseClicked(curator: Curator){
     this.selectedCurator = curator;
+    this.showNotification('Curator successfully chosen!')
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
   overviewClicked(){

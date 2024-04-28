@@ -2,6 +2,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-remove-tour-prompt',
@@ -29,6 +30,7 @@ export class RemoveTourPromptComponent {
   @Output() closeModalEvent = new EventEmitter<void>();
 
   constructor(private dialogRef: MatDialogRef<RemoveTourPromptComponent>,
+              private snackBar: MatSnackBar,
               private toursService: ToursService,
               @Inject(MAT_DIALOG_DATA) public data: any){
     this.tourId = data;
@@ -39,6 +41,7 @@ export class RemoveTourPromptComponent {
     setTimeout(() => { this.removeButtonState = 'idle'; }, 200); 
     this.toursService.deleteTour(this.tourId).subscribe({
       next: () => {
+        this.showNotification('Tour is successfully removed!')
         this.dialogRef.close();
       }
     });
@@ -52,5 +55,13 @@ export class RemoveTourPromptComponent {
 
   overviewClicked(){
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 }
