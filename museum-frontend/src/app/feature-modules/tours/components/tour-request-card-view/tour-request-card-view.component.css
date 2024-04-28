@@ -323,3 +323,13 @@ strike.straight::before {
   transform: scale(1.03);
   transition: transform 300ms ease;
 }
+
+.request-status-value {
+  margin-top: -1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+  overflow: visible;
+  font-size: 18px;
+}
