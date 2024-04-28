@@ -26,6 +26,12 @@
                 </div>
             </div>
             <div class="tour-card-right">
+                <div class="request-status-value"
+                     *ngIf="this.user?.role === 'GUEST'"
+                >
+                    <strong>Status: </strong> &nbsp; {{ request.status.toString() }}
+                </div>  
+
                 <button
                     class="btn"
                     *ngIf="user?.role == 'ORGANIZER'"
@@ -45,10 +51,6 @@
                     <fa-icon [icon]="faTimes" />
                     &nbsp;Decline
                 </button>
-                
-                <div class="request-status-value">
-                    <strong>Status: </strong> &nbsp; {{ request.status.toString() }}
-                </div>  
             </div>
         </div>
     </div>
