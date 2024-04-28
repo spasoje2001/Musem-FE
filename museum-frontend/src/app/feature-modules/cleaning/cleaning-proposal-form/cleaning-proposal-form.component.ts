@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cleaning, CleaningStatus } from '../model/cleaning.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cleaning-proposal-form',
@@ -26,14 +27,18 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 ],
 })
 export class CleaningProposalFormComponent {
-
   buttonState: string = 'idle'; 
   focused: string = '';
   itemId: number;
+  minDate: string;  
 
   constructor(private cleaningService: CleaningService, 
-    private dialogRef: MatDialogRef<CleaningProposalFormComponent>,  @Inject(MAT_DIALOG_DATA) public data: any) {
+              private snackBar: MatSnackBar,
+              private dialogRef: MatDialogRef<CleaningProposalFormComponent>,  
+              @Inject(MAT_DIALOG_DATA) public data: any) {
       this.itemId = data;
+      const today = new Date();
+      this.minDate = today.toISOString().split('T')[0];
   }
 
   ngOnInit(): void {
@@ -47,7 +52,6 @@ export class CleaningProposalFormComponent {
   });
 
   addCleaningButtonClicked() {
-
     const cleaning: Cleaning = {
       text: this.addCleaningForm.value.tekst || "",
       startDate: this.addCleaningForm.value.startDate || "",
@@ -57,20 +61,27 @@ export class CleaningProposalFormComponent {
 
     console.log(cleaning);
 
-   
         this.buttonState = 'clicked'; 
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
         
           this.cleaningService.addCleaning(this.itemId, cleaning).subscribe({
             next: () => {
+              this.showNotification('Item successfully added to cleaning!');
               this.dialogRef.close();
             },
           }); 
   }
 
-
   overviewClicked(){
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
 }

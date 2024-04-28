@@ -7,6 +7,7 @@ import { EmployeesViewComponent } from "src/app/feature-modules/administration/c
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
 import { TourViewComponent } from "src/app/feature-modules/tours/components/tour-view/tour-view.component";
+import { TourRequestsViewComponent } from "src/app/feature-modules/tours/components/tour-requests-view/tour-requests-view.component";
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
 import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
@@ -44,6 +45,10 @@ const routes: Routes = [
         component: EditProfileComponent
       }
     ]
+  },
+  {
+    path: 'request-view',
+    component: TourRequestsViewComponent
   },
   {
     path: 'item-view',

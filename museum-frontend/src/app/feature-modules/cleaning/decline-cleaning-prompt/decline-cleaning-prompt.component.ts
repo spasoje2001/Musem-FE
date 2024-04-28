@@ -5,6 +5,7 @@ import { CleaningService } from '../cleaning.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-decline-cleaning-prompt',
@@ -26,15 +27,16 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
   ],
 })
 export class DeclineCleaningPromptComponent {
-
       cancelButtonState: string = 'idle';   
       declineButtonState: string = 'idle'; 
       cleaning: Cleaning | undefined;
       user: User | undefined;
 
-      constructor(private cleaningService: CleaningService,  private authService: AuthService,
-        private dialogRef: MatDialogRef<DeclineCleaningPromptComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any) {
+      constructor(private cleaningService: CleaningService,  
+                  private authService: AuthService,
+                  private snackBar: MatSnackBar,
+                  private dialogRef: MatDialogRef<DeclineCleaningPromptComponent>,
+                  @Inject(MAT_DIALOG_DATA) public data: any) {
         this.cleaning = data;
         this.authService.user$.subscribe(user => {
           this.user = user;
@@ -48,6 +50,7 @@ export class DeclineCleaningPromptComponent {
         this.cleaningService.declineCleaning(cleaningId, this.user.id).subscribe(
           {
             next: () => {
+              this.showNotification('Cleaning proposal successfully declined!');
               this.dialogRef.close();
             }
         }
@@ -65,5 +68,12 @@ export class DeclineCleaningPromptComponent {
       this.dialogRef.close();
     }
 
-
+    showNotification(message: string): void {
+      this.snackBar.open(message, 'Close', {
+        duration: 3000, 
+        horizontalPosition: 'right', 
+        verticalPosition: 'bottom', 
+      });
+    }
+    
 }
