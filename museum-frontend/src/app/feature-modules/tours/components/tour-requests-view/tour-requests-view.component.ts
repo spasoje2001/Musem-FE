@@ -14,6 +14,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './tour-requests-view.component.html',
   styleUrls: ['./tour-requests-view.component.css'],
   animations: [
+      trigger("fadeIn", [
+        transition(":enter", [
+            style({ opacity: 0, transform: "translateX(-40px)" }),
+            animate(
+                "0.5s ease",
+                style({ opacity: 1, transform: "translateX(0)" }),
+            ),
+        ]),
+      ]),
       trigger('buttonState', [
         state('clicked', style({
           transform: 'scale(0.9)',
