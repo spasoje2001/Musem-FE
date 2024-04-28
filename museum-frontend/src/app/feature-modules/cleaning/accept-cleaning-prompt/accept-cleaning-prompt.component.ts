@@ -5,6 +5,7 @@ import { CleaningService } from '../cleaning.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-accept-cleaning-prompt',
@@ -33,9 +34,11 @@ export class AcceptCleaningPromptComponent {
   focused: string = '';
   user: User | undefined;
 
-  constructor(private cleaningService: CleaningService, private authService: AuthService,
-    private dialogRef: MatDialogRef<AcceptCleaningPromptComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private cleaningService: CleaningService,
+              private snackBar: MatSnackBar, 
+              private authService: AuthService,
+              private dialogRef: MatDialogRef<AcceptCleaningPromptComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
     this.cleaning = data;
     this.authService.user$.subscribe(user => {
       this.user = user;
@@ -49,6 +52,7 @@ export class AcceptCleaningPromptComponent {
       if(this.user != null){
         this.cleaningService.acceptCleaning(cleaningId, this.user.id).subscribe({
           next: () => {
+            this.showNotification('Cleaning proposal successfully accepted!');
             this.dialogRef.close();
           }
       });
@@ -63,6 +67,14 @@ export class AcceptCleaningPromptComponent {
 
   overviewClicked(){
     this.dialogRef.close();
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
   }
 
 }
