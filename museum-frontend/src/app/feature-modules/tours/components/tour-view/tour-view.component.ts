@@ -42,7 +42,6 @@ export class TourViewComponent implements OnInit{
   tour: Tour[] = [];
   user: User | undefined;
   toursButtonState: string = "";
-  tourRequestsButtonState: string = "";
   private dialogRef: any;
 
   constructor(private dialog: MatDialog, 
@@ -93,26 +92,6 @@ export class TourViewComponent implements OnInit{
       });
     }
   }
-
-  addTourRequestButtonClicked() {
-    this.toursButtonState = 'clicked'; 
-    setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
-    this.dialogRef = this.dialog.open(AddTourRequestFormComponent, {
-    });
-
-    if (this.dialogRef) {
-      this.dialogRef.afterClosed().subscribe((result: any) => {
-        this.toursService.getTours().subscribe({
-          next: (result: Tour[] | Tour) => {
-            if(Array.isArray(result)){
-              this.tours = result;
-            }
-          }
-        });   
-      });
-    }
-  }
-
 
   backgroundSize: string = '100% 100%';
 

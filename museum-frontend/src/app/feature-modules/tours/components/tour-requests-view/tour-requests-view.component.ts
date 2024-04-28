@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { PersonalTourRequest } from '../../model/personalTourRequest.model';
-import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTourRequestFormComponent } from '../add-tour-request-form/add-tour-request-form.component';
 
 @Component({
   selector: 'app-tour-requests-view',
@@ -29,13 +31,20 @@ export class TourRequestsViewComponent implements OnInit{
   user: User | undefined;
   backgroundSize: string = '100% 100%';
   requests: PersonalTourRequest[] = [];
-  
+  tourRequestsButtonState: string = "";
+  private dialogRef: any;
+
   constructor(private toursService: ToursService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dialog: MatDialog,) {
 
   }
 
   ngOnInit(): void {
+    this.getRequests();
+  }
+
+  getRequests() {
     this.authService.user$.subscribe(user => {
       this.user = user;
       if(this.user.role === 'GUEST'){
@@ -59,6 +68,23 @@ export class TourRequestsViewComponent implements OnInit{
     });
   }
 
+  handleDialogClosed(result: any) {
+    this.getRequests();
+  }
+
+  addTourRequestButtonClicked() {
+    this.tourRequestsButtonState = 'clicked'; 
+    setTimeout(() => { this.tourRequestsButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(AddTourRequestFormComponent, {
+    });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.getRequests();   
+      });
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const scrollPosition = window.pageYOffset;
@@ -72,4 +98,5 @@ export class TourRequestsViewComponent implements OnInit{
     this.backgroundSize = `${zoom}% ${zoom}%`;
   }
 
+  faPlus = faPlus;
 }

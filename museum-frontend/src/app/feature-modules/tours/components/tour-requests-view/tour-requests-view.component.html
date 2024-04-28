@@ -10,12 +10,21 @@
        You can make reservations, or even let you imagination play by organizing a tour by yourself! Embark on an unforgettable journey through history and culture with our guided tours at the museum
     </p>
   </div>
+  <button *ngIf="user?.role === 'GUEST'"
+          type="submit" 
+          class="add-tour-btn" 
+          (click)="addTourRequestButtonClicked()"
+          [@buttonState]="tourRequestsButtonState">
+    <fa-icon [icon]="faPlus" />
+    &nbsp;Request personal tour
+  </button>
   <div class="tour-search-results">
     <div class="tour-search-result-tours">
         <xp-tour-request-card-view
             [@fadeIn]
             *ngFor="let request of requests"
             [request]="request"
+            (dialogRefClosed)="handleDialogClosed($event)"
         ></xp-tour-request-card-view>
     </div>
   </div>
