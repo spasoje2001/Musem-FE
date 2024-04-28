@@ -61,7 +61,7 @@ export class AddTourRequestFormComponent implements OnInit{
     const request: PersonalTourRequest = {
       occurrenceDateTime: this.addTourRequestForm.value.occurrenceDate || new Date(),
       guestNumber: this.addTourRequestForm.value.guestNumber || "",
-      status: PersonalTourRequestStatus.ON_HOLD,
+      status: PersonalTourRequestStatus.IN_PROGRESS,
     };
 
     console.log(request);
