@@ -13,7 +13,8 @@ import {
   faBinoculars,
   faPencilSquare,
   faAddressBook,
-  faEnvelopeOpen
+  faEnvelopeOpen,
+  faArchive
  } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -49,4 +50,5 @@ export class NavbarComponent {
   faBinoculars = faBinoculars;
   faAdressBook = faAddressBook;
   faEnvelopeOpen = faEnvelopeOpen;
+  faArchive = faArchive;
 }

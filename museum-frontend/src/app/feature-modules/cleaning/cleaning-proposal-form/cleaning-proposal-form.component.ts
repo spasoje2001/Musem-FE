@@ -61,15 +61,23 @@ export class CleaningProposalFormComponent {
 
     console.log(cleaning);
 
-        this.buttonState = 'clicked'; 
-        setTimeout(() => { this.buttonState = 'idle'; }, 200); 
-        
-          this.cleaningService.addCleaning(this.itemId, cleaning).subscribe({
-            next: () => {
-              this.showNotification('Item successfully added to cleaning!');
-              this.dialogRef.close();
-            },
-          }); 
+    this.buttonState = 'clicked'; 
+    setTimeout(() => { this.buttonState = 'idle'; }, 200); 
+
+    const startDateString = new Date(cleaning.startDate);
+    const endDateString = new Date(cleaning.endDate);
+
+    if(endDateString > startDateString){
+      this.cleaningService.addCleaning(this.itemId, cleaning).subscribe({
+        next: () => {
+          this.showNotification('Item successfully added to cleaning!');
+          this.dialogRef.close();
+        },
+      });
+    }
+    else{
+      this.showNotification('End date must be after start date!');
+    }
   }
 
   overviewClicked(){

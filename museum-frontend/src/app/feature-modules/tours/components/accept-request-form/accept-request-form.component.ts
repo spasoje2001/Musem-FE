@@ -59,6 +59,7 @@ export class AcceptRequestFormComponent{
 
   onChooseClicked(curator: Curator){
     this.selectedCurator = curator;
+    this.showNotification('Curator successfully chosen!');
   }
 
   acceptButtonClicked(){

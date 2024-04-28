@@ -1,6 +1,6 @@
 .prompt {
   width: 500px;
-  height: 450px;
+  height: 350px;
   display: flex;
   flex-direction: column;
 }
@@ -148,18 +148,18 @@
 }
 
 .input-box, .adult label {
-  top: 205px;
+  top: 239px;
   left: 70px;
 }
 
 .input-box, .minor label {
-  top: 205px;
+  top: 239px;
   left: 300px;
 }
 
 .input-box, .adult input:focus + label,
 .input-box, .adult label.active {
-  top: 175px;
+  top: 209px;
   left: 60px;
   font-size: 13px;
   color: #fff;
@@ -167,7 +167,7 @@
 
 .input-box, .minor input:focus + label,
 .input-box, .minor label.active {
-  top: 175px;
+  top: 209px;
   left: 290px;
   font-size: 13px;
   color: #fff;
