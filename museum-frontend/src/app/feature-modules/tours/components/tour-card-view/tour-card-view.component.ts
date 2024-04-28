@@ -53,11 +53,13 @@ export class TourCardViewComponent implements OnInit{
       this.user = user;
     });
 
-    this.toursService.getCuratorById(this.tour.guideId!).subscribe({
-      next: (curator: Curator) => {
-        this.tour.guide = curator;
-      }
-    })
+    if(this.tour.guideId){
+      this.toursService.getCuratorById(this.tour.guideId!).subscribe({
+        next: (curator: Curator) => {
+          this.tour.guide = curator;
+        }
+      })
+    }
 
     const tourOccurrenceDateTimeString = this.tour.occurrenceDateTime.toString();
     [this.tourOccurrenceDate, this.tourOccurrenceTime] = tourOccurrenceDateTimeString.split('T');
