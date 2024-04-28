@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { faCoins, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Tour } from '../../model/tour.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -29,6 +29,7 @@ export class TourCardViewComponent implements OnChanges{
   removeButtonState: string = 'idle'; 
   @Input() tour!: Tour;
   private dialogRef: any;
+  @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private dialog: MatDialog) {
 
@@ -49,7 +50,9 @@ export class TourCardViewComponent implements OnChanges{
     this.dialogRef = this.dialog.open(RemoveTourPromptComponent, {
       data: id
     });
-
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.dialogRefClosed.emit(result);
+    });
   }
 
   faCoins = faCoins;
