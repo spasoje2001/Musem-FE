@@ -1,3 +1,4 @@
+import { Exhibition } from "../../exhibitions/model/exhibition.model";
 import { Curator } from "../../stakeholder/model/curator.model";
 
 export interface Tour {
@@ -8,8 +9,9 @@ export interface Tour {
   occurrenceDateTime: Date;
   adultTicketPrice: string;
   minorTicketPrice: string;
-  guide?: Curator; // Proveriti da li moze ovako da ostane ili ce morati bas kustos da bude
+  guide?: Curator; 
   guideId?: number;
   capacity: string;
   picturePath: string;
+  exhibitions?: Exhibition[];
 }
