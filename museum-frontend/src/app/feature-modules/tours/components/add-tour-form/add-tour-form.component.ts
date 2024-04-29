@@ -1,11 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 
 @Component({
   selector: 'app-add-tour-form',
@@ -34,10 +35,12 @@ export class AddTourFormComponent implements OnInit{
   tourImageFile: File | null = null;
   curators: Curator[] = [];
   selectedCurator: Curator | undefined;
+  private ownDialogRef: any;
 
   constructor(private toursService: ToursService, 
               private snackBar: MatSnackBar,
-              private dialogRef: MatDialogRef<AddTourFormComponent>) {
+              private dialogRef: MatDialogRef<AddTourFormComponent>,
+              private dialog: MatDialog,) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
 
@@ -123,7 +126,9 @@ export class AddTourFormComponent implements OnInit{
   }
 
   selectRouteButtonClicked() {
-    
+    this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
+    });
+
   }
 
   onSelectImage(event: Event) {
