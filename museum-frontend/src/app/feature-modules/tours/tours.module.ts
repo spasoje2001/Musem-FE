@@ -20,6 +20,7 @@ import { AcceptRequestFormComponent } from './components/accept-request-form/acc
 import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
+import { CuratorChoosingDialogueComponent } from './components/curator-choosing-dialogue/curator-choosing-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ExhibitionChoosingDialogueComponent } from './components/exhibition-cho
     DeclineRequestPromptComponent,
     AcceptRequestFormComponent,
     EditTourFormComponent,
-    ExhibitionChoosingDialogueComponent
+    ExhibitionChoosingDialogueComponent,
+    CuratorChoosingDialogueComponent
   ],
   imports: [
     CommonModule,
