@@ -10,6 +10,8 @@ import { AuthModule } from './infrastructure/auth/auth.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './infrastructure/auth/jwt/jwt.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToursModule } from './feature-modules/tours/tours.module';
+import { ArtifactsComponent } from './feature-modules/items/artifacts/artifacts.component'; 
 import { UserProfileComponent } from './feature-modules/stakeholder/components/user-profile/user-profile.component';
 import { EditProfileComponent } from './feature-modules/stakeholder/components/edit-profile/edit-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,11 +25,22 @@ import { GuestEditProfileComponent } from './feature-modules/stakeholder/compone
 import { OrganizerEditProfileComponent } from './feature-modules/stakeholder/components/organizer-edit-profile/organizer-edit-profile.component';
 import { AdministratorEditProfileComponent } from './feature-modules/stakeholder/components/administrator-edit-profile/administrator-edit-profile.component';
 import { AdministratorProfileComponent } from './feature-modules/stakeholder/components/administrator-profile/administrator-profile.component';
+
+import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
+import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
+import { EventCardComponent } from './feature-modules/events/event-card/event-card.component';
+import { EventsComponent } from './feature-modules/events/events/events.component';
+import { OragnizerEventCardComponent } from './feature-modules/events/oragnizer-event-card/oragnizer-event-card.component';
+import { EventInfoComponent } from './feature-modules/events/event-info/event-info.component';
+import { CreateEventComponent } from './feature-modules/events/create-event/create-event.component';
+import { UpdateEventComponent } from './feature-modules/events/update-event/update-event.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     UserProfileComponent,
     EditProfileComponent,
     GuestProfileComponent,
@@ -40,6 +53,12 @@ import { MatButtonModule } from '@angular/material/button';
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
     AdministratorProfileComponent,
+    EventCardComponent,
+    EventsComponent,
+    OragnizerEventCardComponent,
+    EventInfoComponent,
+    CreateEventComponent,
+    UpdateEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +76,11 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatDialogModule,
     FontAwesomeModule,
+    ToursModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    ExhibitionsModule
   ],
   providers: [
     {

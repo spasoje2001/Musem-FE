@@ -1,0 +1,19 @@
+<div class="overlay">
+    <button 
+              type="submit" 
+              class="btn" 
+              (click)="addItemButtonClicked()"
+              [@buttonState]="addItemButtonState"
+              >+ Add item
+    </button>
+    <div class="card-container">
+        <div class="row" *ngFor="let row of slicedItems">
+            <app-artifact-card class="card"
+            *ngFor="let item of row"
+            [item]="item">
+            </app-artifact-card>
+        </div>
+    </div>
+      
+</div>
+  

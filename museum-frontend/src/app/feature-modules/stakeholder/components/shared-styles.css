@@ -1,11 +1,17 @@
 .container {
     background-color: rgb(124, 124, 124);
     color: white;
+
+    display: flex;
+    flex-direction: column;
     
     border-radius: 1rem;
+    padding: 2rem;
+}
+
+.wrapper {
     margin: 2rem;
     margin-inline: 10rem;
-    padding: 2rem;
 }
 
 .profile-grid {
