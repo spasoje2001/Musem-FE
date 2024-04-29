@@ -1,9 +1,21 @@
-<div class="container profile-grid">
-    <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
-    <div class="user-data">
-        <p class="name">{{organizer?.firstName}} {{organizer?.lastName}}</p>
-        <p class="username">&#64;{{organizer?.username}}</p>
-        <p class="bio">{{organizer?.biography}}</p>
+<div class="wrapper">
+    <div class="container profile-grid">
+        <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
+        <div class="user-data">
+            <p class="name">{{organizer?.firstName}} {{organizer?.lastName}}</p>
+            <p class="username">&#64;{{organizer?.username}}</p>
+            <p class="bio">{{organizer?.biography}}</p>
+        </div>
+        <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
-    <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
+
+    <div class="events-header">
+        <h1>My events</h1>
+        <button [routerLink]="['/events/create']">+</button>
+    </div>
+
+    <div class="event-cards" *ngFor="let event of events">
+        <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)"></app-oragnizer-event-card>
+    </div>
+    
 </div>

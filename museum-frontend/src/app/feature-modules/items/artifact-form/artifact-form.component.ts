@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Item, ItemCategory } from '../model/item.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-artifact-form',
@@ -25,14 +26,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 ],
 })
 export class ArtifactFormComponent {
-
   buttonState: string = 'idle'; 
   focused: string = '';
   itemImage: string | null = null;
   itemImageFile: File | null = null;
 
-
   constructor(private itemsService: ItemsService, 
+              private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<ArtifactFormComponent>) {
   }
 
@@ -100,9 +100,6 @@ export class ArtifactFormComponent {
             return; 
     }
 
-
-
-
     const item: Item = {
       name: this.addItemForm.value.name || "",
       description: this.addItemForm.value.description || "",
@@ -115,24 +112,27 @@ export class ArtifactFormComponent {
 
     console.log(item);
 
-   
         this.buttonState = 'clicked'; 
         setTimeout(() => { this.buttonState = 'idle'; }, 200); 
 
-
-        
           this.itemsService.addItem(item).subscribe({
             next: () => {
+              this.showNotification('Item successfully added!');
               this.dialogRef.close();
             },
           });
-        
-    
-    
   }
-
 
   overviewClicked(){
     this.dialogRef.close();
   }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      horizontalPosition: 'right', 
+      verticalPosition: 'bottom', 
+    });
+  }
+
 }

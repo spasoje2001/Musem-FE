@@ -28,7 +28,14 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
 
 import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
 import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
+import { EventCardComponent } from './feature-modules/events/event-card/event-card.component';
+import { EventsComponent } from './feature-modules/events/events/events.component';
+import { OragnizerEventCardComponent } from './feature-modules/events/oragnizer-event-card/oragnizer-event-card.component';
+import { EventInfoComponent } from './feature-modules/events/event-info/event-info.component';
+import { CreateEventComponent } from './feature-modules/events/create-event/create-event.component';
+import { UpdateEventComponent } from './feature-modules/events/update-event/update-event.component';
 
 
 @NgModule({
@@ -46,6 +53,12 @@ import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
     AdministratorProfileComponent,
+    EventCardComponent,
+    EventsComponent,
+    OragnizerEventCardComponent,
+    EventInfoComponent,
+    CreateEventComponent,
+    UpdateEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +80,7 @@ import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
+    ExhibitionsModule
   ],
   providers: [
     {

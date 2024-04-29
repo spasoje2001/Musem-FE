@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'xp-registration',
@@ -38,7 +39,9 @@ export class RegistrationComponent {
   isPasswordVisible: boolean;
   isRepeatPasswordVisible: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, 
+              private router: Router,
+              private snackBar: MatSnackBar,) {
     this.isPasswordVisible = false;
     this.isRepeatPasswordVisible = false;
   }
@@ -84,25 +87,25 @@ export class RegistrationComponent {
                 const errorMessage: string = error.error.message || "";
 
                 if (errorMessage.includes('email')) {
-                    alert('Email already exists. Please use a different one.');
+                    this.showNotification('Email already exists. Please use a different one.');
                 } else if (errorMessage.includes('username')) {
-                    alert('Username already exists. Please use a different one.');
+                  this.showNotification('Username already exists. Please use a different one.');
                 } else {
-                    alert('Email and username already exist. Please try different ones.');
+                  this.showNotification('Email and username already exist. Please try different ones.');
                 }
             } else {
-                alert('Server error occurred. Please try again later.');
+              this.showNotification('Server error occurred. Please try again later.');
             }
             }
         }
         });
       } 
       else{
-        alert('Passwords do not match!'); 
+        this.showNotification('Passwords do not match!'); 
       }
     }
     else{
-      alert('Sign up form not valid!');
+      this.showNotification('Sign up form not valid!');
     }
   }
 
@@ -112,6 +115,16 @@ export class RegistrationComponent {
 
   toggleRepeatPasswordVisibility() {
     this.isRepeatPasswordVisible = !this.isRepeatPasswordVisible;
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['custom-snackbar'] // Add custom CSS class here
+
+    });
   }
 
   @HostListener('window:scroll', ['$event'])

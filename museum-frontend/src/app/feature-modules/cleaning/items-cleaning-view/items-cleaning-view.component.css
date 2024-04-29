@@ -79,6 +79,6 @@ h1 {
   background: #FFFFFF; /* Assuming a white background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow around the overlay */
   border-radius: 8px; /* Slight rounding of corners */
-  height: 70%;
+  height: 100%;
 }
   /* Add styles for the search filter, sort dropdown, add employee button, and action buttons */

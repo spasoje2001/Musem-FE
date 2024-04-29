@@ -1,9 +1,11 @@
-<div class="container profile-grid">
-    <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
-    <div class="user-data">
-        <p class="name">{{restaurateur?.firstName}} {{restaurateur?.lastName}}</p>
-        <p class="username">&#64;{{restaurateur?.username}}</p>
-        <p class="bio">{{restaurateur?.biography}}</p>
+<div class="wrapper">
+    <div class="container profile-grid">
+        <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
+        <div class="user-data">
+            <p class="name">{{restaurateur?.firstName}} {{restaurateur?.lastName}}</p>
+            <p class="username">&#64;{{restaurateur?.username}}</p>
+            <p class="bio">{{restaurateur?.biography}}</p>
+        </div>
+        <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
-    <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
@@ -11,7 +11,7 @@ import { OrganizerService } from '../../services/organizer.service';
   templateUrl: './organizer-edit-profile.component.html',
   styleUrls: ['./organizer-edit-profile.component.css', '../shared-styles.css']
 })
-export class OrganizerEditProfileComponent {
+export class OrganizerEditProfileComponent implements OnInit {
 
   organizer?: Organizer;
   canChangeUsername: Boolean = true;

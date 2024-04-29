@@ -12,6 +12,11 @@ import { AddTourFormComponent } from "./components/add-tour-form/add-tour-form.c
 import { TourCardViewComponent } from "./components/tour-card-view/tour-card-view.component";
 import { TourViewComponent } from "./components/tour-view/tour-view.component";
 import { RemoveTourPromptComponent } from './components/remove-tour-prompt/remove-tour-prompt.component';
+import { AddTourRequestFormComponent } from './components/add-tour-request-form/add-tour-request-form.component';
+import { TourRequestsViewComponent } from './components/tour-requests-view/tour-requests-view.component';
+import { TourRequestCardViewComponent } from './components/tour-request-card-view/tour-request-card-view.component';
+import { DeclineRequestPromptComponent } from './components/decline-request-prompt/decline-request-prompt.component';
+import { AcceptRequestFormComponent } from './components/accept-request-form/accept-request-form.component';
 import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
@@ -23,6 +28,12 @@ import { ExhibitionChoosingDialogueComponent } from './components/exhibition-cho
     AddTourFormComponent,
     RemoveTourPromptComponent,
     EditTourFormComponent,
+    EditTourFormComponent,
+    AddTourRequestFormComponent,
+    TourRequestsViewComponent,
+    TourRequestCardViewComponent,
+    DeclineRequestPromptComponent,
+    AcceptRequestFormComponent,
     EditTourFormComponent,
     ExhibitionChoosingDialogueComponent
   ],

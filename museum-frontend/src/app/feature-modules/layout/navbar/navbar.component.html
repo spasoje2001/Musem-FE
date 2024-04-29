@@ -16,7 +16,7 @@
               class="feat-button"
               color="white" 
               mat-raised-button 
-              [routerLink]="['']"> <!-- PROMENITI PUTANJU -->
+              [routerLink]="['exhibitions-view']"> <!-- PROMENITI PUTANJU -->
         <fa-icon [icon]="faInstitution" />    
         &nbsp;Exhibitions
       </button>
@@ -65,12 +65,22 @@
 
       <button 
             class="feat-button"
+            *ngIf="user && user?.role === 'ORGANIZER' || user?.role === 'GUEST'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['request-view']" 
+      >         
+      <fa-icon [icon]="faEnvelopeOpen" />    
+      &nbsp;Tour Requests
+      </button>
+
+      <button 
             *ngIf="user && user.role === 'ADMIN'"
             color="white"
             mat-raised-button
             [routerLink]="['item-view']" 
       >         
-      <fa-icon [icon]="faAdressBook" />    
+      <fa-icon [icon]="faArchive" />    
       &nbsp;See items
       </button>
 
@@ -81,7 +91,7 @@
             mat-raised-button
             [routerLink]="['cleaning-proposals-view']" 
       >         
-      <fa-icon [icon]="faAdressBook" />    
+      <fa-icon [icon]="faEnvelopeOpen" />    
       &nbsp;See proposals
       </button>
 
@@ -92,7 +102,7 @@
             mat-raised-button
             [routerLink]="['items-for-cleaning-view']" 
       >         
-      <fa-icon [icon]="faAdressBook" />    
+      <fa-icon [icon]="faEnvelopeOpen" />    
       &nbsp;Items for cleaning
       </button>
 

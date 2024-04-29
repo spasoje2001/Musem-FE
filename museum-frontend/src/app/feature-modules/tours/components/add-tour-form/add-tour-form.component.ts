@@ -25,7 +25,7 @@ import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dial
           animate('200ms')
         ])
       ]),
-],
+  ],
 })
 export class AddTourFormComponent implements OnInit{
   buttonState: string = 'idle'; 
@@ -121,29 +121,10 @@ export class AddTourFormComponent implements OnInit{
     }
   }
 
-  uploadImageButtonClicked() {
-
-  }
-
   selectRouteButtonClicked() {
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
     });
 
-  }
-
-  onSelectImage(event: Event) {
-    const element = event.currentTarget as HTMLInputElement;
-    if (element.files && element.files[0]) {
-        this.tourImageFile = element.files[0];
-
-        const reader = new FileReader();
-
-        reader.readAsDataURL(this.tourImageFile);
-        reader.onload = (e: ProgressEvent<FileReader>) => {
-            this.tourImage = reader.result as string;
-            //this.addTourForm.value.picturePath = "";
-        };
-    }
   }
 
   onChooseClicked(curator: Curator){
