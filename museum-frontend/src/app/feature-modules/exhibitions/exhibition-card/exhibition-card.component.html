@@ -1,0 +1,17 @@
+<div class="item-card">
+    <div class="image-container">
+      <img class="item-image" *ngIf="exhibition"
+      [src]=exhibition.picture alt="Exhibition Image">
+    </div>
+    <div class="info-container">
+      <div class="info-row">
+        <p class="item-name">{{exhibition.name}}</p>
+      </div>
+      <div class="info-row">
+        <p class="short-description">{{exhibition.shortDescription}}</p>
+      </div>
+      <div class="info-row">
+        <button class="find-out-more-button" (click)="navigateToDetails(exhibition.id)">Find Out More</button>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,53 @@
+.overlay {
+    height: 200%;
+  }
+  
+  .btn {
+    width: 10rem;
+    height: 5rem;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-top: 5%;
+    margin-left: 80%;
+    margin-bottom: 2%;
+  }
+  
+  .btn:hover {
+    background-color: #f2f2f2; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.03);
+    transition: transform 300ms ease;
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Start from the left */
+    gap: 20px; /* Set a fixed gap between cards */
+}
+
+.card {
+    width: calc(25% - 20px); /* Adjust margin */
+    /* Margin to create space between cards */
+    margin-right: 20px; 
+    margin-bottom: 20px; /* Adjust as needed */
+    /* Additional styling for your card component */
+}
+  
+  .row {
+    width: 100%; /* Ensure each row spans the full width */
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px; /* Adjust as needed */
+    margin-left: 12rem;
+  }
+  
+
+  

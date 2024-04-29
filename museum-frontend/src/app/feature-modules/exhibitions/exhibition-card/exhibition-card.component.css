@@ -1,0 +1,59 @@
+.item-card {
+    width: 300px; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .image-container {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .info-container {
+    padding: 20px;
+  }
+  
+  .item-name {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    font-weight: bold; 
+  }
+
+  .short-description,
+  .period,
+  .category,
+  .additional-info,
+  .authorsName,
+  .yearOfCreation {
+    margin-bottom: 10px;
+  }
+
+  .info-row {
+    margin-bottom: 10px;
+  }
+  
+  .find-out-more-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .find-out-more-button:hover {
+    background-color: #636363;
+  }

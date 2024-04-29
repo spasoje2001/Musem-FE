@@ -7,6 +7,8 @@ import { EmployeesViewComponent } from "src/app/feature-modules/administration/c
 import { UserProfileComponent } from "src/app/feature-modules/stakeholder/components/user-profile/user-profile.component";
 import { EditProfileComponent } from "src/app/feature-modules/stakeholder/components/edit-profile/edit-profile.component";
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
+import { ExhibitionsViewComponent } from "src/app/feature-modules/exhibitions/exhibitions-view/exhibitions-view.component";
+import { ExhibitionDetailsComponent } from "src/app/feature-modules/exhibitions/exhibition-details/exhibition-details.component";
 
 const routes: Routes = [
   { 
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: 'item-view',
     component: ArtifactsComponent
+  },
+  {
+    path: 'exhibitions-view',
+    component: ExhibitionsViewComponent
+  },
+  {
+    path: 'exhibitions/:id', // Define the route parameter :id
+    component: ExhibitionDetailsComponent
   },
 ];
 
