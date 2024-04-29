@@ -3,7 +3,7 @@
     <div class="buttons">
         <button *ngIf="event?.status === 'DRAFT'" (click)="onPublishClick()">Publish</button>
         <button *ngIf="event?.status === 'PUBLISHED'" (click)="onArchiveClick()">Archive</button>
-        <img class="edit" *ngIf="event?.status === 'DRAFT'" src="../../../../assets/pen.svg" [routerLink]="['edit']">
+        <img class="edit" *ngIf="event?.status === 'DRAFT'" src="../../../../assets/pen.svg" [routerLink]="['/events/update/' + event?.id]">
         <img class="edit" *ngIf="event?.status === 'DRAFT'" src="../../../../assets/delete.svg" (click)="onDeleteClick()">
     </div>
 </div>

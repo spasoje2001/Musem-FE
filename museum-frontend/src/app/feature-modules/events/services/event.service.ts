@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
 import { Event } from '../model/event.model';
 import { NewEvent } from '../model/new-event.model';
+import { UpdatedEvent } from '../model/updated-event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,16 @@ export class EventService {
   saveEvent(newEvent: NewEvent): Observable<any> {
     const path = this.basePath;
     return this.http.post<any>(path, newEvent);
+  }
+  
+  getEventById(id: string): Observable<Event> {
+    const path = this.basePath + '/' + id;
+    return this.http.get<Event>(path);
+  }
+  
+  updateEvent(updatedEvent: UpdatedEvent): Observable<any> {
+    const path = this.basePath;
+    return this.http.put<any>(path, updatedEvent);
   }
 
 }

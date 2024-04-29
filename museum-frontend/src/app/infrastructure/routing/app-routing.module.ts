@@ -12,6 +12,7 @@ import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/arti
 import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 import { CreateEventComponent } from "src/app/feature-modules/events/create-event/create-event.component";
+import { UpdateEventComponent } from "src/app/feature-modules/events/update-event/update-event.component";
 
 const routes: Routes = [
   { 
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'events/create',
     component: CreateEventComponent
+  },
+  {
+    path: 'events/update/:id',
+    component: UpdateEventComponent
   },
 ];
 

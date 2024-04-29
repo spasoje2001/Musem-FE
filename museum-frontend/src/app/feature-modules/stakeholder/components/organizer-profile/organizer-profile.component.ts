@@ -3,6 +3,7 @@ import { Organizer } from '../../model/organizer.model';
 import { OrganizerService } from '../../services/organizer.service';
 import { EventService } from 'src/app/feature-modules/events/services/event.service';
 import { Event } from 'src/app/feature-modules/events/model/event.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -17,6 +18,7 @@ export class OrganizerProfileComponent implements OnInit {
   constructor(
     private guestService: OrganizerService,
     private eventService: EventService,
+    private router: Router
   ) { }
   
   ngOnInit(): void {

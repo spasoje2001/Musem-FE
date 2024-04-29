@@ -57,9 +57,6 @@ export class CreateEventComponent implements OnInit {
       roomId: this.selectedRoom?.id || 0,
     }
 
-    console.log(newEvent);
-    console.log(this.selectedRoom);
-
     this.eventService.saveEvent(newEvent).subscribe({
       next: () => {
         this.router.navigate(['/profile']);

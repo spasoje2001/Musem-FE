@@ -34,6 +34,7 @@ import { EventsComponent } from './feature-modules/events/events/events.componen
 import { OragnizerEventCardComponent } from './feature-modules/events/oragnizer-event-card/oragnizer-event-card.component';
 import { EventInfoComponent } from './feature-modules/events/event-info/event-info.component';
 import { CreateEventComponent } from './feature-modules/events/create-event/create-event.component';
+import { UpdateEventComponent } from './feature-modules/events/update-event/update-event.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { CreateEventComponent } from './feature-modules/events/create-event/crea
     OragnizerEventCardComponent,
     EventInfoComponent,
     CreateEventComponent,
+    UpdateEventComponent,
   ],
   imports: [
     BrowserModule,
