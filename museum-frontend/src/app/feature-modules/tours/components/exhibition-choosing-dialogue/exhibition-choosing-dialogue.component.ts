@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToursService } from '../../tours.service';
@@ -18,7 +18,7 @@ export class ExhibitionChoosingDialogueComponent implements OnInit{
   constructor(private dialogRef: MatDialogRef<ExhibitionChoosingDialogueComponent>,
               private snackBar: MatSnackBar,
               private toursService: ToursService,
-              private exhibitionsService: ExhibitionsService){              
+              @Inject(ExhibitionsService) private exhibitionsService: ExhibitionsService){              
   }
 
   ngOnInit(): void {
