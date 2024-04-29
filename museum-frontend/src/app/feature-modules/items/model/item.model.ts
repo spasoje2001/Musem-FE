@@ -1,3 +1,5 @@
+import { Cleaning } from "../../cleaning/model/cleaning.model";
+
 export interface Item {
     id?: number;
     name : string;
@@ -7,6 +9,7 @@ export interface Item {
     period : string;
     category : ItemCategory;
     picture :  string;
+    cleaning?: Cleaning;
   }
 
 export enum ItemCategory {
