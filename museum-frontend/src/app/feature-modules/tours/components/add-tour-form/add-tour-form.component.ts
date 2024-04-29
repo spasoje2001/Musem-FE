@@ -7,6 +7,7 @@ import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
+import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
 
 @Component({
   selector: 'app-add-tour-form',
@@ -35,6 +36,7 @@ export class AddTourFormComponent implements OnInit{
   tourImageFile: File | null = null;
   curators: Curator[] = [];
   selectedCurator: Curator | undefined;
+  selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
 
   constructor(private toursService: ToursService, 
@@ -123,6 +125,7 @@ export class AddTourFormComponent implements OnInit{
 
   selectRouteButtonClicked() {
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
+      data: this.selectedExhibitions
     });
 
   }

@@ -9,10 +9,20 @@
           <td>{{ exhibition.shortDescription }}</td>
           <td>&nbsp;&nbsp;</td>
           <td>
-            <button (click)="onChooseClicked(exhibition)" 
-                    type="submit">
-              Choose
-            </button>          
+            <button class="table-btn"
+                    (click)="onChooseClicked(exhibition)" 
+                    type="submit"
+                    *ngIf="!isSelected(exhibition)"
+                    [@buttonState]="chooseButtonState"
+                    >Choose
+            </button> 
+            <button class="table-btn"
+                    (click)="onRemoveClicked(exhibition)" 
+                    type="submit"
+                    *ngIf="isSelected(exhibition)"
+                    [@buttonState]="chooseButtonState"
+                    >Remove
+            </button> 
           </td>
         </tr>
       </tbody>
