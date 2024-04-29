@@ -14,6 +14,7 @@ import { TourViewComponent } from "./components/tour-view/tour-view.component";
 import { RemoveTourPromptComponent } from './components/remove-tour-prompt/remove-tour-prompt.component';
 import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     TourCardViewComponent,
     AddTourFormComponent,
     RemoveTourPromptComponent,
-    EditTourFormComponent
+    EditTourFormComponent,
+    EditTourFormComponent,
+    ExhibitionChoosingDialogueComponent
   ],
   imports: [
     CommonModule,
