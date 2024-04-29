@@ -1,0 +1,26 @@
+<div class="exhibition-container">
+    <div class="header" [ngStyle]="{'background-image': 'url(' + exhibition.picture + ')'}">
+      <div class="header-content">
+        <h1>{{ exhibition.name }}</h1>
+        <div class="date">{{ exhibition.startDate  }} – {{ exhibition.endDate  }}</div>
+        <div class="location" *ngIf="exhibition.roomReservations && exhibition.roomReservations.length > 0">
+            <span class="room-info">{{ exhibition.roomReservations[0].room.name }},</span>
+            <span class="floor-info">Floor: {{ exhibition.roomReservations[0].room.floor }},</span>
+            <span class="room-number">Room number: {{ exhibition.roomReservations[0].room.number }}</span>
+          </div>
+        <button class="book-tickets">Book tickets</button>
+      </div>
+    </div>
+    <div class="content">
+      <p class="short-description">{{ exhibition.shortDescription }}</p>
+      <div class="long-description" [innerHTML]="exhibition.longDescription"></div>
+      <div class="details">
+        <div class="price">Tickets from £{{ exhibition.price }}</div>
+        <div class="organizer">Organized by: {{ exhibition.organizer.firstName }} {{ exhibition.organizer.lastName }}</div>
+        <div class="curator">Curated by: {{ exhibition.curator.firstName }} {{ exhibition.curator.lastName }}</div>
+      </div>
+    </div>
+    <div class="footer">
+      <a href="#" class="share">Share the page</a>
+    </div>
+</div>

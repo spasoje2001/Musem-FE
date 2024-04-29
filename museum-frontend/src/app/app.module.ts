@@ -28,6 +28,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
 
 import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
 import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
 
 
@@ -67,6 +68,7 @@ import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
+    ExhibitionsModule
   ],
   providers: [
     {
