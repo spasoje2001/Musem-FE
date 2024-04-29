@@ -9,6 +9,8 @@ import { EditProfileComponent } from "src/app/feature-modules/stakeholder/compon
 import { TourViewComponent } from "src/app/feature-modules/tours/components/tour-view/tour-view.component";
 import { TourRequestsViewComponent } from "src/app/feature-modules/tours/components/tour-requests-view/tour-requests-view.component";
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
+import { ExhibitionsViewComponent } from "src/app/feature-modules/exhibitions/exhibitions-view/exhibitions-view.component";
+import { ExhibitionDetailsComponent } from "src/app/feature-modules/exhibitions/exhibition-details/exhibition-details.component";
 import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/cleaning-handling-view/cleaning-handling-view.component";
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 import { CreateEventComponent } from "src/app/feature-modules/events/create-event/create-event.component";
@@ -55,6 +57,14 @@ const routes: Routes = [
   {
     path: 'item-view',
     component: ArtifactsComponent
+  },
+  {
+    path: 'exhibitions-view',
+    component: ExhibitionsViewComponent
+  },
+  {
+    path: 'exhibitions/:id', // Define the route parameter :id
+    component: ExhibitionDetailsComponent
   },
   {
     path: 'cleaning-proposals-view',

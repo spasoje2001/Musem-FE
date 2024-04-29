@@ -37,6 +37,7 @@ export class ArtifactsComponent {
   ngOnInit(): void {
       this.itemService.getItems().subscribe({
         next: (result: Item[] | Item) => {
+          console.log(result);
           if(Array.isArray(result)){
             this.items = result;
             this.sliceItems();
