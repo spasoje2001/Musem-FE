@@ -8,6 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
+import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/curator-choosing-dialogue.component';
 
 @Component({
   selector: 'app-add-tour-form',
@@ -132,6 +133,12 @@ export class AddTourFormComponent implements OnInit{
   selectRouteButtonClicked() {
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
       data: this.selectedExhibitions
+    });
+  }
+  
+  selectCuratorButtonClicked() {
+    this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
+      data: this.selectedCurator
     });
   }
 

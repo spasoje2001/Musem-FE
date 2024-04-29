@@ -2,7 +2,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ExhibitionsService } from 'src/app/feature-modules/exhibitions/exhibitions.service';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { ToursService } from '../../tours.service';
 
@@ -27,7 +26,7 @@ import { ToursService } from '../../tours.service';
 })
 export class CuratorChoosingDialogueComponent implements OnInit{
   curators: Curator[] = [];
-  selectedCurators: Curator[] = [];
+  selectedCurator: Curator | undefined;
   doneButtonState: string = 'idle';
   chooseButtonState: string = 'idle';
 
@@ -35,7 +34,7 @@ export class CuratorChoosingDialogueComponent implements OnInit{
               private snackBar: MatSnackBar,
               private toursService: ToursService,
               @Inject(MAT_DIALOG_DATA) public data: any){
-    this.selectedCurators = data;
+    this.selectedCurator = data;
   }
 
   ngOnInit(): void {
@@ -49,17 +48,20 @@ export class CuratorChoosingDialogueComponent implements OnInit{
   }
 
   onChooseClicked(curator: Curator){
-    this.selectedCurators.push(curator);
+    this.selectedCurator = curator;
     this.showNotification('Curator successfully chosen!');
   }
 
-  onRemoveClicked(curatorToRemove: Curator){
-    this.selectedCurators = this.selectedCurators.filter(curator => curator.id !== curatorToRemove.id);
+  onRemoveClicked(){
+    this.selectedCurator = undefined;
     this.showNotification('Curator successfully removed!');
   }
 
   isSelected(curator: Curator): boolean {
-    return this.selectedCurators.includes(curator);
+    if(this.selectedCurator){
+      return this.selectedCurator == curator;
+    }
+    return false;
   }
 
   doneButtonClicked(){

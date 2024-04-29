@@ -79,24 +79,7 @@
 
         <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="selectRouteButtonClicked()">Select route</button>
 
-        <div class="curator-choosing">
-          <mat-label id="choose-curator">Choose Guide</mat-label>
-          <table id="curator-table">
-            <tbody>
-              <tr *ngFor="let curator of curators">
-                <td>{{ curator.firstName }}</td>
-                <td>{{ curator.lastName }}</td>
-                <td>&nbsp;&nbsp;</td>
-                <td>
-                  <button (click)="onChooseClicked(curator)" 
-                          type="submit">
-                    Choose
-                  </button>          
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="selectCuratorButtonClicked()">Select curator</button>
 
         <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="addTourButtonClicked()">Add</button>
     </form>
