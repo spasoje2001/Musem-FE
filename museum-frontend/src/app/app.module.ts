@@ -28,6 +28,7 @@ import { AdministratorProfileComponent } from './feature-modules/stakeholder/com
 
 import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
+import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
 import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
 import { EventCardComponent } from './feature-modules/events/event-card/event-card.component';
 import { EventsComponent } from './feature-modules/events/events/events.component';
@@ -79,6 +80,7 @@ import { UpdateEventComponent } from './feature-modules/events/update-event/upda
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
+    ExhibitionsModule
   ],
   providers: [
     {
