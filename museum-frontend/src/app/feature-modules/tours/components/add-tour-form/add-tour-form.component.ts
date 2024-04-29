@@ -106,20 +106,26 @@ export class AddTourFormComponent implements OnInit{
         tour.occurrenceDateTime = dateTime;
 
         if(this.selectedCurator != null){
-          //tour.guide = this.selectedCurator;
           tour.guideId = this.selectedCurator.id;
-          // za sad ovako dok s ene dodaju sobe
-          tour.duration = "0";
-          this.toursService.addTour(tour).subscribe({
-            next: () => {
-              this.showNotification('Tour successfully added!')
-              this.dialogRef.close();
-            },
-          });
+          if(this.selectedExhibitions != null){
+            tour.duration = "0";
+            this.toursService.addTour(tour).subscribe({
+              next: () => {
+                this.showNotification('Tour successfully added!')
+                this.dialogRef.close();
+              },
+            });
+          }
+          else{
+            this.showNotification('Please select at least one exhibition')
+          }
+        }
+        else{
+          this.showNotification('Please select a curator')
         }
     }
     else{
-      console.log('Add tour form not valid!'); // Treba dodati neki vid validacije
+      this.showNotification('Please fill out the form correctly')
     }
   }
 
@@ -127,7 +133,6 @@ export class AddTourFormComponent implements OnInit{
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
       data: this.selectedExhibitions
     });
-
   }
 
   onChooseClicked(curator: Curator){
