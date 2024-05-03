@@ -103,6 +103,7 @@ export class AddTourFormComponent implements OnInit{
           tour.guideId = this.selectedCurator[0].id;
           if(this.selectedExhibitions.length != 0){
             tour.duration = (this.selectedExhibitions.length * 15).toString();
+            tour.exhibitions = this.selectedExhibitions;
             this.toursService.addTour(tour).subscribe({
               next: () => {
                 this.showNotification('Tour successfully added!')
