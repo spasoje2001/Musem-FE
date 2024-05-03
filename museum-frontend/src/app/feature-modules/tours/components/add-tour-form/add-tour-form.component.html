@@ -77,9 +77,9 @@
           <label [class.active]="addTourForm.get('picturePath')?.value || focused === 'picturePath'">Insert image path</label>
         </div>
 
-        <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="selectRouteButtonClicked()">Select route</button>
+        <button type="submit" class="submit-btn" [@buttonState]="selectRoutebuttonState" (click)="selectRouteButtonClicked()">Select route</button>
 
-        <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="selectCuratorButtonClicked()">Select curator</button>
+        <button type="submit" class="submit-btn" [@buttonState]="selectCuratorbuttonState" (click)="selectCuratorButtonClicked()">Select curator</button>
 
         <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="addTourButtonClicked()">Add</button>
     </form>

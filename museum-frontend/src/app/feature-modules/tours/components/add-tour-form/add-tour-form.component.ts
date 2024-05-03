@@ -31,12 +31,14 @@ import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/c
 })
 export class AddTourFormComponent implements OnInit{
   buttonState: string = 'idle'; 
+  selectCuratorbuttonState: string = 'idle';
+  selectRoutebuttonState: string = 'idle';
   focused: string = '';
   minDate: string;  
   tourImage: string | null = null;
   tourImageFile: File | null = null;
   curators: Curator[] = [];
-  selectedCurator: Curator | undefined;
+  selectedCurator: Curator[] = [];
   selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
 
@@ -46,19 +48,10 @@ export class AddTourFormComponent implements OnInit{
               private dialog: MatDialog,) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
-
-    this.toursService.getCurators().subscribe({
-      next: (result: Curator[] | Curator) => {
-        if (Array.isArray(result)) {
-          this.curators = result;
-          console.log(this.curators);
-        }
-      }
-    })
   }
 
   ngOnInit(): void {
-    
+
   }
 
   addTourForm = new FormGroup({
@@ -106,10 +99,10 @@ export class AddTourFormComponent implements OnInit{
 
         tour.occurrenceDateTime = dateTime;
 
-        if(this.selectedCurator != null){
-          tour.guideId = this.selectedCurator.id;
-          if(this.selectedExhibitions != null){
-            tour.duration = "0";
+        if(this.selectedCurator.length != 0){
+          tour.guideId = this.selectedCurator[0].id;
+          if(this.selectedExhibitions.length != 0){
+            tour.duration = (this.selectedExhibitions.length * 15).toString();
             this.toursService.addTour(tour).subscribe({
               next: () => {
                 this.showNotification('Tour successfully added!')
@@ -131,20 +124,25 @@ export class AddTourFormComponent implements OnInit{
   }
 
   selectRouteButtonClicked() {
+    this.selectRoutebuttonState = 'clicked'; 
+    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200); 
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
       data: this.selectedExhibitions
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si egzibicie: ' + this.selectedExhibitions);
     });
   }
   
   selectCuratorButtonClicked() {
+    this.selectCuratorbuttonState = 'clicked'; 
+    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200); 
     this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
       data: this.selectedCurator
     });
-  }
-
-  onChooseClicked(curator: Curator){
-    this.selectedCurator = curator;
-    this.showNotification('Curator successfully chosen!')
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si kuratora: ' + this.selectedCurator);
+    });
   }
 
   showNotification(message: string): void {
@@ -158,4 +156,5 @@ export class AddTourFormComponent implements OnInit{
   overviewClicked(){
     this.dialogRef.close();
   }
+
 }

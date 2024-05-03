@@ -17,7 +17,7 @@
                     >Choose
             </button> 
             <button class="table-btn"
-                    (click)="onRemoveClicked()" 
+                    (click)="onRemoveClicked(curator)" 
                     type="submit"
                     *ngIf="isSelected(curator)"
                     [@buttonState]="chooseButtonState"

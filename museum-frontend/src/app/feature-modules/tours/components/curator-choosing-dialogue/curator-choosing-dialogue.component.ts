@@ -26,7 +26,7 @@ import { ToursService } from '../../tours.service';
 })
 export class CuratorChoosingDialogueComponent implements OnInit{
   curators: Curator[] = [];
-  selectedCurator: Curator | undefined;
+  selectedCurator: Curator[] = [];
   doneButtonState: string = 'idle';
   chooseButtonState: string = 'idle';
 
@@ -48,20 +48,17 @@ export class CuratorChoosingDialogueComponent implements OnInit{
   }
 
   onChooseClicked(curator: Curator){
-    this.selectedCurator = curator;
+    this.selectedCurator.push(curator);
     this.showNotification('Curator successfully chosen!');
   }
 
-  onRemoveClicked(){
-    this.selectedCurator = undefined;
+  onRemoveClicked(curatorToRemove: Curator){
+    this.selectedCurator = this.selectedCurator.filter(curator => curator.id !== curatorToRemove.id);
     this.showNotification('Curator successfully removed!');
   }
 
   isSelected(curator: Curator): boolean {
-    if(this.selectedCurator){
-      return this.selectedCurator == curator;
-    }
-    return false;
+    return this.selectedCurator.includes(curator);
   }
 
   doneButtonClicked(){
