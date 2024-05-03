@@ -1,1 +1,13 @@
-<p>tour-pricelist-view works!</p>
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="dialogue">
+  <div class="wrapper">
+    <h2>Tour Pricelist</h2>
+
+    <p>Name: {{tourPricelist?.name}}</p>
+    <p>Adult ticket price: {{tourPricelist?.adultTicketPrice}}</p>
+    <p>Minor ticket price: {{tourPricelist?.minorTicketPrice}}</p>
+    <p>Start date: {{tourPricelist?.startDate?.toISOString()}}</p>
+
+    <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="editButtonClicked()">Edit</button>
+  </div>
+</div>

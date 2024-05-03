@@ -1,0 +1,69 @@
+.dialogue {
+  width: 32rem;
+  height: 21rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; 
+  background-color: rgba(255, 255, 255, .1); 
+  padding: 20px;
+  backdrop-filter: blur(15px);
+  color: #fff;
+  border: 3px solid rgba(255, 255, 255, .2);
+  border-radius: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; 
+}
+
+.wrapper {
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+  gap: 15px;
+}
+
+.wrapper .submit-btn {
+  margin-top: 5%;
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #1b1b1b;
+  font-weight: 600;
+}
+
+.wrapper .submit-btn:hover {
+  background-color: rgb(172, 172, 172); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.03);
+  transition: transform 300ms ease;
+}
+
+p {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
