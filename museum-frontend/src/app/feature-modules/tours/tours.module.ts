@@ -21,6 +21,7 @@ import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-for
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 import { CuratorChoosingDialogueComponent } from './components/curator-choosing-dialogue/curator-choosing-dialogue.component';
+import { TourPricelistViewComponent } from './components/tour-pricelist-view/tour-pricelist-view.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CuratorChoosingDialogueComponent } from './components/curator-choosing-
     AcceptRequestFormComponent,
     EditTourFormComponent,
     ExhibitionChoosingDialogueComponent,
-    CuratorChoosingDialogueComponent
+    CuratorChoosingDialogueComponent,
+    TourPricelistViewComponent
   ],
   imports: [
     CommonModule,
