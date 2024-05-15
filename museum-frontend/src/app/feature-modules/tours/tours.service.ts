@@ -76,4 +76,8 @@ export class ToursService {
     return this.http.get<TourPricelist>(environment.apiHost + 'tourPricelists');
   }
 
+  updateTourPricelist(pricelist: TourPricelist): Observable<TourPricelist> {
+    return this.http.put<TourPricelist>(environment.apiHost + 'tourPricelists', pricelist);
+  }
+
 }
