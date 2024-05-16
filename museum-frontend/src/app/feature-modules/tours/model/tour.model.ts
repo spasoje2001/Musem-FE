@@ -9,7 +9,7 @@ export interface Tour {
   occurrenceDateTime: Date;
   adultTicketPrice: string;
   minorTicketPrice: string;
-  guide?: Curator; 
+  guide?: Curator;
   guideId?: number;
   capacity: string;
   picturePath: string;

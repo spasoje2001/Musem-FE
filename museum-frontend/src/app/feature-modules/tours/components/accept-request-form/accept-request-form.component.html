@@ -1,59 +1,39 @@
 <div class="modal-overlay" (click)="overviewClicked()"></div>
 <div class="modal-container">
-  <div class="prompt" [formGroup]="acceptRequestForm">
+  <div class="prompt">
     <h1>Accept Request</h1>
-    
-    <div class="curator-choosing">
-      <mat-label id="choose-curator">Choose Guide</mat-label>
-      <table id="curator-table">
-        <tbody>
-          <tr *ngFor="let curator of curators">
-            <td>{{ curator.firstName }}</td>
-            <td>{{ curator.lastName }}</td>
-            <td>&nbsp;&nbsp;</td>
-            <td>
-              <button (click)="onChooseClicked(curator)" 
-                      type="submit">
-                Choose
-              </button>          
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
     <div class="ticket-prices">
-      <div class="input-box adult">
-          <input 
-                  type="number"
-                  formControlName="adultTicketPrice"
-                  required
-          />
-          <label [class.active]="acceptRequestForm.get('adultTicketPrice')?.value || focused === 'adultTicketPrice'">Adult Ticket Price</label>
+      <div class="input-box">
+        <label [class.active]="true">Adult Ticket Price</label>
+        <div class="display-value">
+          {{ this.tourPricelist?.adultTicketPrice }}
+        </div>
       </div>
-      <div class="input-box minor">
-          <input 
-                  type="number"
-                  formControlName="minorTicketPrice"
-                  required
-          />
-          <label [class.active]="acceptRequestForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor Ticket Price</label>
+      <div class="input-box">
+        <label [class.active]="true">Minor Ticket Price</label>
+        <div class="display-value">
+          {{ this.tourPricelist?.minorTicketPrice }}
+        </div>
       </div>
     </div>
 
+    <button type="submit" class="submit-btn" [@buttonState]="selectCuratorbuttonState" (click)="selectCuratorButtonClicked()">Select curator</button>
+
     <div class="buttons">
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="acceptButtonClicked()"
-              [@buttonState]="acceptButtonState" 
+              [@buttonState]="acceptButtonState"
               >Accept
       </button>
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="cancelButtonClicked()"
-              [@buttonState]="cancelButtonState" 
+              [@buttonState]="cancelButtonState"
               >Cancel
       </button>
     </div>
+
   </div>
 </div>

@@ -5,17 +5,17 @@
         <h1>Add tour</h1>
 
         <div class="input-box">
-            <input 
-                    type="text" 
-                    formControlName="name" 
+            <input
+                    type="text"
+                    formControlName="name"
                     required
             />
             <label [class.active]="addTourForm.get('name')?.value || focused === 'name'">Name</label>
         </div>
 
         <div class="input-box">
-            <input 
-                    type="text" 
+            <input
+                    type="text"
                     formControlName="description"
                     required
             />
@@ -24,25 +24,25 @@
 
         <div class="date-time">
             <div class="input-box">
-                <input 
-                        type="date" 
-                        id="datepicker" 
-                        name="datepicker" 
+                <input
+                        type="date"
+                        id="datepicker"
+                        name="datepicker"
                         formControlName="occurrenceDate"
                         [min]="minDate">
             </div>
             <div class="input-box">
-                    <input matInput 
-                        type="time" 
-                        id="timepicker" 
-                        name="timepicker" 
+                    <input matInput
+                        type="time"
+                        id="timepicker"
+                        name="timepicker"
                         formControlName="occurrenceTime">
             </div>
         </div>
 
         <div class="input-box">
-            <input 
-                    type="number" 
+            <input
+                    type="number"
                     formControlName="capacity"
                     required
             />
@@ -51,26 +51,22 @@
 
         <div class="ticket-prices">
             <div class="input-box">
-                <input 
-                        type="number"
-                        formControlName="adultTicketPrice"
-                        required
-                />
-                <label [class.active]="addTourForm.get('adultTicketPrice')?.value || focused === 'adultTicketPrice'">Adult Ticket Price</label>
+              <div class="display-value">
+                {{ this.tourPricelist?.adultTicketPrice }}
+              </div>
+              <label [class.active]="true">Adult Ticket Price</label>
             </div>
             <div class="input-box">
-                <input 
-                        type="number"
-                        formControlName="minorTicketPrice"
-                        required
-                />
-                <label [class.active]="addTourForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor Ticker Price</label>
+              <div class="display-value">
+                {{ this.tourPricelist?.minorTicketPrice }}
+              </div>
+              <label [class.active]="true">Minor Ticket Price</label>
             </div>
         </div>
-        
+
         <div class="input-box">
-          <input 
-                  type="text" 
+          <input
+                  type="text"
                   formControlName="picturePath"
                   required
           />

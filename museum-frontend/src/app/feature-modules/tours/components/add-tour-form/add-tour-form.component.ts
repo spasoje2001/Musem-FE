@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
 import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/curator-choosing-dialogue.component';
+import {TourPricelist} from "../../model/tourPricelist.model";
 
 @Component({
   selector: 'app-add-tour-form',
@@ -30,19 +31,17 @@ import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/c
   ],
 })
 export class AddTourFormComponent implements OnInit{
-  buttonState: string = 'idle'; 
+  buttonState: string = 'idle';
   selectCuratorbuttonState: string = 'idle';
   selectRoutebuttonState: string = 'idle';
   focused: string = '';
-  minDate: string;  
-  tourImage: string | null = null;
-  tourImageFile: File | null = null;
-  curators: Curator[] = [];
+  minDate: string;
   selectedCurator: Curator[] = [];
   selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
+  tourPricelist: TourPricelist | undefined;
 
-  constructor(private toursService: ToursService, 
+  constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<AddTourFormComponent>,
               private dialog: MatDialog,) {
@@ -51,7 +50,11 @@ export class AddTourFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.toursService.getTourPricelist().subscribe({
+      next: (result: TourPricelist) => {
+        this.tourPricelist = result;
+      }
+    })
   }
 
   addTourForm = new FormGroup({
@@ -60,8 +63,6 @@ export class AddTourFormComponent implements OnInit{
     //duration: new FormControl('', [Validators.required]),
     occurrenceTime: new FormControl(null, [Validators.required]),
     occurrenceDate: new FormControl(null, [Validators.required]),
-    adultTicketPrice: new FormControl('', [Validators.required]),
-    minorTicketPrice: new FormControl('', [Validators.required]),
     //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
@@ -72,8 +73,8 @@ export class AddTourFormComponent implements OnInit{
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       occurrenceDateTime: this.addTourForm.value.occurrenceDate || new Date(),
-      adultTicketPrice: this.addTourForm.value.adultTicketPrice || "",
-      minorTicketPrice: this.addTourForm.value.minorTicketPrice || "",
+      adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
+      minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
       capacity: this.addTourForm.value.capacity || "",
       picturePath: this.addTourForm.value.picturePath || "",
     };
@@ -81,14 +82,14 @@ export class AddTourFormComponent implements OnInit{
     console.log(tour);
 
     if (this.addTourForm.valid) {
-        this.buttonState = 'clicked'; 
-        setTimeout(() => { this.buttonState = 'idle'; }, 200); 
+        this.buttonState = 'clicked';
+        setTimeout(() => { this.buttonState = 'idle'; }, 200);
 
-        // Postavi datum i vreme 
+        // Postavi datum i vreme
         const dateValue: Date | null = this.addTourForm.value.occurrenceDate!;
         const timeValue: string | null = this.addTourForm.value.occurrenceTime!;
 
-        const [hours, minutes] = (timeValue as string).split(':'); 
+        const [hours, minutes] = (timeValue as string).split(':');
         const dateTime = new Date(dateValue);
         dateTime.setHours(Number(hours) + 1);
         dateTime.setMinutes(Number(minutes));
@@ -125,19 +126,19 @@ export class AddTourFormComponent implements OnInit{
   }
 
   selectRouteButtonClicked() {
-    this.selectRoutebuttonState = 'clicked'; 
-    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200); 
+    this.selectRoutebuttonState = 'clicked';
+    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200);
     this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
       data: this.selectedExhibitions
     });
     this.ownDialogRef.afterClosed().subscribe((result: any) => {
-      console.log('Odabrao si egzibicie: ' + this.selectedExhibitions);
+      console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
     });
   }
-  
+
   selectCuratorButtonClicked() {
-    this.selectCuratorbuttonState = 'clicked'; 
-    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200); 
+    this.selectCuratorbuttonState = 'clicked';
+    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200);
     this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
       data: this.selectedCurator
     });
@@ -148,9 +149,9 @@ export class AddTourFormComponent implements OnInit{
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 
