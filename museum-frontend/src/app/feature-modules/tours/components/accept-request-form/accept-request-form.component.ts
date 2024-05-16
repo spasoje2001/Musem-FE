@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
@@ -29,8 +29,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class AcceptRequestFormComponent{
-  cancelButtonState: string = 'idle';   
-  acceptButtonState: string = 'idle'; 
+  cancelButtonState: string = 'idle';
+  acceptButtonState: string = 'idle';
   request: PersonalTourRequest | undefined;
   curators: Curator[] = [];
   selectedCurator: Curator | undefined;
@@ -64,11 +64,11 @@ export class AcceptRequestFormComponent{
 
   acceptButtonClicked(){
     if (this.acceptRequestForm.valid) {
-      this.acceptButtonState = 'clicked'; 
-      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+      this.acceptButtonState = 'clicked';
+      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
 
       this.request!.status = PersonalTourRequestStatus.ACCEPTED;
-      
+
       this.toursService.updateTourRequest(this.request!).subscribe({
         next: () => {
 
@@ -78,9 +78,9 @@ export class AcceptRequestFormComponent{
             minorTicketPrice: this.acceptRequestForm.value.minorTicketPrice?.toString() || "",
             guestNumber: this.request!.guestNumber || "",
             proposerId: this.request!.proposerId || 0,
+            guideId: this.selectedCurator?.id || 7,
             duration: "0",
-            //guideId: this.selectedCurator!.id || 7,
-            guideId: 7,
+            exhibitions: this.request?.exhibitions || []
           };
 
           this.toursService.addPersonalTour(tour).subscribe({
@@ -95,8 +95,8 @@ export class AcceptRequestFormComponent{
   }
 
   cancelButtonClicked(){
-    this.cancelButtonState = 'clicked'; 
-    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200); 
+    this.cancelButtonState = 'clicked';
+    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200);
     this.dialogRef.close();
   }
 
@@ -106,9 +106,9 @@ export class AcceptRequestFormComponent{
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 
