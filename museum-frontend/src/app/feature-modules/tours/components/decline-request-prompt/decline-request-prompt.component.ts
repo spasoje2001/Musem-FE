@@ -4,6 +4,7 @@ import { ToursService } from '../../tours.service';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-decline-request-prompt',
@@ -25,9 +26,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class DeclineRequestPromptComponent{
-  cancelButtonState: string = 'idle';   
-  declineButtonState: string = 'idle'; 
+  cancelButtonState: string = 'idle';
+  declineButtonState: string = 'idle';
   request: PersonalTourRequest | undefined;
+  focused: string = '';
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
@@ -36,12 +38,17 @@ export class DeclineRequestPromptComponent{
     this.request = data;
   }
 
+  declineRequestForm = new FormGroup({
+    explanation: new FormControl('', [Validators.required]),
+  });
+
   declineButtonClicked(){
-    this.declineButtonState = 'clicked'; 
-    setTimeout(() => { this.declineButtonState = 'idle'; }, 200); 
+    this.declineButtonState = 'clicked';
+    setTimeout(() => { this.declineButtonState = 'idle'; }, 200);
 
     this.request!.status = PersonalTourRequestStatus.DECLINED;
-    
+    this.request!.denialReason = this.declineRequestForm.value.explanation || undefined;
+
     this.toursService.updateTourRequest(this.request!).subscribe({
       next: () => {
         this.showNotification('Tour request successfully declined!');
@@ -51,8 +58,8 @@ export class DeclineRequestPromptComponent{
   }
 
   cancelButtonClicked(){
-    this.cancelButtonState = 'clicked'; 
-    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200); 
+    this.cancelButtonState = 'clicked';
+    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200);
     this.dialogRef.close();
   }
 
@@ -62,9 +69,9 @@ export class DeclineRequestPromptComponent{
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 }

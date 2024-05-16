@@ -13,6 +13,14 @@
   <button *ngIf="user!.role == 'ORGANIZER'"
           type="submit" 
           class="add-tour-btn" 
+          (click)="viewPricelistButtonClicked()"
+          [@buttonState]="pricelistButtonState">
+    <fa-icon [icon]="faMoneyBill" />
+    &nbsp;View pricelist
+  </button>
+  <button *ngIf="user!.role == 'ORGANIZER'"
+          type="submit" 
+          class="add-tour-btn" 
           (click)="addToursButtonClicked()"
           [@buttonState]="toursButtonState">
     <fa-icon [icon]="faPlus" />

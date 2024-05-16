@@ -1,0 +1,34 @@
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="dialogue">
+  <div class="wrapper">
+    <h2>Tour Pricelist</h2>
+
+    <div class="paragraphs">
+      <p *ngIf="!editClicked">Adult ticket price: {{tourPricelist?.adultTicketPrice}} per exhibition</p>
+      <p *ngIf="!editClicked">Minor ticket price: {{tourPricelist?.minorTicketPrice}} per exhibition</p>  
+    </div>
+    
+    <form [formGroup]="editTourPricelistForm">
+      <div *ngIf="editClicked" class="input-box">
+        <input 
+                type="text" 
+                formControlName="adultTicketPrice"
+                required
+        />
+        <label [class.active]="editTourPricelistForm.get('adultTicketPrice')?.value || focused === 'adultTicketPrice'">Adult ticket price</label>
+      </div>
+  
+      <div *ngIf="editClicked" class="input-box">
+        <input 
+                type="text" 
+                formControlName="minorTicketPrice"
+                required
+        />
+        <label [class.active]="editTourPricelistForm.get('minorTicketPrice')?.value || focused === 'minorTicketPrice'">Minor ticket price</label>
+      </div>
+    </form>
+    
+    <button *ngIf="!editClicked" type="submit" class="submit-btn edit" [@buttonState]="buttonState" (click)="editButtonClicked()">Edit</button>
+    <button *ngIf="editClicked" type="submit" class="submit-btn done" [@buttonState]="doneButtonState" (click)="doneButtonClicked()">Done</button>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { ToursService } from '../../tours.service';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
 
 @Component({
   selector: 'xp-tour-card-view',
@@ -40,6 +41,7 @@ export class TourCardViewComponent implements OnInit{
   user: User | undefined;
   tourOccurrenceTime: string = "";
   tourOccurrenceDate: string = "";
+  exhibitionsString: string = "";
 
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
@@ -63,6 +65,12 @@ export class TourCardViewComponent implements OnInit{
 
     const tourOccurrenceDateTimeString = this.tour.occurrenceDateTime.toString();
     [this.tourOccurrenceDate, this.tourOccurrenceTime] = tourOccurrenceDateTimeString.split('T');
+
+    this.tour.exhibitions!.forEach((exhibition: Exhibition) => {
+      this.exhibitionsString += exhibition.name + ", ";
+    });
+    
+    this.exhibitionsString = this.exhibitionsString.slice(0, -2);
   }
 
   editButtonClicked() {

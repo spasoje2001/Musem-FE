@@ -19,6 +19,9 @@ import { DeclineRequestPromptComponent } from './components/decline-request-prom
 import { AcceptRequestFormComponent } from './components/accept-request-form/accept-request-form.component';
 import { EditTourFormComponent } from './components/edit-tour-form/edit-tour-form.component';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
+import { CuratorChoosingDialogueComponent } from './components/curator-choosing-dialogue/curator-choosing-dialogue.component';
+import { TourPricelistViewComponent } from './components/tour-pricelist-view/tour-pricelist-view.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,17 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     TourCardViewComponent,
     AddTourFormComponent,
     RemoveTourPromptComponent,
+    EditTourFormComponent,
+    EditTourFormComponent,
     AddTourRequestFormComponent,
     TourRequestsViewComponent,
     TourRequestCardViewComponent,
     DeclineRequestPromptComponent,
     AcceptRequestFormComponent,
-    EditTourFormComponent
+    EditTourFormComponent,
+    ExhibitionChoosingDialogueComponent,
+    CuratorChoosingDialogueComponent,
+    TourPricelistViewComponent
   ],
   imports: [
     CommonModule,

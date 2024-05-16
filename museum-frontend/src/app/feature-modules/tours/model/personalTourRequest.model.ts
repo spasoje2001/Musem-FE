@@ -1,6 +1,7 @@
 import { Curator } from "../../stakeholder/model/curator.model";
 import { Guest } from "../../stakeholder/model/guest.model";
 import { Organizer } from "../../stakeholder/model/organizer.model";
+import { Exhibition } from "../../exhibitions/model/exhibition.model";
 
 export interface PersonalTourRequest {
   id?: number;
@@ -14,6 +15,9 @@ export interface PersonalTourRequest {
   organizer?: Organizer;
   guestNumber: string;
   status: PersonalTourRequestStatus;
+  denialReason?: string;
+  proposerContactPhone?: string;
+  exhibitions?: Exhibition[];
 }
 
 export enum PersonalTourRequestStatus {
