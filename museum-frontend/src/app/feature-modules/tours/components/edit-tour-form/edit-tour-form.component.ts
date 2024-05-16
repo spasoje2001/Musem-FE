@@ -9,6 +9,10 @@ import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {TourPricelist} from "../../model/tourPricelist.model";
 import {CuratorChoosingDialogueComponent} from "../curator-choosing-dialogue/curator-choosing-dialogue.component";
+import {
+  ExhibitionChoosingDialogueComponent
+} from "../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component";
+import {Exhibition} from "../../../exhibitions/model/exhibition.model";
 
 @Component({
   selector: 'app-edit-tour-form',
@@ -32,12 +36,14 @@ import {CuratorChoosingDialogueComponent} from "../curator-choosing-dialogue/cur
 export class EditTourFormComponent implements OnChanges{
   buttonState: string = 'idle';
   selectCuratorbuttonState: string = 'idle';
+  selectRoutebuttonState: string = 'idle';
   focused: string = '';
   minDate: string;
   tourImage: string | null = null;
   tourImageFile: File | null = null;
   curators: Curator[] = [];
   selectedCurator: Curator[] = [];
+  selectedExhibitions: Exhibition[] = [];
   @Input() tour: Tour;
   tourPricelist: TourPricelist | undefined;
   private ownDialogRef: any;
@@ -131,11 +137,18 @@ export class EditTourFormComponent implements OnChanges{
           tour.occurrenceDateTime = this.tour.occurrenceDateTime;
         }
 
-        if(this.selectedCurator != null){
+        if(this.selectedCurator.length != 0){
           tour.guideId = this.selectedCurator[0].id;
         }
         else{
           tour.guideId = this.tour.guide?.id;
+        }
+
+        if(this.selectedExhibitions.length != 0){
+          tour.exhibitions = this.selectedExhibitions;
+        }
+        else{
+          tour.exhibitions = this.tour.exhibitions;
         }
 
         // setuje se na beku
@@ -149,7 +162,14 @@ export class EditTourFormComponent implements OnChanges{
   }
 
   selectRouteButtonClicked() {
-
+    this.selectRoutebuttonState = 'clicked';
+    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
+      data: this.selectedExhibitions
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+    });
   }
 
   selectCuratorButtonClicked() {
