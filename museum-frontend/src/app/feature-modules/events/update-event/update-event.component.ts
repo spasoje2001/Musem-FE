@@ -77,7 +77,7 @@ export class UpdateEventComponent implements OnInit {
       startDateTime: this.eventForm.value.startDateTime || '',
       durationMinutes: this.eventForm.value.durationMinutes || 0,
       ticketsNumber: this.eventForm.value.ticketsNumber || 0,
-      price: this.eventForm.value.ticketsNumber || 0,
+      price: this.eventForm.value.price || 0,
       roomId: this.selectedRoom?.id || 0,
     }
 
