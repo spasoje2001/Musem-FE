@@ -1,1 +1,87 @@
-<p>edit-artifact works!</p>
+
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="dialogue">
+  <div class="wrapper">
+    <form [formGroup]="editItemForm">
+        <h1>Edit item</h1>
+
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="name" 
+                    required
+            />
+            <label [class.active]="editItemForm.get('name')?.value || focused === 'name'">Name</label>
+        </div>
+
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="description"
+                    required
+            />
+            <label [class.active]="editItemForm.get('description')?.value || focused === 'description'">Description</label>
+        </div>
+
+
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="authorsName"
+                    required
+            />
+            <label [class.active]="editItemForm.get('authorsName')?.value || focused === 'authorsName'">Authors Name</label>
+        </div>
+
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="yearOfCreation"
+                    required
+            />
+            <label [class.active]="editItemForm.get('yearOfCreation')?.value || focused === 'yearOfCreation'">Year Of Creation</label>
+        </div>
+        
+        <div class="input-box">
+            <input 
+                    type="text" 
+                    formControlName="period"
+                    required
+            />
+            <label [class.active]="editItemForm.get('period')?.value || focused === 'period'">Period</label>
+        </div>
+        
+
+
+        <div class="input-box">
+          <input 
+                  type="text" 
+                  formControlName="picture"
+                  required
+          />
+          <label [class.active]="editItemForm.get('picture')?.value || focused === 'picture'">Insert image path</label>
+        </div>
+
+        <div class="input-box">
+          <select formControlName="category" required>
+                  <option value="Painting">Painting</option>
+                  <option value="Drawing">Drawing</option>
+                  <option value="Sculpture">Sculpture</option>
+                  <option value="Print">Print</option>
+                  <option value="Photograph">Photograph</option>
+                  <option value="Clothing">Clothing</option>
+                  <option value="Specimen">Specimen</option>
+                  <option value="Fossil">Fossil</option>
+                  <option value="Animal">Animal</option>
+                  <option value="Mineral">Mineral</option>
+                  <option value="Pottery">Pottery</option>
+                  <option value="Jewelry">Jewelry</option>
+          </select>
+          <label>Select catrgory</label>
+        </div>
+
+        <button type="submit" class="submit-btn" [@buttonState]="buttonState" (click)="editItemButtonClicked()">Add</button>
+    </form>
+  </div>
+</div>
+

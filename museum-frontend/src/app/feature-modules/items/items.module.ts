@@ -10,6 +10,7 @@ import { ArtifactCardComponent } from './artifact-card/artifact-card.component';
 import { ArtifactForDisplayComponent } from './artifact-for-display/artifact-for-display.component';
 import { EditArtifactComponent } from './edit-artifact/edit-artifact.component';
 import { PutArtifactIntoRoomPromptComponent } from './put-artifact-into-room-prompt/put-artifact-into-room-prompt.component';
+import { RoomChosingComponent } from './room-chosing/room-chosing.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PutArtifactIntoRoomPromptComponent } from './put-artifact-into-room-pro
       ArtifactForDisplayComponent,
       EditArtifactComponent,
       PutArtifactIntoRoomPromptComponent,
+      RoomChosingComponent,
     ],
     imports: [
       CommonModule,

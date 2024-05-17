@@ -1,1 +1,13 @@
-<p>artifact-for-display works!</p>
+<div class="overlay">
+    <div class="card-container">
+        <div class="row" *ngFor="let row of slicedItems">
+            <app-artifact-card class="card"
+            *ngFor="let item of row"
+            [item]="item"
+            (dialogRefClosed)="handleDialogClosed($event)">
+            </app-artifact-card>
+        </div>
+    </div>
+      
+</div>
+  
