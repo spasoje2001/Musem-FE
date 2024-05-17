@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Event } from '../model/event.model';
 
 @Component({
-  selector: 'app-oragnizer-event-card',
-  templateUrl: './oragnizer-event-card.component.html',
-  styleUrls: ['./oragnizer-event-card.component.css', '../shared-styles.css']
+  selector: 'app-organizer-event-card',
+  templateUrl: './organizer-event-card.component.html',
+  styleUrls: ['./organizer-event-card.component.css', '../shared-styles.css']
 })
-export class OragnizerEventCardComponent {
+export class OrganizerEventCardComponent {
 
   @Input() event?: Event;
 
