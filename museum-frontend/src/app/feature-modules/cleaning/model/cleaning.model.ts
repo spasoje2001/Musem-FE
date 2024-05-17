@@ -10,7 +10,7 @@ export interface Cleaning {
     curator?: Curator;
     status : CleaningStatus;
     itemId?: number;
-  }
+}
 
 export enum CleaningStatus{
     NEW = 0,
