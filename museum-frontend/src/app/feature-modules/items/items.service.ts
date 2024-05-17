@@ -41,4 +41,9 @@ export class ItemsService {
     return this.http.get<Room>(environment.apiHost + 'rooms');
   }
 
+
+  searchItemsByName(name: string): Observable<Item> {
+    return this.http.get<Item>(environment.apiHost + 'items/search/' + name);
+  }
+
 }

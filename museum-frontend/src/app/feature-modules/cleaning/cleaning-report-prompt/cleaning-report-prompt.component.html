@@ -16,19 +16,21 @@
           </label>
         </div>
     </form>
+
     <div class="buttons">
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="finishCleaning(cleaningId! || 0)"
-              [@buttonState]="acceptButtonState" 
+              [@buttonState]="acceptButtonState"
               >Finish
       </button>
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="cancelButtonClicked()"
-              [@buttonState]="cancelButtonState" 
+              [@buttonState]="cancelButtonState"
               >Cancel
       </button>
     </div>
+
   </div>
 </div>
