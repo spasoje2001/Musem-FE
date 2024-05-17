@@ -21,7 +21,7 @@
                 </div>
                 <div class="tour-rooms-occupied">
                   <div class="tour-rooms-value">
-                      <strong>Exhibitions: </strong> TO DO :/
+                      <strong>Exhibitions: </strong> {{ exhibitionsString }}
                   </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                      *ngIf="this.user?.role === 'GUEST'"
                 >
                     <strong>Status: </strong> &nbsp; {{ request.status.toString() }}
-                </div>  
+                </div>
 
                 <button
                     class="btn"

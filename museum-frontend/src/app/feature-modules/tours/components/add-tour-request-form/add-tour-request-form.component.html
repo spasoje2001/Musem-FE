@@ -7,29 +7,38 @@
         <h2>Date and time</h2>
         <div class="date-time">
             <div class="input-box">
-                <input 
-                        type="date" 
-                        id="datepicker" 
-                        name="datepicker" 
+                <input
+                        type="date"
+                        id="datepicker"
+                        name="datepicker"
                         formControlName="occurrenceDate"
                         [min]="minDate">
             </div>
             <div class="input-box">
-                    <input matInput 
-                        type="time" 
-                        id="timepicker" 
-                        name="timepicker" 
+                    <input matInput
+                        type="time"
+                        id="timepicker"
+                        name="timepicker"
                         formControlName="occurrenceTime">
             </div>
         </div>
 
         <div class="input-box">
-            <input 
-                    type="number" 
+            <input
+                    type="number"
                     formControlName="guestNumber"
                     required
             />
             <label [class.active]="addTourRequestForm.get('guestNumber')?.value || focused === 'guestNumber'">Guest number</label>
+        </div>
+
+        <div class="input-box">
+          <input
+            type="number"
+            formControlName="contactPhone"
+            required
+          />
+          <label [class.active]="addTourRequestForm.get('contactPhone')?.value || focused === 'contactPhone'">Contact phone number</label>
         </div>
 
         <button type="submit" class="submit-btn" [@buttonState]="routeButtonState" (click)="selectRouteButtonClicked()">Select route</button>

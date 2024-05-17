@@ -9,6 +9,7 @@ import { AcceptRequestFormComponent } from '../accept-request-form/accept-reques
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ToursService } from '../../tours.service';
 import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
+import {Exhibition} from "../../../exhibitions/model/exhibition.model";
 
 @Component({
   selector: 'xp-tour-request-card-view',
@@ -30,14 +31,15 @@ import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
   ],
 })
 export class TourRequestCardViewComponent implements OnInit{
-  acceptButtonState: string = 'idle';   
-  declineButtonState: string = 'idle'; 
+  acceptButtonState: string = 'idle';
+  declineButtonState: string = 'idle';
   @Input() request!: PersonalTourRequest;
   private dialogRef: any;
   user: User | undefined;
   @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>(); // Define event emitter
   tourOccurrenceTime: string = "";
   tourOccurrenceDate: string = "";
+  exhibitionsString: string = "";
 
   constructor(private dialog: MatDialog,
               private authService: AuthService,
@@ -58,11 +60,17 @@ export class TourRequestCardViewComponent implements OnInit{
         }
       });
     }
+
+    this.request.exhibitions!.forEach((exhibition: Exhibition) => {
+      this.exhibitionsString += exhibition.name + ", ";
+    });
+
+    this.exhibitionsString = this.exhibitionsString.slice(0, -2);
   }
 
   acceptButtonClicked(request: PersonalTourRequest) {
-    this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(AcceptRequestFormComponent, {
       data: request
     });
@@ -72,8 +80,8 @@ export class TourRequestCardViewComponent implements OnInit{
   }
 
   declineButtonClicked(request: PersonalTourRequest) {
-    this.declineButtonState = 'clicked'; 
-    setTimeout(() => { this.declineButtonState = 'idle'; }, 200); 
+    this.declineButtonState = 'clicked';
+    setTimeout(() => { this.declineButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(DeclineRequestPromptComponent, {
       data: request
     });

@@ -29,12 +29,12 @@ export class RemoveTourPromptComponent {
   tourId: number = 0;
   @Output() closeModalEvent = new EventEmitter<void>();
 
-  constructor(private dialogRef: MatDialogRef<RemoveTourPromptComponent>,
-              private snackBar: MatSnackBar,
-              private toursService: ToursService,
-              @Inject(MAT_DIALOG_DATA) public data: any){
-    this.tourId = data;
-  }
+    constructor(private dialogRef: MatDialogRef<RemoveTourPromptComponent>,
+                private snackBar: MatSnackBar,
+                private toursService: ToursService,
+                @Inject(MAT_DIALOG_DATA) public data: any){
+      this.tourId = data;
+    }
 
   removeButtonClicked(){
     this.removeButtonState = 'clicked'; 
