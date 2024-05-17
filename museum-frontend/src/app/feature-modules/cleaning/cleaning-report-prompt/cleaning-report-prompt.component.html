@@ -1,0 +1,36 @@
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="modal-container">
+  <div class="prompt" >
+    <h1>Write Report</h1>
+
+    <form [formGroup]="writeReportForm">
+        <div class="input-box">
+          <textarea
+            formControlName="text"
+            required
+            (focus)="focused = 'text'"
+            (blur)="focused = ''"
+          ></textarea>
+          <label [class.active]="writeReportForm.get('text')?.value || focused === 'text'">
+            Write report on cleaning:
+          </label>
+        </div>
+    </form>
+
+    <div class="buttons">
+      <button type="submit"
+              class="btn"
+              (click)="finishCleaning(cleaningId! || 0)"
+              [@buttonState]="acceptButtonState"
+              >Finish
+      </button>
+      <button type="submit"
+              class="btn"
+              (click)="cancelButtonClicked()"
+              [@buttonState]="cancelButtonState"
+              >Cancel
+      </button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="modal-container">
+  <div class="prompt">
+    <h1>Choose curators</h1>
+    <table id="curators-table">
+      <tbody>
+        <tr *ngFor="let room of rooms">
+          <td>Name: {{ room.name }}</td>
+          <td>Floor: {{ room.floor }}</td>
+          <td>Room: {{ room.number }}</td>
+          <td>&nbsp;&nbsp;</td>
+          <td>
+            <button class="table-btn"
+                    (click)="onChooseClicked(room)" 
+                    type="submit"
+                    *ngIf="!isSelected(room)"
+                    [@buttonState]="chooseButtonState"
+                    >Choose
+            </button> 
+            <button class="table-btn"
+                    (click)="onRemoveClicked(room)" 
+                    type="submit"
+                    *ngIf="isSelected(room)"
+                    [@buttonState]="chooseButtonState"
+                    >Remove
+            </button> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" 
+            class="btn"
+            (click)="doneButtonClicked()"
+            [@buttonState]="doneButtonState" 
+            >Done
+    </button>
+  </div>
+</div>

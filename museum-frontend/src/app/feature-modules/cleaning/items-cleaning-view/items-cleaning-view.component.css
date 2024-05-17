@@ -4,26 +4,27 @@ table {
     border-collapse: collapse;
     margin-top: 7rem; /* Adjust as needed */
   }
-  
+
   th, td {
-    text-align: left;
+    text-align: center;
     padding: 8px; /* Adjust as needed */
+
   }
-  
+
   th {
     color: #666; /* Adjust to match wireframe */
     font-weight: normal;
   }
-  
+
   tr:nth-child(even) {
     background-color: #f9f9f9; /* Adjust to match wireframe */
   }
-  
+
   .employee-info {
     display: flex;
     align-items: center; /* Vertically center the contents */
   }
-  
+
   .employee-image {
     width: 40px; /* Adjust size as needed */
     height: 40px; /* Adjust size as needed */
@@ -38,11 +39,16 @@ table {
   border: none; /* Remove border */
   cursor: pointer; /* Change cursor to indicate clickable */
   padding: 5px; /* Add padding to increase clickable area */
-  margin-right: 10px; /* Add margin to separate the icons */
   display: inline-flex; /* Use flexbox to center icon */
   align-items: center; /* Center icon vertically */
   justify-content: center; /* Center icon horizontally */
 }
+
+.action-button:hover {
+  background: transparent; /* Remove any default background */
+  color: #555555;
+}
+
 
 /* Add a class for the icons to style them */
 .action-icon {
@@ -53,7 +59,7 @@ table {
 
 /* Add hover effect for buttons */
 .action-button:hover .action-icon {
-  color: #555; /* Darken icon on hover */
+  color: #807f7f; /* Darken icon on hover */
 }
 
 /* Make sure the td has enough space for the icons */
@@ -62,7 +68,7 @@ td .employee-actions {
   justify-content: flex-end; /* Align buttons to the end of the cell */
   align-items: center; /* Center buttons vertically */
 }
-  
+
 h1 {
   font-size: 24px; /* Adjust size as needed */
   color: #333; /* Dark text color */
@@ -70,7 +76,7 @@ h1 {
   flex-grow: 1; /* Allows the title to take up the available space */
   margin-top: 2rem;
 }
-  
+
 .overlay {
   /* Assuming the overlay is a centered container for your directory */
   width: 90%; /* Adjust based on your layout */
@@ -82,3 +88,6 @@ h1 {
   height: 100%;
 }
   /* Add styles for the search filter, sort dropdown, add employee button, and action buttons */
+p {
+  margin-top: 10%;
+}

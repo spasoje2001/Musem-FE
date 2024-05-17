@@ -108,6 +108,18 @@
 
 
       <button 
+            class="feat-button"
+            *ngIf="user && user.role === 'CURATOR'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['items-for-display-view']" 
+      >         
+      <fa-icon [icon]="faArchive" />    
+      &nbsp;Items for displaying
+      </button>
+
+
+      <button 
               class="feat-button"
               *ngIf="user && user.username === ''" 
               color="white"
