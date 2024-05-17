@@ -2,19 +2,19 @@
 <div class="modal-container">
   <div class="prompt" >
     <h1>Put item into room</h1>
-    <button type="submit"  [@buttonState]="selectRoombuttonState" (click)="selectRoomButtonClicked()">Select room</button>
+    <button type="submit" class="room-btn" [@buttonState]="selectRoombuttonState" (click)="selectRoomButtonClicked()">Select room</button>
 
     <div class="buttons">
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="putToRoomButtonClicked()"
-              [@buttonState]="acceptButtonState" 
+              [@buttonState]="acceptButtonState"
               >Put
       </button>
-      <button type="submit" 
+      <button type="submit"
               class="btn"
               (click)="cancelButtonClicked()"
-              [@buttonState]="cancelButtonState" 
+              [@buttonState]="cancelButtonState"
               >Cancel
       </button>
     </div>
