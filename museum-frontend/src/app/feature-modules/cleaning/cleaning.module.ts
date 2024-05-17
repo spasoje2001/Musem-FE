@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from 'src/app/infrastructure/material/material-module';
 import { AcceptCleaningPromptComponent } from './accept-cleaning-prompt/accept-cleaning-prompt.component';
 import { DeclineCleaningPromptComponent } from './decline-cleaning-prompt/decline-cleaning-prompt.component';
+import { CleaningReportPromptComponent } from './cleaning-report-prompt/cleaning-report-prompt.component';
 
 
 
@@ -22,7 +23,8 @@ import { DeclineCleaningPromptComponent } from './decline-cleaning-prompt/declin
     CleaningHandlingViewComponent,
     CleaningProposalCardComponent,
     AcceptCleaningPromptComponent,
-    DeclineCleaningPromptComponent
+    DeclineCleaningPromptComponent,
+    CleaningReportPromptComponent
   ],
   imports: [
     CommonModule,

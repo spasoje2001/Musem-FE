@@ -25,6 +25,12 @@
           <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning || item.cleaning.status.toString() == 'REJECTED'">
                 Write proposal
           </button>
+          <button (click)="putToCleaning(item.cleaning!.id || 0)" class="action-button" *ngIf="item.cleaning! && item.cleaning!.status.toString() == 'APPROVED'">
+            Put to cleaning
+          </button>
+          <button (click)="finishCleaning(item.cleaning!.id || 0)" class="action-button" *ngIf="item.cleaning! && item.cleaning!.status.toString() == 'INCLEANING'">
+            Finish cleaning
+          </button>
           <!-- ... action buttons ... -->
         </td>
       </tr>

@@ -7,6 +7,9 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MaterialModule } from "src/app/infrastructure/material/material-module";
 import { ArtifactCardComponent } from './artifact-card/artifact-card.component';
+import { ArtifactForDisplayComponent } from './artifact-for-display/artifact-for-display.component';
+import { EditArtifactComponent } from './edit-artifact/edit-artifact.component';
+import { PutArtifactIntoRoomPromptComponent } from './put-artifact-into-room-prompt/put-artifact-into-room-prompt.component';
 
 
 @NgModule({
@@ -14,6 +17,9 @@ import { ArtifactCardComponent } from './artifact-card/artifact-card.component';
       ArtifactsComponent,
       ArtifactFormComponent,
       ArtifactCardComponent,
+      ArtifactForDisplayComponent,
+      EditArtifactComponent,
+      PutArtifactIntoRoomPromptComponent,
     ],
     imports: [
       CommonModule,
