@@ -22,6 +22,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ExhibitionChoosingDialogueComponent } from './components/exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
 import { CuratorChoosingDialogueComponent } from './components/curator-choosing-dialogue/curator-choosing-dialogue.component';
 import { TourPricelistViewComponent } from './components/tour-pricelist-view/tour-pricelist-view.component';
+import { DenialExplanationComponent } from './components/denial-explanation/denial-explanation.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TourPricelistViewComponent } from './components/tour-pricelist-view/tou
     EditTourFormComponent,
     ExhibitionChoosingDialogueComponent,
     CuratorChoosingDialogueComponent,
-    TourPricelistViewComponent
+    TourPricelistViewComponent,
+    DenialExplanationComponent
   ],
   imports: [
     CommonModule,

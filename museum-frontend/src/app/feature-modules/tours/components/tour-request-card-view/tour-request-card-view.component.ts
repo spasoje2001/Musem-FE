@@ -10,6 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ToursService } from '../../tours.service';
 import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
 import {Exhibition} from "../../../exhibitions/model/exhibition.model";
+import {DenialExplanationComponent} from "../denial-explanation/denial-explanation.component";
 
 @Component({
   selector: 'xp-tour-request-card-view',
@@ -33,6 +34,7 @@ import {Exhibition} from "../../../exhibitions/model/exhibition.model";
 export class TourRequestCardViewComponent implements OnInit{
   acceptButtonState: string = 'idle';
   declineButtonState: string = 'idle';
+  seeExplanationButtonState: string = 'idle';
   @Input() request!: PersonalTourRequest;
   private dialogRef: any;
   user: User | undefined;
@@ -87,6 +89,14 @@ export class TourRequestCardViewComponent implements OnInit{
     });
     this.dialogRef.afterClosed().subscribe((result: any) => {
       this.dialogRefClosed.emit(result);
+    });
+  }
+
+  seeExplanationButtonClicked(request: PersonalTourRequest) {
+    this.seeExplanationButtonState = 'clicked';
+    setTimeout(() => { this.seeExplanationButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(DenialExplanationComponent, {
+      data: request
     });
   }
 
