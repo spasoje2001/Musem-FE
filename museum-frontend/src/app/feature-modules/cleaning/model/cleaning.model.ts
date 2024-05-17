@@ -10,6 +10,7 @@ export interface Cleaning {
     curator?: Curator;
     status : CleaningStatus;
     itemId?: number;
+    denialReason?: string;
 }
 
 export enum CleaningStatus{

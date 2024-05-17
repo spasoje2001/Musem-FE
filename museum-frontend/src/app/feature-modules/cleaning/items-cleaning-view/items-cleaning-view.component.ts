@@ -9,6 +9,7 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { ItemsService } from '../../items/items.service';
 import { CleaningReportPromptComponent } from '../cleaning-report-prompt/cleaning-report-prompt.component';
+import {RejectReasonComponent} from "../reject-reason/reject-reason.component";
 
 @Component({
   selector: 'app-items-cleaning-view',
@@ -33,8 +34,8 @@ export class ItemsCleaningViewComponent {
 
   private dialogRef: any;
   items: Item[] = [];
-  acceptButtonState: string = 'idle';   
-  declineButtonState: string = 'idle'; 
+  acceptButtonState: string = 'idle';
+  declineButtonState: string = 'idle';
   @Input() cleaning!: Cleaning;
   @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
   user: User | undefined;
@@ -42,7 +43,7 @@ export class ItemsCleaningViewComponent {
   constructor(private dialog: MatDialog, private cleaningService: CleaningService, private authService: AuthService,private itemService: ItemsService){
     this.authService.user$.subscribe(user => {
       this.user = user;
-    }); 
+    });
   }
 
   ngOnInit(): void {
@@ -56,8 +57,8 @@ export class ItemsCleaningViewComponent {
   }
 
   writeProposal(itemId:number){
-    this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(CleaningProposalFormComponent, {
       data: itemId
     });
@@ -73,8 +74,8 @@ export class ItemsCleaningViewComponent {
   }
 
   putToCleaning(cleaningId:number){
-    this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
     this.cleaningService.putItemToCleaning(cleaningId).subscribe({
         next: () => {
           this.cleaningService.getItemsForCleaningHandling().subscribe({
@@ -86,13 +87,13 @@ export class ItemsCleaningViewComponent {
           });
         }
       });
-    
+
   }
 
   //PROMENITI DA BUDE PROMPT ZA PISANJE REPORTA
   finishCleaning(cleaningId:number){
-    /*this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    /*this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
     this.cleaningService.finishCleaning(cleaningId).subscribe({
         next: () => {
           this.cleaningService.getItemsForCleaningHandling().subscribe({
@@ -104,8 +105,8 @@ export class ItemsCleaningViewComponent {
           });
         }
       });*/
-      this.acceptButtonState = 'clicked'; 
-      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+      this.acceptButtonState = 'clicked';
+      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
       this.dialogRef = this.dialog.open(CleaningReportPromptComponent, {
         data: cleaningId
       });
@@ -121,5 +122,9 @@ export class ItemsCleaningViewComponent {
 
   }
 
-
+  seeReasonButtonClicked(cleaning: Cleaning) {
+    this.dialogRef = this.dialog.open(RejectReasonComponent, {
+      data: cleaning
+    });
+  }
 }
