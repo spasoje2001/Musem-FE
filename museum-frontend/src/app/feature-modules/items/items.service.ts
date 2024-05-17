@@ -23,4 +23,9 @@ export class ItemsService {
   getItem(itemId : number) : Observable<Item>{
     return this.http.get<Item>(environment.apiHost + 'items/' + itemId);
   }
+
+  searchItemsByName(name: string): Observable<Item> {
+    return this.http.get<Item>(environment.apiHost + 'items/search/' + name);
+  }
+
 }
