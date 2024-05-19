@@ -5,6 +5,9 @@ import { Cleaning } from './model/cleaning.model';
 import { environment } from 'src/env/environment';
 import { Observable } from 'rxjs';
 import { Item } from '../items/model/item.model';
+import { CleaningReport } from './model/cleaningReport.model';
+import {CleaningDeclineModel} from "./model/cleaning-decline.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,8 @@ export class CleaningService {
 
   constructor(private http: HttpClient,private router: Router) { }
 
-  declineCleaning(cleaningId : number, curatorId : number): Observable<Cleaning> {
-    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/decline/' + cleaningId + '/' + curatorId, null);
+  declineCleaning(cleaning: CleaningDeclineModel): Observable<Cleaning> {
+    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/decline', cleaning);
   }
 
   acceptCleaning(cleaningId : number, curatorId : number): Observable<Cleaning> {
@@ -31,5 +34,17 @@ export class CleaningService {
 
   getItemsForCleaningHandling() : Observable<Item>{
     return this.http.get<Item>(environment.apiHost + 'items/forCleaning');
+  }
+
+  putItemToCleaning(cleaningId : number): Observable<Cleaning> {
+    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/putToCleaning/' + cleaningId, null);
+  }
+
+  finishCleaning(cleaningId : number): Observable<Cleaning> {
+    return this.http.put<Cleaning>(environment.apiHost + 'cleaning/finishCleaning/' + cleaningId, null);
+  }
+
+  writeReport(cleaningReport : CleaningReport) : Observable<CleaningReport> {
+      return this.http.post<CleaningReport>(environment.apiHost + 'cleaningReport', cleaningReport);
   }
 }

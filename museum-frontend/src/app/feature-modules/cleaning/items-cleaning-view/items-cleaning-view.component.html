@@ -7,8 +7,9 @@
         <th>Author</th>
         <th>Period</th>
         <th>Category</th>
+        <th>Status</th>
         <th>Action</th>
-        
+        <th>Reject reason</th>
       </tr>
     </thead>
     <tbody>
@@ -21,11 +22,30 @@
         <td>{{ item.authorsName }}</td>
         <td>{{ item.period }}</td>
         <td>{{ item.category }}</td>
+        <td>
+          <p *ngIf="!item.cleaning?.status"> NEW </p>
+          <p *ngIf="item.cleaning?.status?.toString() != 'NEW'">{{ item.cleaning?.status }} </p>
+          <p *ngIf="item.cleaning?.status?.toString() == 'NEW'"> PROPOSED </p>
+        </td>
         <td class="employee-actions">
-          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning || item.cleaning.status.toString() == 'REJECTED'">
+          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="!item.cleaning">
                 Write proposal
           </button>
+          <button (click)="writeProposal(item.id || 0)" class="action-button" *ngIf="item.cleaning?.status!.toString() == 'REJECTED'">
+            Write proposal again
+          </button>
+          <button (click)="putToCleaning(item.cleaning!.id || 0)" class="action-button" *ngIf="item.cleaning! && item.cleaning!.status.toString() == 'APPROVED'">
+            Put to cleaning
+          </button>
+          <button (click)="finishCleaning(item.cleaning!.id || 0)" class="action-button" *ngIf="item.cleaning! && item.cleaning!.status.toString() == 'INCLEANING'">
+            Finish cleaning
+          </button>
+          <p *ngIf="item.cleaning?.status?.toString() == 'NEW'">None available</p>
           <!-- ... action buttons ... -->
+        </td>
+        <td>
+          <p *ngIf="item.cleaning?.status?.toString() != 'REJECTED'">None</p>
+          <button *ngIf="item.cleaning?.status?.toString() == 'REJECTED'" class="action-button" (click)="seeReasonButtonClicked(item.cleaning!)">See reason</button>
         </td>
       </tr>
     </tbody>
