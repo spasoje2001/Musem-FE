@@ -39,6 +39,7 @@ import { UpdateEventComponent } from './feature-modules/events/update-event/upda
 import { InviteCuratorComponent } from './feature-modules/events/invite-curator/invite-curator.component';
 import { EventPicturesComponent } from './feature-modules/events/event-pictures/event-pictures.component';
 import { DeletablePhotoComponent } from './feature-modules/events/deletable-photo/deletable-photo.component';
+import { DeclinationExplanationComponent } from './feature-modules/events/declination-explanation/declination-explanation.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { DeletablePhotoComponent } from './feature-modules/events/deletable-phot
     InviteCuratorComponent,
     EventPicturesComponent,
     DeletablePhotoComponent,
+    DeclinationExplanationComponent,
   ],
   imports: [
     BrowserModule,

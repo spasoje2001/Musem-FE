@@ -9,6 +9,7 @@ import { EventPicturesComponent } from './event-pictures/event-pictures.componen
 import { EventsComponent } from './events/events.component';
 import { OragnizerEventCardComponent } from './oragnizer-event-card/oragnizer-event-card.component';
 import { UpdateEventComponent } from './update-event/update-event.component';
+import { DeclinationExplanationComponent } from './declination-explanation/declination-explanation.component';
 
 
 
@@ -21,7 +22,8 @@ import { UpdateEventComponent } from './update-event/update-event.component';
     EventPicturesComponent,
     EventsComponent,
     OragnizerEventCardComponent,
-    UpdateEventComponent
+    UpdateEventComponent,
+    DeclinationExplanationComponent
   ],
   imports: [
     CommonModule,

@@ -36,12 +36,11 @@ export class InviteCuratorComponent {
         next: (result) => {
           this.usernameExists = result.value;
         }
-      }
-    );
+      });
+    }
   }
-}
 
-onInvite(): void {
+  onInvite(): void {
     const username = this.usernameForm.value.username;
     this.curatorService.getCuratorByUsername(username!).subscribe({
       next: (result) => {

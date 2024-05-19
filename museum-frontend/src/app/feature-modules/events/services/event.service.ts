@@ -6,6 +6,7 @@ import { Event } from '../model/event.model';
 import { NewEvent } from '../model/new-event.model';
 import { UpdatedEvent } from '../model/updated-event.model';
 import { EventInvitation } from '../model/event-invitation.model';
+import { EventInvitationDeclination } from '../model/event-invitation-declination.model';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,16 @@ export class EventService {
   getRespondedInvitations(): Observable<EventInvitation[]> {
     const path = this.invitationsBasePath + '/responded';
     return this.http.get<any>(path);
+  }
+  
+  acceptInvitation(eventInvitationId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/accept/' + eventInvitationId;
+    return this.http.patch<any>(path, {});
+  }
+  
+  declineInvitation(eventInvitationId: number, declinationExplanation: EventInvitationDeclination): Observable<any> {
+    const path = this.invitationsBasePath + '/decline/' + eventInvitationId;
+    return this.http.patch<any>(path, declinationExplanation);
   }
 
 }

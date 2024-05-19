@@ -39,7 +39,7 @@
         <div class="cards" *ngFor="let invitation of respondedEventInvitations">
             <div class="container organizer">
                 <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}} responded to your invitation: {{invitation.status}}.</p>
-                <p *ngIf="invitation.status === 'DECLINED'">kurac{{invitation.declinationExplanation}}</p>
+                <p *ngIf="invitation.status === 'DECLINED'">{{invitation.declinationExplanation}}</p>
             </div>
         </div>
 
