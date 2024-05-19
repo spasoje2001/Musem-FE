@@ -5,13 +5,16 @@ import { environment } from 'src/env/environment';
 import { Event } from '../model/event.model';
 import { NewEvent } from '../model/new-event.model';
 import { UpdatedEvent } from '../model/updated-event.model';
+import { EventInvitation } from '../model/event-invitation.model';
+import { EventInvitationDeclination } from '../model/event-invitation-declination.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  basePath = environment.apiHost + 'events'
+  basePath = environment.apiHost + 'events';
+  invitationsBasePath = this.basePath + '/invitations';
 
   constructor(
     private http: HttpClient,
@@ -50,6 +53,36 @@ export class EventService {
   updateEvent(updatedEvent: UpdatedEvent): Observable<any> {
     const path = this.basePath;
     return this.http.put<any>(path, updatedEvent);
+  }
+  
+  inviteParticipant(eventId: number, curatorId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/invite/' + eventId + '/' + curatorId;
+    return this.http.post<any>(path, {});
+  }
+  
+  getPendingInvitations(): Observable<EventInvitation[]> {
+    const path = this.invitationsBasePath + '/pending';
+    return this.http.get<any>(path);
+  }
+  
+  getRespondedInvitations(): Observable<EventInvitation[]> {
+    const path = this.invitationsBasePath + '/responded';
+    return this.http.get<any>(path);
+  }
+  
+  acceptInvitation(eventInvitationId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/accept/' + eventInvitationId;
+    return this.http.patch<any>(path, {});
+  }
+  
+  declineInvitation(eventInvitationId: number, declinationExplanation: EventInvitationDeclination): Observable<any> {
+    const path = this.invitationsBasePath + '/decline/' + eventInvitationId;
+    return this.http.patch<any>(path, declinationExplanation);
+  }
+
+  cancelInvitation(eventInvitationId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/cancel/' + eventInvitationId;
+    return this.http.delete<any>(path);
   }
 
 }

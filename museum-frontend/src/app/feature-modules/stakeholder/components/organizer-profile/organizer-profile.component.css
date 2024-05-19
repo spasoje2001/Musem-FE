@@ -7,14 +7,14 @@
     font-size: xx-large;
 }
 
-.events-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.events-header button {
+.header button {
     font-size: x-large;
     
     background-color: transparent;
@@ -28,9 +28,53 @@
     width: 2.5rem;
 }
 
-.event-cards {
+.cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 1rem;
+}
+
+
+/* cards */
+.organizer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.container-cards img.edit, .buttons button {
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.container-cards {
+    width: 100%;
+    background-color: rgb(124, 124, 124);
+    color: white;
+    
+    display: flex;
+    flex-direction: row;
+    
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    color: white;
+}
+
+.container-cards p {
+    width: 100%;
+    font-size: 1rem;
+    color: white;
 }

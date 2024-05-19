@@ -13,6 +13,7 @@ export class OrganizerEventCardComponent {
   @Output() deleted: EventEmitter<Event> = new EventEmitter<Event>();
   @Output() published: EventEmitter<Event> = new EventEmitter<Event>();
   @Output() archived: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() invitedParticipant: EventEmitter<Event> = new EventEmitter<Event>();
 
 
   onDeleteClick(): void {
@@ -25,6 +26,10 @@ export class OrganizerEventCardComponent {
 
   onArchiveClick(): void {
     this.archived.emit(this.event);
+  }
+
+  onInviteParticipant(): void {
+    this.invitedParticipant.emit(this.event);
   }
 
 }

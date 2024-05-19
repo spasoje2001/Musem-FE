@@ -36,8 +36,10 @@ import { OrganizerEventCardComponent } from './feature-modules/events/oragnizer-
 import { EventInfoComponent } from './feature-modules/events/event-info/event-info.component';
 import { CreateEventComponent } from './feature-modules/events/create-event/create-event.component';
 import { UpdateEventComponent } from './feature-modules/events/update-event/update-event.component';
+import { InviteCuratorComponent } from './feature-modules/events/invite-curator/invite-curator.component';
 import { EventPicturesComponent } from './feature-modules/events/event-pictures/event-pictures.component';
 import { DeletablePhotoComponent } from './feature-modules/events/deletable-photo/deletable-photo.component';
+import { DeclinationExplanationComponent } from './feature-modules/events/declination-explanation/declination-explanation.component';
 
 
 @NgModule({
@@ -61,8 +63,10 @@ import { DeletablePhotoComponent } from './feature-modules/events/deletable-phot
     EventInfoComponent,
     CreateEventComponent,
     UpdateEventComponent,
+    InviteCuratorComponent,
     EventPicturesComponent,
     DeletablePhotoComponent,
+    DeclinationExplanationComponent,
   ],
   imports: [
     BrowserModule,
