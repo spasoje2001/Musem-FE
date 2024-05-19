@@ -80,4 +80,9 @@ export class EventService {
     return this.http.patch<any>(path, declinationExplanation);
   }
 
+  cancelInvitation(eventInvitationId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/cancel/' + eventInvitationId;
+    return this.http.delete<any>(path);
+  }
+
 }

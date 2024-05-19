@@ -42,9 +42,21 @@
     grid-template-columns: 1fr auto;
 }
 
-.container img.edit, .buttons button {
+.container-cards img.edit, .buttons button {
     height: 1.5rem;
     cursor: pointer;
+}
+
+.container-cards {
+    width: 100%;
+    background-color: rgb(124, 124, 124);
+    color: white;
+    
+    display: flex;
+    flex-direction: row;
+    
+    border-radius: 1rem;
+    padding: 2rem;
 }
 
 .buttons {
@@ -58,8 +70,11 @@
     background-color: transparent;
     border: none;
     font-size: 1rem;
+    color: white;
 }
 
-.cards p {
+.container-cards p {
+    width: 100%;
     font-size: 1rem;
+    color: white;
 }

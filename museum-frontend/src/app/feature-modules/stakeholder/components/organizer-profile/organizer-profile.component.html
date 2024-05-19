@@ -25,8 +25,11 @@
             <h1>Pending invitations</h1>
         </div>
         <div class="cards" *ngFor="let invitation of pendingEventInvitations">
-            <div class="container organizer">
+            <div class="container-cards organizer">
                 <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}}: {{invitation.event.name}}.</p>
+                <div class="buttons">
+                    <button (click)="onCancel(invitation)">Cancel</button>
+                </div>
             </div>
         </div>
     </div>

@@ -79,6 +79,14 @@ export class OrganizerProfileComponent implements OnInit {
     })
   }
 
+  onCancel(eventInvitation: EventInvitation): void {
+    this.eventService.cancelInvitation(eventInvitation.id).subscribe({
+      next: (result) => {
+        this.loadData();
+      }
+    })
+  }
+
   onInviteParticipant(event: Event): void {
     const dialogRef = this.dialog.open(InviteCuratorComponent, {
       data: {
