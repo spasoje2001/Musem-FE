@@ -16,7 +16,7 @@
         </div>
     
         <div class="cards" *ngFor="let event of events">
-            <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)" (invitedParticipant)="onInviteParticipant($event)"></app-oragnizer-event-card>
+            <app-organizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)" (invitedParticipant)="onInviteParticipant($event)"></app-organizer-event-card>
         </div>
     </div>
 
