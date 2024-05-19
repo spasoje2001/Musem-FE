@@ -6,6 +6,7 @@ import { Event } from 'src/app/feature-modules/events/model/event.model';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteCuratorComponent } from 'src/app/feature-modules/events/invite-curator/invite-curator.component';
+import { EventInvitation } from 'src/app/feature-modules/events/model/event-invitation.model';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -16,6 +17,8 @@ export class OrganizerProfileComponent implements OnInit {
 
   organizer?: Organizer;
   events: Event[] = [];
+  respondedEventInvitations: EventInvitation[] = [];
+  pendingEventInvitations: EventInvitation[] = [];
 
   constructor(
     private guestService: OrganizerService,
@@ -32,11 +35,29 @@ export class OrganizerProfileComponent implements OnInit {
       this.organizer = organizer;
       this.loadEvents();
     });
+    this.loadPendingInvites();
+    this.loadRespondedInvites();
   }
 
   loadEvents(): void {
     this.eventService.getEventsByOrganizer().subscribe(events => {
       this.events = events;
+    })
+  }
+
+  loadPendingInvites(): void {
+    this.eventService.getPendingInvitations().subscribe({
+      next: (result) => {
+        this.pendingEventInvitations = result;
+      }
+    })
+  }
+
+  loadRespondedInvites(): void {
+    this.eventService.getRespondedInvitations().subscribe({
+      next: (result) => {
+        this.respondedEventInvitations = result;
+      }
     })
   }
 
@@ -59,11 +80,17 @@ export class OrganizerProfileComponent implements OnInit {
   }
 
   onInviteParticipant(event: Event): void {
-    this.dialog.open(InviteCuratorComponent, {
+    const dialogRef = this.dialog.open(InviteCuratorComponent, {
       data: {
         event: event
       }
     });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        this.loadData();
+      }
+    })
   }
 
 }

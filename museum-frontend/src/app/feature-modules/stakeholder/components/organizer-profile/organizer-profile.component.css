@@ -34,3 +34,32 @@
     justify-content: space-between;
     margin-bottom: 1rem;
 }
+
+
+/* cards */
+.organizer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.container img.edit, .buttons button {
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+}
+
+.cards p {
+    font-size: 1rem;
+}

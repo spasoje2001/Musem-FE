@@ -10,6 +10,4 @@ export class EventInfoComponent {
 
   @Input() event?: Event;
 
-  
-
 }

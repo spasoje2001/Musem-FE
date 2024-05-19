@@ -5,6 +5,7 @@ import { environment } from 'src/env/environment';
 import { Event } from '../model/event.model';
 import { NewEvent } from '../model/new-event.model';
 import { UpdatedEvent } from '../model/updated-event.model';
+import { EventInvitation } from '../model/event-invitation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,16 @@ export class EventService {
   inviteParticipant(eventId: number, curatorId: number): Observable<any> {
     const path = this.invitationsBasePath + '/invite/' + eventId + '/' + curatorId;
     return this.http.post<any>(path, {});
+  }
+  
+  getPendingInvitations(): Observable<EventInvitation[]> {
+    const path = this.invitationsBasePath + '/pending';
+    return this.http.get<any>(path);
+  }
+  
+  getRespondedInvitations(): Observable<EventInvitation[]> {
+    const path = this.invitationsBasePath + '/responded';
+    return this.http.get<any>(path);
   }
 
 }

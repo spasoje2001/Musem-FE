@@ -24,20 +24,25 @@
         <div class="header">
             <h1>Pending invitations</h1>
         </div>
-
-        <div class="cards">
-
-        </div>  
+        <div class="cards" *ngFor="let invitation of pendingEventInvitations">
+            <div class="container organizer">
+                <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}}: {{invitation.event.name}}.</p>
+            </div>
+        </div>
     </div>
 
     <div>
         <div class="header">
             <h1>Responded invitations</h1>
-        </div>
-
-        <div class="cards">
 
         </div>
+        <div class="cards" *ngFor="let invitation of respondedEventInvitations">
+            <div class="container organizer">
+                <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}} responded to your invitation: {{invitation.status}}.</p>
+                <p *ngIf="invitation.status === 'DECLINED'">kurac{{invitation.declinationExplanation}}</p>
+            </div>
+        </div>
+
     </div>
 
     
