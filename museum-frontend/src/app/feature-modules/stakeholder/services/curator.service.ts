@@ -6,6 +6,7 @@ import { AuthenticationResponse } from 'src/app/infrastructure/auth/model/authen
 import { environment } from 'src/env/environment';
 import { CuratorEditProfile } from '../model/curator-edit-profile.model';
 import { Curator } from '../model/curator.model';
+import { BooleanResponseDTO } from '../model/boolean-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,16 @@ export class CuratorService {
   getCuratorById(id: number): Observable<Curator> {
     const path = this.basePath + '/' + id;
     return this.http.get<Curator>(path);
+  }
+
+  getCuratorByUsername(username: string): Observable<Curator> {
+    const path = this.basePath + '/by-username/' + username;
+    return this.http.get<Curator>(path);
+  }
+
+  existsByUsername(username: string): Observable<BooleanResponseDTO> {
+    const path = this.basePath + '/exists-by-username/' + username;
+    return this.http.get<BooleanResponseDTO>(path);
   }
 
   getLoggedInCurator(): Observable<Curator> {

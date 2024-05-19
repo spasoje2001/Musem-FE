@@ -7,14 +7,14 @@
     font-size: xx-large;
 }
 
-.events-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.events-header button {
+.header button {
     font-size: x-large;
     
     background-color: transparent;
@@ -28,7 +28,7 @@
     width: 2.5rem;
 }
 
-.event-cards {
+.cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

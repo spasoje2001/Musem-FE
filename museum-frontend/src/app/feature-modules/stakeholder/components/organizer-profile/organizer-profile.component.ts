@@ -4,6 +4,8 @@ import { OrganizerService } from '../../services/organizer.service';
 import { EventService } from 'src/app/feature-modules/events/services/event.service';
 import { Event } from 'src/app/feature-modules/events/model/event.model';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { InviteCuratorComponent } from 'src/app/feature-modules/events/invite-curator/invite-curator.component';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -18,7 +20,7 @@ export class OrganizerProfileComponent implements OnInit {
   constructor(
     private guestService: OrganizerService,
     private eventService: EventService,
-    private router: Router
+    private dialog: MatDialog
   ) { }
   
   ngOnInit(): void {
@@ -54,6 +56,14 @@ export class OrganizerProfileComponent implements OnInit {
     this.eventService.archiveEvent(event).subscribe(() => {
       this.loadEvents();
     })
+  }
+
+  onInviteParticipant(event: Event): void {
+    this.dialog.open(InviteCuratorComponent, {
+      data: {
+        event: event
+      }
+    });
   }
 
 }

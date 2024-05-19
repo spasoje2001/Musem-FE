@@ -9,13 +9,36 @@
         <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
 
-    <div class="events-header">
-        <h1>My events</h1>
-        <button [routerLink]="['/events/create']">+</button>
+    <div>
+        <div class="header">
+            <h1>My events</h1>
+            <button [routerLink]="['/events/create']">+</button>
+        </div>
+    
+        <div class="cards" *ngFor="let event of events">
+            <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)" (invitedParticipant)="onInviteParticipant($event)"></app-oragnizer-event-card>
+        </div>
     </div>
 
-    <div class="event-cards" *ngFor="let event of events">
-        <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)"></app-oragnizer-event-card>
+    <div>
+        <div class="header">
+            <h1>Pending invitations</h1>
+        </div>
+
+        <div class="cards">
+
+        </div>  
     </div>
+
+    <div>
+        <div class="header">
+            <h1>Responded invitations</h1>
+        </div>
+
+        <div class="cards">
+
+        </div>
+    </div>
+
     
 </div>

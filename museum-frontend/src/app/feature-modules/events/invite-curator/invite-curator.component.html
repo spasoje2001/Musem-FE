@@ -1,0 +1,9 @@
+<form [formGroup]="usernameForm" (ngSubmit)="onInvite()">
+    <div class="wrapper">
+        <input placeholder="Curator name" id="username" formControlName="username" autocomplete="off" (input)="onChange()">
+        <button [disabled]="usernameForm.invalid || !usernameExists">Invite</button>
+    </div>
+    <div class="errors" *ngIf="usernameForm.controls['username'].dirty">
+        <p *ngIf="!usernameExists">This curator's username doesn't exist.</p>
+    </div>
+</form>

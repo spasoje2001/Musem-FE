@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    padding: 2rem;
+}

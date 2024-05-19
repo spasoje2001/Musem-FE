@@ -97,7 +97,7 @@ label.required::after {
     color: rgb(200, 0, 0);
 }
 
-.form button {
+button {
     border-radius: 0.5rem;
     border: 0;
     color: white;

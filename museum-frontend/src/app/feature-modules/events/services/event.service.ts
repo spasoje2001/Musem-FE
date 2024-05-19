@@ -11,7 +11,8 @@ import { UpdatedEvent } from '../model/updated-event.model';
 })
 export class EventService {
 
-  basePath = environment.apiHost + 'events'
+  basePath = environment.apiHost + 'events';
+  invitationsBasePath = this.basePath + '/invitations';
 
   constructor(
     private http: HttpClient,
@@ -50,6 +51,11 @@ export class EventService {
   updateEvent(updatedEvent: UpdatedEvent): Observable<any> {
     const path = this.basePath;
     return this.http.put<any>(path, updatedEvent);
+  }
+  
+  inviteParticipant(eventId: number, curatorId: number): Observable<any> {
+    const path = this.invitationsBasePath + '/invite/' + eventId + '/' + curatorId;
+    return this.http.post<any>(path, {});
   }
 
 }
