@@ -13,8 +13,9 @@ import { Room } from '../model/room.model';
 })
 export class CreateEventComponent implements OnInit {
 
-  rooms: Room[] = []
+  rooms: Room[] = [];
   selectedRoom?: Room;
+  pictures: string[] = [];
 
   eventForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -55,6 +56,7 @@ export class CreateEventComponent implements OnInit {
       ticketsNumber: this.eventForm.value.ticketsNumber || 0,
       price: this.eventForm.value.ticketsNumber || 0,
       roomId: this.selectedRoom?.id || 0,
+      picturePaths: this.pictures || []
     }
 
     this.eventService.saveEvent(newEvent).subscribe({
@@ -66,10 +68,6 @@ export class CreateEventComponent implements OnInit {
 
   discard(): void {
     this.router.navigate(['/profile'])
-  }
-
-  onChange(): void {
-    console.log('promjena');
   }
 
 }

@@ -1,0 +1,14 @@
+<div class="elements">
+    <div class="mini-form">
+        <div class="input-group">
+            <label for="start-date-time">Images</label>
+            <div class="sub-form">
+                <input type="text" id="image_url" autocomplete="off" #imageUrlInput>
+                <button (click)="onClick(imageUrlInput.value)">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="images">
+        <app-deletable-photo *ngFor="let photo of photos" [photo]="photo" (deleted)="onDeleted($event)"></app-deletable-photo>
+    </div>
+</div>
