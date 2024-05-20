@@ -9,13 +9,44 @@
         <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
 
-    <div class="events-header">
-        <h1>My events</h1>
-        <button [routerLink]="['/events/create']">+</button>
+    <div>
+        <div class="header">
+            <h1>My events</h1>
+            <button [routerLink]="['/events/create']">+</button>
+        </div>
+    
+        <div class="cards" *ngFor="let event of events">
+            <app-organizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)" (invitedParticipant)="onInviteParticipant($event)"></app-organizer-event-card>
+        </div>
     </div>
 
-    <div class="event-cards" *ngFor="let event of events">
-        <app-oragnizer-event-card [event]="event" (deleted)="onDelete($event)" (published)="onPublish($event)" (archived)="onArchive($event)"></app-oragnizer-event-card>
+    <div>
+        <div class="header">
+            <h1>Pending invitations</h1>
+        </div>
+        <div class="cards" *ngFor="let invitation of pendingEventInvitations">
+            <div class="container-cards organizer">
+                <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}}: {{invitation.event.name}}.</p>
+                <div class="buttons">
+                    <button (click)="onCancel(invitation)">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div>
+        <div class="header">
+            <h1>Responded invitations</h1>
+
+        </div>
+        <div class="cards" *ngFor="let invitation of respondedEventInvitations">
+            <div class="container organizer">
+                <p>{{invitation.curator.firstName}} {{invitation.curator.lastName}} responded to your invitation: {{invitation.status}}.</p>
+                <p *ngIf="invitation.status === 'DECLINED'">{{invitation.declinationExplanation}}</p>
+            </div>
+        </div>
+
+    </div>
+
     
 </div>

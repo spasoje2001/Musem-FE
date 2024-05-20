@@ -1,12 +1,18 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Inject, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {TourPricelist} from "../../model/tourPricelist.model";
+import {CuratorChoosingDialogueComponent} from "../curator-choosing-dialogue/curator-choosing-dialogue.component";
+import {
+  ExhibitionChoosingDialogueComponent
+} from "../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component";
+import {Exhibition} from "../../../exhibitions/model/exhibition.model";
 
 @Component({
   selector: 'app-edit-tour-form',
@@ -28,19 +34,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class EditTourFormComponent implements OnChanges{
-  buttonState: string = 'idle'; 
+  buttonState: string = 'idle';
+  selectCuratorbuttonState: string = 'idle';
+  selectRoutebuttonState: string = 'idle';
   focused: string = '';
-  minDate: string;  
+  minDate: string;
   tourImage: string | null = null;
   tourImageFile: File | null = null;
   curators: Curator[] = [];
-  selectedCurator: Curator | undefined;
+  selectedCurator: Curator[] = [];
+  selectedExhibitions: Exhibition[] = [];
   @Input() tour: Tour;
+  tourPricelist: TourPricelist | undefined;
+  private ownDialogRef: any;
 
-  constructor(private toursService: ToursService, 
+  constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<AddTourFormComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialog: MatDialog,) {
     this.tour = data;
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
@@ -51,6 +63,12 @@ export class EditTourFormComponent implements OnChanges{
           this.curators = result;
           console.log(this.curators);
         }
+      }
+    })
+
+    this.toursService.getTourPricelist().subscribe({
+      next: (result: TourPricelist) => {
+        this.tourPricelist = result;
       }
     })
 
@@ -77,8 +95,6 @@ export class EditTourFormComponent implements OnChanges{
     //duration: new FormControl('', [Validators.required]),
     occurrenceTime: new FormControl(null, [Validators.required]),
     occurrenceDate: new FormControl(null, [Validators.required]),
-    adultTicketPrice: new FormControl('', [Validators.required]),
-    minorTicketPrice: new FormControl('', [Validators.required]),
     //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
@@ -89,8 +105,8 @@ export class EditTourFormComponent implements OnChanges{
       name: this.editTourForm.value.name || "",
       description: this.editTourForm.value.description || "",
       occurrenceDateTime: this.editTourForm.value.occurrenceDate || new Date(),
-      adultTicketPrice: this.editTourForm.value.adultTicketPrice || "",
-      minorTicketPrice: this.editTourForm.value.minorTicketPrice || "",
+      adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
+      minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
       capacity: this.editTourForm.value.capacity || "",
       picturePath: this.editTourForm.value.picturePath || "",
     };
@@ -98,15 +114,15 @@ export class EditTourFormComponent implements OnChanges{
         tour.id = this.tour.id;
         console.log(tour);
 
-        this.buttonState = 'clicked'; 
-        setTimeout(() => { this.buttonState = 'idle'; }, 200); 
+        this.buttonState = 'clicked';
+        setTimeout(() => { this.buttonState = 'idle'; }, 200);
 
         if(this.editTourForm.value.occurrenceDate && this.editTourForm.value.occurrenceTime){
-          // Postavi datum i vreme 
+          // Postavi datum i vreme
           const dateValue: Date | null = this.editTourForm.value.occurrenceDate!;
           const timeValue: string | null = this.editTourForm.value.occurrenceTime!;
 
-          const [hours, minutes] = (timeValue as string).split(':'); 
+          const [hours, minutes] = (timeValue as string).split(':');
           const dateTime = new Date(dateValue);
           dateTime.setHours(Number(hours) + 1);
           dateTime.setMinutes(Number(minutes));
@@ -121,14 +137,21 @@ export class EditTourFormComponent implements OnChanges{
           tour.occurrenceDateTime = this.tour.occurrenceDateTime;
         }
 
-        if(this.selectedCurator != null){
-          tour.guideId = this.selectedCurator.id;
+        if(this.selectedCurator.length != 0){
+          tour.guideId = this.selectedCurator[0].id;
         }
         else{
           tour.guideId = this.tour.guide?.id;
         }
 
-        // za sad ovako dok s ene dodaju sobe
+        if(this.selectedExhibitions.length != 0){
+          tour.exhibitions = this.selectedExhibitions;
+        }
+        else{
+          tour.exhibitions = this.tour.exhibitions;
+        }
+
+        // setuje se na beku
         tour.duration = "0";
         this.toursService.updateTour(tour).subscribe({
           next: () => {
@@ -138,39 +161,33 @@ export class EditTourFormComponent implements OnChanges{
         });
   }
 
-  uploadImageButtonClicked() {
-
-  }
-
   selectRouteButtonClicked() {
-    
+    this.selectRoutebuttonState = 'clicked';
+    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
+      data: this.selectedExhibitions
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+    });
   }
 
-  onSelectImage(event: Event) {
-    const element = event.currentTarget as HTMLInputElement;
-    if (element.files && element.files[0]) {
-        this.tourImageFile = element.files[0];
-
-        const reader = new FileReader();
-
-        reader.readAsDataURL(this.tourImageFile);
-        reader.onload = (e: ProgressEvent<FileReader>) => {
-            this.tourImage = reader.result as string;
-            //this.addTourForm.value.picturePath = "";
-        };
-    }
-  }
-
-  onChooseClicked(curator: Curator){
-    this.selectedCurator = curator;
-    this.showNotification('Curator successfully chosen!')
+  selectCuratorButtonClicked() {
+    this.selectCuratorbuttonState = 'clicked';
+    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
+      data: this.selectedCurator
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si kuratora: ' + this.selectedCurator);
+    });
   }
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 

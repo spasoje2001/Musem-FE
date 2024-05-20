@@ -28,7 +28,20 @@
         <label for="category">Category:</label>
         <p class="category">{{item.category}}</p>
       </div>
-
+      <button *ngIf="user && user.role === 'CURATOR'"
+      class="btn"
+      (click)="editButtonClicked();$event.stopPropagation()"
+      [@buttonState]="editButtonState"
+      >
+          Edit
+      </button>
+      <button *ngIf="user && user.role === 'CURATOR'"
+      class="btn"
+      (click)="putIntoRoomButtonClicked(item!.id || 0);$event.stopPropagation()"
+      [@buttonState]="putIntoRoomButtonState"
+      >
+        Put into room
+      </button>
     </div>
   </div>
   

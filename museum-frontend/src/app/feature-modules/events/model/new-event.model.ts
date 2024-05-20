@@ -6,4 +6,5 @@ export interface NewEvent {
     ticketsNumber: number;
     price: number;
     roomId: number;
+    picturePaths: string[];
 }

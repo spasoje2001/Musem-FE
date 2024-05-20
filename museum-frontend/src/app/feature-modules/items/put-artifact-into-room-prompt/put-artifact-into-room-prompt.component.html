@@ -1,0 +1,22 @@
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="modal-container">
+  <div class="prompt" >
+    <h1>Put item into room</h1>
+    <button type="submit" class="room-btn" [@buttonState]="selectRoombuttonState" (click)="selectRoomButtonClicked()">Select room</button>
+
+    <div class="buttons">
+      <button type="submit"
+              class="btn"
+              (click)="putToRoomButtonClicked()"
+              [@buttonState]="acceptButtonState"
+              >Put
+      </button>
+      <button type="submit"
+              class="btn"
+              (click)="cancelButtonClicked()"
+              [@buttonState]="cancelButtonState"
+              >Cancel
+      </button>
+    </div>
+  </div>
+</div>

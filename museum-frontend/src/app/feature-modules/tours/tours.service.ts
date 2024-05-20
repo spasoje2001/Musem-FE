@@ -7,6 +7,8 @@ import { Curator } from "../stakeholder/model/curator.model";
 import { PersonalTourRequest } from "./model/personalTourRequest.model";
 import { PersonalTour } from "./model/personalTour.model";
 import { Guest } from "../stakeholder/model/guest.model";
+import { TourPricelist } from "./model/tourPricelist.model";
+import {Organizer} from "../stakeholder/model/organizer.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +36,17 @@ export class ToursService {
   getCurators(): Observable<Curator>{
     return this.http.get<Curator>(environment.apiHost + 'users/curators');
   }
-  
+
   getCuratorById(curatorId: number): Observable<Curator>{
     return this.http.get<Curator>(environment.apiHost + 'users/curators/' + curatorId);
   }
 
   getOrganizersTours(organizerId: number): Observable<Tour> {
     return this.http.get<Tour>(environment.apiHost + 'tours/organizers/' + organizerId);
+  }
+
+  getOrganizerById(organizerId: number): Observable<Organizer>{
+    return this.http.get<Organizer>(environment.apiHost + 'users/organizers/' + organizerId);
   }
 
   addTourRequest(request: PersonalTourRequest): Observable<PersonalTourRequest> {
@@ -70,4 +76,13 @@ export class ToursService {
   addPersonalTour(tour: PersonalTour): Observable<PersonalTour> {
     return this.http.post<PersonalTour>(environment.apiHost + 'personalTours', tour);
   }
+
+  getTourPricelist(): Observable<TourPricelist> {
+    return this.http.get<TourPricelist>(environment.apiHost + 'tourPricelists');
+  }
+
+  updateTourPricelist(pricelist: TourPricelist): Observable<TourPricelist> {
+    return this.http.put<TourPricelist>(environment.apiHost + 'tourPricelists', pricelist);
+  }
+
 }

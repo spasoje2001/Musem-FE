@@ -1,10 +1,15 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CleaningService } from '../cleaning.service';
 import { Item } from '../../items/model/item.model';
 import { CleaningProposalFormComponent } from '../cleaning-proposal-form/cleaning-proposal-form.component';
-import { CleaningStatus } from '../model/cleaning.model';
+import { Cleaning, CleaningStatus } from '../model/cleaning.model';
+import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { AuthService } from 'src/app/infrastructure/auth/auth.service';
+import { ItemsService } from '../../items/items.service';
+import { CleaningReportPromptComponent } from '../cleaning-report-prompt/cleaning-report-prompt.component';
+import {RejectReasonComponent} from "../reject-reason/reject-reason.component";
 
 @Component({
   selector: 'app-items-cleaning-view',
@@ -29,10 +34,16 @@ export class ItemsCleaningViewComponent {
 
   private dialogRef: any;
   items: Item[] = [];
-  acceptButtonState: string = 'idle';   
-  declineButtonState: string = 'idle'; 
-  constructor(private dialog: MatDialog, private cleaningService: CleaningService){
+  acceptButtonState: string = 'idle';
+  declineButtonState: string = 'idle';
+  @Input() cleaning!: Cleaning;
+  @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
+  user: User | undefined;
 
+  constructor(private dialog: MatDialog, private cleaningService: CleaningService, private authService: AuthService,private itemService: ItemsService){
+    this.authService.user$.subscribe(user => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {
@@ -46,8 +57,8 @@ export class ItemsCleaningViewComponent {
   }
 
   writeProposal(itemId:number){
-    this.acceptButtonState = 'clicked'; 
-    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(CleaningProposalFormComponent, {
       data: itemId
     });
@@ -62,4 +73,58 @@ export class ItemsCleaningViewComponent {
     });
   }
 
+  putToCleaning(cleaningId:number){
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
+    this.cleaningService.putItemToCleaning(cleaningId).subscribe({
+        next: () => {
+          this.cleaningService.getItemsForCleaningHandling().subscribe({
+            next: (result: Item[] | Item) => {
+              if(Array.isArray(result)){
+                this.items = result;
+              }
+            }
+          });
+        }
+      });
+
+  }
+
+  //PROMENITI DA BUDE PROMPT ZA PISANJE REPORTA
+  finishCleaning(cleaningId:number){
+    /*this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
+    this.cleaningService.finishCleaning(cleaningId).subscribe({
+        next: () => {
+          this.cleaningService.getItemsForCleaningHandling().subscribe({
+            next: (result: Item[] | Item) => {
+              if(Array.isArray(result)){
+                this.items = result;
+              }
+            }
+          });
+        }
+      });*/
+      this.acceptButtonState = 'clicked';
+      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
+      this.dialogRef = this.dialog.open(CleaningReportPromptComponent, {
+        data: cleaningId
+      });
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.cleaningService.getItemsForCleaningHandling().subscribe({
+          next: (result: Item[] | Item) => {
+            if(Array.isArray(result)){
+              this.items = result;
+            }
+          }
+        });
+      });
+
+  }
+
+  seeReasonButtonClicked(cleaning: Cleaning) {
+    this.dialogRef = this.dialog.open(RejectReasonComponent, {
+      data: cleaning
+    });
+  }
 }

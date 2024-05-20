@@ -42,8 +42,8 @@
 }
 
 .btn:hover {
-  background-color: #f2f2f2; 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  background-color: #f2f2f2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1.03);
   transition: transform 300ms ease;
 }
@@ -54,7 +54,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .modal-container {
@@ -62,8 +62,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1001; 
-  background-color: rgba(255, 255, 255, .1); 
+  z-index: 1001;
+  background-color: rgba(255, 255, 255, .1);
   padding: 20px;
   backdrop-filter: blur(15px);
   color: #fff;
@@ -92,8 +92,8 @@
 }
 
 .curator-choosing button:hover{
-  background-color: rgb(172, 172, 172); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  background-color: rgb(172, 172, 172);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1.03);
   transition: transform 300ms ease;
 }
@@ -139,39 +139,9 @@
   font-size: 20px;
 }
 
-.input-box label {
-  position: absolute;
-  transform: translateY(-50%);
-  transition: all 0.3s ease;
-  color: rgba(0, 0, 0, 0.7);
-  pointer-events: none;
+.input-box label{
+  margin-left: 5px;
 }
-
-.input-box, .adult label {
-  top: 239px;
-  left: 70px;
-}
-
-.input-box, .minor label {
-  top: 239px;
-  left: 300px;
-}
-
-.input-box, .adult input:focus + label,
-.input-box, .adult label.active {
-  top: 209px;
-  left: 60px;
-  font-size: 13px;
-  color: #fff;
-}
-
-.input-box, .minor input:focus + label,
-.input-box, .minor label.active {
-  top: 209px;
-  left: 290px;
-  font-size: 13px;
-  color: #fff;
-} 
 
 .ticket-prices {
   display: flex;
@@ -179,4 +149,38 @@
   justify-content: center;
   gap: 30px;
   margin-top: 20px;
+}
+
+.display-value {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 40px;
+  width: 200px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #1b1b1b;
+}
+
+.submit-btn {
+  margin-top: 5%;
+  margin-left: 7%;
+  width: 86%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #1b1b1b;
+  font-weight: 600;
+}
+
+.submit-btn:hover {
+  background-color: rgb(172, 172, 172);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  transition: transform 300ms ease;
 }

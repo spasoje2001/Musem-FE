@@ -32,10 +32,14 @@ import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.mod
 import { CleaningModule } from './feature-modules/cleaning/cleaning.module';
 import { EventCardComponent } from './feature-modules/events/event-card/event-card.component';
 import { EventsComponent } from './feature-modules/events/events/events.component';
-import { OragnizerEventCardComponent } from './feature-modules/events/oragnizer-event-card/oragnizer-event-card.component';
+import { OrganizerEventCardComponent } from './feature-modules/events/oragnizer-event-card/organizer-event-card.component';
 import { EventInfoComponent } from './feature-modules/events/event-info/event-info.component';
 import { CreateEventComponent } from './feature-modules/events/create-event/create-event.component';
 import { UpdateEventComponent } from './feature-modules/events/update-event/update-event.component';
+import { InviteCuratorComponent } from './feature-modules/events/invite-curator/invite-curator.component';
+import { EventPicturesComponent } from './feature-modules/events/event-pictures/event-pictures.component';
+import { DeletablePhotoComponent } from './feature-modules/events/deletable-photo/deletable-photo.component';
+import { DeclinationExplanationComponent } from './feature-modules/events/declination-explanation/declination-explanation.component';
 
 
 @NgModule({
@@ -55,10 +59,14 @@ import { UpdateEventComponent } from './feature-modules/events/update-event/upda
     AdministratorProfileComponent,
     EventCardComponent,
     EventsComponent,
-    OragnizerEventCardComponent,
+    OrganizerEventCardComponent,
     EventInfoComponent,
     CreateEventComponent,
     UpdateEventComponent,
+    InviteCuratorComponent,
+    EventPicturesComponent,
+    DeletablePhotoComponent,
+    DeclinationExplanationComponent,
   ],
   imports: [
     BrowserModule,

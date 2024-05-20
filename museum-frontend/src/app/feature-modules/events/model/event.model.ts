@@ -1,4 +1,5 @@
 import { Organizer } from "../../stakeholder/model/organizer.model";
+import { EventPicture } from "./event-picture.model";
 import { RoomReservation } from "./room-reservation.model";
 
 export interface Event {
@@ -11,6 +12,7 @@ export interface Event {
     price: number;
     organizer: Organizer;
     createdDateTime: string;
-    roomReservation: RoomReservation
-    status: string
+    roomReservation: RoomReservation;
+    status: string;
+    pictures: EventPicture[];
 }

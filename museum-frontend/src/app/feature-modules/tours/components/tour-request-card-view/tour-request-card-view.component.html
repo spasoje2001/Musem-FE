@@ -21,16 +21,26 @@
                 </div>
                 <div class="tour-rooms-occupied">
                   <div class="tour-rooms-value">
-                      <strong>Exhibitions: </strong> TO DO :/
+                      <strong>Exhibitions: </strong> {{ exhibitionsString }}
                   </div>
                 </div>
             </div>
+
             <div class="tour-card-right">
                 <div class="request-status-value"
                      *ngIf="this.user?.role === 'GUEST'"
                 >
                     <strong>Status: </strong> &nbsp; {{ request.status.toString() }}
-                </div>  
+                </div>
+
+                <button
+                  class="btn"
+                  *ngIf="user?.role == 'GUEST' && request.status.toString() == 'DECLINED'"
+                  (click)="seeExplanationButtonClicked(request);$event.stopPropagation()"
+                  [@buttonState]="seeExplanationButtonState"
+                >
+                  &nbsp;See denial explanation
+                </button>
 
                 <button
                     class="btn"

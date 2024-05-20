@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from '../model/event.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Room } from '../model/room.model';
-import { NewEvent } from '../model/new-event.model';
 import { UpdatedEvent } from '../model/updated-event.model';
 
 @Component({
@@ -18,6 +17,7 @@ export class UpdateEventComponent implements OnInit {
   event?: Event;
   rooms: Room[] = []
   selectedRoom?: Room;
+  pictures: string[] = [];
 
   eventForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -63,6 +63,10 @@ export class UpdateEventComponent implements OnInit {
         this.eventForm.controls['price'].setValue(this.event.price);
         this.eventForm.controls['roomId'].setValue(this.event.roomReservation.room.id);
         this.eventForm.controls['description'].setValue(this.event.description);
+
+        this.event.pictures.forEach(picture => {
+          this.pictures.push(picture.path);
+        });
         
         this.loadAvailabeRooms();
       })
@@ -77,8 +81,9 @@ export class UpdateEventComponent implements OnInit {
       startDateTime: this.eventForm.value.startDateTime || '',
       durationMinutes: this.eventForm.value.durationMinutes || 0,
       ticketsNumber: this.eventForm.value.ticketsNumber || 0,
-      price: this.eventForm.value.ticketsNumber || 0,
+      price: this.eventForm.value.price || 0,
       roomId: this.selectedRoom?.id || 0,
+      picturePaths: this.pictures || []
     }
 
     this.eventService.updateEvent(updatedEvent).subscribe({

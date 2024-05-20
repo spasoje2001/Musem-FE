@@ -1,13 +1,13 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { Component, EventEmitter, HostListener, OnInit } from '@angular/core';
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Component, HostListener, OnInit } from '@angular/core';
+import { faPlus, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
-import { AddTourRequestFormComponent } from '../add-tour-request-form/add-tour-request-form.component';
+import { TourPricelistViewComponent } from '../tour-pricelist-view/tour-pricelist-view.component';
 
 @Component({
   selector: 'xp-tour-view',
@@ -41,7 +41,8 @@ export class TourViewComponent implements OnInit{
   tours: Tour[] = [];
   tour: Tour[] = [];
   user: User | undefined;
-  toursButtonState: string = "";
+  toursButtonState: string = "";  
+  pricelistButtonState: string = "";
   private dialogRef: any;
   backgroundSize: string = '100% 100%';
 
@@ -107,6 +108,13 @@ export class TourViewComponent implements OnInit{
     this.getTours();
   }
 
+  viewPricelistButtonClicked() {
+    this.pricelistButtonState = 'clicked'; 
+    setTimeout(() => { this.pricelistButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(TourPricelistViewComponent, {
+    });
+  }
+
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const scrollPosition = window.pageYOffset;
@@ -121,4 +129,5 @@ export class TourViewComponent implements OnInit{
   }
 
   faPlus = faPlus;
+  faMoneyBill = faMoneyBill;
 }

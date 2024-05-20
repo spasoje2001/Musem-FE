@@ -2,17 +2,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Event } from '../model/event.model';
 
 @Component({
-  selector: 'app-oragnizer-event-card',
-  templateUrl: './oragnizer-event-card.component.html',
-  styleUrls: ['./oragnizer-event-card.component.css', '../shared-styles.css']
+  selector: 'app-organizer-event-card',
+  templateUrl: './organizer-event-card.component.html',
+  styleUrls: ['./organizer-event-card.component.css', '../shared-styles.css']
 })
-export class OragnizerEventCardComponent {
+export class OrganizerEventCardComponent {
 
   @Input() event?: Event;
 
   @Output() deleted: EventEmitter<Event> = new EventEmitter<Event>();
   @Output() published: EventEmitter<Event> = new EventEmitter<Event>();
   @Output() archived: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() invitedParticipant: EventEmitter<Event> = new EventEmitter<Event>();
 
 
   onDeleteClick(): void {
@@ -25,6 +26,10 @@ export class OragnizerEventCardComponent {
 
   onArchiveClick(): void {
     this.archived.emit(this.event);
+  }
+
+  onInviteParticipant(): void {
+    this.invitedParticipant.emit(this.event);
   }
 
 }

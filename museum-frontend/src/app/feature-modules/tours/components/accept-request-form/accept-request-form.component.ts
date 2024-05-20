@@ -1,13 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PersonalTourRequest, PersonalTourRequestStatus } from '../../model/personalTourRequest.model';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { ToursService } from '../../tours.service';
 import { DeclineRequestPromptComponent } from '../decline-request-prompt/decline-request-prompt.component';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PersonalTour } from '../../model/personalTour.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TourPricelist } from "../../model/tourPricelist.model";
+import {CuratorChoosingDialogueComponent} from "../curator-choosing-dialogue/curator-choosing-dialogue.component";
 
 @Component({
   selector: 'app-accept-request-form',
@@ -29,17 +30,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class AcceptRequestFormComponent{
-  cancelButtonState: string = 'idle';   
-  acceptButtonState: string = 'idle'; 
+  cancelButtonState: string = 'idle';
+  acceptButtonState: string = 'idle';
+  selectCuratorbuttonState: string = 'idle';
   request: PersonalTourRequest | undefined;
   curators: Curator[] = [];
-  selectedCurator: Curator | undefined;
+  selectedCurator: Curator[] = [];
   focused: string = '';
+  tourPricelist: TourPricelist | undefined;
+  private ownDialogRef: any;
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
               private dialogRef: MatDialogRef<DeclineRequestPromptComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialog: MatDialog,) {
     this.request = data;
 
     this.toursService.getCurators().subscribe({
@@ -50,37 +55,32 @@ export class AcceptRequestFormComponent{
         }
       }
     })
-  }
 
-  acceptRequestForm = new FormGroup({
-    adultTicketPrice: new FormControl('', [Validators.required]),
-    minorTicketPrice: new FormControl('', [Validators.required]),
-  });
-
-  onChooseClicked(curator: Curator){
-    this.selectedCurator = curator;
-    this.showNotification('Curator successfully chosen!');
+    this.toursService.getTourPricelist().subscribe({
+      next: (result: TourPricelist) => {
+        this.tourPricelist = result;
+      }
+    })
   }
 
   acceptButtonClicked(){
-    if (this.acceptRequestForm.valid) {
-      this.acceptButtonState = 'clicked'; 
-      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200); 
+      this.acceptButtonState = 'clicked';
+      setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
 
       this.request!.status = PersonalTourRequestStatus.ACCEPTED;
-      
+
       this.toursService.updateTourRequest(this.request!).subscribe({
         next: () => {
 
           const tour: PersonalTour = {
             occurrenceDateTime: this.request!.occurrenceDateTime || new Date(),
-            adultTicketPrice: this.acceptRequestForm.value.adultTicketPrice?.toString() || "",
-            minorTicketPrice: this.acceptRequestForm.value.minorTicketPrice?.toString() || "",
+            adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
+            minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
             guestNumber: this.request!.guestNumber || "",
             proposerId: this.request!.proposerId || 0,
+            guideId: this.selectedCurator[0].id || 7,
             duration: "0",
-            //guideId: this.selectedCurator!.id || 7,
-            guideId: 7,
+            exhibitions: this.request?.exhibitions || []
           };
 
           this.toursService.addPersonalTour(tour).subscribe({
@@ -91,12 +91,22 @@ export class AcceptRequestFormComponent{
           })
         }
       });
-    }
+  }
+
+  selectCuratorButtonClicked() {
+    this.selectCuratorbuttonState = 'clicked';
+    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
+      data: this.selectedCurator
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si kuratora: ' + this.selectedCurator);
+    });
   }
 
   cancelButtonClicked(){
-    this.cancelButtonState = 'clicked'; 
-    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200); 
+    this.cancelButtonState = 'clicked';
+    setTimeout(() => { this.cancelButtonState = 'idle'; }, 200);
     this.dialogRef.close();
   }
 
@@ -106,9 +116,9 @@ export class AcceptRequestFormComponent{
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 

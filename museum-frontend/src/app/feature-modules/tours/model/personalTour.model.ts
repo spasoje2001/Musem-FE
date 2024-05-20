@@ -1,6 +1,7 @@
 import { Curator } from "../../stakeholder/model/curator.model";
 import { Guest } from "../../stakeholder/model/guest.model";
 import { Organizer } from "../../stakeholder/model/organizer.model";
+import {Exhibition} from "../../exhibitions/model/exhibition.model";
 
 export interface PersonalTour {
   id?: number;
@@ -15,4 +16,5 @@ export interface PersonalTour {
   organizerId?: number;
   organizer?: Organizer;
   guestNumber: string;
+  exhibitions?: Exhibition[];
 }

@@ -5,28 +5,28 @@
     overflow: hidden;
     margin-bottom: 20px;
   }
-  
+
   .image-container {
     width: 100%;
     height: 200px; /* Adjust height as needed */
     overflow: hidden;
   }
-  
+
   .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .info-container {
     padding: 20px;
   }
-  
+
   .item-name {
     font-size: 1.2em;
     margin-bottom: 5px;
   }
-  
+
   .description,
   .period,
   .category,
@@ -35,4 +35,13 @@
   .yearOfCreation {
     margin-bottom: 10px;
   }
-  
+
+.btn {
+  border: 0;
+  background: #FFFFFF;
+  margin-left: 15%;
+}
+
+.btn:hover {
+  color: #807f7f;
+}

@@ -1,11 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
 import { Tour } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component';
+import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
+import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/curator-choosing-dialogue.component';
+import {TourPricelist} from "../../model/tourPricelist.model";
 
 @Component({
   selector: 'app-add-tour-form',
@@ -27,32 +31,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class AddTourFormComponent implements OnInit{
-  buttonState: string = 'idle'; 
+  buttonState: string = 'idle';
+  selectCuratorbuttonState: string = 'idle';
+  selectRoutebuttonState: string = 'idle';
   focused: string = '';
-  minDate: string;  
-  tourImage: string | null = null;
-  tourImageFile: File | null = null;
-  curators: Curator[] = [];
-  selectedCurator: Curator | undefined;
+  minDate: string;
+  selectedCurator: Curator[] = [];
+  selectedExhibitions: Exhibition[] = [];
+  private ownDialogRef: any;
+  tourPricelist: TourPricelist | undefined;
 
-  constructor(private toursService: ToursService, 
+  constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
-              private dialogRef: MatDialogRef<AddTourFormComponent>) {
+              private dialogRef: MatDialogRef<AddTourFormComponent>,
+              private dialog: MatDialog,) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
-
-    this.toursService.getCurators().subscribe({
-      next: (result: Curator[] | Curator) => {
-        if (Array.isArray(result)) {
-          this.curators = result;
-          console.log(this.curators);
-        }
-      }
-    })
   }
 
   ngOnInit(): void {
-    
+    this.toursService.getTourPricelist().subscribe({
+      next: (result: TourPricelist) => {
+        this.tourPricelist = result;
+      }
+    })
   }
 
   addTourForm = new FormGroup({
@@ -61,8 +63,6 @@ export class AddTourFormComponent implements OnInit{
     //duration: new FormControl('', [Validators.required]),
     occurrenceTime: new FormControl(null, [Validators.required]),
     occurrenceDate: new FormControl(null, [Validators.required]),
-    adultTicketPrice: new FormControl('', [Validators.required]),
-    minorTicketPrice: new FormControl('', [Validators.required]),
     //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
@@ -73,8 +73,8 @@ export class AddTourFormComponent implements OnInit{
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       occurrenceDateTime: this.addTourForm.value.occurrenceDate || new Date(),
-      adultTicketPrice: this.addTourForm.value.adultTicketPrice || "",
-      minorTicketPrice: this.addTourForm.value.minorTicketPrice || "",
+      adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
+      minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
       capacity: this.addTourForm.value.capacity || "",
       picturePath: this.addTourForm.value.picturePath || "",
     };
@@ -82,14 +82,14 @@ export class AddTourFormComponent implements OnInit{
     console.log(tour);
 
     if (this.addTourForm.valid) {
-        this.buttonState = 'clicked'; 
-        setTimeout(() => { this.buttonState = 'idle'; }, 200); 
+        this.buttonState = 'clicked';
+        setTimeout(() => { this.buttonState = 'idle'; }, 200);
 
-        // Postavi datum i vreme 
+        // Postavi datum i vreme
         const dateValue: Date | null = this.addTourForm.value.occurrenceDate!;
         const timeValue: string | null = this.addTourForm.value.occurrenceTime!;
 
-        const [hours, minutes] = (timeValue as string).split(':'); 
+        const [hours, minutes] = (timeValue as string).split(':');
         const dateTime = new Date(dateValue);
         dateTime.setHours(Number(hours) + 1);
         dateTime.setMinutes(Number(minutes));
@@ -100,42 +100,63 @@ export class AddTourFormComponent implements OnInit{
 
         tour.occurrenceDateTime = dateTime;
 
-        if(this.selectedCurator != null){
-          //tour.guide = this.selectedCurator;
-          tour.guideId = this.selectedCurator.id;
-          // za sad ovako dok s ene dodaju sobe
-          tour.duration = "0";
-          this.toursService.addTour(tour).subscribe({
-            next: () => {
-              this.showNotification('Tour successfully added!')
-              this.dialogRef.close();
-            },
-          });
+        if(this.selectedCurator.length != 0){
+          tour.guideId = this.selectedCurator[0].id;
+          if(this.selectedExhibitions.length != 0){
+            tour.duration = (this.selectedExhibitions.length * 15).toString();
+            tour.exhibitions = this.selectedExhibitions;
+            this.toursService.addTour(tour).subscribe({
+              next: () => {
+                this.showNotification('Tour successfully added!')
+                this.dialogRef.close();
+              },
+            });
+          }
+          else{
+            this.showNotification('Please select at least one exhibition')
+          }
+        }
+        else{
+          this.showNotification('Please select a curator')
         }
     }
     else{
-      console.log('Add tour form not valid!'); // Treba dodati neki vid validacije
+      this.showNotification('Please fill out the form correctly')
     }
   }
 
   selectRouteButtonClicked() {
-    
+    this.selectRoutebuttonState = 'clicked';
+    setTimeout(() => { this.selectRoutebuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(ExhibitionChoosingDialogueComponent, {
+      data: this.selectedExhibitions
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+    });
   }
 
-  onChooseClicked(curator: Curator){
-    this.selectedCurator = curator;
-    this.showNotification('Curator successfully chosen!')
+  selectCuratorButtonClicked() {
+    this.selectCuratorbuttonState = 'clicked';
+    setTimeout(() => { this.selectCuratorbuttonState = 'idle'; }, 200);
+    this.ownDialogRef = this.dialog.open(CuratorChoosingDialogueComponent, {
+      data: this.selectedCurator
+    });
+    this.ownDialogRef.afterClosed().subscribe((result: any) => {
+      console.log('Odabrao si kuratora: ' + this.selectedCurator);
+    });
   }
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 
   overviewClicked(){
     this.dialogRef.close();
   }
+
 }
