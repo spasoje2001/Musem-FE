@@ -11,6 +11,7 @@ import { ItemsService } from '../../items/items.service';
 import { CleaningReportPromptComponent } from '../cleaning-report-prompt/cleaning-report-prompt.component';
 import {RejectReasonComponent} from "../reject-reason/reject-reason.component";
 import { PdfCleaningPromptComponent } from '../pdf-cleaning-prompt/pdf-cleaning-prompt.component';
+import { PdfPersonalCleaningPromptComponent } from '../pdf-personal-cleaning-prompt/pdf-personal-cleaning-prompt.component';
 
 @Component({
   selector: 'app-items-cleaning-view',
@@ -136,7 +137,7 @@ export class ItemsCleaningViewComponent {
   }
 
   seeReportMyButtonClick(){
-    
+    this.dialogRef = this.dialog.open(PdfPersonalCleaningPromptComponent, {});
   }
 
 }
