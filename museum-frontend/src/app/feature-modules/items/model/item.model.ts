@@ -1,4 +1,5 @@
 import { Cleaning } from "../../cleaning/model/cleaning.model";
+import { Room } from "./room.model";
 
 export interface Item {
     id?: number;
@@ -10,6 +11,7 @@ export interface Item {
     category : ItemCategory;
     picture :  string;
     cleaning?: Cleaning;
+    room? : Room;
   }
 
 export enum ItemCategory {

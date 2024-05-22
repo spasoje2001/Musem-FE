@@ -28,6 +28,12 @@
         <label for="category">Category:</label>
         <p class="category">{{item.category}}</p>
       </div>
+      <div class="info-row" *ngIf="user && user.role === 'CURATOR' && item.room">
+        <label for="room">Room:</label>
+        <p class="category">{{item.room!.name}}</p>
+        <label for="room">Number and floor:</label>
+        <p class="category">{{item.room!.number}} ,  {{item.room!.floor}}</p>
+      </div>
       <button *ngIf="user && user.role === 'CURATOR'"
       class="btn"
       (click)="editButtonClicked();$event.stopPropagation()"
