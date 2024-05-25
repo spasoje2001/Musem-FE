@@ -23,6 +23,8 @@ import { ExhibitionChoosingDialogueComponent } from './components/exhibition-cho
 import { CuratorChoosingDialogueComponent } from './components/curator-choosing-dialogue/curator-choosing-dialogue.component';
 import { TourPricelistViewComponent } from './components/tour-pricelist-view/tour-pricelist-view.component';
 import { DenialExplanationComponent } from './components/denial-explanation/denial-explanation.component';
+import { PdfHandledRequestsPromptComponent } from './components/pdf-handled-requests-prompt/pdf-handled-requests-prompt.component';
+import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf-requests-prompt.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { DenialExplanationComponent } from './components/denial-explanation/deni
     ExhibitionChoosingDialogueComponent,
     CuratorChoosingDialogueComponent,
     TourPricelistViewComponent,
-    DenialExplanationComponent
+    DenialExplanationComponent,
+    PdfHandledRequestsPromptComponent,
+    PdfRequestsPromptComponent
   ],
   imports: [
     CommonModule,
