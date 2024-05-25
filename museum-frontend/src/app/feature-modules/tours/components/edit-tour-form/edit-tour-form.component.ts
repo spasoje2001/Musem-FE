@@ -47,6 +47,8 @@ export class EditTourFormComponent implements OnChanges{
   @Input() tour: Tour;
   tourPricelist: TourPricelist | undefined;
   private ownDialogRef: any;
+  adultTicketPrice: string = "0";
+  minorTicketPrice: string = "0";
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
@@ -169,6 +171,11 @@ export class EditTourFormComponent implements OnChanges{
     });
     this.ownDialogRef.afterClosed().subscribe((result: any) => {
       console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+      this.adultTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.adultTicketPrice)).toString();
+      this.minorTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.minorTicketPrice)).toString();
+
+      console.log('Adult ticket price: ' + this.adultTicketPrice);
+      console.log('Minor ticket price: ' + this.minorTicketPrice);
     });
   }
 
