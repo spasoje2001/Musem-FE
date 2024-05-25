@@ -47,4 +47,17 @@ export class CleaningService {
   writeReport(cleaningReport : CleaningReport) : Observable<CleaningReport> {
       return this.http.post<CleaningReport>(environment.apiHost + 'cleaningReport', cleaningReport);
   }
+
+  seeGeneratedResport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/generate-pdf/' + userId, { responseType: 'blob' });
+  }
+
+  saveGeneratedResport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/save-pdf/' + userId, { responseType: 'blob' });
+  }
+
+  seeGeneratedPersonalReport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/generate-pdf-personal/' + userId, { responseType: 'blob' });
+  }
+  
 }

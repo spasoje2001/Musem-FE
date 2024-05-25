@@ -85,4 +85,16 @@ export class ToursService {
     return this.http.put<TourPricelist>(environment.apiHost + 'tourPricelists', pricelist);
   }
 
+  seeGeneratedReport() : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfRequest/generate-pdf', { responseType: 'blob' });
+  }
+
+  seeGeneratedPersonalReport() : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfRequest/generate-pdf-personal', { responseType: 'blob' });
+  }
+
+  saveGeneratedReport() : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfRequest/save-pdf', { responseType: 'blob' });
+  }
+
 }

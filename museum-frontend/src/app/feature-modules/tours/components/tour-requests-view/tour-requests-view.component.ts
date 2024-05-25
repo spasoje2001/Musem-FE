@@ -8,6 +8,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTourRequestFormComponent } from '../add-tour-request-form/add-tour-request-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {PdfHandledRequestsPromptComponent} from "../pdf-handled-requests-prompt/pdf-handled-requests-prompt.component";
+import {PdfRequestsPromptComponent} from "../pdf-requests-prompt/pdf-requests-prompt.component";
 
 @Component({
   selector: 'app-tour-requests-view',
@@ -42,6 +44,9 @@ export class TourRequestsViewComponent implements OnInit{
   backgroundSize: string = '100% 100%';
   requests: PersonalTourRequest[] = [];
   tourRequestsButtonState: string = "";
+  handledRequestsReportButtonState: string = "";
+  requestsReportButtonState: string = "";
+
   private dialogRef: any;
 
   constructor(private toursService: ToursService,
@@ -84,23 +89,49 @@ export class TourRequestsViewComponent implements OnInit{
   }
 
   addTourRequestButtonClicked() {
-    this.tourRequestsButtonState = 'clicked'; 
+    this.tourRequestsButtonState = 'clicked';
     setTimeout(() => { this.tourRequestsButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(AddTourRequestFormComponent, {
     });
 
     if (this.dialogRef) {
       this.dialogRef.afterClosed().subscribe((result: any) => {
-        this.getRequests();   
+        this.getRequests();
+      });
+    }
+  }
+
+  openHandledRequestsReportDialogue(): void {
+    this.handledRequestsReportButtonState = 'clicked';
+    setTimeout(() => { this.handledRequestsReportButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(PdfHandledRequestsPromptComponent, {
+    });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.getRequests();
+      });
+    }
+  }
+
+  openRequestsReportDialogue(): void {
+    this.requestsReportButtonState = 'clicked';
+    setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(PdfRequestsPromptComponent, {
+    });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.getRequests();
       });
     }
   }
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 
@@ -112,7 +143,7 @@ export class TourRequestsViewComponent implements OnInit{
 
     const scrollPercent = (scrollPosition / (docHeight - windowHeight)) * 100;
 
-    const zoom = 100 + scrollPercent * 0.3; 
+    const zoom = 100 + scrollPercent * 0.3;
 
     this.backgroundSize = `${zoom}% ${zoom}%`;
   }
