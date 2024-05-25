@@ -41,6 +41,21 @@
           <label [class.active]="addTourRequestForm.get('contactPhone')?.value || focused === 'contactPhone'">Contact phone number</label>
         </div>
 
+        <div class="ticket-prices">
+          <div class="input-box">
+            <div class="display-value">
+              {{ this.adultTicketPrice }}
+            </div>
+            <label [class.active]="true">Adult Ticket Price</label>
+          </div>
+          <div class="input-box">
+            <div class="display-value">
+              {{ this.minorTicketPrice }}
+            </div>
+            <label [class.active]="true">Minor Ticket Price</label>
+          </div>
+        </div>
+
         <button type="submit" class="submit-btn" [@buttonState]="routeButtonState" (click)="selectRouteButtonClicked()">Select route</button>
 
         <button type="submit" class="submit-btn" [@buttonState]="submitButtonState" (click)="addTourRequestButtonClicked()">Request</button>

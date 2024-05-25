@@ -40,6 +40,8 @@ export class AddTourFormComponent implements OnInit{
   selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
   tourPricelist: TourPricelist | undefined;
+  adultTicketPrice: string = "0";
+  minorTicketPrice: string = "0";
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
@@ -73,8 +75,8 @@ export class AddTourFormComponent implements OnInit{
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       occurrenceDateTime: this.addTourForm.value.occurrenceDate || new Date(),
-      adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
-      minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
+      adultTicketPrice: this.adultTicketPrice || "",
+      minorTicketPrice: this.minorTicketPrice || "",
       capacity: this.addTourForm.value.capacity || "",
       picturePath: this.addTourForm.value.picturePath || "",
     };
@@ -133,6 +135,11 @@ export class AddTourFormComponent implements OnInit{
     });
     this.ownDialogRef.afterClosed().subscribe((result: any) => {
       console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+      this.adultTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.adultTicketPrice)).toString();
+      this.minorTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.minorTicketPrice)).toString();
+
+      console.log('Adult ticket price: ' + this.adultTicketPrice);
+      console.log('Minor ticket price: ' + this.minorTicketPrice);
     });
   }
 
