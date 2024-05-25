@@ -96,5 +96,5 @@ export class ToursService {
   saveGeneratedReport() : Observable<Blob> {
     return this.http.get(environment.apiHost + 'pdfRequest/save-pdf', { responseType: 'blob' });
   }
-  
+
 }

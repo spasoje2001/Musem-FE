@@ -23,7 +23,7 @@
 
   <button *ngIf="user?.role === 'ORGANIZER'"
           type="submit"
-          class="add-tour-btn"
+          class="report-btn"
           (click)="openHandledRequestsReportDialogue()"
           [@buttonState]="tourRequestsButtonState">
     <fa-icon [icon]="faPlus" />
@@ -31,7 +31,7 @@
   </button>
   <button *ngIf="user?.role === 'ORGANIZER'"
           type="submit"
-          class="add-tour-btn"
+          class="report-btn"
           (click)="openRequestsReportDialogue()"
           [@buttonState]="requestsReportButtonState">
     <fa-icon [icon]="faPlus" />
