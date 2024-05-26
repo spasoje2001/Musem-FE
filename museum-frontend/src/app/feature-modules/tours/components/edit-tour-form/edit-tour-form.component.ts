@@ -3,7 +3,7 @@ import { Component, Inject, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
-import { Tour } from '../../model/tour.model';
+import {Tour, TourCategory} from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -100,9 +100,58 @@ export class EditTourFormComponent implements OnChanges{
     //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
   });
 
   editTourButtonClicked() {
+    const selectedCategoryString: string = this.editTourForm.value.category ?? '';
+    let selectedCategory: TourCategory;
+
+    switch (selectedCategoryString) {
+      case 'ART_COLLECTIONS':
+        selectedCategory = TourCategory.ArtCollections;
+        break;
+      case 'HISTORICAL_EXHIBITS':
+        selectedCategory = TourCategory.HistoricalExhibits;
+        break;
+      case 'SCIENCE_AND_TECHNOLOGY':
+        selectedCategory = TourCategory.ScienceAndTechnology;
+        break;
+      case 'CULTURAL_HERITAGE':
+        selectedCategory = TourCategory.CulturalHeritage;
+        break;
+      case 'ANCIENT_ART':
+        selectedCategory = TourCategory.AncientArt;
+        break;
+      case 'EUROPEAN_PAINTINGS':
+        selectedCategory = TourCategory.EuropeanPaintings;
+        break;
+      case 'MODERN_ART':
+        selectedCategory = TourCategory.ModernArt;
+        break;
+      case 'AMERICAN_ART':
+        selectedCategory = TourCategory.AmericanArt;
+        break;
+      case 'ASIAN_ART':
+        selectedCategory = TourCategory.AsianArt;
+        break;
+      case 'AFRICAN_CULTURE':
+        selectedCategory = TourCategory.AfricanCulture;
+        break;
+      case 'ISLAMIC_ART':
+        selectedCategory = TourCategory.IslamicArt;
+        break;
+      case 'COSTUME_INSTITUTE':
+        selectedCategory = TourCategory.CostumeInstitute;
+        break;
+      case 'ARMS_AND_ARMOR':
+        selectedCategory = TourCategory.ArmsAndArmor;
+        break;
+      default:
+        console.error("Invalid category selected.");
+        return;
+    }
+
     const tour: Tour = {
       name: this.editTourForm.value.name || "",
       description: this.editTourForm.value.description || "",
@@ -111,6 +160,7 @@ export class EditTourFormComponent implements OnChanges{
       minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
       capacity: this.editTourForm.value.capacity || "",
       picturePath: this.editTourForm.value.picturePath || "",
+      category: selectedCategory,
     };
 
         tour.id = this.tour.id;
