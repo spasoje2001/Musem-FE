@@ -1,18 +1,18 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Inject, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
-import {Tour, TourCategory} from '../../model/tour.model';
+import { Tour, TourCategory } from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { AddTourFormComponent } from '../add-tour-form/add-tour-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {TourPricelist} from "../../model/tourPricelist.model";
-import {CuratorChoosingDialogueComponent} from "../curator-choosing-dialogue/curator-choosing-dialogue.component";
+import { TourPricelist } from "../../model/tourPricelist.model";
+import { CuratorChoosingDialogueComponent } from "../curator-choosing-dialogue/curator-choosing-dialogue.component";
 import {
   ExhibitionChoosingDialogueComponent
 } from "../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component";
-import {Exhibition} from "../../../exhibitions/model/exhibition.model";
+import { Exhibition } from "../../../exhibitions/model/exhibition.model";
 
 @Component({
   selector: 'app-edit-tour-form',
@@ -39,8 +39,6 @@ export class EditTourFormComponent implements OnChanges{
   selectRoutebuttonState: string = 'idle';
   focused: string = '';
   minDate: string;
-  tourImage: string | null = null;
-  tourImageFile: File | null = null;
   curators: Curator[] = [];
   selectedCurator: Curator[] = [];
   selectedExhibitions: Exhibition[] = [];
