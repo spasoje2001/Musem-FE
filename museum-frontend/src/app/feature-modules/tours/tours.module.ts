@@ -25,6 +25,9 @@ import { TourPricelistViewComponent } from './components/tour-pricelist-view/tou
 import { DenialExplanationComponent } from './components/denial-explanation/denial-explanation.component';
 import { PdfHandledRequestsPromptComponent } from './components/pdf-handled-requests-prompt/pdf-handled-requests-prompt.component';
 import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf-requests-prompt.component';
+import {
+  ReserveTicketsDialogueComponent
+} from "./components/reserve-tickets-dialogue/reserve-tickets-dialogue.component";
 
 @NgModule({
   declarations: [
@@ -45,13 +48,14 @@ import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf
     TourPricelistViewComponent,
     DenialExplanationComponent,
     PdfHandledRequestsPromptComponent,
-    PdfRequestsPromptComponent
+    PdfRequestsPromptComponent,
+    ReserveTicketsDialogueComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FontAwesomeModule,  
+    FontAwesomeModule,
     MaterialModule,
     AdministrationModule,
     MatDatepickerModule,
@@ -63,6 +67,6 @@ import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf
     TourViewComponent
   ]
 })
-export class ToursModule { 
+export class ToursModule {
 
 }
