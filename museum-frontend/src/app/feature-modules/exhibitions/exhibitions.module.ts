@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ExhibitionsViewComponent } from './exhibitions-view/exhibitions-view.component';
 import { ExhibitionCardComponent } from './exhibition-card/exhibition-card.component';
 import { ExhibitionDetailsComponent } from './exhibition-details/exhibition-details.component';
+import { ProposeExhibitionComponent } from './propose-exhibition/propose-exhibition.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -10,9 +12,11 @@ import { ExhibitionDetailsComponent } from './exhibition-details/exhibition-deta
   declarations: [
     ExhibitionsViewComponent,
     ExhibitionCardComponent,
-    ExhibitionDetailsComponent
+    ExhibitionDetailsComponent,
+    ProposeExhibitionComponent
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule
   ],
   exports: [

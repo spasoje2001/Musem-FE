@@ -1,0 +1,103 @@
+/* Add the same or similar styles as the "Add tour" form */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .dialogue {
+    width: 32rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .wrapper {
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .input-box input,
+  .input-box select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .input-box label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    color: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+  }
+
+  .input-box input + label {
+    /* Position the label above the input */
+    position: absolute;
+    top: -5px; /* Adjust this value based on your design needs */
+    left: 0;
+    /* Ensure the label is smaller and styled to look like a placeholder */
+    font-size: 12px;
+    color: #aaa; /* Placeholder-like text color */
+    transition: all 0.3s ease;
+    pointer-events: none; /* To allow click events to pass through to the input */
+  }
+  
+  .input-box input:focus + label,
+  .input-box select:focus + label {
+    top: -8px;
+    font-size: 12px;
+    color: #3f51b5;
+  }
+  
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #303f9f;
+  }
+  
+  .submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Additional styles can be added based on your UI requirements */

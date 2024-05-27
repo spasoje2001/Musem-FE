@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteCuratorComponent } from 'src/app/feature-modules/events/invite-curator/invite-curator.component';
 import { EventInvitation } from 'src/app/feature-modules/events/model/event-invitation.model';
+import { ExhibitionsService } from 'src/app/feature-modules/exhibitions/exhibitions.service';
+import { ProposeExhibitionComponent } from 'src/app/feature-modules/exhibitions/propose-exhibition/propose-exhibition.component';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -19,6 +21,7 @@ export class OrganizerProfileComponent implements OnInit {
   events: Event[] = [];
   respondedEventInvitations: EventInvitation[] = [];
   pendingEventInvitations: EventInvitation[] = [];
+  isExhibitionProposalFormOpen = false;
 
   constructor(
     private guestService: OrganizerService,
@@ -99,6 +102,21 @@ export class OrganizerProfileComponent implements OnInit {
         this.loadData();
       }
     })
+  }
+
+  openExhibitionProposalForm() {
+    const dialogRef = this.dialog.open(ProposeExhibitionComponent, {
+      width: '250px',
+      data: {
+        organizerId: this.organizer!.id  // Pass the organizer's ID to the dialog
+      }
+      // Pass any required data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Handle the result from the dialog, which could be the new exhibition
+      console.log('The dialog was closed', result);
+    });
   }
 
 }
