@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { PersonalTourRequest } from '../../model/personalTourRequest.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DeclineRequestPromptComponent } from '../decline-request-prompt/decline-request-prompt.component';
@@ -9,8 +9,8 @@ import { AcceptRequestFormComponent } from '../accept-request-form/accept-reques
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ToursService } from '../../tours.service';
 import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
-import {Exhibition} from "../../../exhibitions/model/exhibition.model";
-import {DenialExplanationComponent} from "../denial-explanation/denial-explanation.component";
+import { Exhibition } from "../../../exhibitions/model/exhibition.model";
+import { DenialExplanationComponent } from "../denial-explanation/denial-explanation.component";
 
 @Component({
   selector: 'xp-tour-request-card-view',
@@ -35,6 +35,8 @@ export class TourRequestCardViewComponent implements OnInit{
   acceptButtonState: string = 'idle';
   declineButtonState: string = 'idle';
   seeExplanationButtonState: string = 'idle';
+  updateRequestButtonState: string = 'idle';
+  cancelRequestButtonState: string = 'idle';
   @Input() request!: PersonalTourRequest;
   private dialogRef: any;
   user: User | undefined;
@@ -100,6 +102,25 @@ export class TourRequestCardViewComponent implements OnInit{
     });
   }
 
+  updateRequestButtonClicked(request: PersonalTourRequest){
+    this.updateRequestButtonState = 'clicked';
+    setTimeout(() => { this.updateRequestButtonState = 'idle'; }, 200);
+
+  }
+
+  cancelRequestButtonClicked(request: PersonalTourRequest){
+    this.cancelRequestButtonState = 'clicked';
+    setTimeout(() => { this.cancelRequestButtonState = 'idle'; }, 200);
+
+    this.toursService.cancelTourRequest(request.id!).subscribe({
+      next: (response: any) => {
+        this.dialogRefClosed.emit(response);
+      }
+    })
+  }
+
   faCheck = faCheck;
   faTimes = faTimes;
+  faPen = faPen;
+  faTrash = faTrash;
 }
