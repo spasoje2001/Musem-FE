@@ -87,7 +87,7 @@ export class EditTourFormComponent implements OnChanges{
             picturePath: this.tour.picturePath || "",
           };
           this.editTourForm.patchValue(tourToPatch);
-        }
+  }
 
   editTourForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

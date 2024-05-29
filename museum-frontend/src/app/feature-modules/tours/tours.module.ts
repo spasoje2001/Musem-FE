@@ -28,6 +28,7 @@ import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf
 import {
   ReserveTicketsDialogueComponent
 } from "./components/reserve-tickets-dialogue/reserve-tickets-dialogue.component";
+import { EditTourRequestFormComponent } from './components/edit-tour-request-form/edit-tour-request-form.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {
     PdfHandledRequestsPromptComponent,
     PdfRequestsPromptComponent,
     ReserveTicketsDialogueComponent,
+    EditTourRequestFormComponent,
   ],
   imports: [
     CommonModule,
