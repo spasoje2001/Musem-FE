@@ -85,6 +85,16 @@
       </button>
 
       <button 
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['journal-view']" 
+      >         
+      <fa-icon [icon]="faArchive" />    
+      &nbsp;See cleaning journals
+      </button>
+
+      <button 
             class="feat-button"
             *ngIf="user && user.role === 'CURATOR'"
             color="white"

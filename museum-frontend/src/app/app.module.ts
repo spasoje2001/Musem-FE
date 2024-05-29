@@ -42,6 +42,7 @@ import { DeletablePhotoComponent } from './feature-modules/events/deletable-phot
 import { DeclinationExplanationComponent } from './feature-modules/events/declination-explanation/declination-explanation.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -67,6 +68,7 @@ import { DeclinationExplanationComponent } from './feature-modules/events/declin
     EventPicturesComponent,
     DeletablePhotoComponent,
     DeclinationExplanationComponent,
+
   ],
   imports: [
     BrowserModule,

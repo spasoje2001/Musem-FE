@@ -15,7 +15,7 @@ import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 import { CreateEventComponent } from "src/app/feature-modules/events/create-event/create-event.component";
 import { UpdateEventComponent } from "src/app/feature-modules/events/update-event/update-event.component";
-import { ArtifactForDisplayComponent } from "src/app/feature-modules/items/artifact-for-display/artifact-for-display.component";
+import { JournalComponent } from "src/app/feature-modules/cleaning/journal/journal.component";
 
 const routes: Routes = [
   { 
@@ -84,8 +84,8 @@ const routes: Routes = [
     component: UpdateEventComponent
   },
   {
-    path: 'items-for-display-view',
-    component: ArtifactForDisplayComponent
+    path: 'journal-view',
+    component: JournalComponent
   },
 ];
 
