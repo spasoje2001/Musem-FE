@@ -9,6 +9,7 @@ import { PersonalTour } from "./model/personalTour.model";
 import { Guest } from "../stakeholder/model/guest.model";
 import { TourPricelist } from "./model/tourPricelist.model";
 import {Organizer} from "../stakeholder/model/organizer.model";
+import {TourReservation} from "./model/tourReservation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,10 @@ export class ToursService {
 
   saveGeneratedReport() : Observable<Blob> {
     return this.http.get(environment.apiHost + 'pdfRequest/save-pdf', { responseType: 'blob' });
+  }
+
+  addTourReservation(reservation: TourReservation): Observable<TourReservation> {
+    return this.http.post<TourReservation>(environment.apiHost + 'tourReservations', reservation);
   }
 
 }

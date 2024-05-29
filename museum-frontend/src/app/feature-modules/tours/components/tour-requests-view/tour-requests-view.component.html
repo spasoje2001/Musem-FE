@@ -26,7 +26,6 @@
           class="report-btn"
           (click)="openHandledRequestsReportDialogue()"
           [@buttonState]="tourRequestsButtonState">
-    <fa-icon [icon]="faPlus" />
     View Personal Requests Report
   </button>
   <button *ngIf="user?.role === 'ORGANIZER'"
@@ -34,8 +33,7 @@
           class="report-btn"
           (click)="openRequestsReportDialogue()"
           [@buttonState]="requestsReportButtonState">
-    <fa-icon [icon]="faPlus" />
-    &nbsp;View Requests Report
+    &nbsp;View Total Requests Report
   </button>
 
   <div class="tour-search-results">
