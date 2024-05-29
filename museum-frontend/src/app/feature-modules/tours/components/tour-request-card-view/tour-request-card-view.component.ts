@@ -11,6 +11,7 @@ import { ToursService } from '../../tours.service';
 import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
 import { Exhibition } from "../../../exhibitions/model/exhibition.model";
 import { DenialExplanationComponent } from "../denial-explanation/denial-explanation.component";
+import {EditTourRequestFormComponent} from "../edit-tour-request-form/edit-tour-request-form.component";
 
 @Component({
   selector: 'xp-tour-request-card-view',
@@ -105,7 +106,12 @@ export class TourRequestCardViewComponent implements OnInit{
   updateRequestButtonClicked(request: PersonalTourRequest){
     this.updateRequestButtonState = 'clicked';
     setTimeout(() => { this.updateRequestButtonState = 'idle'; }, 200);
-
+    this.dialogRef = this.dialog.open(EditTourRequestFormComponent, {
+      data: request
+    });
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.dialogRefClosed.emit(result);
+    });
   }
 
   cancelRequestButtonClicked(request: PersonalTourRequest){
