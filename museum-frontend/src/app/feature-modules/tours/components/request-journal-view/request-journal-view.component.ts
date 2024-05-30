@@ -73,5 +73,5 @@ export class RequestJournalViewComponent implements OnInit {
   handleDialogClosed(result: any) {
     this.getEntries();
   }
-  
+
 }
