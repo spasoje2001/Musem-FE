@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Item } from '../items/model/item.model';
 import { CleaningReport } from './model/cleaningReport.model';
 import {CleaningDeclineModel} from "./model/cleaning-decline.model";
+import { CleaningJournal } from './model/cleaning-journal.model';
 
 
 @Injectable({
@@ -60,4 +61,8 @@ export class CleaningService {
     return this.http.get(environment.apiHost + 'pdfCleaning/generate-pdf-personal/' + userId, { responseType: 'blob' });
   }
   
+  getJournals(): Observable<CleaningJournal>{
+    return this.http.get<CleaningJournal>(environment.apiHost + 'cleaning/journal');
+  }
+
 }

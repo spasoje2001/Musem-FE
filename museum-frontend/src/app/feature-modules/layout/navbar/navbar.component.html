@@ -74,7 +74,6 @@
       &nbsp;Tour Requests
       </button>
 
-
       <button
         class="feat-button"
         *ngIf="user && user?.role === 'ORGANIZER' || user?.role === 'ADMIN'"
@@ -95,8 +94,18 @@
       <fa-icon [icon]="faArchive" />
       &nbsp;See items
       </button>
+      
+      <button 
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['journal-view']" 
+      >         
+      <fa-icon [icon]="faArchive" />    
+      &nbsp;See cleaning journals
+      </button>
 
-      <button
+      <button 
             class="feat-button"
             *ngIf="user && user.role === 'CURATOR'"
             color="white"
@@ -118,7 +127,6 @@
       &nbsp;Items for cleaning
       </button>
 
-
       <button
             class="feat-button"
             *ngIf="user && user.role === 'CURATOR'"
@@ -129,7 +137,6 @@
       <fa-icon [icon]="faArchive" />
       &nbsp;Items for displaying
       </button>
-
 
       <button
               class="feat-button"

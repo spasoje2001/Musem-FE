@@ -19,6 +19,7 @@ import { ArtifactForDisplayComponent } from "src/app/feature-modules/items/artif
 import {
   RequestJournalViewComponent
 } from "../../feature-modules/tours/components/request-journal-view/request-journal-view.component";
+import { JournalComponent } from "src/app/feature-modules/cleaning/journal/journal.component";
 
 const routes: Routes = [
   {
@@ -87,8 +88,8 @@ const routes: Routes = [
     component: UpdateEventComponent
   },
   {
-    path: 'items-for-display-view',
-    component: ArtifactForDisplayComponent
+    path: 'journal-view',
+    component: JournalComponent
   },
   {
     path: 'requests-journal-view',

@@ -16,6 +16,8 @@ import { CleaningReportPromptComponent } from './cleaning-report-prompt/cleaning
 import { RejectReasonComponent } from './reject-reason/reject-reason.component';
 import { PdfCleaningPromptComponent } from './pdf-cleaning-prompt/pdf-cleaning-prompt.component';
 import { PdfPersonalCleaningPromptComponent } from './pdf-personal-cleaning-prompt/pdf-personal-cleaning-prompt.component';
+import { CleaningJournalComponent } from './cleaning-journal/cleaning-journal.component';
+import { JournalComponent } from './journal/journal.component';
 
 
 
@@ -30,7 +32,9 @@ import { PdfPersonalCleaningPromptComponent } from './pdf-personal-cleaning-prom
     CleaningReportPromptComponent,
     RejectReasonComponent,
     PdfCleaningPromptComponent,
-    PdfPersonalCleaningPromptComponent
+    PdfPersonalCleaningPromptComponent,
+    CleaningJournalComponent,
+    JournalComponent  
   ],
   imports: [
     CommonModule,
