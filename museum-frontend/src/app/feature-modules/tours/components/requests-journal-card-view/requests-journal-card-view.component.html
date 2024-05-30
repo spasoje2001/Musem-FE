@@ -1,0 +1,44 @@
+<div
+  class="tour-card"
+>
+  <div class="tour-card-content">
+    <div class="tour-card-top">
+      <div class="tour-rooms-value">
+        <strong>Version: </strong> {{ this.journal.vers }}
+      </div>
+    </div>
+    <div class="tour-card-information">
+      <div class="tour-card-center">
+        <div class="tour-guide-value">
+          <strong>User: </strong> {{ journal.proposer?.firstName }} {{ journal.proposer?.lastName }}
+        </div>
+        <div class="tour-date">
+          <div class="tour-date-value">
+            <strong>Date and time: </strong> {{ this.tourOccurrenceDate }} {{ this.tourOccurrenceTime }} h
+          </div>
+        </div>
+        <div class="tour-capacity">
+          <div class="tour-capacity-value">
+            <strong>Guest number: </strong> {{ journal.guestNumber }} people
+          </div>
+        </div>
+        <div class="tour-rooms-occupied">
+          <div class="tour-rooms-value">
+            <strong>Modification date: </strong> {{ this.journalOccurrenceDate }} {{ this.journalOccurrenceTime }} h
+          </div>
+        </div>
+      </div>
+
+      <div class="tour-card-right">
+        <div class="request-status-value"
+        >
+          <strong>Last status: </strong> &nbsp; {{ journal.status.toString() }}
+        </div>
+        <div class="request-status-value"
+        >
+          <strong>Operation: </strong> &nbsp; {{ journal.operation }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

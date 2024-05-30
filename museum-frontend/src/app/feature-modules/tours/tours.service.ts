@@ -8,8 +8,9 @@ import { PersonalTourRequest } from "./model/personalTourRequest.model";
 import { PersonalTour } from "./model/personalTour.model";
 import { Guest } from "../stakeholder/model/guest.model";
 import { TourPricelist } from "./model/tourPricelist.model";
-import {Organizer} from "../stakeholder/model/organizer.model";
+import { Organizer } from "../stakeholder/model/organizer.model";
 import { TourReservation } from "./model/tourReservation.model";
+import { RequestsJournal } from "./model/requestsJournal.model";
 
 @Injectable({
   providedIn: 'root'
@@ -110,4 +111,7 @@ export class ToursService {
     return this.http.post<TourReservation>(environment.apiHost + 'tourReservations', reservation);
   }
 
+  getJournalEntries(): Observable<RequestsJournal> {
+    return this.http.get<RequestsJournal>(environment.apiHost + 'personalTourRequestsJournal');
+  }
 }

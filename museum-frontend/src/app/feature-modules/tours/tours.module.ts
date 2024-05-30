@@ -29,6 +29,8 @@ import {
   ReserveTicketsDialogueComponent
 } from "./components/reserve-tickets-dialogue/reserve-tickets-dialogue.component";
 import { EditTourRequestFormComponent } from './components/edit-tour-request-form/edit-tour-request-form.component';
+import { RequestJournalViewComponent } from './components/request-journal-view/request-journal-view.component';
+import { RequestsJournalCardViewComponent } from './components/requests-journal-card-view/requests-journal-card-view.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { EditTourRequestFormComponent } from './components/edit-tour-request-for
     PdfRequestsPromptComponent,
     ReserveTicketsDialogueComponent,
     EditTourRequestFormComponent,
+    RequestJournalViewComponent,
+    RequestsJournalCardViewComponent,
   ],
   imports: [
     CommonModule,

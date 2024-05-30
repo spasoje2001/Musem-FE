@@ -15,20 +15,24 @@ import { CleaningHandlingViewComponent } from "src/app/feature-modules/cleaning/
 import { ItemsCleaningViewComponent } from "src/app/feature-modules/cleaning/items-cleaning-view/items-cleaning-view.component";
 import { CreateEventComponent } from "src/app/feature-modules/events/create-event/create-event.component";
 import { UpdateEventComponent } from "src/app/feature-modules/events/update-event/update-event.component";
+import { ArtifactForDisplayComponent } from "src/app/feature-modules/items/artifact-for-display/artifact-for-display.component";
+import {
+  RequestJournalViewComponent
+} from "../../feature-modules/tours/components/request-journal-view/request-journal-view.component";
 import { JournalComponent } from "src/app/feature-modules/cleaning/journal/journal.component";
 
 const routes: Routes = [
-  { 
-    path: '', 
-    component: HomeComponent 
+  {
+    path: '',
+    component: HomeComponent
   },
-  { 
-    path: 'login', 
-    component: LoginComponent 
+  {
+    path: 'login',
+    component: LoginComponent
   },
-  { 
-    path: 'register', 
-    component: RegistrationComponent 
+  {
+    path: 'register',
+    component: RegistrationComponent
   },
   {
     path: 'employee-view',
@@ -86,6 +90,10 @@ const routes: Routes = [
   {
     path: 'journal-view',
     component: JournalComponent
+  },
+  {
+    path: 'requests-journal-view',
+    component: RequestJournalViewComponent
   },
 ];
 

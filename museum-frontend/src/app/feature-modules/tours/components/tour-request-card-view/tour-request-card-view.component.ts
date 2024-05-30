@@ -11,7 +11,7 @@ import { ToursService } from '../../tours.service';
 import { Guest } from 'src/app/feature-modules/stakeholder/model/guest.model';
 import { Exhibition } from "../../../exhibitions/model/exhibition.model";
 import { DenialExplanationComponent } from "../denial-explanation/denial-explanation.component";
-import {EditTourRequestFormComponent} from "../edit-tour-request-form/edit-tour-request-form.component";
+import { EditTourRequestFormComponent } from "../edit-tour-request-form/edit-tour-request-form.component";
 
 @Component({
   selector: 'xp-tour-request-card-view',
@@ -41,7 +41,7 @@ export class TourRequestCardViewComponent implements OnInit{
   @Input() request!: PersonalTourRequest;
   private dialogRef: any;
   user: User | undefined;
-  @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>(); // Define event emitter
+  @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
   tourOccurrenceTime: string = "";
   tourOccurrenceDate: string = "";
   exhibitionsString: string = "";
