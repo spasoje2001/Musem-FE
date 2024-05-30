@@ -2,7 +2,7 @@ import {PersonalTourRequest, PersonalTourRequestStatus} from "./personalTourRequ
 import {Guest} from "../../stakeholder/model/guest.model";
 import {Organizer} from "../../stakeholder/model/organizer.model";
 
-export interface RequestsJournalModel{
+export interface RequestsJournal {
   id: number;
   operation: string;
   guestNumber: string;
