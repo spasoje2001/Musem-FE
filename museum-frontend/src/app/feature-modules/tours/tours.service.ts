@@ -8,7 +8,9 @@ import { PersonalTourRequest } from "./model/personalTourRequest.model";
 import { PersonalTour } from "./model/personalTour.model";
 import { Guest } from "../stakeholder/model/guest.model";
 import { TourPricelist } from "./model/tourPricelist.model";
-import {Organizer} from "../stakeholder/model/organizer.model";
+import { Organizer } from "../stakeholder/model/organizer.model";
+import { TourReservation } from "./model/tourReservation.model";
+import { RequestsJournal } from "./model/requestsJournal.model";
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +56,15 @@ export class ToursService {
   }
 
   updateTourRequest(request: PersonalTourRequest): Observable<PersonalTourRequest> {
+    return this.http.put<PersonalTourRequest>(environment.apiHost + 'personalTourRequests/handle', request);
+  }
+
+  updateTourRequestAsGuest(request: PersonalTourRequest): Observable<PersonalTourRequest> {
     return this.http.put<PersonalTourRequest>(environment.apiHost + 'personalTourRequests', request);
+  }
+
+  cancelTourRequest(id: number): Observable<PersonalTourRequest> {
+    return this.http.delete<PersonalTourRequest>(environment.apiHost + `personalTourRequests/${id}`);
   }
 
   getGuestById(guestId: number): Observable<Guest>{
@@ -97,4 +107,11 @@ export class ToursService {
     return this.http.get(environment.apiHost + 'pdfRequest/save-pdf', { responseType: 'blob' });
   }
 
+  addTourReservation(reservation: TourReservation): Observable<TourReservation> {
+    return this.http.post<TourReservation>(environment.apiHost + 'tourReservations', reservation);
+  }
+
+  getJournalEntries(): Observable<RequestsJournal> {
+    return this.http.get<RequestsJournal>(environment.apiHost + 'personalTourRequestsJournal');
+  }
 }

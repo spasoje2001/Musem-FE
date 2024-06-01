@@ -1,0 +1,66 @@
+<div
+    class="tour-card"
+>
+    <div class="tour-card-content">
+        <div class="tour-card-top">
+        </div>
+        <div class="tour-card-information">
+
+            <div class="tour-card-center">
+                <div class="tour-guide-value">
+                    <strong>Restaurateur: </strong> {{ journal.restaurateur?.firstName }} {{ journal.restaurateur?.lastName }}
+                </div>
+                <div class="tour-date">
+                  <div class="tour-date-value">
+                    <strong>Start date: </strong> {{ journal.startDate }}
+                  </div>
+                  <div class="tour-date-value">
+                    <strong>End date: </strong> {{ journal.endDate }}
+                  </div>
+                </div>
+                <div class="tour-capacity">
+                  <div class="tour-capacity-value">
+                      <strong>Description: </strong> {{ journal.text }}
+                  </div>
+                </div>
+
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Status: </strong> {{ journal.status }}
+                    </div>
+                </div>
+
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Denial reason: </strong> {{ journal.denialReason }}
+                    </div>
+                </div> 
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Version: </strong> {{ journal.version }}
+                    </div>
+                </div>
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Finsih cleaning time: </strong> {{ journal.finishCleaningTime }}
+                    </div>
+                </div>
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Put item to cleaning time: </strong> {{ journal.putToCleaningTime }}
+                    </div>
+                </div>
+                <div class="tour-capacity">
+                    <div class="tour-capacity-value">
+                        <strong>Operation type: </strong> {{ journal.operationType }}
+                    </div>
+                </div>
+                <div class="tour-guide-value">
+                    <strong>Item name: </strong> {{ item?.name}}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

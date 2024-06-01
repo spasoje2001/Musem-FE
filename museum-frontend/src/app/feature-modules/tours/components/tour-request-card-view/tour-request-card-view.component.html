@@ -43,6 +43,26 @@
                 </button>
 
                 <button
+                  class="btn"
+                  *ngIf="user?.role == 'GUEST' && request.status.toString() == 'IN_PROGRESS'"
+                  (click)="updateRequestButtonClicked(request);$event.stopPropagation()"
+                  [@buttonState]="updateRequestButtonState"
+                >
+                  <fa-icon [icon]="faPen" />
+                  &nbsp;Update request
+                </button>
+
+                <button
+                  class="btn"
+                  *ngIf="user?.role == 'GUEST' && request.status.toString() == 'IN_PROGRESS'"
+                  (click)="cancelRequestButtonClicked(request);$event.stopPropagation()"
+                  [@buttonState]="cancelRequestButtonState"
+                >
+                  <fa-icon [icon]="faTrash" />
+                  &nbsp;Cancel request
+                </button>
+
+                <button
                     class="btn"
                     *ngIf="user?.role == 'ORGANIZER'"
                     (click)="acceptButtonClicked(request);$event.stopPropagation()"

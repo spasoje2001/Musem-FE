@@ -1,0 +1,17 @@
+<div class="overview" [ngStyle]="{'background-size': backgroundSize}">
+    <div class="h2-wrapper">
+      <h2>Cleaning journals</h2>
+    </div>
+    <br>
+    
+    <div class="tour-search-results">
+      <div class="tour-search-result-tours">
+           <app-cleaning-journal
+              [@fadeIn]
+              *ngFor="let cleaning of cleaningsJournal"
+              [journal]="cleaning"
+              (dialogRefClosed)="handleDialogClosed($event)"
+          ></app-cleaning-journal>
+      </div>
+    </div>
+</div>

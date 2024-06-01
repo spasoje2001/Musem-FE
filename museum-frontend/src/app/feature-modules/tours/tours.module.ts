@@ -25,6 +25,12 @@ import { TourPricelistViewComponent } from './components/tour-pricelist-view/tou
 import { DenialExplanationComponent } from './components/denial-explanation/denial-explanation.component';
 import { PdfHandledRequestsPromptComponent } from './components/pdf-handled-requests-prompt/pdf-handled-requests-prompt.component';
 import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf-requests-prompt.component';
+import {
+  ReserveTicketsDialogueComponent
+} from "./components/reserve-tickets-dialogue/reserve-tickets-dialogue.component";
+import { EditTourRequestFormComponent } from './components/edit-tour-request-form/edit-tour-request-form.component';
+import { RequestJournalViewComponent } from './components/request-journal-view/request-journal-view.component';
+import { RequestsJournalCardViewComponent } from './components/requests-journal-card-view/requests-journal-card-view.component';
 
 @NgModule({
   declarations: [
@@ -45,13 +51,17 @@ import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf
     TourPricelistViewComponent,
     DenialExplanationComponent,
     PdfHandledRequestsPromptComponent,
-    PdfRequestsPromptComponent
+    PdfRequestsPromptComponent,
+    ReserveTicketsDialogueComponent,
+    EditTourRequestFormComponent,
+    RequestJournalViewComponent,
+    RequestsJournalCardViewComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FontAwesomeModule,  
+    FontAwesomeModule,
     MaterialModule,
     AdministrationModule,
     MatDatepickerModule,
@@ -63,6 +73,6 @@ import { PdfRequestsPromptComponent } from './components/pdf-requests-prompt/pdf
     TourViewComponent
   ]
 })
-export class ToursModule { 
+export class ToursModule {
 
 }
