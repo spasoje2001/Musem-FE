@@ -80,6 +80,10 @@ const routes: Routes = [
     component: ItemsCleaningViewComponent
   },
   {
+    path: 'items-for-display-view',
+    component: ArtifactForDisplayComponent
+  },
+  {
     path: 'events/create',
     component: CreateEventComponent
   },
