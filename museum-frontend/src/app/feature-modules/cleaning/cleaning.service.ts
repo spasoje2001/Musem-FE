@@ -65,4 +65,7 @@ export class CleaningService {
     return this.http.get<CleaningJournal>(environment.apiHost + 'cleaning/journal');
   }
 
+  deleteCleaning(cleaningId: number) : Observable<Cleaning>{
+    return this.http.delete<Cleaning>(environment.apiHost + 'cleaning/' + cleaningId);
+  }
 }

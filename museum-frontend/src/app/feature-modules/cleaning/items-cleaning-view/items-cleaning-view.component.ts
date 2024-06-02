@@ -140,4 +140,21 @@ export class ItemsCleaningViewComponent {
     this.dialogRef = this.dialog.open(PdfPersonalCleaningPromptComponent, {});
   }
 
+  deleteCleaning(cleaningId:number){
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
+    this.cleaningService.deleteCleaning(cleaningId).subscribe({
+        next: () => {
+          this.cleaningService.getItemsForCleaningHandling().subscribe({
+            next: (result: Item[] | Item) => {
+              if(Array.isArray(result)){
+                this.items = result;
+              }
+            }
+          });
+        }
+      });
+
+  }
+
 }
