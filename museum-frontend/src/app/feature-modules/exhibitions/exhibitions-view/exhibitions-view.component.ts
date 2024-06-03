@@ -21,8 +21,9 @@ export class ExhibitionsViewComponent {
     this.exhibitionService.getExhibitions().subscribe({
       next: (result: Exhibition[] | Exhibition) => {
         if(Array.isArray(result)){
-          this.exhibitions = result;
-          console.log(this.exhibitions);
+          this.exhibitions = result.filter(
+            (exhibition) => exhibition.status === 'OPEN' || exhibition.status === 'READY_TO_OPEN'
+          );;
           this.sliceItems();
         }
       }

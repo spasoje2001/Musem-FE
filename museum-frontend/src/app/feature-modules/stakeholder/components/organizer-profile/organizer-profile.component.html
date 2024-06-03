@@ -20,6 +20,25 @@
         </div>
     </div>
 
+    <div class="header">
+        <h1>Exhibitions</h1>
+        <button
+          type="submit"
+          class="report-btn"
+          (click)="openOrganizerExhibitionsReportDialogue()">
+        &nbsp;View Exhibitions Insights
+        </button>
+        <button (click)="openExhibitionProposalForm()">+</button>
+    </div>
+
+    
+    
+    <!-- List of exhibitions managed by the organizer 
+    <div class="cards" *ngFor="let exhibition of exhibitions">
+        <app-organizer-exhibition-card [exhibition]="exhibition" (deleted)="onDeleteExhibition(\$event)" (updated)="onUpdateExhibition(\$event)"></app-organizer-exhibition-card>
+    </div>
+    -->
+
     <div>
         <div class="header">
             <h1>Pending invitations</h1>

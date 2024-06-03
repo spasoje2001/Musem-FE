@@ -50,4 +50,8 @@ export class CuratorService {
     );
   }
 
+  getAllCurators(): Observable<Curator[]> {
+    return this.http.get<Curator[]>(this.basePath);
+  }
+
 }

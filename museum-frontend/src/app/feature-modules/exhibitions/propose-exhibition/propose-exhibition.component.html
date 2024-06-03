@@ -1,0 +1,45 @@
+<div class="modal-overlay" (click)="emitClose()"></div>
+<div class="dialogue">
+  <div class="wrapper">
+    <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()">
+      <h1>Propose Exhibition</h1>
+
+      <!-- Start Date Picker -->
+      <div class="input-box">
+        <input type="date" formControlName="startDate" required />
+        <label>Date Start</label>
+      </div>
+
+      <!-- End Date Picker -->
+      <div class="input-box">
+        <input type="date" formControlName="endDate" required />
+        <label>Date End</label>
+      </div>
+
+      <!-- Available Rooms Dropdown - Populated after dates are selected -->
+      <div class="input-box" *ngIf="availableRooms.length > 0">
+        <select formControlName="roomId">
+          <option value="" disabled selected>Choose a room</option>
+          <option *ngFor="let room of availableRooms" [value]="room.id">{{ room.name }}</option>
+        </select>
+      </div>
+
+      <!-- Price Input -->
+      <div class="input-box">
+        <input type="number" formControlName="price" required min="0" />
+        <label>Price</label>
+      </div>
+
+      <!-- Curator Dropdown -->
+      <div class="input-box">
+        <select formControlName="curatorId">
+          <option value="" disabled selected>Assign a curator</option>
+          <option *ngFor="let curator of curators" [value]="curator.id">{{ curator.firstName }} {{ curator.lastName }}</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn" [disabled]="!proposalForm.valid">Propose</button>
+    </form>
+  </div>
+</div>
