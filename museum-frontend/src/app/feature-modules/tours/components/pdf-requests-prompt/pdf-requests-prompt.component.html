@@ -1,0 +1,17 @@
+<div class="modal-overlay" (click)="overviewClicked()"></div>
+<div class="modal-container">
+  <div class="prompt" >
+    <h1>Report on total handled Personal Tour Requests last month</h1>
+    <div>
+      <iframe [src]="pdfUrl" width="650px" height="750px"></iframe>
+    </div>
+    <div class="buttons">
+      <button type="submit"
+              class="btn"
+              (click)="cancelButtonClicked()"
+              [@buttonState]="cancelButtonState"
+      >Cancel
+      </button>
+    </div>
+  </div>
+</div>

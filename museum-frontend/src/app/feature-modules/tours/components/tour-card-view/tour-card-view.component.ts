@@ -11,6 +11,7 @@ import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
+import {ReserveTicketsDialogueComponent} from "../reserve-tickets-dialogue/reserve-tickets-dialogue.component";
 
 @Component({
   selector: 'xp-tour-card-view',
@@ -32,9 +33,9 @@ import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition
   ]
 })
 export class TourCardViewComponent implements OnInit{
-  editButtonState: string = 'idle';   
-  removeButtonState: string = 'idle'; 
-  reserveTicketsButtonState: string = 'idle'; 
+  editButtonState: string = 'idle';
+  removeButtonState: string = 'idle';
+  reserveTicketsButtonState: string = 'idle';
   @Input() tour!: Tour;
   private dialogRef: any;
   @Output() dialogRefClosed: EventEmitter<any> = new EventEmitter<any>();
@@ -69,13 +70,13 @@ export class TourCardViewComponent implements OnInit{
     this.tour.exhibitions!.forEach((exhibition: Exhibition) => {
       this.exhibitionsString += exhibition.name + ", ";
     });
-    
+
     this.exhibitionsString = this.exhibitionsString.slice(0, -2);
   }
 
   editButtonClicked() {
-    this.editButtonState = 'clicked'; 
-    setTimeout(() => { this.editButtonState = 'idle'; }, 200); 
+    this.editButtonState = 'clicked';
+    setTimeout(() => { this.editButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(EditTourFormComponent, {
       data: this.tour
     });
@@ -85,8 +86,8 @@ export class TourCardViewComponent implements OnInit{
   }
 
   removeButtonClicked(id: number) {
-    this.removeButtonState = 'clicked'; 
-    setTimeout(() => { this.removeButtonState = 'idle'; }, 200); 
+    this.removeButtonState = 'clicked';
+    setTimeout(() => { this.removeButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(RemoveTourPromptComponent, {
       data: id
     });
@@ -96,15 +97,18 @@ export class TourCardViewComponent implements OnInit{
   }
 
   reserveTicketsButtonClicked(id: number){
-    this.reserveTicketsButtonState = 'clicked'; 
-    setTimeout(() => { this.reserveTicketsButtonState = 'idle'; }, 200); 
+    this.reserveTicketsButtonState = 'clicked';
+    setTimeout(() => { this.reserveTicketsButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(ReserveTicketsDialogueComponent, {
+      data: this.tour
+    });
   }
 
   showNotification(message: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000, 
-      horizontalPosition: 'right', 
-      verticalPosition: 'bottom', 
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
     });
   }
 

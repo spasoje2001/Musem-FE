@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Item } from '../items/model/item.model';
 import { CleaningReport } from './model/cleaningReport.model';
 import {CleaningDeclineModel} from "./model/cleaning-decline.model";
+import { CleaningJournal } from './model/cleaning-journal.model';
 
 
 @Injectable({
@@ -46,5 +47,25 @@ export class CleaningService {
 
   writeReport(cleaningReport : CleaningReport) : Observable<CleaningReport> {
       return this.http.post<CleaningReport>(environment.apiHost + 'cleaningReport', cleaningReport);
+  }
+
+  seeGeneratedResport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/generate-pdf/' + userId, { responseType: 'blob' });
+  }
+
+  saveGeneratedResport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/save-pdf/' + userId, { responseType: 'blob' });
+  }
+
+  seeGeneratedPersonalReport(userId: number) : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfCleaning/generate-pdf-personal/' + userId, { responseType: 'blob' });
+  }
+  
+  getJournals(): Observable<CleaningJournal>{
+    return this.http.get<CleaningJournal>(environment.apiHost + 'cleaning/journal');
+  }
+
+  deleteCleaning(cleaningId: number) : Observable<Cleaning>{
+    return this.http.delete<Cleaning>(environment.apiHost + 'cleaning/' + cleaningId);
   }
 }

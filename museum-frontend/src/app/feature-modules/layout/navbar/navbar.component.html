@@ -3,85 +3,106 @@
     <!-- TREBA DODATI NEKI LOGO I MOZDA IZRAVNATI PARAGRAF-->
     <p>Museum</p>
     <div id="buttons">
-      <button 
+      <button
               class="feat-button"
               color="white"
-              mat-raised-button 
+              mat-raised-button
               [routerLink]="['']">
-        <fa-icon [icon]="faHome" />    
+        <fa-icon [icon]="faHome" />
         &nbsp;Home
       </button>
-    
-      <button 
+
+      <button
               class="feat-button"
-              color="white" 
-              mat-raised-button 
+              color="white"
+              mat-raised-button
               [routerLink]="['exhibitions-view']"> <!-- PROMENITI PUTANJU -->
-        <fa-icon [icon]="faInstitution" />    
+        <fa-icon [icon]="faInstitution" />
         &nbsp;Exhibitions
       </button>
 
-      <button 
+      <button
               class="feat-button"
-              color="white" 
-              mat-raised-button 
-              [routerLink]="['tour-view']"> 
-        <fa-icon [icon]="faBinoculars" />    
+              color="white"
+              mat-raised-button
+              [routerLink]="['tour-view']">
+        <fa-icon [icon]="faBinoculars" />
         &nbsp;Tours
       </button>
 
-      <button 
+      <button
               class="feat-button"
               color="white"
-              mat-raised-button 
+              mat-raised-button
               [routerLink]="['']"> <!-- PROMENITI PUTANJU -->
-        <fa-icon [icon]="faCalendar" />    
+        <fa-icon [icon]="faCalendar" />
         &nbsp;Events
       </button>
     </div>
 
     <div id="account-buttons">
-      <button 
+      <button
             class="feat-button"
             *ngIf="user?.username != ''"
             color="white"
             mat-raised-button
-            [routerLink]="['profile']" 
-      >       
-      <fa-icon [icon]="faUser" />    
+            [routerLink]="['profile']"
+      >
+      <fa-icon [icon]="faUser" />
       &nbsp;My profile
       </button>
 
-      <button 
+      <button
             class="feat-button"
             *ngIf="user && user.role === 'ADMIN'"
             color="white"
             mat-raised-button
-            [routerLink]="['employee-view']" 
-      >         
-      <fa-icon [icon]="faAdressBook" />    
+            [routerLink]="['employee-view']"
+      >
+      <fa-icon [icon]="faAdressBook" />
       &nbsp;See employees
       </button>
 
-      <button 
+      <button
             class="feat-button"
             *ngIf="user && user?.role === 'ORGANIZER' || user?.role === 'GUEST'"
             color="white"
             mat-raised-button
-            [routerLink]="['request-view']" 
-      >         
-      <fa-icon [icon]="faEnvelopeOpen" />    
+            [routerLink]="['request-view']"
+      >
+      <fa-icon [icon]="faEnvelopeOpen" />
       &nbsp;Tour Requests
       </button>
 
+      <button
+        class="feat-button"
+        *ngIf="user && user?.role === 'ORGANIZER' || user?.role === 'ADMIN'"
+        color="white"
+        mat-raised-button
+        [routerLink]="['requests-journal-view']"
+      >
+        <fa-icon [icon]="faBookmark" />
+        &nbsp;Tour Request Journal
+      </button>
+
+      <button
+            *ngIf="user && user.role === 'ADMIN'"
+            color="white"
+            mat-raised-button
+            [routerLink]="['item-view']"
+      >
+      <fa-icon [icon]="faArchive" />
+      &nbsp;See items
+      </button>
+      
       <button 
             *ngIf="user && user.role === 'ADMIN'"
             color="white"
             mat-raised-button
-            [routerLink]="['item-view']" 
+            [routerLink]="['journal-view']" 
       >         
       <fa-icon [icon]="faArchive" />    
-      &nbsp;See items
+      &nbsp;See cleaning journals
       </button>
 
       <button 
@@ -89,54 +110,52 @@
             *ngIf="user && user.role === 'CURATOR'"
             color="white"
             mat-raised-button
-            [routerLink]="['cleaning-proposals-view']" 
-      >         
-      <fa-icon [icon]="faEnvelopeOpen" />    
+            [routerLink]="['cleaning-proposals-view']"
+      >
+      <fa-icon [icon]="faEnvelopeOpen" />
       &nbsp;See proposals
       </button>
 
-      <button 
+      <button
             class="feat-button"
             *ngIf="user && user.role === 'RESTAURATEUR'"
             color="white"
             mat-raised-button
-            [routerLink]="['items-for-cleaning-view']" 
-      >         
-      <fa-icon [icon]="faEnvelopeOpen" />    
+            [routerLink]="['items-for-cleaning-view']"
+      >
+      <fa-icon [icon]="faEnvelopeOpen" />
       &nbsp;Items for cleaning
       </button>
 
-
-      <button 
+      <button
             class="feat-button"
             *ngIf="user && user.role === 'CURATOR'"
             color="white"
             mat-raised-button
-            [routerLink]="['items-for-display-view']" 
-      >         
-      <fa-icon [icon]="faArchive" />    
+            [routerLink]="['items-for-display-view']"
+      >
+      <fa-icon [icon]="faArchive" />
       &nbsp;Items for displaying
       </button>
 
-
-      <button 
+      <button
               class="feat-button"
-              *ngIf="user && user.username === ''" 
+              *ngIf="user && user.username === ''"
               color="white"
-              mat-raised-button 
+              mat-raised-button
               [routerLink]="['register']"
       >
-      <fa-icon [icon]="faPencilSquare" />    
+      <fa-icon [icon]="faPencilSquare" />
         &nbsp;Sign up
       </button>
-      
-      <button 
+
+      <button
             *ngIf="user && user.username === ''"
             color="accent"
             mat-raised-button
             [routerLink]="['login']"
       >
-      <fa-icon [icon]="faSignIn" />    
+      <fa-icon [icon]="faSignIn" />
       &nbsp;Login
       </button>
 
@@ -145,7 +164,7 @@
               mat-raised-button
               (click)="onLogout()"
       >
-      <fa-icon [icon]="faSignOut" />    
+      <fa-icon [icon]="faSignOut" />
         &nbsp;Logout
       </button>
     </div>

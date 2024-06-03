@@ -39,6 +39,8 @@ export class AcceptRequestFormComponent{
   focused: string = '';
   tourPricelist: TourPricelist | undefined;
   private ownDialogRef: any;
+  adultTicketPrice: string = "0";
+  minorTicketPrice: string = "0";
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
@@ -59,6 +61,11 @@ export class AcceptRequestFormComponent{
     this.toursService.getTourPricelist().subscribe({
       next: (result: TourPricelist) => {
         this.tourPricelist = result;
+        this.adultTicketPrice = (this.request?.exhibitions?.length! * Number(this.tourPricelist?.adultTicketPrice)).toString();
+        this.minorTicketPrice = (this.request?.exhibitions?.length! * Number(this.tourPricelist?.minorTicketPrice)).toString();
+
+        console.log('Adult ticket price: ' + this.adultTicketPrice);
+        console.log('Minor ticket price: ' + this.minorTicketPrice);
       }
     })
   }
@@ -74,8 +81,8 @@ export class AcceptRequestFormComponent{
 
           const tour: PersonalTour = {
             occurrenceDateTime: this.request!.occurrenceDateTime || new Date(),
-            adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
-            minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
+            adultTicketPrice: this.adultTicketPrice || "",
+            minorTicketPrice: this.minorTicketPrice || "",
             guestNumber: this.request!.guestNumber || "",
             proposerId: this.request!.proposerId || 0,
             guideId: this.selectedCurator[0].id || 7,

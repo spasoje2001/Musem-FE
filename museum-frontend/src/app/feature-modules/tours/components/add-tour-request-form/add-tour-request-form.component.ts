@@ -9,6 +9,7 @@ import {
   ExhibitionChoosingDialogueComponent
 } from "../exhibition-choosing-dialogue/exhibition-choosing-dialogue.component";
 import {Exhibition} from "../../../exhibitions/model/exhibition.model";
+import {TourPricelist} from "../../model/tourPricelist.model";
 
 @Component({
   selector: 'xp-add-tour-request-form',
@@ -36,6 +37,9 @@ export class AddTourRequestFormComponent implements OnInit{
   minDate: string;
   selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
+  adultTicketPrice: string = "0";
+  minorTicketPrice: string = "0";
+  tourPricelist: TourPricelist | undefined;
 
   constructor(private toursService: ToursService,
               private dialogRef: MatDialogRef<AddTourRequestFormComponent>,
@@ -46,7 +50,11 @@ export class AddTourRequestFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.toursService.getTourPricelist().subscribe({
+      next: (result: TourPricelist) => {
+        this.tourPricelist = result;
+      }
+    })
   }
 
   addTourRequestForm = new FormGroup({
@@ -65,6 +73,11 @@ export class AddTourRequestFormComponent implements OnInit{
     });
     this.ownDialogRef.afterClosed().subscribe((result: any) => {
       console.log('Odabrao si egzibicie: ' + this.selectedExhibitions);
+      this.adultTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.adultTicketPrice)).toString();
+      this.minorTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.minorTicketPrice)).toString();
+
+      console.log('Adult ticket price: ' + this.adultTicketPrice);
+      console.log('Minor ticket price: ' + this.minorTicketPrice);
     });
   }
 

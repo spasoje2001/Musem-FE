@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { ItemsService } from '../../items/items.service';
 import { CleaningReportPromptComponent } from '../cleaning-report-prompt/cleaning-report-prompt.component';
 import {RejectReasonComponent} from "../reject-reason/reject-reason.component";
+import { PdfCleaningPromptComponent } from '../pdf-cleaning-prompt/pdf-cleaning-prompt.component';
+import { PdfPersonalCleaningPromptComponent } from '../pdf-personal-cleaning-prompt/pdf-personal-cleaning-prompt.component';
 
 @Component({
   selector: 'app-items-cleaning-view',
@@ -127,4 +129,32 @@ export class ItemsCleaningViewComponent {
       data: cleaning
     });
   }
+
+  seeReportAllButtonClick(){
+
+    this.dialogRef = this.dialog.open(PdfCleaningPromptComponent, {
+    });
+  }
+
+  seeReportMyButtonClick(){
+    this.dialogRef = this.dialog.open(PdfPersonalCleaningPromptComponent, {});
+  }
+
+  deleteCleaning(cleaningId:number){
+    this.acceptButtonState = 'clicked';
+    setTimeout(() => { this.acceptButtonState = 'idle'; }, 200);
+    this.cleaningService.deleteCleaning(cleaningId).subscribe({
+        next: () => {
+          this.cleaningService.getItemsForCleaningHandling().subscribe({
+            next: (result: Item[] | Item) => {
+              if(Array.isArray(result)){
+                this.items = result;
+              }
+            }
+          });
+        }
+      });
+
+  }
+
 }

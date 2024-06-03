@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Curator } from 'src/app/feature-modules/stakeholder/model/curator.model';
-import { Tour } from '../../model/tour.model';
+import {Tour, TourCategory} from '../../model/tour.model';
 import { ToursService } from '../../tours.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,6 +10,7 @@ import { ExhibitionChoosingDialogueComponent } from '../exhibition-choosing-dial
 import { Exhibition } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
 import { CuratorChoosingDialogueComponent } from '../curator-choosing-dialogue/curator-choosing-dialogue.component';
 import {TourPricelist} from "../../model/tourPricelist.model";
+import {ItemCategory} from "../../../items/model/item.model";
 
 @Component({
   selector: 'app-add-tour-form',
@@ -40,6 +41,8 @@ export class AddTourFormComponent implements OnInit{
   selectedExhibitions: Exhibition[] = [];
   private ownDialogRef: any;
   tourPricelist: TourPricelist | undefined;
+  adultTicketPrice: string = "0";
+  minorTicketPrice: string = "0";
 
   constructor(private toursService: ToursService,
               private snackBar: MatSnackBar,
@@ -66,17 +69,67 @@ export class AddTourFormComponent implements OnInit{
     //guide: new FormControl('', [Validators.required]),
     capacity: new FormControl('', [Validators.required]),
     picturePath: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
   });
 
   addTourButtonClicked() {
+    const selectedCategoryString: string = this.addTourForm.value.category ?? '';
+    let selectedCategory: TourCategory;
+
+    switch (selectedCategoryString) {
+      case 'ART_COLLECTIONS':
+        selectedCategory = TourCategory.ArtCollections;
+        break;
+      case 'HISTORICAL_EXHIBITS':
+        selectedCategory = TourCategory.HistoricalExhibits;
+        break;
+      case 'SCIENCE_AND_TECHNOLOGY':
+        selectedCategory = TourCategory.ScienceAndTechnology;
+        break;
+      case 'CULTURAL_HERITAGE':
+        selectedCategory = TourCategory.CulturalHeritage;
+        break;
+      case 'ANCIENT_ART':
+        selectedCategory = TourCategory.AncientArt;
+        break;
+      case 'EUROPEAN_PAINTINGS':
+        selectedCategory = TourCategory.EuropeanPaintings;
+        break;
+      case 'MODERN_ART':
+        selectedCategory = TourCategory.ModernArt;
+        break;
+      case 'AMERICAN_ART':
+        selectedCategory = TourCategory.AmericanArt;
+        break;
+      case 'ASIAN_ART':
+        selectedCategory = TourCategory.AsianArt;
+        break;
+      case 'AFRICAN_CULTURE':
+        selectedCategory = TourCategory.AfricanCulture;
+        break;
+      case 'ISLAMIC_ART':
+        selectedCategory = TourCategory.IslamicArt;
+        break;
+      case 'COSTUME_INSTITUTE':
+        selectedCategory = TourCategory.CostumeInstitute;
+        break;
+      case 'ARMS_AND_ARMOR':
+        selectedCategory = TourCategory.ArmsAndArmor;
+        break;
+      default:
+        console.error("Invalid category selected.");
+        return;
+    }
+
     const tour: Tour = {
       name: this.addTourForm.value.name || "",
       description: this.addTourForm.value.description || "",
       occurrenceDateTime: this.addTourForm.value.occurrenceDate || new Date(),
-      adultTicketPrice: this.tourPricelist?.adultTicketPrice || "",
-      minorTicketPrice: this.tourPricelist?.minorTicketPrice || "",
+      adultTicketPrice: this.adultTicketPrice || "",
+      minorTicketPrice: this.minorTicketPrice || "",
       capacity: this.addTourForm.value.capacity || "",
       picturePath: this.addTourForm.value.picturePath || "",
+      category: selectedCategory,
     };
 
     console.log(tour);
@@ -133,6 +186,11 @@ export class AddTourFormComponent implements OnInit{
     });
     this.ownDialogRef.afterClosed().subscribe((result: any) => {
       console.log('Odabrao si egzibicije: ' + this.selectedExhibitions);
+      this.adultTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.adultTicketPrice)).toString();
+      this.minorTicketPrice = (this.selectedExhibitions.length * Number(this.tourPricelist?.minorTicketPrice)).toString();
+
+      console.log('Adult ticket price: ' + this.adultTicketPrice);
+      console.log('Minor ticket price: ' + this.minorTicketPrice);
     });
   }
 

@@ -5,6 +5,7 @@ import { EventService } from 'src/app/feature-modules/events/services/event.serv
 import { EventInvitation } from 'src/app/feature-modules/events/model/event-invitation.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DeclinationExplanationComponent } from 'src/app/feature-modules/events/declination-explanation/declination-explanation.component';
+import { PdfCuratorExhibitionsPromptComponent } from 'src/app/feature-modules/exhibitions/pdf-curator-exhibitions-prompt/pdf-curator-exhibitions-prompt.component';
 
 @Component({
   selector: 'app-curator-profile',
@@ -15,6 +16,9 @@ export class CuratorProfileComponent implements OnInit {
 
   curator?: Curator;
   pendingEventInvitations: EventInvitation[] = [];
+  requestsReportButtonState: string = "";
+
+  private dialogRef: any;
 
   constructor(
     private curatorService: CuratorService,
@@ -65,6 +69,19 @@ export class CuratorProfileComponent implements OnInit {
         this.loadData();
       }
     })
+  }
+
+  openOrganizerExhibitionsReportDialogue(): void {
+    this.requestsReportButtonState = 'clicked';
+    setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(PdfCuratorExhibitionsPromptComponent, {
+    });
+
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.loadData();
+      });
+    }
   }
 
 }

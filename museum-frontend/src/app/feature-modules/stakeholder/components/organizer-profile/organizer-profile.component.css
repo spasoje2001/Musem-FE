@@ -14,6 +14,24 @@
     margin-bottom: 1rem;
 }
 
+.header .report-btn {
+    width: 300px;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin-left: 56.5%; /* Adjust the margin-left value as needed */
+    margin-top: 1%;
+    margin-bottom: 0.5%;
+}
+
+
 .header button {
     font-size: x-large;
     
