@@ -25,4 +25,12 @@ export class ExhibitionsService {
     const url = environment.apiHost + `exhibitions/propose`;
     return this.http.post<Exhibition>(url, proposalData);
   }
+
+  seeOrganizerGeneratedReport() : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfExhibitions/generate-organizer-report', { responseType: 'blob' });
+  }
+
+  seeCuratorGeneratedReport() : Observable<Blob> {
+    return this.http.get(environment.apiHost + 'pdfExhibitions/generate-curator-report', { responseType: 'blob' });
+  }
 }

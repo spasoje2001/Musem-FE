@@ -9,6 +9,7 @@ import { InviteCuratorComponent } from 'src/app/feature-modules/events/invite-cu
 import { EventInvitation } from 'src/app/feature-modules/events/model/event-invitation.model';
 import { ExhibitionsService } from 'src/app/feature-modules/exhibitions/exhibitions.service';
 import { ProposeExhibitionComponent } from 'src/app/feature-modules/exhibitions/propose-exhibition/propose-exhibition.component';
+import { PdfOrganizerExhibitionsPromptComponent } from 'src/app/feature-modules/exhibitions/pdf-organizer-exhibitions-prompt/pdf-organizer-exhibitions-prompt.component';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -22,6 +23,9 @@ export class OrganizerProfileComponent implements OnInit {
   respondedEventInvitations: EventInvitation[] = [];
   pendingEventInvitations: EventInvitation[] = [];
   isExhibitionProposalFormOpen = false;
+  requestsReportButtonState: string = "";
+
+  private dialogRef: any;
 
   constructor(
     private guestService: OrganizerService,
@@ -118,5 +122,18 @@ export class OrganizerProfileComponent implements OnInit {
       console.log('The dialog was closed', result);
     });
   }
+  openOrganizerExhibitionsReportDialogue(): void {
+    this.requestsReportButtonState = 'clicked';
+    setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
+    this.dialogRef = this.dialog.open(PdfOrganizerExhibitionsPromptComponent, {
+    });
 
+    if (this.dialogRef) {
+      this.dialogRef.afterClosed().subscribe((result: any) => {
+        this.loadData();
+      });
+    }
+  }
 }
+
+
