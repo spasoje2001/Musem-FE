@@ -1,9 +1,14 @@
 <div class="banner" [ngStyle]="{'background-size': backgroundSize}">
-  <div class="overlay">
-      <h1>Museum</h1>
-      <p>
-        "Where you can experience the Journey of Time"
-      </p>
+  <div class="museum-info-container">
+    <div class="overlay">
+      <img src="assets/color-logo1.png" alt="Artium Historia Museum Logo" class="museum-logo">
+      <div class="museum-description">
+        <h1>Artium Historia Museum</h1>
+        <p>Discover the legacy of art and history at the Artium Historia Museum. Our exhibits transport you across time and cultures, offering a unique perspective on the human experience through the lens of art and historical artifacts.
+          The name combines the Latin word "Artium" meaning "arts", with "Historia", meaning "history", reflecting a museum that celebrates the intersection of art and history, which would be fitting for a wide-ranging collection.
+        </p>
+      </div>
+    </div>
   </div>
   <div class="card-container-headers">
     <div class="wrapper">
@@ -34,7 +39,7 @@
         
         <div class="big-card card"></div>  
     </div>
-    <div class="card-group tour-cards" data-index="1" (click)="toursButtonClicked()" [@fadeInOut]> 
+    <div class="card-group tour-cards" data-index="1" [@fadeInOut]> 
         <div class="little-card card"></div>
         
         <div class="big-card card"></div>
@@ -51,7 +56,7 @@
         
         <div class="big-card card"></div>  
     </div>
-    <div class="card-group event-cards" data-index="2" (click)="eventsButtonClicked()" [@fadeInOut]> 
+    <div class="card-group event-cards" data-index="2" [@fadeInOut]> 
         <div class="little-card card"></div>
         
         <div class="big-card card"></div>
@@ -98,16 +103,14 @@
     <button 
             type="submit" 
             class="btn" 
-            (click)="toursButtonClicked()"
             [@buttonState]="toursButtonState"
-            >Visit Tours
+            >Coming soon...
     </button>
     <button 
             type="submit" 
             class="btn" 
-            (click)="eventsButtonClicked()"
             [@buttonState]="eventsButtonState"
-            >Visit Events
+            >Coming soon...
     </button>
   </div>
 </div>

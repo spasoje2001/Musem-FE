@@ -46,20 +46,9 @@ export class HomeComponent {
   exhibitionsButtonClicked(){
     this.exhibitionsButtonState = 'clicked'; 
     setTimeout(() => { this.exhibitionsButtonState = 'idle'; }, 200);
-    this.router.navigate(['/exhibitons']); // Proveriti samo kada se dodaju egzibicije da li je dobra putanja
+    this.router.navigate(['/exhibitions-view']); 
   }
 
-  toursButtonClicked(){
-    this.toursButtonState = 'clicked'; 
-    setTimeout(() => { this.toursButtonState = 'idle'; }, 200);
-    this.router.navigate(['/tour-view']); 
-  }
-
-  eventsButtonClicked(){
-    this.eventsButtonState = 'clicked'; 
-    setTimeout(() => { this.eventsButtonState = 'idle'; }, 200);
-    this.router.navigate(['/events']); // Proveriti samo kada se dodaju dogadjaji da li je dobra putanja
-  }
 
   backgroundSize: string = '100% 100%';
 

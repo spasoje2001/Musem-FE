@@ -11,14 +11,14 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgetwallpapers.com%2Fwallpaper%2Ffull%2F6%2Fe%2F2%2F861216-download-free-greece-widescreen-wallpaper-1920x1080-notebook.jpg&f=1&nofb=1&ipt=900d90fc7375c7f738aae7cfc547dc8861b92da5a13f88641fe8f0ec66f82315&ipo=images') no-repeat;
+  background: url('https://images.unsplash.com/photo-1566170821470-8c760077e748?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 .wrapper {
   width: 420px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
   border: 2px solid rgba(255, 255, 255, .2);
   backdrop-filter: blur(20px);
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -50,7 +50,13 @@ body {
   font-size: 16px;
   color: #fff;
   padding: 20px 45px 20px 20px;
+  transition: border 0.3s ease;
 }
+
+.input-box input:hover {
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle change on hover */
+}
+
 
 .input-box input::placeholder {
   color: #fff;
@@ -72,6 +78,11 @@ body {
   transition: all 0.3s ease;
   color: rgba(255, 255, 255, 0.7);
   pointer-events: none;
+}
+
+.input-box input:focus {
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.7); /* Stronger border on focus */
 }
 
 .input-box input:focus + label,
@@ -116,6 +127,7 @@ body {
   font-size: 16px;
   color: #333;
   font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .wrapper .btn:hover {
@@ -123,6 +135,27 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
   transform: scale(1.03);
   transition: transform 300ms ease;
+}
+
+.wrapper .btn.clicked {
+  background: rgba(255, 255, 255, 0.7); /* Dim background */
+}
+
+.wrapper .btn.clicked::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .wrapper .register-link {

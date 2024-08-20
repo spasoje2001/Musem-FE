@@ -1,23 +1,33 @@
-div {
+#navbar-container {
   width: 100%;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between; /* Distribute space between logo, left buttons, and account buttons */
 }
 
-#buttons {
-  width: auto;
-  margin-left: auto;
-  width: 65%;
+#logo img {
+  height: 65px; /* Adjust the height to fit the navbar better */
+  width: auto; /* Maintain the aspect ratio */
+  margin-right: 10px; /* Add space between the logo and the left buttons */
+}
+
+
+#left-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between left-aligned buttons */
 }
 
 #account-buttons {
-  width: auto;
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between right-aligned account buttons */
 }
 
 .mat-toolbar {
   backdrop-filter: blur(20px);
   background: #1b1b1b;
+  padding: 0 20px; /* Add some padding inside the toolbar */
 }
 
 button {
