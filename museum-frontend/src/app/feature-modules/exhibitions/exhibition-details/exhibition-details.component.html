@@ -2,11 +2,10 @@
     <div class="header" [ngStyle]="{'background-image': 'url(' + exhibition.picture + ')'}">
       <div class="header-content">
         <h1>{{ exhibition.name }}</h1>
-        <div class="date">{{ exhibition.startDate  }} – {{ exhibition.endDate  }}</div>
-        <div class="location" *ngIf="exhibition.roomReservation">
-            <span class="room-info">{{ exhibition.roomReservation.room.name }},</span>
-            <span class="floor-info">Floor: {{ exhibition.roomReservation.room.floor }},</span>
-            <span class="room-number">Room number: {{ exhibition.roomReservation.room.number }}</span>
+        <div class="date">{{ exhibition.proposal.startDate  }} – {{ exhibition.proposal.endDate  }}</div>
+        <div class="location" *ngIf="exhibition.proposal.roomReservation">
+            <span class="room-info">{{ exhibition.proposal.roomReservation.room.name }},</span>
+            <span class="room-number">Room number: {{ exhibition.proposal.roomReservation.room.number }}</span>
           </div>
         <button class="book-tickets">Book tickets</button>
       </div>
@@ -15,8 +14,9 @@
       <p class="short-description">{{ exhibition.shortDescription }}</p>
       <div class="long-description" [innerHTML]="exhibition.longDescription"></div>
       <div class="details">
-        <div class="price">Tickets from £{{ exhibition.price }}</div>
-        <div class="organizer">Organized by: {{ exhibition.organizer.firstName }} {{ exhibition.organizer.lastName }}</div>
+        <div class="price">Adult price - ${{ exhibition.proposal.priceList.adultPrice }}</div>
+        <div class="price">Minor price - ${{ exhibition.proposal.priceList.minorPrice }}</div>
+        <div class="organizer">Organized by: {{ exhibition.proposal.organizer.firstName }} {{ exhibition.proposal.organizer.lastName }}</div>
         <div class="curator">Curated by: {{ exhibition.curator.firstName }} {{ exhibition.curator.lastName }}</div>
       </div>
     </div>

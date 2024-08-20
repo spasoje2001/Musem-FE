@@ -1,6 +1,9 @@
 .overlay {
-    height: 200%;
-  }
+  position: relative;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1556005693-00fff02f134c?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+  padding: 50px 0; /* Add some padding on top and bottom */
+}
   
   .btn {
     width: 10rem;
@@ -27,27 +30,36 @@
   }
 
   .card-container {
+    position: relative;
+    z-index: 2; /* Make sure cards are above the overlay */
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Start from the left */
-    gap: 20px; /* Set a fixed gap between cards */
+    justify-content: center; /* Center the cards */
+    gap: 20px;
+    max-width: 1200px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container on the page */
 }
 
 .card {
-    width: calc(25% - 20px); /* Adjust margin */
-    /* Margin to create space between cards */
-    margin-right: 20px; 
-    margin-bottom: 20px; /* Adjust as needed */
-    /* Additional styling for your card component */
+  width: 30%; /* Take up 30% of the container's width */
+  background-color: #fff; /* Background color for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Hide anything that overflows the card */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
   
-  .row {
-    width: 100%; /* Ensure each row spans the full width */
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 20px; /* Adjust as needed */
-    margin-left: 12rem;
-  }
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Evenly distribute the cards */
+  margin-bottom: 30px; /* Space between rows */
+}
   
 
   

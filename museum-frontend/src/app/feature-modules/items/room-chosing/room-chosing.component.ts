@@ -3,7 +3,6 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Curator } from '../../stakeholder/model/curator.model';
-import { ToursService } from '../../tours/tours.service';
 import { Room } from '../model/room.model';
 import { ItemsService } from '../items.service';
 

@@ -20,6 +20,7 @@ export class ExhibitionsViewComponent {
   ngOnInit(): void {
     this.exhibitionService.getExhibitions().subscribe({
       next: (result: Exhibition[] | Exhibition) => {
+        console.log(result);
         if(Array.isArray(result)){
           this.exhibitions = result.filter(
             (exhibition) => exhibition.status === 'OPEN' || exhibition.status === 'READY_TO_OPEN'

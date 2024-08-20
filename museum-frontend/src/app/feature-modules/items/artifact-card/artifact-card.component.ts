@@ -5,7 +5,6 @@ import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditArtifactComponent } from '../edit-artifact/edit-artifact.component';
-import { PutArtifactIntoRoomPromptComponent } from '../put-artifact-into-room-prompt/put-artifact-into-room-prompt.component';
 
 @Component({
   selector: 'app-artifact-card',
@@ -31,8 +30,6 @@ export class ArtifactCardComponent {
 
   }
 
-
-
   editButtonClicked() {
     this.editButtonState = 'clicked'; 
     setTimeout(() => { this.editButtonState = 'idle'; }, 200); 
@@ -44,15 +41,5 @@ export class ArtifactCardComponent {
     });
   }
 
-  putIntoRoomButtonClicked(id: number) {
-    this.putIntoRoomButtonState = 'clicked'; 
-    setTimeout(() => { this.putIntoRoomButtonState = 'idle'; }, 200); 
-    this.dialogRef = this.dialog.open(PutArtifactIntoRoomPromptComponent, {
-      data: id
-    });
-    this.dialogRef.afterClosed().subscribe((result: any) => {
-      this.dialogRefClosed.emit(result);
-    });
-  }
 
 }

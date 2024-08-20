@@ -25,16 +25,8 @@ export class ItemsService {
     return this.http.get<Item>(environment.apiHost + 'items/' + itemId);
   }
 
-  getItemsForDisplay() : Observable<Item>{
-    return this.http.get<Item>(environment.apiHost + 'items/forDisplay');
-  }
-
   updateItem(item: Item) : Observable<Item>{
     return this.http.put<Item>(environment.apiHost + 'items', item);
-  }
-
-  putIntoRoom(itemId: number, roomId: number) : Observable<Item>{
-    return this.http.put<Item>(environment.apiHost + 'items/putIntoRoom/' + itemId + '/' + roomId, null);
   }
 
   getAllRooms() : Observable<Room>{

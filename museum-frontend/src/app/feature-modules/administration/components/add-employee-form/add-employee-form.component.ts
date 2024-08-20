@@ -62,9 +62,6 @@ export class AddEmployeeFormComponent implements OnInit{
         case 'Organizer':
             selectedRole = Role.Organizer;
             break;
-        case 'Restaurateur':
-            selectedRole = Role.Restaurateur;
-            break;
         default:
             console.error("Invalid role selected.");
             return; 

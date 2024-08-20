@@ -1,9 +1,0 @@
-<form [formGroup]="explanationForm" (ngSubmit)="onSubmit()">
-    <div class="wrapper">
-        <input placeholder="Explanation" id="explanation" formControlName="explanation" autocomplete="off">
-        <button [disabled]="explanationForm.invalid">Submit</button>
-    </div>
-    <div class="errors" *ngIf="explanationForm.controls['explanation'].dirty">
-        <p *ngIf="explanationForm.invalid">This field is required.</p>
-    </div>
-</form>

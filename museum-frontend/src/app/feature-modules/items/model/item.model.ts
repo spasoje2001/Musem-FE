@@ -1,4 +1,3 @@
-import { Cleaning } from "../../cleaning/model/cleaning.model";
 import { Room } from "./room.model";
 
 export interface Item {
@@ -10,8 +9,6 @@ export interface Item {
     period : string;
     category : ItemCategory;
     picture :  string;
-    cleaning?: Cleaning;
-    room? : Room;
   }
 
 export enum ItemCategory {

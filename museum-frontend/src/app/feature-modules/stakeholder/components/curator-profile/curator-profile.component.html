@@ -19,16 +19,7 @@
         <div class="header">
             <h1>Pending invites</h1>
         </div>
-    
-        <div class="cards" *ngFor="let invitation of pendingEventInvitations">
-            <div class="container-cards organizer">
-                <p>{{invitation.event.organizer.firstName}} {{invitation.event.organizer.lastName}} invited you to participate in the event: {{invitation.event.name}}</p>
-                <div class="buttons">
-                    <button (click)="onAccept(invitation)">Accept</button>
-                    <button (click)="onDecline(invitation)">Decline</button>
-                </div>
-            </div>
-        </div>
+
     </div>
 
 </div>

@@ -1,5 +1,3 @@
-import { Role } from "./registration.model";
-
 export interface EditEmployee {
     firstName: string,
     lastName: string,
@@ -13,6 +11,5 @@ export interface EditEmployee {
     GUEST,
     ORGANIZER,
     CURATOR,
-    RESTAURATEUR,
     ADMINISTRATOR,
   }

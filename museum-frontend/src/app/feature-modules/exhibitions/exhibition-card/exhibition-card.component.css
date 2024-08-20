@@ -1,34 +1,61 @@
 .item-card {
-    width: 300px; /* Adjust width as needed */
+    width: 360px; /* Adjust width as needed */
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .image-container {
     width: 100%;
-    height: 200px; /* Adjust height as needed */
+    height: 300px; /* Adjust height for larger images */
     overflow: hidden;
-  }
+}
   
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Make sure the image covers the entire container */
+}
   
   .info-container {
     padding: 20px;
+    height: 200px;
+    width: 100%;
+    position: relative; /* To position the button absolutely */
+    flex-grow: 1;
   }
   
   .item-name {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    font-weight: bold; 
-  }
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    height: 2.4em; /* Fixed height to accommodate 2 lines of text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-  .short-description,
+.exhibition-dates {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.short-description {
+  font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+    height: 3.6em; /* Fixed height to accommodate 3 lines of text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits text to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
   .period,
   .category,
   .additional-info,
@@ -43,17 +70,18 @@
   
   .find-out-more-button {
     display: block;
-    width: 100%;
+    width: 80%; /* Adjust width as needed, for example 80% of the card's width */
     padding: 10px;
     text-align: center;
-    background-color: #000000;
+    background-color: #000;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px; /* 20px from the bottom of the container */
+    left: 50%;
+    transform: translateX(-50%);
+}
   
-  .find-out-more-button:hover {
-    background-color: #636363;
-  }

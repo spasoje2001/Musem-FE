@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ExhibitionsService } from '../exhibitions.service';
-import { RoomService } from '../../events/services/room.service';
 import { CuratorService } from '../../stakeholder/services/curator.service';
-import { Curator } from '../model/exhibition.model';
-import { Room } from '../../events/model/room.model';
+import { Curator, Room } from '../model/exhibition.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
 
@@ -22,7 +20,6 @@ export class ProposeExhibitionComponent {
   constructor(
     private fb: FormBuilder,
     private exhibitionService: ExhibitionsService,
-    private roomService: RoomService,
     private curatorService: CuratorService,
     public dialogRef: MatDialogRef<ProposeExhibitionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { organizerId: number }
@@ -64,10 +61,6 @@ export class ProposeExhibitionComponent {
   onDateChange() {
     const startDate = this.proposalForm.get('startDate')?.value;
     const endDate = this.proposalForm.get('endDate')?.value;
-    if (startDate && endDate) {
-      this.roomService.getAvailableRooms(startDate, endDate)
-        .subscribe(rooms => this.availableRooms = rooms);
-    }
   }
 
   onSubmit() {

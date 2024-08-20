@@ -108,9 +108,6 @@ export class EditEmployeeFormComponent {
         case 'ORGANIZER':
             selectedRole = EditRole.ORGANIZER;
             break;
-        case 'RESTAURATEUR':
-            selectedRole = EditRole.RESTAURATEUR;
-            break;
         default:
             console.error("Invalid role selected.");
             return; 

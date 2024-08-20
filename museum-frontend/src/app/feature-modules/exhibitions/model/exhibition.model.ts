@@ -1,3 +1,5 @@
+import { Item } from "../../items/model/item.model";
+
 // Exhibition model in the frontend
 export interface Exhibition {
     id: number;
@@ -7,13 +9,19 @@ export interface Exhibition {
     longDescription: string;
     theme: string;
     status: string;
+    proposal: ExhibitionProposal;
+    curator: Curator;
+    itemReservations: ItemReservation[];
+  }
+
+  export interface ExhibitionProposal {
+    id: number;
     startDate: string;
     endDate: string;
-    price: number;
     organizer: Organizer;
-    curator: Curator;
     roomReservation: RoomReservation;
-  }
+    priceList: ExhibitionPriceList;
+}
   
   // Organizer model in the frontend
   export interface Organizer {
@@ -36,13 +44,19 @@ export interface Exhibition {
     role: string;
     biography: string;
   }
+
+  export interface ItemReservation {
+    id: number;
+    startDate: string;
+    endDate: string;
+    item: Item;
+}
   
   // RoomReservation model in the frontend
   export interface RoomReservation {
     id: number;
-    startDateTime: string;
-    endDateTime: string;
-    durationMinutes: number;
+    startDate: string;
+    endDate: string;
     room: Room;
   }
   
@@ -50,16 +64,10 @@ export interface Exhibition {
   export interface Room {
     id: number;
     name: string;
-    floor: number;
     number: number;
-    // Add other properties as needed
   }
 
-  export interface ExhibitionProposal {
-    startDate: string;    // Expected to be a string in "dd.MM.yyyy." format
-    endDate: string;      // Expected to be a string in "dd.MM.yyyy." format
-    price: number;        // Expected to be a positive number or zero
-    roomId: number;       // Expected to be the ID of the selected room
-    organizerId: number;  // Expected to be the ID of the organizer creating the proposal
-    curatorId: number;    // Expected to be the ID of the selected curator
+  export interface ExhibitionPriceList {
+    adultPrice: number;
+    minorPrice: number;
 }
