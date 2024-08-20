@@ -1,4 +1,13 @@
 <div class="overlay">
+    <div class="exhibition-menu">
+        <div class="title">Exhibitions</div>
+        <div class="filters">
+            <div class="filter" [ngClass]="{'active': activeFilter === 'current'}" (click)="filterExhibitions('current')">Current</div>
+            <div class="filter" [ngClass]="{'active': activeFilter === 'upcoming'}" (click)="filterExhibitions('upcoming')">Upcoming</div>
+            <div class="filter" [ngClass]="{'active': activeFilter === 'past'}" (click)="filterExhibitions('past')">Past</div>
+        </div>
+    </div>
+
     <div class="card-container">
         <div class="row" *ngFor="let row of slicedExhibitions">
             <app-exhibition-card class="card"

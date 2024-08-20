@@ -29,33 +29,17 @@
   }
   
   .item-name {
-    font-size: 1.4em;
+    font-size: 1.2em; /* Slightly reduced font size */
     margin-bottom: 10px;
     font-weight: bold;
-    height: 2.4em; /* Fixed height to accommodate 2 lines of text */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
+    overflow: visible; /* Allow the name to take more space */
+    white-space: normal; /* Allow wrapping to a new line */
+  }
 .exhibition-dates {
   font-size: 1.1em;
   color: #666;
   margin-bottom: 10px;
 }
-
-.short-description {
-  font-size: 1.1em;
-    color: #666;
-    margin-bottom: 20px;
-    height: 3.6em; /* Fixed height to accommodate 3 lines of text */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limits text to 3 lines */
-    -webkit-box-orient: vertical;
-}
-
   .period,
   .category,
   .additional-info,
@@ -64,10 +48,6 @@
     margin-bottom: 10px;
   }
 
-  .info-row {
-    margin-bottom: 10px;
-  }
-  
   .find-out-more-button {
     display: block;
     width: 80%; /* Adjust width as needed, for example 80% of the card's width */

@@ -1,9 +1,19 @@
 .overlay {
   position: relative;
   height: 100%;
-  background: url('https://images.unsplash.com/photo-1556005693-00fff02f134c?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
-  padding: 50px 0; /* Add some padding on top and bottom */
+  padding: 0px 0px 50px 0px; 
+  
 }
+
+.exhibition-menu {
+  background: url('https://images.unsplash.com/photo-1556005693-00fff02f134c?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+  background-size: cover;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+
   
   .btn {
     width: 10rem;
@@ -30,15 +40,17 @@
   }
 
   .card-container {
+    background-color: #f5f5f5; /* or another light color */
+    padding: 30px;
     position: relative;
     z-index: 2; /* Make sure cards are above the overlay */
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /* Center the cards */
     gap: 20px;
-    max-width: 1200px; /* Limit the width of the container */
+    max-width: 1250px; /* Limit the width of the container */
     margin: 0 auto; /* Center the container on the page */
-}
+  }
 
 .card {
   width: 30%; /* Take up 30% of the container's width */
@@ -59,6 +71,34 @@
   display: flex;
   justify-content: space-between; /* Evenly distribute the cards */
   margin-bottom: 30px; /* Space between rows */
+}
+
+.title {
+  margin-top: 30px;
+  font-size: 2.5em; /* Increase the size of the Exhibitions title */
+  font-weight: bold;
+  text-align:left; /* Center the title */
+  margin-bottom: 20px; /* Add some space below the title */
+}
+
+.filters {
+  display: flex;
+  justify-content: flex-start; /* Center the filters horizontally */
+  gap: 20px; /* Space between filters */
+}
+
+.filter {
+  font-size: 1.2em; /* Increase the size of the filter options */
+  cursor: pointer;
+  padding: 5px 10px;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.filter:hover,
+.filter.active {
+  border-bottom: 3px solid #ff538a; /* Underline color for active or hovered filter */
+  color: #ff538a; /* Text color for active or hovered filter */
 }
   
 
