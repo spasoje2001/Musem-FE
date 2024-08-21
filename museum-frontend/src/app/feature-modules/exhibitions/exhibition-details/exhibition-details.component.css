@@ -1,17 +1,22 @@
 .exhibition-container {
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+  padding-bottom: 50px; /* Add padding to avoid the footer overlapping */
+}
   
-  .header {
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    padding: 100px 20px;
-    text-align: center;
-  }
+.header {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 150px 20px; /* Increase padding for a bigger header */
+  text-align: center;
+  min-height: 500px; /* Ensure the header has a sufficient height */
+  width: 100vw; /* Make the header span the full width of the viewport */
+  left: 50%; /* Center the header */
+  transform: translateX(-50%); /* Adjust for the full-width positioning */
+}
   
   .header::before {
     content: '';
@@ -23,44 +28,132 @@
     background: rgba(0, 0, 0, 0.5);
   }
   
-  .header-content {
-    position: relative;
-    z-index: 2;
-  }
   
-  .header h1 {
-    margin: 0;
-    font-size: 28px;
-    color: #fff;
-  }
+.header-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
   
-  .date {
-    margin-top: 10px;
-    font-style: italic;
-    color: #fff;
-  }
+.header h1 {
+  margin: 0;
+  font-size: 48px; /* Larger title font size */
+  color: #fff;
+}
   
-  .book-tickets {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
   
-  .content {
-    padding: 20px;
-  }
+.date {
+  margin-top: 25px; /* Add margin to separate date from the title */
+  font-style: italic;
+  color: #fff;
+}
+
+.booking-container {
+  margin: 40px auto;
+  padding: 20px;
+  width: 15%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -50px; /* Position it above the content */
+  right: 12%;
+}
+
+.booking-container hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+.booking-container .location {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.booking-container .price {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
   
-  .short-description {
-    font-size: 18px;
+.book-tickets {
+  width: 100%;
+  padding: 12px;
+  background-color: #d9534f; /* Change button color to a more appealing red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+
+.book-tickets:hover {
+  background-color: #c9302c; /* Darken the button color on hover */
+}
+
+.booking-container .price {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.booking-container .location {
+    font-size: 1.1em;
     margin-bottom: 20px;
-  }
+}
   
-  .long-description {
-    margin-bottom: 20px;
-  }
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+  padding: 0 20px;
+  position: relative; /* Ensure children can use absolute positioning */
+  max-width: 80%; /* Limit width of the content area */
+  margin: 40px auto; /* Center the content area */
+}
+
+
+.content {
+  flex-grow: 1;
+  margin-right: 20px;
+  max-width: 50%; /* Limit the width of the content to around half */
+}
+
+.content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.content .date {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 20px;
+}
+  
+.content p.short-description {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.content .long-description {
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.content .curator {
+  font-weight: bold;
+  margin-top: 30px;
+}
   
   .details {
     background-color: #f8f8f8;
@@ -68,29 +161,53 @@
     border-radius: 5px;
     margin-bottom: 20px;
   }
-  
-  .price,
-  .organizer,
-  .curator {
-    margin-bottom: 10px;
-  }
-  
-  .footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-  }
-  
-  .share {
-    color: #fff;
-    text-decoration: none;
-  }
 
-  .location {
+  .selected-works {
+    margin-top: 60px;
+    padding: 0 20px;
+  }
+  
+  .selected-works h3 {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .items-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .item {
+    flex: 1 1 30%;
+    max-width: 30%;
+    text-align: center;
+  }
+  
+  .item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .item img:hover {
+    transform: scale(1.05);
+  }
+  
+  .item p {
     margin-top: 10px;
     font-size: 16px;
-    color: #fff;
+    color: #555;
   }
+  
 
   .room-info,
     .floor-info,
@@ -98,16 +215,150 @@
         font-weight: normal;
         padding-right: 5px; /* Add space between the information */
     }
+
+    .show-more {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .show-more button {
+      padding: 10px 20px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 10%;
+    }
+    
+    .show-more button:hover {
+      background-color: #005bb5;
+    }
+
+    .item-details-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    
+    
+    .modal-content {
+      background: #fff;
+      padding: 40px;
+      max-width: 1200px;
+      width: 90%;
+      display: flex;
+      gap: 40px;
+      position: relative;
+      border-radius: 8px;
+      height: 600px; /* Set a fixed height for the modal */
+      overflow: hidden; /* Hide overflow content */
+    }
+    
+    .modal-left {
+      flex: 2;
+      overflow-y: auto; /* Enable vertical scrolling */
+      height: 100%; /* Ensure it takes up the full height */
+      padding-right: 20px; /* Add padding to avoid text touching the scrollbar */
+    }
+
+    .modal-left h1 {
+      font-size: 38px; /* Veća veličina fonta za naziv stavke */
+      margin-bottom: 10px;
+      color: #333; /* Tamnija boja za bolje čitanje */
+    }
+    
+    .modal-left p strong {
+      font-size: 20px; /* Veća veličina fonta za ime autora */
+      color: #555; /* Svetlija boja za ime autora */
+    }
+    
+    .modal-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    .modal-right img {
+      max-width: 100%; /* Ensure the image doesn’t overflow its container */
+      max-height: 500px; /* Limit the height of the image */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: absolute;
+    }
+    
+    .item-details-table {
+      margin-top: 30px;
+      line-height: 1.6;
+    }
+    
+    .item-details-table p {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .item-details-table .label {
+      font-weight: bold;
+      width: 150px; /* Adjust width as needed */
+      display: inline-block;
+      vertical-align: top;
+    }
+    
+    .item-details-table .value {
+      display: inline-block;
+      vertical-align: top;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+
+  
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .header, .footer {
-      text-align: left;
+        text-align: left;
     }
-  
+
+    .content-container {
+        flex-direction: column;
+    }
+
     .book-tickets {
-      display: block;
-      width: 100%;
-      margin-top: 10px;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
     }
-  }
+
+    .booking-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-bottom: 20px;
+    }
+
+    .item {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+}

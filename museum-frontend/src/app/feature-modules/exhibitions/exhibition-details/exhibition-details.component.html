@@ -3,24 +3,61 @@
       <div class="header-content">
         <h1>{{ exhibition.name }}</h1>
         <div class="date">{{ exhibition.proposal.startDate  }} – {{ exhibition.proposal.endDate  }}</div>
+      </div>
+    </div>
+    <div class="content-container">
+      <div class="content">
+        <h2>{{ exhibition.name }}</h2>
+        <p class="short-description">{{ exhibition.shortDescription }}</p>
+        <div class="date">{{ exhibition.proposal.startDate  }} – {{ exhibition.proposal.endDate  }}</div>
+        <div class="long-description" [innerHTML]="exhibition.longDescription"></div>
+        <div class="curator">Curated by: {{ exhibition.curator.firstName }} {{ exhibition.curator.lastName }}</div>
+      </div>
+      <div class="booking-container">
         <div class="location" *ngIf="exhibition.proposal.roomReservation">
-            <span class="room-info">{{ exhibition.proposal.roomReservation.room.name }},</span>
-            <span class="room-number">Room number: {{ exhibition.proposal.roomReservation.room.number }}</span>
-          </div>
+          <span class="room-info">{{ exhibition.proposal.roomReservation.room.name }}, number</span>
+          <span class="room-number">{{ exhibition.proposal.roomReservation.room.number }}</span>
+        </div>
+        <hr>
+        <p class="price">adults ${{ exhibition.proposal.priceList.adultPrice }}</p>
+        <p class="price">minors ${{ exhibition.proposal.priceList.minorPrice }}</p>
+        <hr>
         <button class="book-tickets">Book tickets</button>
       </div>
     </div>
-    <div class="content">
-      <p class="short-description">{{ exhibition.shortDescription }}</p>
-      <div class="long-description" [innerHTML]="exhibition.longDescription"></div>
-      <div class="details">
-        <div class="price">Adult price - ${{ exhibition.proposal.priceList.adultPrice }}</div>
-        <div class="price">Minor price - ${{ exhibition.proposal.priceList.minorPrice }}</div>
-        <div class="organizer">Organized by: {{ exhibition.proposal.organizer.firstName }} {{ exhibition.proposal.organizer.lastName }}</div>
-        <div class="curator">Curated by: {{ exhibition.curator.firstName }} {{ exhibition.curator.lastName }}</div>
+    <div class="selected-works">
+      <h3>Selected Works</h3>
+      <div class="items-grid">
+        <div class="item" *ngFor="let itemReservation of visibleItems" (click)="showItemDetails(itemReservation.item)">
+          <img [src]="itemReservation.item.picture" [alt]="itemReservation.item.name">
+          <p>{{ itemReservation.item.name }}</p>
+        </div>
+      </div>
+      <div class="show-more" *ngIf="visibleItems.length < exhibition.itemReservations.length">
+        <button (click)="showMore()">Show More</button>
       </div>
     </div>
-    <div class="footer">
-      <a href="#" class="share">Share the page</a>
+</div>
+
+<div class="item-details-modal" *ngIf="selectedItem" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">×</button>
+    <div class="modal-left">
+      <h1><strong>{{ selectedItem.name }}</strong></h1>
+      <p><strong>{{ selectedItem.authorsName }}</strong></p>
+      <p><strong>{{ selectedItem.yearOfCreation }}</strong></p>
+      <p>{{ selectedItem.description }}</p>
+      <p>{{ selectedItem.period }}</p>
+      <div class="item-details-table">
+        <p><span class="label">Title:</span> <span class="value">{{ selectedItem.name }}</span></p>
+        <p><span class="label">Artist:</span> <span class="value">{{ selectedItem.authorsName }}</span></p>
+        <p><span class="label">Year:</span> <span class="value">{{ selectedItem.yearOfCreation }}</span></p>
+        <p><span class="label">Period:</span> <span class="value">{{ selectedItem.period }}</span></p>
+        <p><span class="label">Category:</span> <span class="value">{{ selectedItem.category }}</span></p>
+      </div>
     </div>
+    <div class="modal-right">
+      <img [src]="selectedItem.picture" [alt]="selectedItem.name">
+    </div>
+  </div>
 </div>
