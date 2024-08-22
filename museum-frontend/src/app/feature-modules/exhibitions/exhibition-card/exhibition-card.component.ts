@@ -11,14 +11,26 @@ import { Router } from '@angular/router';
 export class ExhibitionCardComponent {
 
   @Input() exhibition!: Exhibition;
+
+  fullStars: number = 0;
+  hasHalfStar: boolean = false;
   
   constructor(private dialog: MatDialog, private router: Router) {
 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    if (this.exhibition) {
+      this.calculateStars();
+    }
   }
+
+  calculateStars() {
+    // Računanje broja punih zvezdica i poluzvezdice na osnovu prosečne ocene
+    this.fullStars = Math.floor(this.exhibition.averageRating);
+    this.hasHalfStar = (this.exhibition.averageRating - this.fullStars) >= 0.5;
+  }
+
 
   navigateToDetails(id: number) {
     this.router.navigate(['/exhibitions', id]);

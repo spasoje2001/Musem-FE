@@ -4,6 +4,7 @@ import { Item } from "../../items/model/item.model";
 export interface Exhibition {
     id: number;
     name: string;
+    averageRating: number;
     picture: string;
     shortDescription: string;
     longDescription: string;

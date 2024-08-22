@@ -64,4 +64,32 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+.rating {
+  display: flex;
+  margin-top: 10px;
+}
+
+.rating .filled {
+  color: gold; /* Zlata boja za pune zvezde */
+}
+
+.rating .half-filled::before {
+  content: "★";
+  color: gold;
+  position: absolute;
+  width: 50%;
+  overflow: hidden;
+}
+
+.rating .half-filled {
+  color: black; /* Crna boja za prazne zvezde */
+  position: relative;
+}
+
+.rating span {
+  font-size: 20px; /* Veličina zvezda */
+  color: black; /* Crna boja za prazne zvezde */
+  margin-right: 5px; /* Razmak između zvezdica */
+}
   

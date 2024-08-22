@@ -62,7 +62,8 @@ import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.mod
     MatDialogModule,
     ExhibitionsModule,
     BrowserAnimationsModule, // Make sure BrowserAnimationsModule is also imported
-    MatSnackBarModule, // Add MatSnackBarModule here
+    MatSnackBarModule, // Add MatSnackBarModule here,
+    FormsModule
   ],
   providers: [
     {

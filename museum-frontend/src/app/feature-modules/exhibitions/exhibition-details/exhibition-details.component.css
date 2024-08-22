@@ -13,7 +13,7 @@
   padding: 150px 20px; /* Increase padding for a bigger header */
   text-align: center;
   min-height: 500px; /* Ensure the header has a sufficient height */
-  width: 100vw; /* Make the header span the full width of the viewport */
+  width: 100%; /* Make the header span the full width of the viewport */
   left: 50%; /* Center the header */
   transform: translateX(-50%); /* Adjust for the full-width positioning */
 }
@@ -176,6 +176,15 @@
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
   }
+
+  .comments-container {
+    max-width: 60%; /* Restrict to central 60% */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+    max-height: 300px; /* Limit the height for scrolling */
+    overflow-y: scroll; /* Allow vertical scroll */
+    padding-right: 10px; /* Ensure scrollbar doesn't overlap content */
+  }
   
   .items-grid {
     display: flex;
@@ -242,7 +251,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
       border-radius: 12px;
       display: flex;
       justify-content: center;
@@ -250,7 +260,118 @@
       z-index: 1000;
     }
 
+    .booking-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2); /* Dark semi-transparent background */
+      backdrop-filter: blur(10px); /* Optional: add blur to background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .booking-modal-content {
+      background: #fff; /* Ensure the modal content has a white background */
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 500px; /* Make this smaller than the item details modal */
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .booking-modal-content h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .booking-modal-content h1 strong,
+    .booking-modal-content .ticket-type,
+    .booking-modal-content .subtotal span {
+      color: #555; /* Softer gray color */
+      font-weight: bold;
+    }
+
+    .subtotal {
+      font-weight: bold;
+    }
+
+    .ticket-selection {
+      margin-top: 20px;
+    }
     
+    .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd; /* Add horizontal line */
+    }
+    
+    .ticket-type {
+      font-weight: bold;
+    }
+    
+    .ticket-controls {
+      display: flex;
+      align-items: center;
+      margin-left: auto; /* Push the controls to the far right */
+    }
+    
+    .ticket-controls button {
+      width: 30px;
+      height: 30px;
+      background-color: #ddd;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .ticket-quantity {
+      margin: 0 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .ticket-price {
+      font-weight: bold;
+      margin-right: 10px; /* Add space between price and controls */
+      margin-left: 50%;
+    }
+    
+    .total-cost {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .finish-booking {
+      padding: 12px 20px;
+      background-color: #d9534f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+    }
+    
+    .finish-booking:hover {
+      background-color: #c9302c; /* Change to a darker shade on hover */
+    }
+
+    .finish-booking:disabled {
+      background-color: #ccc; /* Light gray background */
+      cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    }
     
     .modal-content {
       background: #fff;
@@ -330,35 +451,185 @@
       font-size: 24px;
       cursor: pointer;
     }
+
+    .review-item {
+      display: flex;
+      align-items: flex-start; /* Aligns items to the top */
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd; /* Light grey horizontal line between reviews */
+    }
+    
+    /* Image of the guest */
+    .guest-picture {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    
+    /* Review details */
+    .review-details {
+      flex-grow: 1;
+      position: relative;
+    }
+    
+    .rating .star {
+      color: #ccc;
+      font-size: 20px;
+    }
+    
+    .rating .star.filled {
+      color: #ffcc00;
+    }
+    
+    .review-comment {
+      max-width: 90%; /* Limit the width of the comment to prevent overlap */
+      word-wrap: break-word; /* Break long words to prevent overflow */
+      margin-bottom: 10px; /* Space between comment and date */
+  }
+  
+  .review-date {
+      font-size: 0.9em;
+      color: #777;
+      text-align: right;
+      margin-left: auto; /* Push the date to the right */
+  }
+
+    .review-form {
+      max-width: 60%;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Heading for the review form */
+    .review-form h3 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    
+    /* Star rating in the form */
+    .review-form .stars {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .review-form .stars .star {
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    .review-form .stars .star.filled {
+      color: #ffcc00;
+    }
+    
+    /* Textarea for comment */
+    .review-form textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      resize: none; /* Prevent resizing */
+    }
+    
+    /* Submit button styling */
+    .review-form button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 90%;
+      transition: background-color 0.3s ease;
+    }
+    
+    .review-form button:hover {
+      background-color: #005bb5;
+    }    
+
+    .show-reviews {
+      text-align: left; /* Aligns the button to the left */
+      margin-top: 20px; /* Add some space above the button */
+      margin-left: 15%; /* Adjust the position */
+    }
+
+    .toggle-buttons {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px; /* Space above the buttons */
+      padding-left: 0; /* Align with the content */
+    }
     
 
-  
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .header, .footer {
-        text-align: left;
+    .toggle-buttons button {
+      background: none;
+      border: none;
+      color: #333; /* Default text color */
+      font-size: 18px;
+      cursor: pointer;
+      position: relative;
+      padding-bottom: 5px; /* Space for underline */
+    }
+    
+    
+    .toggle-buttons button.active {
+      color: #ff4081; /* Highlight color */
+      font-weight: bold;
+    }
+    
+    .toggle-buttons button.active::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #ff4081; /* Underline color */
+      position: absolute;
+      bottom: 0; /* Adjust this value to change underline position */
+      left: 0;
     }
 
-    .content-container {
-        flex-direction: column;
+    .no-review-message {
+      text-align: center;
+      font-size: 24px; /* Adjust this value to match the size of the "REVIEWS" heading */
+      color: #333; /* Use a similar color as the "REVIEWS" heading */
+      font-weight: bold;
+      margin-top: 20px; /* Adjust the margin to your liking */
     }
 
-    .book-tickets {
-        display: block;
-        width: 100%;
-        margin-top: 10px;
+    .rating1 {
+      display: flex;
+      margin-top: 10px;
+      justify-content: center;
     }
-
-    .booking-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-bottom: 20px;
+    
+    .rating1 .filled {
+      color: gold; /* Zlata boja za pune zvezde */
     }
-
-    .item {
-      flex: 1 1 100%;
-      max-width: 100%;
+    
+    .rating1 .half-filled::before {
+      content: "★";
+      color: gold;
+      position: absolute;
+      width: 50%;
+      overflow: hidden;
     }
-}
+    
+    .rating1 .half-filled {
+      color: black; /* Crna boja za prazne zvezde */
+      position: relative;
+    }
+    
+    .rating1 span {
+      font-size: 20px; /* Veličina zvezda */
+      color: black; /* Crna boja za prazne zvezde */
+      margin-right: 5px; /* Razmak između zvezdica */
+    }
+    
+    

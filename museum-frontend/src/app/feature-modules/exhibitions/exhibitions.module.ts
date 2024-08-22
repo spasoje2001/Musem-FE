@@ -4,7 +4,7 @@ import { ExhibitionsViewComponent } from './exhibitions-view/exhibitions-view.co
 import { ExhibitionCardComponent } from './exhibition-card/exhibition-card.component';
 import { ExhibitionDetailsComponent } from './exhibition-details/exhibition-details.component';
 import { ProposeExhibitionComponent } from './propose-exhibition/propose-exhibition.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfOrganizerExhibitionsPromptComponent } from './pdf-organizer-exhibitions-prompt/pdf-organizer-exhibitions-prompt.component';
 import { PdfCuratorExhibitionsPromptComponent } from './pdf-curator-exhibitions-prompt/pdf-curator-exhibitions-prompt.component';
 
@@ -22,7 +22,8 @@ import { PdfCuratorExhibitionsPromptComponent } from './pdf-curator-exhibitions-
   ],
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     ExhibitionCardComponent

@@ -3,6 +3,12 @@
       <div class="header-content">
         <h1>{{ exhibition.name }}</h1>
         <div class="date">{{ exhibition.proposal.startDate  }} – {{ exhibition.proposal.endDate  }}</div>
+        <div class="rating1">
+          <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
+                [ngClass]="{'filled': i < fullStars, 'half-filled': i === fullStars && hasHalfStar}">
+            ★
+          </span>
+        </div> 
       </div>
     </div>
     <div class="content-container">
@@ -12,6 +18,18 @@
         <div class="date">{{ exhibition.proposal.startDate  }} – {{ exhibition.proposal.endDate  }}</div>
         <div class="long-description" [innerHTML]="exhibition.longDescription"></div>
         <div class="curator">Curated by: {{ exhibition.curator.firstName }} {{ exhibition.curator.lastName }}</div>
+        <div class="toggle-buttons">
+          <button 
+            [ngClass]="{'active': viewMode === 'comments'}" 
+            (click)="setViewMode('comments')">
+            Comments
+          </button>
+          <button 
+            [ngClass]="{'active': viewMode === 'highlights'}" 
+            (click)="setViewMode('highlights')">
+            Highlights
+          </button>
+        </div>
       </div>
       <div class="booking-container">
         <div class="location" *ngIf="exhibition.proposal.roomReservation">
@@ -22,22 +40,53 @@
         <p class="price">adults ${{ exhibition.proposal.priceList.adultPrice }}</p>
         <p class="price">minors ${{ exhibition.proposal.priceList.minorPrice }}</p>
         <hr>
-        <button class="book-tickets">Book tickets</button>
+        <button class="book-tickets" *ngIf="user && user.role === 'GUEST'" (click)="openBookingModal()">Book tickets</button>
+        <button class="book-tickets" *ngIf="user && user.role === '' ">Log in to book tickets</button>
       </div>
     </div>
     <div class="selected-works">
-      <h3>Selected Works</h3>
-      <div class="items-grid">
-        <div class="item" *ngFor="let itemReservation of visibleItems" (click)="showItemDetails(itemReservation.item)">
-          <img [src]="itemReservation.item.picture" [alt]="itemReservation.item.name">
-          <p>{{ itemReservation.item.name }}</p>
+      <h3>{{ viewMode === 'comments' ? 'Reviews' : 'Selected Works' }}</h3>
+      <div *ngIf="viewMode === 'comments'; else works" class="comments-and-form">
+        <div  class = "comments-container">
+          <div *ngFor="let review of reviews" class="review-item">
+            <img [src]="review.guestPicture" alt="{{ review.guestFirstName }}" class="guest-picture">
+            <div class="review-details">
+              <p><strong>{{ review.guestFirstName }} {{ review.guestLastName }}</strong></p>
+              <p class="rating">
+                <span *ngFor="let star of [1,2,3,4,5]; let i = index" class="star"
+                      [class.filled]="i < review.rating">★</span>
+              </p>
+              <p class="review-comment">{{ review.comment }}</p>
+              <p class="review-date">{{ review.reviewDate }}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="shouldShowReviewForm()" class="review-form">
+          <h3>Leave a review</h3>
+          <div class="stars">
+            <span *ngFor="let star of [1,2,3,4,5]; let i = index" class="star"
+                  [class.filled]="i < currentRating" (click)="setRating(i + 1)">★</span>
+          </div>
+          <textarea [(ngModel)]="newComment" placeholder="Write your comment here..."></textarea>
+          <button (click)="submitReview()">Submit</button>
+        </div>
+        <div *ngIf="shouldShowReviewMessage()" class="no-review-message">
+          <p>Only guests who visited the exhibition can leave a review.</p>
         </div>
       </div>
-      <div class="show-more" *ngIf="visibleItems.length < exhibition.itemReservations.length">
-        <button (click)="showMore()">Show More</button>
-      </div>
+      <ng-template #works>
+        <div class="items-grid">
+          <div class="item" *ngFor="let itemReservation of visibleItems" (click)="showItemDetails(itemReservation.item)">
+            <img [src]="itemReservation.item.picture" [alt]="itemReservation.item.name">
+            <p>{{ itemReservation.item.name }}</p>
+          </div>
+        </div>
+        <div class="show-more" *ngIf="visibleItems.length < exhibition.itemReservations.length">
+          <button (click)="showMore()">Show More</button>
+        </div>
+      </ng-template>
     </div>
-</div>
+
 
 <div class="item-details-modal" *ngIf="selectedItem" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
@@ -58,6 +107,46 @@
     </div>
     <div class="modal-right">
       <img [src]="selectedItem.picture" [alt]="selectedItem.name">
+    </div>
+  </div>
+</div>
+
+<div class="booking-modal" *ngIf="isBookingModalOpen">
+  <div class="booking-modal-content">
+    <button class="close-btn" (click)="closeBookingModal()">×</button>
+    <h1><strong>Booking tickets</strong></h1>
+
+    <div class="ticket-selection">
+      <div class="ticket-row">
+        <div class="ticket-type">Adults Admission</div>
+        <div class="ticket-price">${{ exhibition.proposal.priceList.adultPrice }}</div>
+        <div class="ticket-controls">
+          <button (click)="decrementAdultTickets()">-</button>
+          <div class="ticket-quantity">{{ adultTickets }}</div>
+          <button (click)="incrementAdultTickets()">+</button>
+        </div>
+      </div>
+
+      <div class="ticket-row">
+        <div class="ticket-type">Minors Admission</div>
+        <div class="ticket-price">${{ exhibition.proposal.priceList.minorPrice }}</div>
+        <div class="ticket-controls">
+          <button (click)="decrementMinorTickets()">-</button>
+          <div class="ticket-quantity">{{ minorTickets }}</div>
+          <button (click)="incrementMinorTickets()">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-cost">
+      <div class="subtotal">
+        <span>Subtotal: </span>
+        <span>${{ totalCost }}</span>
+      </div>
+      <button class="finish-booking" (click)="finishBooking()"
+      [disabled]="adultTickets + minorTickets === 0">
+        Finish booking
+      </button>
     </div>
   </div>
 </div>
