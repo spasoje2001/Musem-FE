@@ -9,6 +9,7 @@ import { EditProfileComponent } from "src/app/feature-modules/stakeholder/compon
 import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/artifacts.component";
 import { ExhibitionsViewComponent } from "src/app/feature-modules/exhibitions/exhibitions-view/exhibitions-view.component";
 import { ExhibitionDetailsComponent } from "src/app/feature-modules/exhibitions/exhibition-details/exhibition-details.component";
+import { ExhibitionProposalComponent } from "src/app/feature-modules/exhibitions/exhibition-proposal/exhibition-proposal.component";
 
 
 
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'exhibitions/:id', // Define the route parameter :id
     component: ExhibitionDetailsComponent
+  },
+  {
+    path: 'propose-exhibition', // Define the route parameter :id
+    component: ExhibitionProposalComponent
   },
 ];
 

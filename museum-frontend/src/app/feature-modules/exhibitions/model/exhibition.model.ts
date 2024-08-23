@@ -72,3 +72,12 @@ export interface Exhibition {
     adultPrice: number;
     minorPrice: number;
 }
+
+export interface ExhibitionProposalRequest {
+  startDate: string;
+  endDate: string;
+  organizerId: number;
+  roomId: number;
+  adultPrice: number;
+  minorPrice: number;
+}

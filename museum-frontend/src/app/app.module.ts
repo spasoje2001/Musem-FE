@@ -26,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -63,7 +64,8 @@ import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.mod
     ExhibitionsModule,
     BrowserAnimationsModule, // Make sure BrowserAnimationsModule is also imported
     MatSnackBarModule, // Add MatSnackBarModule here,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule,
   ],
   providers: [
     {
