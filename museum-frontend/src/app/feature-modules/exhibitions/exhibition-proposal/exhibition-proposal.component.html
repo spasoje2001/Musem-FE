@@ -1,34 +1,58 @@
-<form [formGroup]="proposalForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="startDate">Start Date</label>
-      <input type="date" id="startDate" formControlName="startDate" class="form-control" (change)="onDatesSelected()">
-    </div>
-  
-    <div class="form-group">
-      <label for="endDate">End Date</label>
-      <input type="date" id="endDate" formControlName="endDate" class="form-control" (change)="onDatesSelected()">
-    </div>
-  
-    <div *ngIf="availableRooms.length > 0">
-      <h3>Select Room:</h3>
-      <div class="room-container">
-        <div *ngFor="let room of availableRooms" class="room-card" [class.selected]="room === selectedRoom" (click)="selectRoom(room)">
-          <p>{{ room.number }}</p>
-          <p>{{ room.name }}</p>
-        </div>
+<div class="dialog-backdrop" (click)="close()"></div>
+
+<div class="form-container">
+  <button class="close-btn" (click)="close()">×</button>
+  <h1>Propose an Exhibition</h1>
+  <h3 *ngIf="currentStep === 1" class="sub-header sub-header-dates">Select Dates</h3>
+  <h3 *ngIf="currentStep === 2" class="sub-header sub-header-room">Select a Room</h3>
+  <h3 *ngIf="currentStep === 3" class="sub-header sub-header-pricing">Set the Pricing</h3>
+  <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()"> <!-- Ensure the formGroup is correctly bound here -->
+
+    <!-- Step 1: Select Date Range -->
+    <div *ngIf="currentStep === 1" class="step-container">
+      <div class="form-group">
+          <input type="date" id="startDate" formControlName="startDate" class="form-control" (change)="onDatesSelected()" placeholder=" ">
+          <label for="startDate">Start Date</label>
       </div>
-    </div>
+      <div class="form-group">
+          <input type="date" id="endDate" formControlName="endDate" class="form-control" (change)="onDatesSelected()" placeholder=" ">
+          <label for="endDate">End Date</label>
+      </div>
+      <div class="button-group">
+          <button (click)="close()" class="btn-cancel">Cancel</button>
+          <button (click)="nextStep()" [disabled]="!datesSelected()" class="btn-next">Next</button>
+      </div>
+  </div>
   
-    <div class="form-group">
-      <label for="adultPrice">Adult Price</label>
-      <input type="number" id="adultPrice" formControlName="adultPrice" class="form-control">
+
+    <!-- Step 2: Select Room -->
+    <div *ngIf="currentStep === 2" class="step-container">
+        <div class="room-container" [ngClass]="{'scrollable': availableRooms.length > 10}">
+            <div *ngFor="let room of availableRooms" class="room-card" [class.selected]="room === selectedRoom" (click)="selectRoom(room)">
+              <p>{{ room.number }}</p>
+              <p>{{ room.name }}</p>
+            </div>
+        </div>
+        <div class="button-group">
+            <button (click)="previousStep()" class="btn-previous">Previous</button>
+            <button (click)="nextStep()" [disabled]="!selectedRoom" class="btn-next">Next</button>
+        </div>
     </div>
-  
-    <div class="form-group">
-      <label for="minorPrice">Minor Price</label>
-      <input type="number" id="minorPrice" formControlName="minorPrice" class="form-control">
+
+    <!-- Step 3: Set Prices -->
+    <div *ngIf="currentStep === 3" class="step-container">
+        <div class="form-group">
+            <input type="number" id="adultPrice" formControlName="adultPrice" class="form-control" placeholder=" ">
+            <label for="adultPrice">Adult Price</label>
+        </div>
+        <div class="form-group">
+            <input type="number" id="minorPrice" formControlName="minorPrice" class="form-control" placeholder=" ">
+            <label for="minorPrice">Minor Price</label>
+        </div>
+        <div class="button-group">
+            <button (click)="previousStep()" class="btn-previous">Previous</button>
+            <button type="submit" class="btn-next" [disabled]="!proposalForm.valid">Finish Proposal</button>
+        </div>
     </div>
-  
-    <button type="submit" class="btn btn-primary" [disabled]="!proposalForm.valid">Finish Proposal</button>
   </form>
-  
+</div>

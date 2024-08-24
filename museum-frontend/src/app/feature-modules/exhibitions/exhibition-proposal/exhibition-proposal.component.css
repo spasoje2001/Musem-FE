@@ -1,22 +1,222 @@
+/* Backdrop */
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+/* Modal container */
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 600px; /* Povećana širina */
+  min-height: 420px; /* Ensure consistent height across steps */
+  margin: 0 auto;
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to the top */
+  align-items: flex-start; /* Align items to the start */
+  gap: 20px; /* Controlled spacing between elements */
+}
+
+
+.sub-header {
+  font-size: 18px;
+  color: #555;
+  margin: 0; /* Reset margin */
+  margin-top: 10px; /* Consistent gap from h1 */
+  text-align: left;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px; /* Moved closer to the top */
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Title and Subtitles */
+h1, h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px; /* Slightly larger for better readability */
+}
+
+h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+h3.sub-header {
+  text-align: left;
+  margin: 0; /* Reset margin */
+  margin-top: 10px; /* Small gap from h1 */
+  margin-bottom: 15px; /* Consistent spacing below h3 */
+  font-size: 18px;
+  color: #555;
+}
+
+/* Form group */
+.form-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+/* Form input */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #0066cc;
+}
+
+/* Label */
+.form-group label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  transform: translateY(0); /* Remove vertical centering */
+  background-color: #fff;
+  padding: 0 5px;
+  color: #aaa;
+  font-size: 14px;
+  transition: 0.2s ease all;
+}
+
+.form-control:focus + label,
+.form-control:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  color: #0066cc;
+  font-size: 12px;
+}
+
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 5px 10px; /* Add margin between buttons */
+}
+
+.btn-cancel, .btn-previous, .btn-next {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #ccc;
+}
+
+.btn-previous {
+  background-color: #ccc;
+}
+
+.btn-next {
+  background-color: #0066cc;
+  color: white;
+}
+
+.btn-next:disabled {
+  background-color: #999;
+}
+
+.btn-primary {
+  background-color: #0066cc;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #005bb5;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+}
+
+.btn-secondary:hover {
+  background-color: #bbb;
+}
+
+/* Room selection */
 .room-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .room-card {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .room-card.selected {
-    background-color: #4caf50;
-    color: white;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: hidden;
+  justify-content: center;
+}
+
+.room-container.scrollable {
+  overflow-y: auto;
+}
+
+.room-card {
+  width: calc(20% - 10px);
+  height: 80px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.room-card.selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+.date-picker {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  outline: none;
+}
+
+.date-picker:focus {
+  border-color: #0066cc;
+}

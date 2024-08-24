@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExhibitionsService } from 'src/app/feature-modules/exhibitions/exhibitions.service';
 import { ProposeExhibitionComponent } from 'src/app/feature-modules/exhibitions/propose-exhibition/propose-exhibition.component';
 import { PdfOrganizerExhibitionsPromptComponent } from 'src/app/feature-modules/exhibitions/pdf-organizer-exhibitions-prompt/pdf-organizer-exhibitions-prompt.component';
+import { ExhibitionProposalComponent } from 'src/app/feature-modules/exhibitions/exhibition-proposal/exhibition-proposal.component';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -38,8 +39,8 @@ export class OrganizerProfileComponent implements OnInit {
 
 
   openExhibitionProposalForm() {
-    const dialogRef = this.dialog.open(ProposeExhibitionComponent, {
-      width: '250px',
+    const dialogRef = this.dialog.open(ExhibitionProposalComponent, {
+      width: '500px',
       data: {
         organizerId: this.organizer!.id  // Pass the organizer's ID to the dialog
       }

@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { ProposalService } from '../proposal.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-exhibition-proposal',
@@ -19,6 +20,7 @@ export class ExhibitionProposalComponent {
   availableRooms: Room[] = [];
   selectedRoom: Room | null = null;
   user: User | undefined;
+  currentStep: number = 1; // Step indicator
   
 
   constructor(
@@ -27,7 +29,8 @@ export class ExhibitionProposalComponent {
     private snackBar: MatSnackBar,
     private datePipe: DatePipe,
     private authService: AuthService,
-    private proposalService: ProposalService
+    private proposalService: ProposalService,
+    public dialogRef: MatDialogRef<ExhibitionProposalComponent>
   ) {
     this.proposalForm = this.fb.group({
       startDate: ['', Validators.required],
@@ -43,6 +46,27 @@ export class ExhibitionProposalComponent {
       this.user = user;
       console.log(user);
     });
+  }
+
+  nextStep(): void {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+  }
+
+  previousStep(): void {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
+
+  datesSelected(): boolean {
+    const { startDate, endDate } = this.proposalForm.value;
+    return startDate && endDate;
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 
   onDatesSelected(): void {
@@ -82,7 +106,7 @@ export class ExhibitionProposalComponent {
       const proposal: ExhibitionProposalRequest = {
         startDate: formattedStartDate!,
         endDate: formattedEndDate!,
-        organizerId: this.user!.id, // You need to replace this with the actual organizer ID
+        organizerId: this.user!.id,
         roomId: this.selectedRoom.id,
         adultPrice: this.proposalForm.get('adultPrice')?.value,
         minorPrice: this.proposalForm.get('minorPrice')?.value,
@@ -92,7 +116,6 @@ export class ExhibitionProposalComponent {
         next: (response) => {
           console.log(response);
           this.snackBar.open('Proposal created successfully!', 'Close', { duration: 3000 });
-          // Optionally, navigate to another page or reset the form
         },
         error: (error) => {
           this.snackBar.open('Failed to create proposal.', 'Close', { duration: 3000 });
