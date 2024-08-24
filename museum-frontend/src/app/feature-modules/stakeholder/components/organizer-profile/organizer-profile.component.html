@@ -1,27 +1,38 @@
-<div class="wrapper">
-    <div class="container profile-grid">
-        <img class="profile-picture" src="{{organizer?.picture}}" alt="">
-        <div class="user-data">
-            <p class="name">{{organizer?.firstName}} {{organizer?.lastName}}</p>
-            <p class="username">&#64;{{organizer?.username}}</p>
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <div class="profile-info">
+            <img class="profile-picture" src="{{organizer?.picture}}" alt="Profile Picture">
+            <div class="user-data">
+                <p class="name">{{organizer?.firstName}} {{organizer?.lastName}}</p>
+                <p class="username">&#64;{{organizer?.username}}</p>
+                <p class="bio">{{organizer?.biography}}</p>
+            </div>
+            <img class="edit-icon" src="assets/edit.png"/>
         </div>
-        <div class="bio">
-            <p>{{organizer?.biography}}</p>
-        </div>
-        <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
-    </div>
-
-    <div class="header">
-        <h1>Exhibitions</h1>
-        <div class="header-buttons">
-            <button type="submit" class="report-btn" (click)="openOrganizerExhibitionsReportDialogue()">View Exhibitions Insights</button>
-            <button class="add-exhibition-btn" (click)="openExhibitionProposalForm()">+</button>
+        <div class="action-buttons">
+            <button class="generate-report">Generate Report</button>
+            <button class="propose-exhibition" (click)="openExhibitionProposalForm()">Propose Exhibition</button>
         </div>
     </div>
-
-    <!-- List of exhibitions managed by the organizer 
-    <div class="cards" *ngFor="let exhibition of exhibitions">
-        <app-organizer-exhibition-card [exhibition]="exhibition" (deleted)="onDeleteExhibition($event)" (updated)="onUpdateExhibition($event)"></app-organizer-exhibition-card>
+    
+    <div class="exhibitions-container">
+        <h2>My exhibitions</h2>
+        <div class="exhibitions-grid">
+            <div class="exhibition-card">Exhibition Card</div>
+            <div class="exhibition-card">Exhibition Card</div>
+            <div class="exhibition-card">Exhibition Card</div>
+            <div class="exhibition-card">Exhibition Card</div>
+            <div class="exhibition-card">Exhibition Card</div>
+            <div class="exhibition-card">Exhibition Card</div>
+        </div>
+        <h2>My proposals</h2>
+        <div class="proposals-grid">
+            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card">Proposal Card</div>
+        </div>
     </div>
-    -->
 </div>

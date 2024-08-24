@@ -35,8 +35,8 @@ export class ExhibitionProposalComponent {
     this.proposalForm = this.fb.group({
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      adultPrice: ['', [Validators.required, Validators.min(0)]],
-      minorPrice: ['', [Validators.required, Validators.min(0)]],
+      adultPrice: [0, [Validators.required, Validators.min(0)]], // Default value set to 0
+      minorPrice: [0, [Validators.required, Validators.min(0)]], // Default value set to 0
       roomId: [null, Validators.required]
     });
   }
@@ -81,8 +81,8 @@ export class ExhibitionProposalComponent {
       console.log(formattedStartDate);
       console.log(formattedEndDate);
       this.roomService.getAvailableRooms(formattedStartDate!, formattedEndDate!).subscribe(
-        (rooms: any) => {
-          this.availableRooms = rooms;
+        (rooms: Room[]) => {
+          this.availableRooms = rooms.sort((a, b) => a.number - b.number);
         },
         (error: any) => {  // Explicitly specify the type of error as 'any'
           this.snackBar.open('Error fetching available rooms', 'Close', {
@@ -115,10 +115,21 @@ export class ExhibitionProposalComponent {
       this.proposalService.createProposal(proposal).subscribe({
         next: (response) => {
           console.log(response);
-          this.snackBar.open('Proposal created successfully!', 'Close', { duration: 3000 });
+          this.close();
+          this.snackBar.open('Proposal created successfully!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar-success']
+          });
         },
         error: (error) => {
-          this.snackBar.open('Failed to create proposal.', 'Close', { duration: 3000 });
+          this.snackBar.open('Failed to create proposal.', 'Close', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar-error']
+          });
         }
       });
     } else {

@@ -43,13 +43,11 @@ export class OrganizerProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(ExhibitionProposalComponent, {
       width: '500px',
       data: {
-        organizerId: this.organizer!.id  // Pass the organizer's ID to the dialog
+        organizerId: this.organizer!.id  
       }
-      // Pass any required data to the dialog
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // Handle the result from the dialog, which could be the new exhibition
       console.log('The dialog was closed', result);
     });
   }
