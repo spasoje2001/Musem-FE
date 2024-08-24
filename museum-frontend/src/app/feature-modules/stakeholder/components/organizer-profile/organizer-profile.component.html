@@ -1,32 +1,27 @@
 <div class="wrapper">
     <div class="container profile-grid">
-        <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
+        <img class="profile-picture" src="{{organizer?.picture}}" alt="">
         <div class="user-data">
             <p class="name">{{organizer?.firstName}} {{organizer?.lastName}}</p>
             <p class="username">&#64;{{organizer?.username}}</p>
-            <p class="bio">{{organizer?.biography}}</p>
+        </div>
+        <div class="bio">
+            <p>{{organizer?.biography}}</p>
         </div>
         <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
     </div>
 
     <div class="header">
         <h1>Exhibitions</h1>
-        <button
-          type="submit"
-          class="report-btn"
-          (click)="openOrganizerExhibitionsReportDialogue()">
-        &nbsp;View Exhibitions Insights
-        </button>
-        <button (click)="openExhibitionProposalForm()">+</button>
+        <div class="header-buttons">
+            <button type="submit" class="report-btn" (click)="openOrganizerExhibitionsReportDialogue()">View Exhibitions Insights</button>
+            <button class="add-exhibition-btn" (click)="openExhibitionProposalForm()">+</button>
+        </div>
     </div>
 
-    
-    
     <!-- List of exhibitions managed by the organizer 
     <div class="cards" *ngFor="let exhibition of exhibitions">
-        <app-organizer-exhibition-card [exhibition]="exhibition" (deleted)="onDeleteExhibition(\$event)" (updated)="onUpdateExhibition(\$event)"></app-organizer-exhibition-card>
+        <app-organizer-exhibition-card [exhibition]="exhibition" (deleted)="onDeleteExhibition($event)" (updated)="onUpdateExhibition($event)"></app-organizer-exhibition-card>
     </div>
     -->
-
-    
 </div>

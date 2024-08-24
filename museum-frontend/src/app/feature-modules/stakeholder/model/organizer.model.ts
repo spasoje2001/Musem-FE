@@ -1,5 +1,6 @@
 export interface Organizer {
     id: number;
+    picture: string,
     username: string;
     firstName: string;
     lastName: string;

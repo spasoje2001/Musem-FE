@@ -1,98 +1,128 @@
-.wrapper .container {
-    margin-bottom: 3rem;
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #f5f5f5;
 }
 
-.wrapper h1 {
-    font-weight: bolder;
-    font-size: xx-large;
+.container.profile-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 1000px; /* Max width of the profile section */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+.container.profile-grid .user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container.profile-grid .profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid #ecf0f1;
+}
+
+.container.profile-grid .name,
+.container.profile-grid .username {
+    text-align: center;
+}
+
+.container.profile-grid .bio {
+    flex: 1;
+    margin-left: 2rem;
+    color: #ecf0f1;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: pre-wrap;
+}
+
+.container.profile-grid .edit {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-left: auto;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.header .report-btn, .header .add-exhibition-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .header .report-btn {
-    width: 300px;
-    height: 40px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
+    background-color: #3498db;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-weight: 600;
-    margin-left: 56.5%; /* Adjust the margin-left value as needed */
-    margin-top: 1%;
-    margin-bottom: 0.5%;
 }
 
-
-.header button {
-    font-size: x-large;
-    
-    background-color: transparent;
-    border-radius: 5px;
-    border: none;
-    
-    color: white;
-    background-color: gray;
-
-    height: 2.5rem;
+.header .add-exhibition-btn {
+    background-color: #e74c3c;
+    color: #fff;
     width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
 }
 
 .cards {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    gap: 1rem;
 }
 
+@media (min-width: 768px) {
+    .wrapper {
+        padding: 4rem;
+    }
 
-/* cards */
-.organizer {
-    display: grid;
-    grid-template-columns: 1fr auto;
-}
+    .container.profile-grid {
+        padding: 2rem;
+        max-width: 800px; /* Apply the max-width for larger screens */
+    }
 
-.container-cards img.edit, .buttons button {
-    height: 1.5rem;
-    cursor: pointer;
-}
+    .container.profile-grid .profile-picture {
+        width: 140px;
+        height: 140px;
+    }
 
-.container-cards {
-    width: 100%;
-    background-color: rgb(124, 124, 124);
-    color: white;
-    
-    display: flex;
-    flex-direction: row;
-    
-    border-radius: 1rem;
-    padding: 2rem;
-}
-
-.buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
-}
-
-.buttons button {
-    background-color: transparent;
-    border: none;
-    font-size: 1rem;
-    color: white;
-}
-
-.container-cards p {
-    width: 100%;
-    font-size: 1rem;
-    color: white;
+    .header .report-btn, .header .add-exhibition-btn {
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+    }
 }

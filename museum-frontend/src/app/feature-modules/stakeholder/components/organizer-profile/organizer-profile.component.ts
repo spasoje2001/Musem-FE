@@ -34,6 +34,7 @@ export class OrganizerProfileComponent implements OnInit {
   loadData(): void {
     this.guestService.getLoggedInOrganizer().subscribe(organizer => {
       this.organizer = organizer;
+      console.log(organizer);
     });
   }
 
