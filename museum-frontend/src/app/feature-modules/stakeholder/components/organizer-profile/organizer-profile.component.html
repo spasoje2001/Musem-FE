@@ -18,21 +18,45 @@
     <div class="exhibitions-container">
         <h2>My exhibitions</h2>
         <div class="exhibitions-grid">
-            <div class="exhibition-card">Exhibition Card</div>
-            <div class="exhibition-card">Exhibition Card</div>
-            <div class="exhibition-card">Exhibition Card</div>
-            <div class="exhibition-card">Exhibition Card</div>
-            <div class="exhibition-card">Exhibition Card</div>
-            <div class="exhibition-card">Exhibition Card</div>
+            <div class="item-card" *ngFor="let exhibition of exhibitions">
+                <div class="image-container">
+                    <img class="item-image" [src]="exhibition.picture" alt="Exhibition Image">
+                </div>
+                <div class="info-container">
+                    <div class="info-row">
+                        <p class="item-name">{{exhibition.name}}</p>
+                    </div>
+                    <div class="info-row">
+                        <p class="exhibition-dates">{{exhibition.proposal.startDate}} - {{exhibition.proposal.endDate}}</p>
+                    </div>
+                    <div class="info-row">
+                        <button class="find-out-more-button" (click)="navigateToDetails(exhibition.id)">Find Out More</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <h2>My proposals</h2>
         <div class="proposals-grid">
-            <div class="proposal-card">Proposal Card</div>
-            <div class="proposal-card">Proposal Card</div>
-            <div class="proposal-card">Proposal Card</div>
-            <div class="proposal-card">Proposal Card</div>
-            <div class="proposal-card">Proposal Card</div>
-            <div class="proposal-card">Proposal Card</div>
+            <div class="proposal-card" *ngFor="let proposal of proposals">
+                <div class="info-container">
+                    <div class="info-row">
+                        <p class="proposal-name">Proposal #{{proposal.id}}</p>
+                    </div>
+                    <div class="info-row">
+                        <p class="proposal-dates">{{proposal.startDate}} - {{proposal.endDate}}</p>
+                    </div>
+                    <div class="info-row">
+                        <p class="proposal-room">Room {{proposal.roomReservation.room.name}} {{proposal.roomReservation.room.number}}</p>
+                    </div>
+                    <div class="info-row">
+                        <p class="proposal-price">Adult: {{proposal.priceList.adultPrice | currency}} | Minor: {{proposal.priceList.minorPrice | currency}}</p>
+                    </div>
+                    <div class="info-row icons">
+                        <mat-icon (click)="editProposal(proposal.id)">edit</mat-icon>
+                        <mat-icon (click)="deleteProposal(proposal.id)">delete</mat-icon>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

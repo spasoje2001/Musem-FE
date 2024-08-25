@@ -9,7 +9,7 @@ import { environment } from 'src/env/environment';
   providedIn: 'root'
 })
 export class ExhibitionsService {
-
+  
   constructor(private http: HttpClient,private router: Router) { }
 
   getExhibitions(): Observable<Exhibition> {
@@ -20,10 +20,8 @@ export class ExhibitionsService {
     return this.http.get<Exhibition>(environment.apiHost + `exhibitions/${id}`);
   }
 
-  proposeExhibition(proposalData: ExhibitionProposal): Observable<Exhibition> {
-    console.log(proposalData);
-    const url = environment.apiHost + `exhibitions/propose`;
-    return this.http.post<Exhibition>(url, proposalData);
+  getExhibitionsByOrganizer(organizerId: number): Observable<Exhibition[]> {
+    return this.http.get<Exhibition[]>(environment.apiHost + `exhibitions/organizer/${organizerId}`);
   }
 
   seeOrganizerGeneratedReport() : Observable<Blob> {

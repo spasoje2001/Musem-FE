@@ -17,5 +17,9 @@ export class ProposalService {
   createProposal(proposal: ExhibitionProposalRequest): Observable<ExhibitionProposal> {
     return this.http.post<ExhibitionProposal>(this.apiUrl, proposal);
   }
+
+  getProposalsByOrganizer(organizerId: number): Observable<ExhibitionProposal[]> {
+    return this.http.get<ExhibitionProposal[]>(environment.apiHost + `proposals/organizer/${organizerId}`);
+  }
   
 }

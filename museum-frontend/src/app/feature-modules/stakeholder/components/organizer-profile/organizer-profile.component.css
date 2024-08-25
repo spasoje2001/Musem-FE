@@ -35,7 +35,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    max-height: 50%;
+    max-height: 58%;
 }
 
 .profile-info {
@@ -105,6 +105,12 @@
     text-align: center;
 }
 
+.generate-report:hover,
+.propose-exhibition:hover {
+    background-color: #B8860B; /* Promena boje na hover */
+    transition: background-color 0.3s ease; /* Glatki prelaz */
+}
+
 .exhibitions-container {
     flex-basis: 75%;
     margin-left: 20px;
@@ -114,22 +120,26 @@
     height: 100%;
 }
 
-.exhibitions-container h2 {
-    background-color: rgba(255, 255, 255, 0.8); /* Bela sa 80% transparentnosti */
-    color: #1D1D1D; /* Tamno siva boja za tekst */
-    padding: 10px 20px;
+.exhibitions-container h2,
+.proposals-container h2 {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #1D1D1D;
+    padding: 5px 15px; /* Smanjen padding za naslov */
     border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 0px; /* Smanjen margin ispod naslova */
+    margin-top: opx; /* Smanjen margin iznad naslova */
 }
 
 
 .exhibitions-grid,
 .proposals-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    height: 100%; /* Makes the grid take up all available space */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px; /* Smanjen razmak između kartica */
+    padding: 5px; /* Smanjen padding unutar grid containera */
+    justify-items: center;
+    margin-bottom: 0px; /* Smanjen margin ispod kartica */
+    margin-top: 0px; /* Smanjen margin iznad kartica */
 }
 
 .exhibition-section,
@@ -154,3 +164,151 @@
     text-align: center;
     min-height: 100px;
 }
+
+
+.item-card {
+    width: 250px; /* Širina kartica */
+    height: 350px; /* Visina kartica */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+.image-container {
+    width: 100%;
+    height: 200px; /* Povećaj visinu slike */
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.info-container {
+    padding: 15px;
+    height: 150px;
+    width: 100%;
+    position: relative;
+    flex-grow: 1;
+    background-color: #fff;
+}
+
+.item-name {
+    font-size: 1.2em; /* Povećaj font za naziv */
+    margin-bottom: 10px; /* Povećaj razmak ispod naziva */
+    font-weight: bold;
+    color: #333;
+}
+
+.exhibition-dates {
+    font-size: 1em; /* Povećaj font za datume */
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.find-out-more-button {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.exhibitions-grid {
+    align-items: center; /* Vertikalno centrira kartice unutar grid-a */
+    justify-content: center; /* Horizontalno centrira grid unutar containera */
+}
+
+.proposal-card {
+    width: 250px; /* Ista širina kao Exhibition kartice */
+    height: 350px; /* Ista visina kao Exhibition kartice */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff; /* Bela pozadina */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Blaga senka */
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.proposal-card .info-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.proposal-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.proposal-dates {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.proposal-room {
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.proposal-price {
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.icons mat-icon {
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.icons mat-icon:hover {
+    color: #d4a017; /* Promena boje prilikom prelaska mišem */
+}
+
+
+
