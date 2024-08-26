@@ -41,8 +41,6 @@ export class OrganizerProfileComponent implements OnInit {
   loadData(): void {
     this.organizerService.getLoggedInOrganizer().subscribe(organizer => {
       this.organizer = organizer;
-      console.log(organizer);
-
       if (organizer) {
         this.loadExhibitions(organizer.id);
         this.loadProposals(organizer.id);
@@ -60,7 +58,7 @@ export class OrganizerProfileComponent implements OnInit {
   loadProposals(organizerId: number): void {
     this.proposalService.getProposalsByOrganizer(organizerId).subscribe(proposals => {
       this.proposals = proposals;
-      console.log('Proposals:', this.proposals);
+      console.log("apdejtovane")
     });
   }
 
@@ -74,9 +72,12 @@ export class OrganizerProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      if (result) {
+        this.loadProposals(this.organizer!.id);  // Reload proposals after closing the dialog
+      }
     });
   }
+
   openOrganizerExhibitionsReportDialogue(): void {
     this.requestsReportButtonState = 'clicked';
     setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);

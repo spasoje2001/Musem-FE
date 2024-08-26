@@ -1,7 +1,7 @@
-<div class="dialog-backdrop" (click)="close()"></div>
+<div class="dialog-backdrop" (click)="close(false)"></div>
 
 <div class="form-container">
-  <button class="close-btn" (click)="close()">×</button>
+  <button class="close-btn" (click)="close(false)">×</button>
   <div class="header-container">
     <h1>Propose an Exhibition</h1>
     <h3 *ngIf="currentStep === 1" class="sub-header sub-header-dates">Select Dates</h3>
@@ -21,7 +21,7 @@
           <label for="endDate">End Date</label>
       </div>
       <div class="button-group">
-        <button type="button" (click)="close()" class="btn-cancel">Cancel</button>
+        <button type="button" (click)="close(false)" class="btn-cancel">Cancel</button>
         <button (click)="nextStep()" [disabled]="!datesSelected()" class="btn-next">Next</button>
       </div>
   </div>

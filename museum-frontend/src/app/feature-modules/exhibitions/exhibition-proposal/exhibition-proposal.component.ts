@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ExhibitionProposal, ExhibitionProposalRequest, Room } from '../model/exhibition.model';
 import { RoomService } from '../room.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,6 +22,7 @@ export class ExhibitionProposalComponent {
   user: User | undefined;
   currentStep: number = 1; // Step indicator
   isEditMode: boolean = false;
+  minEndDate: string | null = null;
   
 
   constructor(
@@ -42,8 +43,15 @@ export class ExhibitionProposalComponent {
       roomId: [null, Validators.required]
     });
 
+    this.proposalForm.get('adultPrice')?.valueChanges.subscribe(() => {
+      this.validateMinorPrice();
+    });
+
+    this.proposalForm.get('minorPrice')?.valueChanges.subscribe(() => {
+      this.validateMinorPrice();
+    });
+
     if (data.proposal) {
-      console.log('EDIT')
       this.isEditMode = true;
       this.populateForm(data.proposal);
     }
@@ -57,9 +65,6 @@ export class ExhibitionProposalComponent {
   }
 
   populateForm(proposal: ExhibitionProposal): void {
-    console.log("Populate form:", proposal);
-    
-    // Convert the date format from 'dd.MM.yyyy.' to 'yyyy-MM-dd'
     const startDateParts = proposal.startDate.split('.');
     const endDateParts = proposal.endDate.split('.');
 
@@ -73,6 +78,8 @@ export class ExhibitionProposalComponent {
         minorPrice: proposal.priceList.minorPrice,
         roomId: proposal.roomReservation.room.id
     });
+
+    this.minEndDate = startDateFormatted;
 
     this.selectedRoom = proposal.roomReservation.room;
 
@@ -114,16 +121,44 @@ export class ExhibitionProposalComponent {
     return startDate && endDate;
   }
 
-  close(): void {
-    this.dialogRef.close();
+  close(createdUpdated: boolean): void {
+    if(createdUpdated){
+      this.dialogRef.close(true);
+    }else{
+      this.dialogRef.close();
+    }
+    
   }
 
   onDatesSelected(): void {
     const { startDate, endDate } = this.proposalForm.value;
+
+    const today = new Date();
+    const oneWeekLater = new Date(today.setDate(today.getDate() + 7));
+    const selectedStartDate = new Date(startDate);
+    
+    if (selectedStartDate < oneWeekLater) {
+      this.snackBar.open('Start Date must be at least one week from today.', 'Close', {
+        duration: 3000,
+      });
+      this.proposalForm.patchValue({ startDate: '' }); // Reset startDate
+      return;
+    }
     
     if (startDate && endDate) {
         const formattedStartDate = this.datePipe.transform(startDate, 'dd.MM.yyyy.');
         const formattedEndDate = this.datePipe.transform(endDate, 'dd.MM.yyyy.');
+
+        if (selectedStartDate >= new Date(endDate)) {
+          const newEndDate = new Date(selectedStartDate);
+          newEndDate.setDate(newEndDate.getDate() + 1);
+          this.proposalForm.patchValue({
+            endDate: this.datePipe.transform(newEndDate, 'yyyy-MM-dd')
+          });
+          this.snackBar.open('End Date is moved with the start date.', 'Close', {
+            duration: 3000,
+          });
+        }
 
         if (this.isEditMode) {
             // If in edit mode, call the update-specific endpoint
@@ -187,7 +222,7 @@ export class ExhibitionProposalComponent {
         // Update existing proposal
         this.proposalService.updateProposal(this.data.proposal.id, proposal).subscribe({
           next: (response) => {
-            this.close();
+            this.close(true);
             this.snackBar.open('Proposal updated successfully!', 'Close', {
               duration: 3000,
               verticalPosition: 'bottom',
@@ -204,7 +239,7 @@ export class ExhibitionProposalComponent {
         this.proposalService.createProposal(proposal).subscribe({
           next: (response) => {
             console.log(response);
-            this.close();
+            this.close(true);
             this.snackBar.open('Proposal created successfully!', 'Close', {
               duration: 3000,
               verticalPosition: 'bottom',
@@ -227,5 +262,18 @@ export class ExhibitionProposalComponent {
       this.snackBar.open('Please fill in all fields and select a room.', 'Close', { duration: 3000 });
     }
   }
+
+  validateMinorPrice(): void {
+    const adultPrice = this.proposalForm.get('adultPrice')?.value;
+    const minorPriceControl = this.proposalForm.get('minorPrice');
+
+    if (adultPrice === 0) {
+      minorPriceControl?.setValue(0);
+    } else if (minorPriceControl?.value >= adultPrice) {
+      minorPriceControl?.setValue(adultPrice - 1);
+    }
+  }
 }
+
+
 
