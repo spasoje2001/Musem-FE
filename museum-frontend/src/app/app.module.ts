@@ -27,6 +27,7 @@ import { ItemsModule } from './feature-modules/items/items.module';
 import { MatButtonModule } from '@angular/material/button';
 import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DeleteConfirmationDialogComponent } from './feature-modules/stakeholder/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 
 
@@ -43,6 +44,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
     AdministratorProfileComponent,
+    DeleteConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

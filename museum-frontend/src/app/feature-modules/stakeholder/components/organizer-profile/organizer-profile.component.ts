@@ -8,6 +8,7 @@ import { PdfOrganizerExhibitionsPromptComponent } from 'src/app/feature-modules/
 import { ExhibitionProposalComponent } from 'src/app/feature-modules/exhibitions/exhibition-proposal/exhibition-proposal.component';
 import { ProposalService } from 'src/app/feature-modules/exhibitions/proposal.service';
 import { Exhibition, ExhibitionProposal } from 'src/app/feature-modules/exhibitions/model/exhibition.model';
+import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-organizer-profile',
@@ -93,16 +94,33 @@ export class OrganizerProfileComponent implements OnInit {
     this.router.navigate(['/exhibitions', id]);
   }
 
-  editProposal(proposalId: number): void {
-    // Ovde dodajte logiku za editovanje proposala
-    console.log('Edit proposal:', proposalId);
-    // Možete otvoriti dijalog za editovanje ili preusmeriti na drugu stranicu
-}
+  editProposal(proposal: ExhibitionProposal): void {
+    const dialogRef = this.dialog.open(ExhibitionProposalComponent, {
+      width: '500px',
+      data: {
+        proposal: proposal, // Pass the proposal to the dialog
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadProposals(this.organizer!.id);
+      }
+    });
+  }
 
 deleteProposal(proposalId: number): void {
-    // Ovde dodajte logiku za brisanje proposala
-    console.log('Delete proposal:', proposalId);
-    // Možete prikazati potvrdu pre brisanja ili odmah ukloniti iz liste
+  const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+    width: '400px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.proposalService.deleteProposal(proposalId).subscribe(() => {
+        this.loadProposals(this.organizer!.id);
+      });
+    }
+  });
 }
 
 }

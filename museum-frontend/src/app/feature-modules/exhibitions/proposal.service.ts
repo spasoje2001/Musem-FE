@@ -21,5 +21,13 @@ export class ProposalService {
   getProposalsByOrganizer(organizerId: number): Observable<ExhibitionProposal[]> {
     return this.http.get<ExhibitionProposal[]>(environment.apiHost + `proposals/organizer/${organizerId}`);
   }
+
+  updateProposal(proposalId: number, proposal: ExhibitionProposalRequest): Observable<ExhibitionProposal> {
+    return this.http.put<ExhibitionProposal>(`${this.apiUrl}/${proposalId}`, proposal);
+  }
+
+  deleteProposal(proposalId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${proposalId}`);
+  }
   
 }

@@ -17,4 +17,11 @@ export class RoomService {
     const params = { startDate, endDate };
     return this.http.get<Room[]>(`${this.apiUrl}/available`, { params });
   }
+
+  getAvailableRoomsForUpdate(startDate: string, endDate: string, proposalId: number): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.apiUrl}/availableForUpdate`, {
+        params: { startDate, endDate, proposalId }
+    });
+}
+
 }

@@ -52,7 +52,7 @@
                         <p class="proposal-price">Adult: {{proposal.priceList.adultPrice | currency}} | Minor: {{proposal.priceList.minorPrice | currency}}</p>
                     </div>
                     <div class="info-row icons">
-                        <mat-icon (click)="editProposal(proposal.id)">edit</mat-icon>
+                        <mat-icon (click)="editProposal(proposal)">edit</mat-icon>
                         <mat-icon (click)="deleteProposal(proposal.id)">delete</mat-icon>
                     </div>
                 </div>

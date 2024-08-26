@@ -1,0 +1,10 @@
+<div class="dialog-backdrop" (click)="onCancel()"></div>
+
+<div class="dialog-container">
+  <h2 class="dialog-title">Delete Proposal</h2>
+  <p class="dialog-message">Are you sure you want to delete this proposal?</p>
+  <div class="dialog-buttons">
+    <button class="dialog-button dialog-button-cancel" (click)="onCancel()">Cancel</button>
+    <button class="dialog-button dialog-button-delete" (click)="onDelete()">Delete</button>
+  </div>
+</div>

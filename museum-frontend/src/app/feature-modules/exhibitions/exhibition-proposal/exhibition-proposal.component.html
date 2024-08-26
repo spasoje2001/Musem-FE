@@ -21,8 +21,8 @@
           <label for="endDate">End Date</label>
       </div>
       <div class="button-group">
-          <button (click)="close()" class="btn-cancel">Cancel</button>
-          <button (click)="nextStep()" [disabled]="!datesSelected()" class="btn-next">Next</button>
+        <button type="button" (click)="close()" class="btn-cancel">Cancel</button>
+        <button (click)="nextStep()" [disabled]="!datesSelected()" class="btn-next">Next</button>
       </div>
   </div>
   
