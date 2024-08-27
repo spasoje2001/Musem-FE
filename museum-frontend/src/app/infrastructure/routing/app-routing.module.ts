@@ -10,6 +10,7 @@ import { ArtifactsComponent } from "src/app/feature-modules/items/artifacts/arti
 import { ExhibitionsViewComponent } from "src/app/feature-modules/exhibitions/exhibitions-view/exhibitions-view.component";
 import { ExhibitionDetailsComponent } from "src/app/feature-modules/exhibitions/exhibition-details/exhibition-details.component";
 import { ExhibitionProposalComponent } from "src/app/feature-modules/exhibitions/exhibition-proposal/exhibition-proposal.component";
+import { CreateExhibitionComponent } from "src/app/feature-modules/exhibitions/create-exhibition/create-exhibition.component";
 
 
 
@@ -58,6 +59,10 @@ const routes: Routes = [
   {
     path: 'propose-exhibition', // Define the route parameter :id
     component: ExhibitionProposalComponent
+  },
+  {
+    path: 'create-exhibition/:proposalId', // Define the route parameter :id
+    component: CreateExhibitionComponent
   },
 ];
 

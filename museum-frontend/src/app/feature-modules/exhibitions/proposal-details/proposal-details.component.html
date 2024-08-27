@@ -1,0 +1,8 @@
+<div class="proposal-details">
+    <h3>Proposal #{{ data.proposal.id }}</h3>
+    <p>{{ data.proposal.startDate }} - {{ data.proposal.endDate }}</p>
+    <p>Room {{ data.proposal.roomReservation.room.name }} {{ data.proposal.roomReservation.room.number }}</p>
+    <p>Adult: {{ data.proposal.priceList.adultPrice | currency }} | Minor: {{ data.proposal.priceList.minorPrice | currency }}</p>
+    <p>Proposed by {{ data.proposal.organizer.firstName }} {{ data.proposal.organizer.lastName }}</p>
+</div>
+  

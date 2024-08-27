@@ -1,0 +1,15 @@
+.proposal-details {
+    padding: 20px;
+    text-align: center;
+}
+  
+.proposal-details h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+  
+.proposal-details p {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+  

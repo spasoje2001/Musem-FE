@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CreateExhibitionComponent } from './create-exhibition/create-exhibition.component';
+import { ProposalDetailsComponent } from './proposal-details/proposal-details.component';
 
 
 
@@ -23,7 +25,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ExhibitionDetailsComponent,
     PdfOrganizerExhibitionsPromptComponent,
     PdfCuratorExhibitionsPromptComponent,
-    ExhibitionProposalComponent
+    ExhibitionProposalComponent,
+    CreateExhibitionComponent,
+    ProposalDetailsComponent
   ],
   imports: [
     ReactiveFormsModule,

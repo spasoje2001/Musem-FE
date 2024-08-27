@@ -18,8 +18,16 @@ export class ProposalService {
     return this.http.post<ExhibitionProposal>(this.apiUrl, proposal);
   }
 
+  getProposalById(id: number): Observable<ExhibitionProposal> {
+    return this.http.get<ExhibitionProposal>(environment.apiHost + `proposals/${id}`);
+  }
+
   getProposalsByOrganizer(organizerId: number): Observable<ExhibitionProposal[]> {
     return this.http.get<ExhibitionProposal[]>(environment.apiHost + `proposals/organizer/${organizerId}`);
+  }
+
+  getPendingProposals(): Observable<ExhibitionProposal[]> {
+    return this.http.get<ExhibitionProposal[]>(environment.apiHost + `proposals/pending`);
   }
 
   updateProposal(proposalId: number, proposal: ExhibitionProposalRequest): Observable<ExhibitionProposal> {

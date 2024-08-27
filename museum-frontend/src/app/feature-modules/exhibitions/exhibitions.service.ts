@@ -24,6 +24,10 @@ export class ExhibitionsService {
     return this.http.get<Exhibition[]>(environment.apiHost + `exhibitions/organizer/${organizerId}`);
   }
 
+  getExhibitionsByCurator(curatorId: number): Observable<Exhibition[]> {
+    return this.http.get<Exhibition[]>(environment.apiHost + `exhibitions/curator/${curatorId}`);
+  }
+
   seeOrganizerGeneratedReport() : Observable<Blob> {
     return this.http.get(environment.apiHost + 'pdfExhibitions/generate-organizer-report', { responseType: 'blob' });
   }

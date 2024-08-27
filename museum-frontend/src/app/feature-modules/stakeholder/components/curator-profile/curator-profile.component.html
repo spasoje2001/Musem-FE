@@ -1,25 +1,62 @@
-<div class="wrapper">
-    <div class="container profile-grid">
-        <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
-        <div class="user-data">
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <div class="profile-info">
+            <img class="profile-picture" src="{{curator?.picture}}" alt="Profile Picture">
+            <div class="user-data">
             <p class="name">{{curator?.firstName}} {{curator?.lastName}}</p>
             <p class="username">&#64;{{curator?.username}}</p>
             <p class="bio">{{curator?.biography}}</p>
+            </div>
+            <img class="edit-icon" src="assets/edit.png" />
         </div>
-        <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
-    </div>
-
-    <div>
-        <button
-            type="submit"
-            class="report-btn"
-            (click)="openOrganizerExhibitionsReportDialogue()">
-            &nbsp;Generate Exhibitions Report
-        </button>
-        <div class="header">
-            <h1>Pending invites</h1>
+        <div class="action-buttons">
+            <button class="generate-report">Generate Report</button>
+            <button class="propose-exhibition">Do Something</button>
         </div>
-
     </div>
-
-</div>
+  
+    <div class="exhibitions-container">
+      <h2>My exhibitions</h2>
+      <div class="exhibitions-grid">
+        <div class="item-card" *ngFor="let exhibition of exhibitions">
+          <div class="image-container">
+            <img class="item-image" [src]="exhibition.picture" alt="Exhibition Image">
+          </div>
+          <div class="info-container">
+            <div class="info-row">
+              <p class="item-name">{{exhibition.name}}</p>
+            </div>
+            <div class="info-row">
+              <p class="exhibition-dates">{{exhibition.proposal.startDate}} - {{exhibition.proposal.endDate}}</p>
+            </div>
+            <div class="info-row">
+              <button class="find-out-more-button" (click)="navigateToDetails(exhibition.id)">Find Out More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Pending proposals</h2>
+      <div class="proposals-grid">
+        <div class="proposal-card" *ngFor="let proposal of proposals">
+          <div class="info-container">
+            <div class="info-row">
+              <p class="proposal-name">Proposal #{{proposal.id}}</p>
+            </div>
+            <div class="info-row">
+              <p class="proposal-dates">{{proposal.startDate}} - {{proposal.endDate}}</p>
+            </div>
+            <div class="info-row">
+              <p class="proposal-room">Room {{proposal.roomReservation.room.name}} {{proposal.roomReservation.room.number}}</p>
+            </div>
+            <div class="info-row">
+              <p class="proposal-price">Adult: {{proposal.priceList.adultPrice | currency}} | Minor: {{proposal.priceList.minorPrice | currency}}</p>
+            </div>
+            <div class="info-row icons">
+              <button class="create-exhibition-button" (click)="createExhibition(proposal)">Create Exhibition</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
