@@ -9,12 +9,10 @@
     </div>
 
     <div class="card-container">
-        <div class="row" *ngFor="let row of slicedExhibitions">
-            <app-exhibition-card class="card"
-            *ngFor="let exhibition of row"
-            [exhibition]="exhibition">
-            </app-exhibition-card>
-        </div>
+        <app-exhibition-card class="card"
+        *ngFor="let exhibition of filteredExhibitions"
+        [exhibition]="exhibition">
+        </app-exhibition-card>
     </div>
       
 </div>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Exhibition, ExhibitionProposal } from './model/exhibition.model';
+import { CreateExhibition, Exhibition, ExhibitionProposal } from './model/exhibition.model';
 import { environment } from 'src/env/environment';
 
 @Injectable({
@@ -34,5 +34,10 @@ export class ExhibitionsService {
 
   seeCuratorGeneratedReport() : Observable<Blob> {
     return this.http.get(environment.apiHost + 'pdfExhibitions/generate-curator-report', { responseType: 'blob' });
+  }
+
+  createExhibition(createExhibition: CreateExhibition): Observable<Exhibition> {
+    console.log(createExhibition);
+    return this.http.post<Exhibition>(environment.apiHost + 'exhibitions', createExhibition);
   }
 }

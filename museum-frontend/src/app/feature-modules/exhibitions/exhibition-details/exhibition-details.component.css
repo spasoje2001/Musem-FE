@@ -150,6 +150,13 @@
   line-height: 1.6;
 }
 
+.long-description {
+  margin-bottom: 40px;
+  line-height: 1.6;
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  max-width: 100%; /* Ensure long description does not exceed its container */
+}
+
 .content .curator {
   font-weight: bold;
   margin-top: 30px;

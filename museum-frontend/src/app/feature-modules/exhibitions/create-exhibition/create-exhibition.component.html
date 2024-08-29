@@ -1,79 +1,69 @@
-<form [formGroup]="exhibitionForm" class="exhibition-create-container">
-    <div class="header-container">
-        <h1>Create the exhibition</h1>
-        <button type="button" (click)="openProposalDetails()" class="proposal-button">See organizer's proposal</button>
-    </div>
-    
-    <div class="form-section">
-        <div class="left-section">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input id="name" formControlName="name" type="text" class="form-control" placeholder="Enter name">
+<div class="background-container">
+    <form [formGroup]="exhibitionForm" class="exhibition-create-container" (ngSubmit)="submit()">
+        <div class="header-container">
+            <h1>Create the exhibition</h1>
+            <button type="button" (click)="openProposalDetails()" class="proposal-button">See organizer's proposal</button>
+        </div>
+        
+        <div class="form-section">
+            <div class="left-section">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" formControlName="name" type="text" class="form-control" placeholder="Enter name">
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme" formControlName="theme" class="form-control">
+                        <option value="" disabled selected>Select a theme</option>
+                        <option *ngFor="let theme of themes" [value]="theme">{{theme}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="shortDescription">Short Description</label>
+                    <textarea id="shortDescription" formControlName="shortDescription" class="form-control" rows="3" placeholder="Enter short description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="picture">Picture URL</label>
+                    <input id="picture" formControlName="picture" type="text" class="form-control" placeholder="Enter picture URL">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="theme">Theme</label>
-                <select id="theme" formControlName="theme" class="form-control">
-                    <option *ngFor="let theme of themes" [value]="theme">{{theme}}</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="shortDescription">Short Description</label>
-                <textarea id="shortDescription" formControlName="shortDescription" class="form-control" rows="3" placeholder="Enter short description"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="pictureUrl">Picture URL</label>
-                <input id="pictureUrl" formControlName="pictureUrl" type="text" class="form-control" placeholder="Enter picture URL">
+            <div class="right-section">
+                <div class="form-group">
+                    <label for="longDescription">Long Description</label>
+                    <textarea id="longDescription" formControlName="longDescription" class="form-control" rows="14" placeholder="Enter long description"></textarea>
+                </div>
             </div>
         </div>
 
-        <div class="right-section">
-            <div class="form-group">
-                <label for="longDescription">Long Description</label>
-                <textarea id="longDescription" formControlName="longDescription" class="form-control" rows="10" placeholder="Enter long description"></textarea>
+        <div class="items-section">
+            <label>Choose items to display</label>
+            <input type="text" [(ngModel)]="itemSearch" [ngModelOptions]="{standalone: true}" (ngModelChange)="filterItems()" class="form-control" placeholder="Search by name...">
+
+            <div class="items-grid">
+            <div *ngFor="let item of filteredItems" class="item-card" [class.selected]="isSelected(item)" (click)="selectItem(item)">
+                <div class="image-container">
+                    <img class="item-image" *ngIf="item" [src]="item.picture" alt="Item Image">
+                </div>
+                <div class="info-container">
+                    <div class="info-row">
+                    <label>Name:</label>
+                    <p class="item-name">{{item.name}}</p>
+                    </div>
+                    <div class="info-row">
+                    <label>Category:</label>
+                    <p class="category">{{item.category}}</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="items-section">
-        <label>Choose items to display</label>
-        <input type="text" [(ngModel)]="itemSearch" (ngModelChange)="filterItems()" class="form-control" placeholder="Search by name...">
-        <div class="items-grid">
-          <div *ngFor="let item of filteredItems" class="item-card" (click)="selectItem(item)">
-            <div class="image-container">
-              <img class="item-image" *ngIf="item" [src]="item.picture" alt="Item Image">
-            </div>
-            <div class="info-container">
-              <div class="info-row">
-                <label>Name:</label>
-                <p class="item-name">{{item.name}}</p>
-              </div>
-              <div class="info-row">
-                <label>Description:</label>
-                <p class="description">{{item.description}}</p>
-              </div>
-              <div class="info-row">
-                <label>Period:</label>
-                <p class="period">{{item.period}}</p>
-              </div>
-              <div class="info-row" *ngIf="item.authorsName">
-                <label>Authors name:</label>
-                <p class="authorsName">{{item.authorsName}}</p>
-              </div>
-              <div class="info-row" *ngIf="item.yearOfCreation">
-                <label>Year of creation:</label>
-                <p class="yearOfCreation">{{item.yearOfCreation}}</p>
-              </div>
-              <div class="info-row">
-                <label>Category:</label>
-                <p class="category">{{item.category}}</p>
-              </div>
-            </div>
-          </div>
         </div>
-    </div>
-
-    <button type="submit" [disabled]="!exhibitionForm.valid" class="submit-button">Create Exhibition</button>
-</form>
+        <div class="button-group">
+            <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
+            <button type="submit" [disabled]="!exhibitionForm.valid" class="submit-button">Create Exhibition</button>
+        </div>
+    </form>
+</div>
