@@ -1,7 +1,7 @@
 <div class="background-container">
     <form [formGroup]="exhibitionForm" class="exhibition-create-container" (ngSubmit)="submit()">
         <div class="header-container">
-            <h1>Create the exhibition</h1>
+            <h1>{{ isEditMode ? 'Update Exhibition' : 'Create the exhibition' }}</h1>
             <button type="button" (click)="openProposalDetails()" class="proposal-button">See organizer's proposal</button>
         </div>
         
@@ -63,7 +63,7 @@
         </div>
         <div class="button-group">
             <button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
-            <button type="submit" [disabled]="!exhibitionForm.valid" class="submit-button">Create Exhibition</button>
+            <button type="submit" [disabled]="!exhibitionForm.valid" class="submit-button">{{ isEditMode ? 'Update Exhibition' : 'Create Exhibition' }}</button>
         </div>
     </form>
 </div>

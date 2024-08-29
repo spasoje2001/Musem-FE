@@ -64,6 +64,10 @@ const routes: Routes = [
     path: 'create-exhibition/:proposalId', // Define the route parameter :id
     component: CreateExhibitionComponent
   },
+  {
+    path: 'edit-exhibition/:exhibitionId', // Ruta za ažuriranje postojeće izložbe
+    component: CreateExhibitionComponent
+  },
 ];
 
 @NgModule({

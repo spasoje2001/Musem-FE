@@ -38,6 +38,11 @@ export class ItemsService {
     return this.http.get<Item[]>(environment.apiHost + 'items/available', {params});
   }
 
+  getAvailableItemsForUpdate(startDate: string, endDate: string, exhibitionId: number): Observable<Item[]> {
+    const params = { startDate, endDate, exhibitionId: exhibitionId.toString() };
+    return this.http.get<Item[]>(environment.apiHost + 'items/availableForUpdate', {params});
+  }
+
 
   searchItemsByName(name: string): Observable<Item> {
     return this.http.get<Item>(environment.apiHost + 'items/search/' + name);

@@ -70,6 +70,11 @@ export class CuratorProfileComponent implements OnInit {
     this.router.navigate(['/create-exhibition', proposal.id]);
   }
 
+  editExhibition(exhibitionId: number): void {
+    this.router.navigate(['/edit-exhibition', exhibitionId]);
+  }
+
+
 
 /*
   openOrganizerExhibitionsReportDialogue(): void {

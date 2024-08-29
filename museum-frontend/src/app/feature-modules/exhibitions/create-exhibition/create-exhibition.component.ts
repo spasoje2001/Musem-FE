@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ExhibitionProposal, ExhibitionTheme } from '../model/exhibition.model';
+import { Exhibition, ExhibitionProposal, ExhibitionTheme } from '../model/exhibition.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ProposalDetailsComponent } from '../proposal-details/proposal-details.component';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { Item } from '../../items/model/item.model';
 import { ExhibitionsService } from '../exhibitions.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-exhibition',
@@ -22,9 +23,12 @@ export class CreateExhibitionComponent implements OnInit {
   allItems: Item[] = []; // Ovo će sadržavati sve iteme
   filteredItems: Item[] = []; // This will be populated with items filtered based on search
   proposal!: ExhibitionProposal;
+  exhibitionId?: number;
+  exhibition?: Exhibition;
   itemSearch = '';
   selectedItems: number[] = [];
   user: User | undefined;
+  isEditMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -48,13 +52,40 @@ export class CreateExhibitionComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
-      console.log(user);
     });
     // Retrieve proposalId from route parameters
+    this.exhibitionId = +this.route.snapshot.paramMap.get('exhibitionId')!;
     const proposalId = this.route.snapshot.paramMap.get('proposalId');
-    if (proposalId) {
-      this.loadProposalById(+proposalId); // Convert proposalId to a number
+    if (this.exhibitionId) {
+      this.isEditMode = true;
+      this.loadExhibitionById(this.exhibitionId);
+    } else if (proposalId) {
+      this.isEditMode = false;
+      this.loadProposalById(+proposalId);
     }
+  }
+
+  loadExhibitionById(exhibitionId: number): void {
+    this.exhibitionsService.getExhibitionById(exhibitionId).subscribe(
+      (exhibition) => {
+        this.exhibitionForm.patchValue({
+          name: exhibition.name,
+          theme: exhibition.theme,
+          shortDescription: exhibition.shortDescription,
+          picture: exhibition.picture,
+          longDescription: exhibition.longDescription
+        });
+        this.selectedItems = exhibition.itemReservations.map(ir => ir.item.id!);
+        console.log("Vec selektovani itemi:", this.selectedItems);
+        
+        this.exhibition = exhibition;
+        this.proposal = exhibition.proposal;
+        this.loadAvailableItems();
+      },
+      (error) => {
+        console.error('Error loading exhibition:', error);
+      }
+    );
   }
 
   loadProposalById(proposalId: number): void {
@@ -71,17 +102,31 @@ export class CreateExhibitionComponent implements OnInit {
   }
 
   loadAvailableItems(): void {
-    this.itemService.getAvailableItems(this.proposal.startDate, this.proposal.endDate).subscribe(
-      (items: Item[]) => {
-        this.allItems = items;
-        this.filteredItems = items;
-        console.log('Available items loaded:', this.filteredItems);
-      },
-      (error) => {
-        console.error('Error loading items:', error);
-      }
+    const startDate = this.isEditMode ? this.exhibition!.proposal.startDate : this.proposal.startDate;
+    const endDate = this.isEditMode ? this.exhibition!.proposal.endDate : this.proposal.endDate;
+    
+    let itemServiceMethod: Observable<Item[]>;
+
+    if (this.isEditMode) {
+        itemServiceMethod = this.itemService.getAvailableItemsForUpdate(startDate, endDate, this.exhibition!.id);
+    } else {
+        itemServiceMethod = this.itemService.getAvailableItems(startDate, endDate);
+    }
+
+    itemServiceMethod.subscribe(
+        (items: Item[]) => {
+            console.log(items);
+            this.allItems = items;
+            this.filteredItems = items;
+            console.log('Available items loaded:', this.filteredItems);
+        },
+        (error) => {
+            console.error('Error loading items:', error);
+        }
     );
-  }
+}
+
+
 
   openProposalDetails(): void {
     this.dialog.open(ProposalDetailsComponent, {
@@ -114,24 +159,37 @@ export class CreateExhibitionComponent implements OnInit {
   }
 
   submit(): void {
-    console.log('stisno')
     if (this.exhibitionForm.valid) {
-      const createExhibitionData = {
+      const exhibitionData = {
         ...this.exhibitionForm.value,
         itemIds: this.selectedItems,
         proposalId: this.proposal.id,
         curatorId: this.user!.id
       };
 
-      this.exhibitionsService.createExhibition(createExhibitionData).subscribe(
-        response => {
-          console.log('Exhibition created successfully:', response);
-          this.router.navigate(['/exhibitions-view']); // Navigate to the exhibitions list page
-        },
-        error => {
-          console.error('Error creating exhibition:', error);
-        }
-      );
+      console.log("Submit: ", this.selectedItems);
+
+      if (this.isEditMode) {
+        this.exhibitionsService.updateExhibition(this.exhibitionId!, exhibitionData).subscribe(
+          response => {
+            console.log('Exhibition updated successfully:', response);
+            this.router.navigate(['/exhibitions-view']);
+          },
+          error => {
+            console.error('Error updating exhibition:', error);
+          }
+        );
+      } else {
+        this.exhibitionsService.createExhibition(exhibitionData).subscribe(
+          response => {
+            console.log('Exhibition created successfully:', response);
+            this.router.navigate(['/exhibitions-view']);
+          },
+          error => {
+            console.error('Error creating exhibition:', error);
+          }
+        );
+      }
     }
   }
 

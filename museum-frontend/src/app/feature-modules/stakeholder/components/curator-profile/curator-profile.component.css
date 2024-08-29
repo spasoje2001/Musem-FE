@@ -343,6 +343,30 @@
   .create-exhibition-button:hover {
     background-color: #B8860B; /* Lighter blue on hover */
   }
+
+  .exhibition-dates-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exhibition-dates {
+    margin-right: 10px;
+}
+
+.edit-icon {
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+    font-size: 20px; /* Podesite veličinu ikone prema želji */
+}
+
+.edit-icon:hover {
+    color: #d4a017; /* Promena boje prilikom prelaska mišem */
+}
+
+
+  
   
 
 

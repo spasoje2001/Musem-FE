@@ -40,4 +40,8 @@ export class ExhibitionsService {
     console.log(createExhibition);
     return this.http.post<Exhibition>(environment.apiHost + 'exhibitions', createExhibition);
   }
+
+  updateExhibition(id: number, exhibition: CreateExhibition): Observable<Exhibition> {
+    return this.http.put<Exhibition>(environment.apiHost + `exhibitions/${id}`, exhibition);
+  }
 }
