@@ -10,6 +10,7 @@ import { BookTickets, Ticket } from '../model/ticket.model';
 import { CreateReview, Review } from '../model/review.model';
 import { ReviewService } from '../review.service';
 import { NotificationService } from '../../notifications/notification.service';
+import { GuestService } from '../../stakeholder/services/guest.service';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -32,6 +33,7 @@ export class ExhibitionDetailsComponent {
   totalCost = 0;
   currentRating = 0;       // Track the rating selected by the user
   newComment = '';         // Track the user's comment
+  hasUserReviewed = false;
 
   hasTicket: boolean = false;
 
@@ -47,7 +49,7 @@ export class ExhibitionDetailsComponent {
     private snackBar: MatSnackBar,
     private ticketService: TicketService,
     private reviewService: ReviewService,
-    private notificationService: NotificationService  
+    private notificationService: NotificationService
   ) {}
 
   
@@ -68,11 +70,23 @@ ngOnInit() {
       this.exhibition = exhibition;
       this.calculateStars();
       this.visibleItems = this.exhibition.itemReservations.slice(0, this.itemsToShow);
+      this.checkIfUserHasReviewed();
     },
     error: (err) => {
       console.error('Error fetching exhibition:', err);
     }
   });
+}
+
+checkIfUserHasReviewed(): void {
+  if (this.user && this.reviews) {
+    console.log("tu sam");
+    console.log(this.hasUserReviewed);
+    console.log("Reviewovi: ", this.reviews);
+    console.log("Id korisnika: ", this.user!.id);
+    this.hasUserReviewed = this.reviews.some(review => review.guestId === this.user!.id);
+    console.log(this.hasUserReviewed);
+  }
 }
 
 calculateStars() {
@@ -218,6 +232,7 @@ fetchReviews() {
     next: (reviews: Review[]) => {
       console.log(reviews);
       this.reviews = reviews;
+      this.checkIfUserHasReviewed();
     },
     error: (err) => {
       console.error('Error fetching reviews:', err);
@@ -277,7 +292,8 @@ shouldShowReviewForm(): boolean {
          (this.exhibition.status === 'OPENED' || this.exhibition.status === 'CLOSED') && 
          this.isLoggedIn() && 
          this.user!.role === 'GUEST' && 
-         this.hasTicket;
+         this.hasTicket &&
+         !this.hasUserReviewed;
 }
 
 shouldShowReviewMessage(): boolean {
@@ -286,6 +302,15 @@ shouldShowReviewMessage(): boolean {
          this.isLoggedIn() &&  
          this.user!.role === 'GUEST' && 
          !this.hasTicket;
+}
+
+shouldShowAlreadyReviewedMessage(): boolean{
+  return this.exhibition! && 
+         (this.exhibition.status === 'OPENED' || this.exhibition.status === 'CLOSED') && 
+         this.isLoggedIn() && 
+         this.user!.role === 'GUEST' && 
+         this.hasTicket && 
+         this.hasUserReviewed;
 }
 
 shouldHideReviewSection(): boolean {

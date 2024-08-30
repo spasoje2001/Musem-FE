@@ -1,15 +1,34 @@
 .proposal-details {
-    padding: 20px;
+    padding: 20px;  /* Smanjite padding */
     text-align: center;
+    background-color: #f9f9f9;  /* Svetla pozadina */
+    border-radius: 10px;  /* Zaobljeni uglovi */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Blaga senka */
+    font-family: 'Roboto', sans-serif;  /* Moderni font */
+    max-width: 600px;  /* Maksimalna širina sadržaja */
+    max-height: 400px; /* Maksimalna visina sadržaja */
+    overflow-y: auto; /* Omogućite vertikalno skrolovanje unutar popupa */
 }
-  
+
 .proposal-details h3 {
-    margin-bottom: 10px;
-    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-size: 1.5em;  /* Smanjite veličinu fonta */
+    color: #333;  /* Tamnija boja za naslov */
+    font-weight: 600;  /* Deblji font */
 }
-  
+
 .proposal-details p {
-    margin: 5px 0;
-    font-size: 1.2em;
+    margin: 8px 0;
+    font-size: 1.1em;  /* Smanjite veličinu fonta */
+    color: #555;  /* Blago tamnija boja za tekst */
 }
-  
+
+.proposal-details .dates, .proposal-details .room, .proposal-details .prices {
+    font-weight: 500;
+    color: #d4a017;  /* Zlatna boja za važne informacije */
+}
+
+.proposal-details .organizer {
+    font-style: italic;
+    color: #777;  /* Svetlo siva boja za organizatora */
+}

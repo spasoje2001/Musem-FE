@@ -40,8 +40,11 @@
         <p class="price">adults ${{ exhibition.proposal.priceList.adultPrice }}</p>
         <p class="price">minors ${{ exhibition.proposal.priceList.minorPrice }}</p>
         <hr>
-        <button class="book-tickets" *ngIf="user && user.role === 'GUEST'" (click)="openBookingModal()">Book tickets</button>
+        <button class="book-tickets" *ngIf="user && user.role === 'GUEST'" (click)="openBookingModal()" [disabled]="exhibition.status === 'CLOSED'">Book tickets</button>
         <button class="book-tickets" *ngIf="user && user.role === '' ">Log in to book tickets</button>
+        <div *ngIf="exhibition.status === 'CLOSED'" class="closed-exhibition-message">
+          <p>This exhibition is closed. Ticket booking is no longer available.</p>
+        </div>
       </div>
     </div>
     <div class="selected-works">
@@ -72,6 +75,9 @@
         </div>
         <div *ngIf="shouldShowReviewMessage()" class="no-review-message">
           <p>Only guests who visited the exhibition can leave a review.</p>
+        </div>
+        <div *ngIf="shouldShowAlreadyReviewedMessage()" class="no-review-message">
+          <p>You've already left a review for this exhibition.</p>
         </div>
       </div>
       <ng-template #works>

@@ -1,11 +1,46 @@
-<div class="wrapper">
-    <div class="container profile-grid">
-        <img class="profile-picture" src="../../../../assets/default-profile-picture.png" alt="">
-        <div class="user-data">
-            <p class="name">{{guest?.firstName}} {{guest?.lastName}}</p>
-            <p class="username">&#64;{{guest?.username}}</p>
-            <p class="bio">{{guest?.biography}}</p>
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <div class="profile-info">
+            <img class="profile-picture" src="{{guest?.picture}}" alt="Profile Picture">
+            <div class="user-data">
+                <p class="name">{{guest?.firstName}} {{guest?.lastName}}</p>
+                <p class="username">&#64;{{guest?.username}}</p>
+                <p class="bio">{{guest?.biography}}</p>
+            </div>
+            <img class="edit-icon" src="assets/edit.png" />
         </div>
-        <img class="edit" src="../../../../assets/pen.svg" [routerLink]="['edit']">
+    </div>
+  
+    <div class="tickets-container">
+        <h2>Your purchased tickets</h2>
+        <div class="tickets-grid">
+            <div class="ticket-card" *ngFor="let ticket of tickets" (click)="navigateToExhibition(ticket.exhibitionId)">
+                <div class="ticket-info-left">
+                    <p class="ticket-id">Ticket #{{ticket.id}}</p>
+                    <div class="people-info">
+                        <div class="people-grid">
+                            <p>Number of adults:</p>
+                            <p>{{ticket.numberOfAdults}}</p>
+                            <p>Number of minors:</p>
+                            <p>{{ticket.numberOfMinors}}</p>
+                        </div>
+                        <hr />
+                        <div class="ticket-price">
+                            <p >Ukupna cena:</p>
+                            <p >{{ticket.totalPrice | currency}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-info-center">
+                    <p class="exhibition-name">Exhibition</p>
+                    <p>{{ticket.exhibitionRoomName}} - {{ticket.exhibitionRoomNumber}}</p>
+                    <p class="exhibition-title">{{ticket.exhibitionName}}</p>
+                    <p>{{ticket.exhibitionStartDate}} - {{ticket.exhibitionEndDate}}</p>
+                </div>
+                <div class="ticket-image">
+                    <img [src]="ticket.exhibitionPicture" alt="Exhibition Image">
+                </div>
+            </div>
+        </div>
     </div>
 </div>

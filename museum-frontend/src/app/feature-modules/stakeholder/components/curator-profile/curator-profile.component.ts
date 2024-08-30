@@ -51,15 +51,43 @@ export class CuratorProfileComponent implements OnInit {
 
   loadExhibitions(curatorId: number): void {
     this.exhibitionService.getExhibitionsByCurator(curatorId).subscribe(exhibitions => {
-      this.exhibitions = exhibitions;
-    });
-  }
+        this.exhibitions = exhibitions;
 
-  loadProposals(): void {
-    this.proposalService.getPendingProposals().subscribe(proposals => {
-      this.proposals = proposals;
+        // Sortiranje izložbi
+        this.exhibitions.sort((a, b) => {
+            // Sortiranje po statusu
+            const statusOrder = ['OPENED', 'READY_TO_OPEN', 'CLOSED'];
+            const statusDifference = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+
+            if (statusDifference !== 0) {
+                return statusDifference;
+            }
+
+            // Sortiranje unutar statusa po datumu
+            if (a.status === 'OPENED' || a.status === 'READY_TO_OPEN') {
+                return this.parseDate(a.proposal.startDate).getTime() - this.parseDate(b.proposal.startDate).getTime();
+            } else if (a.status === 'CLOSED') {
+                return this.parseDate(b.proposal.endDate).getTime() - this.parseDate(a.proposal.endDate).getTime();
+            }
+
+            return 0;
+        });
+
+        console.log('Sorted Exhibitions:', this.exhibitions);
     });
-  }
+}
+
+
+loadProposals(): void {
+  this.proposalService.getPendingProposals().subscribe(proposals => {
+      this.proposals = proposals.sort((a, b) => {
+          return this.parseDate(a.startDate).getTime() - this.parseDate(b.startDate).getTime();
+      });
+
+      console.log('Sorted Proposals:', this.proposals);
+  });
+}
+
 
   navigateToDetails(id: number) {
     this.router.navigate(['/exhibitions', id]);
@@ -73,6 +101,42 @@ export class CuratorProfileComponent implements OnInit {
   editExhibition(exhibitionId: number): void {
     this.router.navigate(['/edit-exhibition', exhibitionId]);
   }
+
+  parseDate(dateString: string): Date {
+    const parts = dateString.split('.');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Meseci u JavaScript-u su 0-indeksirani
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+}
+
+getExhibitionStatusClass(status: string): string {
+  switch (status) {
+      case 'READY_TO_OPEN':
+          return 'future-status';
+      case 'OPENED':
+          return 'current-status';
+      case 'CLOSED':
+          return 'past-status';
+      default:
+          return '';
+  }
+}
+
+getExhibitionStatusText(status: string): string {
+  switch (status) {
+      case 'READY_TO_OPEN':
+          return 'FUTURE';
+      case 'OPENED':
+          return 'CURRENT';
+      case 'CLOSED':
+          return 'PAST';
+      default:
+          return '';
+  }
+}
+
+
 
 
 

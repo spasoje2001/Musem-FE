@@ -21,6 +21,9 @@
             <div class="item-card" *ngFor="let exhibition of exhibitions">
                 <div class="image-container">
                     <img class="item-image" [src]="exhibition.picture" alt="Exhibition Image">
+                    <div class="status-label" [ngClass]="getExhibitionStatusClass(exhibition.status)">
+                        {{ getExhibitionStatusText(exhibition.status) }}
+                    </div>
                 </div>
                 <div class="info-container">
                     <div class="info-row">
@@ -49,7 +52,8 @@
                         <p class="proposal-room">Room {{proposal.roomReservation.room.name}} {{proposal.roomReservation.room.number}}</p>
                     </div>
                     <div class="info-row">
-                        <p class="proposal-price">Adult: {{proposal.priceList.adultPrice | currency}} | Minor: {{proposal.priceList.minorPrice | currency}}</p>
+                        <p class="proposal-price">Adult: {{proposal.priceList.adultPrice | currency}}</p>
+                        <p class="proposal-price">Minor: {{proposal.priceList.minorPrice | currency}}</p>
                     </div>
                     <div class="info-row icons">
                         <mat-icon (click)="editProposal(proposal)">edit</mat-icon>

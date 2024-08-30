@@ -5,6 +5,9 @@ export interface Ticket {
     totalPrice: number;
     exhibitionId: number;
     exhibitionName: string;
+    exhibitionPicture: string;
+    exhibitionRoomName: string;
+    exhibitionRoomNumber: string;
     exhibitionStartDate: string; // ISO string format for dates
     exhibitionEndDate: string;
     guestId: number;

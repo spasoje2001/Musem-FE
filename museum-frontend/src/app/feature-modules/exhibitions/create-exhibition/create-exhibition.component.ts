@@ -134,12 +134,17 @@ export class CreateExhibitionComponent implements OnInit {
 
 
 
-  openProposalDetails(): void {
-    this.dialog.open(ProposalDetailsComponent, {
-      width: '400px',
-      data: { proposal: this.proposal }  // Passing the loaded proposal data
-    });
-  }
+openProposalDetails(): void {
+  this.dialog.open(ProposalDetailsComponent, {
+    data: { proposal: this.proposal },  // Passing the loaded proposal data
+    width: '400px',  // Širina popupa
+    height: 'auto',  // Automatska visina na osnovu sadržaja
+    autoFocus: false  // Opcionalno, fokusira sadržaj unutar popupa
+  });
+}
+
+
+
 
 
   selectItem(item: Item): void {

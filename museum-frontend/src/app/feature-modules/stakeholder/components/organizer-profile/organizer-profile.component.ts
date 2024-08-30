@@ -50,17 +50,55 @@ export class OrganizerProfileComponent implements OnInit {
 
   loadExhibitions(organizerId: number): void {
     this.exhibitionService.getExhibitionsByOrganizer(organizerId).subscribe(exhibitions => {
-      this.exhibitions = exhibitions;
-      console.log('Exhibitions:', this.exhibitions);
-    });
-  }
+        this.exhibitions = exhibitions;
+        
+        // Sortiraj izložbe
+        this.exhibitions.sort((a, b) => {
+            // Prvo sortiranje prema statusu
+            const statusOrder = ['OPENED', 'READY_TO_OPEN', 'CLOSED'];
+            const statusDifference = statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
 
-  loadProposals(organizerId: number): void {
-    this.proposalService.getProposalsByOrganizer(organizerId).subscribe(proposals => {
-      this.proposals = proposals;
-      console.log("apdejtovane")
+            if (statusDifference !== 0) {
+                return statusDifference;
+            }
+
+            // Sortiraj unutar statusa prema datumu
+            if (a.status === 'OPENED' || a.status === 'READY_TO_OPEN') {
+                return this.parseDate(a.proposal.startDate).getTime() - this.parseDate(b.proposal.startDate).getTime();
+            } else if (a.status === 'CLOSED') {
+                return this.parseDate(b.proposal.endDate).getTime() - this.parseDate(a.proposal.endDate).getTime();
+            }
+
+            return 0;
+        });
+
+        console.log('Sorted Exhibitions:', this.exhibitions);
     });
-  }
+}
+
+
+
+loadProposals(organizerId: number): void {
+  this.proposalService.getProposalsByOrganizer(organizerId).subscribe(proposals => {
+      // Sortiraj predloge po startDate rastuće
+      this.proposals = proposals.sort((a, b) => {
+          return this.parseDate(a.startDate).getTime() - this.parseDate(b.startDate).getTime();
+      });
+
+      console.log('Sorted Proposals:', this.proposals);
+  });
+}
+
+
+parseDate(dateString: string): Date {
+  const parts = dateString.split('.');
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1; // Meseci u JavaScript-u su 0-indeksirani
+  const year = parseInt(parts[2], 10);
+  return new Date(year, month, day);
+}
+
+
 
 
   openExhibitionProposalForm() {
@@ -123,6 +161,33 @@ deleteProposal(proposalId: number): void {
     }
   });
 }
+
+getExhibitionStatusClass(status: string): string {
+  switch (status) {
+      case 'READY_TO_OPEN':
+          return 'future-status';
+      case 'OPENED':
+          return 'current-status';
+      case 'CLOSED':
+          return 'past-status';
+      default:
+          return '';
+  }
+}
+
+getExhibitionStatusText(status: string): string {
+  switch (status) {
+      case 'READY_TO_OPEN':
+          return 'FUTURE';
+      case 'OPENED':
+          return 'CURRENT';
+      case 'CLOSED':
+          return 'PAST';
+      default:
+          return '';
+  }
+}
+
 
 }
 

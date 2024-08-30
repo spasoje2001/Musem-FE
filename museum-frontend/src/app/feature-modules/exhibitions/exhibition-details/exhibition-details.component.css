@@ -100,6 +100,12 @@
   background-color: #c9302c; /* Darken the button color on hover */
 }
 
+.book-tickets:disabled {
+  background-color: #ccc; /* Siva boja za onemogućeno dugme */
+  cursor: not-allowed; /* Kursur koji pokazuje da dugme nije klikabilno */
+}
+
+
 .booking-container .price {
     font-size: 1.2em;
     margin-bottom: 10px;
@@ -638,5 +644,14 @@
       color: black; /* Crna boja za prazne zvezde */
       margin-right: 5px; /* Razmak između zvezdica */
     }
+
+    .closed-exhibition-message {
+      text-align: center;
+      font-size: 1.1em;
+      color: #d9534f; /* Crvena boja za upozorenje */
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
     
     
