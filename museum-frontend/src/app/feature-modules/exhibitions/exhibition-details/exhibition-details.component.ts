@@ -9,6 +9,7 @@ import { TicketService } from '../ticket.service';
 import { BookTickets, Ticket } from '../model/ticket.model';
 import { CreateReview, Review } from '../model/review.model';
 import { ReviewService } from '../review.service';
+import { NotificationService } from '../../notifications/notification.service';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -45,7 +46,8 @@ export class ExhibitionDetailsComponent {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private ticketService: TicketService,
-    private reviewService: ReviewService  
+    private reviewService: ReviewService,
+    private notificationService: NotificationService  
   ) {}
 
   
@@ -181,6 +183,15 @@ finishBooking() {
       });
       this.hasTicket = true;
       this.closeBookingModal();
+
+      this.notificationService.notifyPurchaseConfirmation(ticket.id).subscribe(
+        () => {
+          console.log('Purchase notification sent successfully');
+        },
+        (error) => {
+          console.error('Error sending purchase notification:', error);
+        }
+      );
     },
     error: (err) => {
       this.snackBar.open('Booking failed. Please try again.', 'Close', {
@@ -233,9 +244,17 @@ submitReview() {
 
   // Assuming reviewService.addReview() sends the review to the backend
   this.reviewService.addReview(newReview).subscribe({
-    next: () => {
+    next: (review: Review) => {
       this.fetchReviews(); // Add the new review to the list
       this.resetForm();
+      this.notificationService.notifyNewReview(review.id).subscribe(
+        () => {
+          console.log('Review notification sent successfully');
+        },
+        (error) => {
+          console.error('Error sending review notification:', error);
+        }
+      );
     },
     error: () => {
       alert('Failed to submit the review. Please try again.');

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Exhibition } from '../model/exhibition.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ExhibitionsService } from '../exhibitions.service';
+import { NotificationService } from '../../notifications/notification.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-exhibitions-view',
@@ -16,7 +18,7 @@ export class ExhibitionsViewComponent {
   activeFilter: string = 'current';
   filteredExhibitions: Exhibition[] = [];
 
-  constructor(private dialog: MatDialog, private exhibitionService: ExhibitionsService){
+  constructor(private dialog: MatDialog, private exhibitionService: ExhibitionsService, private notificationService: NotificationService){
 
   }
 
@@ -30,7 +32,47 @@ export class ExhibitionsViewComponent {
         console.log(result);
         if (Array.isArray(result)) {
           this.exhibitions = result;
+          this.checkForUpcomingExhibitions();
+          this.checkForClosingExhibitions();
           this.applyFilter();
+        }
+      }
+    });
+  }
+
+  checkForUpcomingExhibitions(): void {
+    const today = moment();
+    const oneWeekFromNow = moment().add(7, 'days');
+
+    this.exhibitions.forEach(exhibition => {
+      if (exhibition.status === 'READY_TO_OPEN') {
+        const exhibitionStartDate = moment(exhibition.proposal.startDate, "DD.MM.YYYY.");
+
+        if (exhibitionStartDate.isBetween(today, oneWeekFromNow, undefined, '[]')) {
+          this.notificationService.sendReminderForExhibition(exhibition.id).subscribe(() => {
+            console.log(`Reminder sent for exhibition: ${exhibition.name}`);
+          }, error => {
+            console.error('Error sending reminder:', error);
+          });
+        }
+      }
+    });
+  }
+
+  checkForClosingExhibitions(): void {
+    const today = moment();
+    const oneWeekFromNow = moment().add(7, 'days');
+
+    this.exhibitions.forEach(exhibition => {
+      if (exhibition.status === 'OPENED') {
+        const exhibitionEndDate = moment(exhibition.proposal.endDate, "DD.MM.YYYY.");
+
+        if (exhibitionEndDate.isBetween(today, oneWeekFromNow, undefined, '[]')) {
+          this.notificationService.notifyExhibitionClosingSoon(exhibition.id).subscribe(() => {
+            console.log(`Closing soon notification sent for exhibition: ${exhibition.name}`);
+          }, error => {
+            console.error('Error sending closing soon notification:', error);
+          });
         }
       }
     });

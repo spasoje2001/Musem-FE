@@ -1,6 +1,5 @@
 <mat-toolbar color="primary">
   <div id="navbar-container">
-    <!-- TREBA DODATI NEKI LOGO I MOZDA IZRAVNATI PARAGRAF-->
     <div id="left-buttons">
       <div id="logo">
             <img src="assets/black-white-logo.png" alt="Artium Historia Museum Logo">
@@ -18,13 +17,40 @@
               class="feat-button"
               color="white"
               mat-raised-button
-              [routerLink]="['exhibitions-view']"> <!-- PROMENITI PUTANJU -->
+              [routerLink]="['exhibitions-view']"> 
         <fa-icon [icon]="faInstitution" />
         &nbsp;Exhibitions
       </button>
     </div>
 
     <div id="account-buttons">
+      <button class="feat-button notification-bell" mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+        <fa-icon [icon]="faBell"></fa-icon>
+      </button>
+      <span *ngIf="unreadNotificationsCount > 0" class="notification-count">
+        {{ unreadNotificationsCount }}
+      </span>
+      <mat-menu #notificationsMenu="matMenu" class="notifications-menu" [overlapTrigger]="false">
+        <div class="notification-scroll-container">
+          <ng-container *ngIf="notifications && notifications.length > 0; else noNotifications">
+            <ng-container *ngFor="let notification of notifications">
+              <button mat-menu-item (click)="navigateTo(notification.actionUrl, notification.id)">
+                <div class="notification-item">
+                  <fa-icon [icon]="getNotificationIcon(notification.type)" class="notification-icon"></fa-icon>
+                  <div class="notification-details">
+                    <div class="notification-message">{{ notification.message }}</div>
+                    <div class="notification-timestamp">{{ notification.timestamp | date:'short' }}</div>
+                  </div>
+                </div>
+              </button>
+            </ng-container>
+          </ng-container>
+        </div>
+        <ng-template #noNotifications>
+          <button mat-menu-item disabled>No new notifications</button>
+        </ng-template>
+      </mat-menu>
+      
       <button
             class="feat-button"
             *ngIf="user && user.role === 'ADMIN'"

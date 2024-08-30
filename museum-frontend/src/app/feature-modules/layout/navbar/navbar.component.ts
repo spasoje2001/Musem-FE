@@ -14,8 +14,18 @@ import {
   faPencilSquare,
   faAddressBook,
   faEnvelopeOpen,
-  faArchive
+  faArchive,
+  faBell,
+  faPaintBrush,
+  faShoppingCart,
+  faStar,
+  faTag
  } from "@fortawesome/free-solid-svg-icons";
+import { NotificationService } from '../../notifications/notification.service';
+import { NotificationResponse, NotificationType } from '../../notifications/model/notification.model';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'xp-navbar',
@@ -25,18 +35,85 @@ import {
 export class NavbarComponent {
 
   user: User | undefined;
+  notifications: NotificationResponse[] = [];
+  unreadNotificationsCount = 0;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
       this.user = user;
+      if (this.user) {
+        this.loadNotifications();
+      }
     });
+  }
+
+  loadNotifications(): void {
+    this.notificationService.getNotificationsByUserId(this.user!.id).subscribe({
+      next: (notifications: NotificationResponse[]) => {
+        // Filtriranje nepročitanih notifikacija
+        this.notifications = notifications
+          .filter(notification => !notification.read)
+          .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+        
+        // Računanje broja nepročitanih notifikacija
+        this.unreadNotificationsCount = this.notifications.length;
+        
+        console.log("Broj neprocitanih poruka: ", this.unreadNotificationsCount);
+        console.log(this.notifications);
+      },
+      error: (error) => {
+        console.error('Error fetching notifications:', error);
+      }
+    });
+  }
+  
+  
+
+  getNotificationIcon(type: NotificationType): any {
+    switch (type) {
+      case NotificationType.EXHIBITION:
+        return faPaintBrush;
+      case NotificationType.PURCHASE:
+        return faShoppingCart;
+      case NotificationType.REVIEW:
+        return faStar;
+      case NotificationType.PROMOTION:
+        return faTag;
+      case NotificationType.REMINDER:
+        return faBell;
+      default:
+        return faBell; // Podrazumevana ikona
+    }
   }
 
   onLogout(): void {
     this.authService.logout();
   }
+
+  navigateTo(actionUrl: string, notificationId: number): void {
+    if (actionUrl) {
+      // Navigacija na određeni URL
+      this.router.navigate([actionUrl]).then(() => {
+        // Nakon navigacije, označi notifikaciju kao pročitanu
+        this.notificationService.markAsRead(notificationId).subscribe({
+          next: () => {
+            // Ukloni pročitanu notifikaciju iz liste prikazanih nepročitanih
+            this.notifications = this.notifications.filter(notification => notification.id !== notificationId);
+            this.unreadNotificationsCount = this.notifications.length;
+            this.loadNotifications();
+          },
+          error: (error) => {
+            console.error('Error marking notification as read:', error);
+          }
+        });
+      });
+    }
+  }
+
+  
+  
 
   faUser = faUser;
   faSignOut = faSignOut;
@@ -51,4 +128,5 @@ export class NavbarComponent {
   faAdressBook = faAddressBook;
   faEnvelopeOpen = faEnvelopeOpen;
   faArchive = faArchive;
+  faBell = faBell;
 }

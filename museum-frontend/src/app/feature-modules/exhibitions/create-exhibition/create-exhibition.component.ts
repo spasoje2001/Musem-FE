@@ -11,6 +11,7 @@ import { ExhibitionsService } from '../exhibitions.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
 import { Observable } from 'rxjs';
+import { NotificationService } from '../../notifications/notification.service';
 
 @Component({
   selector: 'app-create-exhibition',
@@ -25,6 +26,8 @@ export class CreateExhibitionComponent implements OnInit {
   proposal!: ExhibitionProposal;
   exhibitionId?: number;
   exhibition?: Exhibition;
+  oldAdultPrice?: number;
+  oldMinorPrice?: number;
   itemSearch = '';
   selectedItems: number[] = [];
   user: User | undefined;
@@ -38,7 +41,8 @@ export class CreateExhibitionComponent implements OnInit {
     private proposalService: ProposalService,
     private itemService: ItemsService,
     private exhibitionsService: ExhibitionsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {
     this.exhibitionForm = this.fb.group({
       name: ['', Validators.required],
@@ -80,6 +84,8 @@ export class CreateExhibitionComponent implements OnInit {
         
         this.exhibition = exhibition;
         this.proposal = exhibition.proposal;
+        this.oldAdultPrice = this.proposal.priceList.adultPrice;
+        this.oldMinorPrice = this.proposal.priceList.minorPrice;
         this.loadAvailableItems();
       },
       (error) => {
@@ -173,7 +179,22 @@ export class CreateExhibitionComponent implements OnInit {
         this.exhibitionsService.updateExhibition(this.exhibitionId!, exhibitionData).subscribe(
           response => {
             console.log('Exhibition updated successfully:', response);
-            this.router.navigate(['/exhibitions-view']);
+
+            const newAdultPrice = this.proposal.priceList.adultPrice;
+            const newMinorPrice = this.proposal.priceList.minorPrice;
+
+            console.log("OVDE SAM1")
+
+            if (newAdultPrice < this.oldAdultPrice! || newMinorPrice < this.oldMinorPrice!) {
+              this.notificationService.notifyPromotion(this.exhibitionId!).subscribe(() => {
+                console.log('Promotion notification sent successfully.');
+              });
+            }
+            console.log("OVDE SAM")
+            this.notificationService.notifyExhibitionUpdate(this.exhibitionId!).subscribe(() => {
+              console.log('Notification for exhibition update sent successfully.');
+            });
+            //this.router.navigate(['/exhibitions-view']);
           },
           error => {
             console.error('Error updating exhibition:', error);
@@ -183,6 +204,9 @@ export class CreateExhibitionComponent implements OnInit {
         this.exhibitionsService.createExhibition(exhibitionData).subscribe(
           response => {
             console.log('Exhibition created successfully:', response);
+            this.notificationService.notifyNewExhibition(response.id).subscribe(() => {
+              console.log('Notification for new exhibition sent successfully.');
+            });
             this.router.navigate(['/exhibitions-view']);
           },
           error => {

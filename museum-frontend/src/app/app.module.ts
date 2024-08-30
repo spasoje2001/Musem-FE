@@ -28,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DeleteConfirmationDialogComponent } from './feature-modules/stakeholder/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -68,6 +69,7 @@ import { DeleteConfirmationDialogComponent } from './feature-modules/stakeholder
     MatSnackBarModule, // Add MatSnackBarModule here,
     FormsModule,
     MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [
     {

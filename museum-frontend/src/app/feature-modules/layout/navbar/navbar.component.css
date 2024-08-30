@@ -42,10 +42,105 @@ button.feat-button::after {
   left: 15;
   width: 0%; 
   height: 2px; 
-  background-color: #fff; 
+  background-color: #d4a017; 
   transition: width 0.4s ease; 
 }
 
 button.feat-button:hover::after {
   width: 90%; 
 }
+
+.notification-bell {
+  position: relative;
+  color: white; /* Ensure the bell icon is white */
+  transition: color 0.3s ease; /* Smooth transition for the color change */
+}
+
+.notification-bell:hover {
+  color: #d4a017; /* Gold color on hover */
+}
+
+.notification-count {
+  position: absolute;
+  top: 8px; /* Move the count above the bell icon */
+  right: 270px; /* Move the count to the right of the bell icon */
+  background-color: #d4a017;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: bold;
+  z-index: 10;
+  line-height: 1;
+  display: inline-block;
+  min-width: 20px; /* Ensure the circle is properly rounded even with single digits */
+  text-align: center;
+}
+
+.notifications-menu {
+  max-width: 350px; /* Širina menija */
+  max-height: 300px; /* Maksimalna visina za prikazivanje 5 notifikacija */
+  overflow-y: auto; /* Dodavanje skrolbara za više notifikacija */
+  scrollbar-width: thin; /* Postavljanje širine skrolbara */
+  padding: 0; /* Uklanjanje paddinga koji može uticati na visinu */
+}
+
+.notification-scroll-container {
+  max-height: 300px; /* Maksimalna visina skrolovanog sadržaja */
+  overflow-y: auto; /* Omogućavanje skrolovanja */
+}
+
+.notifications-menu::-webkit-scrollbar {
+  width: 8px; /* Prikazivanje skrolbara */
+}
+
+.notifications-menu::-webkit-scrollbar-thumb {
+  background-color: #d4a017; /* Boja skrolbara */
+  border-radius: 10px; /* Okrugli krajevi skrolbara */
+}
+
+.notifications-menu::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Boja pozadine staze skrolbara */
+}
+
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Jasna linija između notifikacija */
+}
+
+.notification-item:last-child {
+  border-bottom: none; /* Uklanjanje linije na poslednjoj notifikaciji */
+}
+
+.notification-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.notification-message {
+  font-weight: bold;
+  color: #333;
+}
+
+.notification-timestamp {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.notification-icon {
+  margin-right: 30px;
+  font-size: 20px; /* Manja veličina ikone */
+  color: #B8860B; /* Zlatna boja ili druga boja po izboru */
+}
+
+
+
+
+
+
+

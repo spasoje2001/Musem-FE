@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';  
 import { AdministrationModule } from '../administration/administration.module';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -21,12 +24,16 @@ import { AdministrationModule } from '../administration/administration.module';
     ReactiveFormsModule,
     FontAwesomeModule,  
     MaterialModule,
-    AdministrationModule
+    AdministrationModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatMenuModule
   ],
   exports: [
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    MatMenuModule
   ]
 })
 export class LayoutModule { 
