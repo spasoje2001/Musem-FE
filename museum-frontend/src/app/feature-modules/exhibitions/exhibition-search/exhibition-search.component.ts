@@ -13,7 +13,6 @@ export class ExhibitionSearchComponent {
   searchCriteria: ExhibitionSearchRequestDTO = {};
 
   themes = Object.values(ExhibitionTheme);
-  statuses = Object.values(ExhibitionStatus);
 
   onSearchChange() {
     this.searchCriteriaChanged.emit(this.searchCriteria);

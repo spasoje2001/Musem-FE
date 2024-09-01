@@ -25,10 +25,8 @@ export class ExhibitionsViewComponent {
 
   searchCriteria: {
     name: string;
-    shortDescription: string;
-    longDescription: string;
+    description: string;
     theme: ExhibitionTheme | undefined;
-    status: ExhibitionStatus | undefined;
     startDate: string;
     endDate: string;
     organizer: string;
@@ -43,10 +41,8 @@ export class ExhibitionsViewComponent {
     guest: string;
   } = {
     name: '',
-    shortDescription: '',
-    longDescription: '',
+    description: '',
     theme: undefined,  // Allow theme to be undefined
-    status: undefined,  // Allow status to be undefined
     startDate: '',
     endDate: '',
     organizer: '',
@@ -149,10 +145,8 @@ export class ExhibitionsViewComponent {
   resetFilters(): void {
     this.searchCriteria = {
       name: '',
-      shortDescription: '',
-      longDescription: '',
+      description: '',
       theme: undefined,
-      status: undefined,
       startDate: '',
       endDate: '',
       organizer: '',

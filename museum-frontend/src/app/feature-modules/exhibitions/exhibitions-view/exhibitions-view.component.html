@@ -9,33 +9,38 @@
     </div>
     <div class="search-exhibitions-header">
         <div class="search-header-title">
-            <h2>Exhibition Search</h2>
+            <img src="assets/search2.png" alt="Search" class="search-icon"/>
+            <span>Search by:</span>
         </div>
         <div class="search-buttons">
-            <button class="search-category-btn" (click)="toggleDropdown('exhibitionInfo')">
-                Exhibition Info ({{ exhibitionInfoFiltersCount }})
+            <button class="search-category-btn" [ngClass]="{'active': activeDropdown === 'exhibitionInfo'}" (click)="toggleDropdown('exhibitionInfo')">
+                Basic Info 
+                <span class="filter-count">{{ exhibitionInfoFiltersCount }}</span>
             </button>
-            <button class="search-category-btn" (click)="toggleDropdown('itemsInfo')">
-                Items Info ({{ itemsInfoFiltersCount }})
+            <button class="search-category-btn" [ngClass]="{'active': activeDropdown === 'itemsInfo'}" (click)="toggleDropdown('itemsInfo')">
+                Items Info 
+                <span class="filter-count">{{ itemsInfoFiltersCount }}</span>
             </button>
-            <button class="search-category-btn" (click)="toggleDropdown('reviewsInfo')">
-                Reviews Info ({{ reviewsInfoFiltersCount }})
+            <button class="search-category-btn" [ngClass]="{'active': activeDropdown === 'reviewsInfo'}" (click)="toggleDropdown('reviewsInfo')">
+                Reviews Info 
+                <span class="filter-count">{{ reviewsInfoFiltersCount }}</span>
             </button>
-            <button class="search-btn" (click)="searchExhibitions()">Search</button>
-            <button class="remove-filters-btn" (click)="resetFilters()">Remove Filters</button>
+            <button class="search-btn" (click)="searchExhibitions()">
+                Search
+                <img src="assets/search3.png" alt="Search" class="search-icon-btn"/>
+            </button>
+            <button class="remove-filters-btn" (click)="resetFilters()">
+                <img src="assets/clear-filter.png" alt="Clear Filters" class="clear-icon"/>
+            </button>
         </div>
-
-        <!-- Exhibition Info Dropdown -->
+    
+        <!-- Dropdown Menus -->
         <div *ngIf="activeDropdown === 'exhibitionInfo'" class="dropdown-menu">
             <app-exhibition-search (searchCriteriaChanged)="onExhibitionInfoCriteriaChanged($event)"></app-exhibition-search>
         </div>
-
-        <!-- Items Info Dropdown -->
         <div *ngIf="activeDropdown === 'itemsInfo'" class="dropdown-menu">
             <app-item-search (searchCriteriaChanged)="onItemsInfoCriteriaChanged($event)"></app-item-search>
         </div>
-
-        <!-- Reviews Info Dropdown -->
         <div *ngIf="activeDropdown === 'reviewsInfo'" class="dropdown-menu">
             <app-review-search (searchCriteriaChanged)="onReviewsInfoCriteriaChanged($event)"></app-review-search>
         </div>
