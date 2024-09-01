@@ -120,3 +120,45 @@ export interface ExhibitionProposalRequest {
   adultPrice: number;
   minorPrice: number;
 }
+
+export interface ExhibitionSearchRequestDTO {
+  name?: string;
+  shortDescription?: string;
+  longDescription?: string;
+  theme?: ExhibitionTheme;
+  status?: ExhibitionStatus;
+  startDate?: string;
+  endDate?: string;
+  organizer?: string;
+  curator?: string;
+  itemName?: string;
+  itemDescription?: string;
+  itemAuthorsName?: string;
+  itemPeriod?: string;
+  itemCategory?: ItemCategory;
+  minRating?: number;
+  comment?: string;
+  guest?: string;
+}
+
+export enum ExhibitionStatus {
+  READY_TO_OPEN = 'READY_TO_OPEN',
+  OPENED = 'OPENED',
+  CLOSED = 'CLOSED'
+}
+
+export enum ItemCategory {
+  PAINTING = 'PAINTING',
+  DRAWING = 'DRAWING',
+  SCULPTURE = 'SCULPTURE',
+  PRINT = 'PRINT',
+  PHOTOGRAPH = 'PHOTOGRAPH',
+  ARTIFACT = 'ARTIFACT',
+  CLOTHING = 'CLOTHING',
+  SPECIMEN = 'SPECIMEN',
+  FOSSIL = 'FOSSIL',
+  ANIMAL = 'ANIMAL',
+  MINERAL = 'MINERAL',
+  POTTERY = 'POTTERY',
+  JEWELRY = 'JEWELRY'
+}

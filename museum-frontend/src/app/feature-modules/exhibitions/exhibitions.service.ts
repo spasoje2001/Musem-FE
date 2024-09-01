@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CreateExhibition, Exhibition, ExhibitionProposal } from './model/exhibition.model';
+import { CreateExhibition, Exhibition, ExhibitionProposal, ExhibitionSearchRequestDTO } from './model/exhibition.model';
 import { environment } from 'src/env/environment';
 
 @Injectable({
@@ -43,5 +43,9 @@ export class ExhibitionsService {
 
   updateExhibition(id: number, exhibition: CreateExhibition): Observable<Exhibition> {
     return this.http.put<Exhibition>(environment.apiHost + `exhibitions/${id}`, exhibition);
+  }
+
+  searchExhibitions(searchRequest: ExhibitionSearchRequestDTO): Observable<Exhibition[]> {
+    return this.http.post<Exhibition[]>(environment.apiHost + 'exhibitions/search', searchRequest);
   }
 }
