@@ -1,0 +1,33 @@
+<div class="search-container">
+    <h3>Search by Item Info</h3>
+  
+    <div class="form-group">
+      <label for="itemName">Item Name</label>
+      <input type="text" id="itemName" [(ngModel)]="searchCriteria.itemName" (input)="onSearchChange()">
+    </div>
+  
+    <div class="form-group">
+      <label for="itemDescription">Item Description</label>
+      <input type="text" id="itemDescription" [(ngModel)]="searchCriteria.itemDescription" (input)="onSearchChange()">
+    </div>
+  
+    <div class="form-group">
+      <label for="itemAuthorsName">Author's Name</label>
+      <input type="text" id="itemAuthorsName" [(ngModel)]="searchCriteria.itemAuthorsName" (input)="onSearchChange()">
+    </div>
+  
+    <div class="form-group">
+      <label for="itemPeriod">Period</label>
+      <input type="text" id="itemPeriod" [(ngModel)]="searchCriteria.itemPeriod" (input)="onSearchChange()">
+    </div>
+  
+    <div class="form-group">
+      <label for="itemCategory">Category</label>
+      <select id="itemCategory" [(ngModel)]="searchCriteria.itemCategory" (change)="onSearchChange()">
+        <option *ngFor="let category of itemCategories" [value]="category">{{category}}</option>
+      </select>
+    </div>
+  
+    <button (click)="onClearFilters()">Clear Filters</button>
+  </div>
+  

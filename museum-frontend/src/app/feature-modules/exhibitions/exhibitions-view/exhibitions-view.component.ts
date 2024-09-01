@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Exhibition } from '../model/exhibition.model';
+import { Exhibition, ExhibitionSearchRequestDTO, ExhibitionStatus, ExhibitionTheme, ItemCategory } from '../model/exhibition.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ExhibitionsService } from '../exhibitions.service';
 import { NotificationService } from '../../notifications/notification.service';
@@ -17,6 +17,49 @@ export class ExhibitionsViewComponent {
   slicedExhibitions: Exhibition[][] = [];
   activeFilter: string = 'current';
   filteredExhibitions: Exhibition[] = [];
+
+  activeDropdown: string | null = null;
+  exhibitionInfoFiltersCount: number = 0;
+  itemsInfoFiltersCount: number = 0;
+  reviewsInfoFiltersCount: number = 0;
+
+  searchCriteria: {
+    name: string;
+    shortDescription: string;
+    longDescription: string;
+    theme: ExhibitionTheme | undefined;
+    status: ExhibitionStatus | undefined;
+    startDate: string;
+    endDate: string;
+    organizer: string;
+    curator: string;
+    itemName: string;
+    itemDescription: string;
+    itemAuthorsName: string;
+    itemPeriod: string;
+    itemCategory: ItemCategory | undefined;
+    minRating: number;
+    comment: string;
+    guest: string;
+  } = {
+    name: '',
+    shortDescription: '',
+    longDescription: '',
+    theme: undefined,  // Allow theme to be undefined
+    status: undefined,  // Allow status to be undefined
+    startDate: '',
+    endDate: '',
+    organizer: '',
+    curator: '',
+    itemName: '',
+    itemDescription: '',
+    itemAuthorsName: '',
+    itemPeriod: '',
+    itemCategory: undefined,  // Allow itemCategory to be undefined
+    minRating: 0,
+    comment: '',
+    guest: ''
+  };
 
   constructor(private dialog: MatDialog, private exhibitionService: ExhibitionsService, private notificationService: NotificationService){
 
@@ -98,5 +141,75 @@ export class ExhibitionsViewComponent {
       );
     }
   }
+
+  toggleDropdown(dropdown: string): void {
+    this.activeDropdown = this.activeDropdown === dropdown ? null : dropdown;
+  }
+
+  resetFilters(): void {
+    this.searchCriteria = {
+      name: '',
+      shortDescription: '',
+      longDescription: '',
+      theme: undefined,
+      status: undefined,
+      startDate: '',
+      endDate: '',
+      organizer: '',
+      curator: '',
+      itemName: '',
+      itemDescription: '',
+      itemAuthorsName: '',
+      itemPeriod: '',
+      itemCategory: undefined,
+      minRating: 0,
+      comment: '',
+      guest: ''
+  };
+    this.exhibitionInfoFiltersCount = 0;
+    this.itemsInfoFiltersCount = 0;
+    this.reviewsInfoFiltersCount = 0;
+  }
+
+  onExhibitionInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
+    this.searchCriteria = { ...this.searchCriteria, ...criteria };
+    this.exhibitionInfoFiltersCount = Object.keys(criteria)
+        .filter(key => criteria[key as keyof ExhibitionSearchRequestDTO] !== undefined && criteria[key as keyof ExhibitionSearchRequestDTO] !== '').length;
+}
+
+
+
+onItemsInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
+  this.searchCriteria = { ...this.searchCriteria, ...criteria };
+  this.itemsInfoFiltersCount = Object.keys(criteria)
+      .filter(key => {
+          const typedKey = key as keyof ExhibitionSearchRequestDTO;
+          return criteria[typedKey] !== undefined && criteria[typedKey] !== '';
+      }).length;
+}
+
+
+onReviewsInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
+  this.searchCriteria = { ...this.searchCriteria, ...criteria };
+  this.reviewsInfoFiltersCount = Object.keys(criteria)
+      .filter(key => {
+          const typedKey = key as keyof ExhibitionSearchRequestDTO;
+          return criteria[typedKey] !== undefined && criteria[typedKey] !== '';
+      }).length;
+}
+
+
+  searchExhibitions(): void {
+    this.exhibitionService.searchExhibitions(this.searchCriteria).subscribe({
+      next: (result: Exhibition[]) => {
+        this.filteredExhibitions = result;
+        this.activeDropdown = null;
+      },
+      error: (err) => {
+        console.error("Search failed", err);
+      }
+    });
+  }
+
 
 }

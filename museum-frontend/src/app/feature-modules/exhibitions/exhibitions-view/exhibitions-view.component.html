@@ -7,7 +7,40 @@
             <div class="filter" [ngClass]="{'active': activeFilter === 'past'}" (click)="filterExhibitions('past')">Past</div>
         </div>
     </div>
+    <div class="search-exhibitions-header">
+        <div class="search-header-title">
+            <h2>Exhibition Search</h2>
+        </div>
+        <div class="search-buttons">
+            <button class="search-category-btn" (click)="toggleDropdown('exhibitionInfo')">
+                Exhibition Info ({{ exhibitionInfoFiltersCount }})
+            </button>
+            <button class="search-category-btn" (click)="toggleDropdown('itemsInfo')">
+                Items Info ({{ itemsInfoFiltersCount }})
+            </button>
+            <button class="search-category-btn" (click)="toggleDropdown('reviewsInfo')">
+                Reviews Info ({{ reviewsInfoFiltersCount }})
+            </button>
+            <button class="search-btn" (click)="searchExhibitions()">Search</button>
+            <button class="remove-filters-btn" (click)="resetFilters()">Remove Filters</button>
+        </div>
 
+        <!-- Exhibition Info Dropdown -->
+        <div *ngIf="activeDropdown === 'exhibitionInfo'" class="dropdown-menu">
+            <app-exhibition-search (searchCriteriaChanged)="onExhibitionInfoCriteriaChanged($event)"></app-exhibition-search>
+        </div>
+
+        <!-- Items Info Dropdown -->
+        <div *ngIf="activeDropdown === 'itemsInfo'" class="dropdown-menu">
+            <app-item-search (searchCriteriaChanged)="onItemsInfoCriteriaChanged($event)"></app-item-search>
+        </div>
+
+        <!-- Reviews Info Dropdown -->
+        <div *ngIf="activeDropdown === 'reviewsInfo'" class="dropdown-menu">
+            <app-review-search (searchCriteriaChanged)="onReviewsInfoCriteriaChanged($event)"></app-review-search>
+        </div>
+    </div>
+    
     <div class="card-container">
         <app-exhibition-card class="card"
         *ngFor="let exhibition of filteredExhibitions"

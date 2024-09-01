@@ -143,7 +143,7 @@ export interface ExhibitionSearchRequestDTO {
 
 export enum ExhibitionStatus {
   READY_TO_OPEN = 'READY_TO_OPEN',
-  OPENED = 'OPENED',
+  OPENED = 'open',
   CLOSED = 'CLOSED'
 }
 

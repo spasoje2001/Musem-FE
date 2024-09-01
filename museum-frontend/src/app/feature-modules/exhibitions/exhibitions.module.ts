@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CreateExhibitionComponent } from './create-exhibition/create-exhibition.component';
 import { ProposalDetailsComponent } from './proposal-details/proposal-details.component';
+import { ExhibitionSearchComponent } from './exhibition-search/exhibition-search.component';
+import { ItemSearchComponent } from './item-search/item-search.component';
+import { ReviewSearchComponent } from './review-search/review-search.component';
 
 
 
@@ -27,7 +30,10 @@ import { ProposalDetailsComponent } from './proposal-details/proposal-details.co
     PdfCuratorExhibitionsPromptComponent,
     ExhibitionProposalComponent,
     CreateExhibitionComponent,
-    ProposalDetailsComponent
+    ProposalDetailsComponent,
+    ExhibitionSearchComponent,
+    ItemSearchComponent,
+    ReviewSearchComponent
   ],
   imports: [
     ReactiveFormsModule,
