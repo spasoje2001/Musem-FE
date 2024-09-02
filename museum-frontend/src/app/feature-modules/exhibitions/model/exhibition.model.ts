@@ -36,29 +36,29 @@ export interface CreateExhibition {
 }
 
 export enum ExhibitionTheme {
-  ANCIENT_HISTORY = 'ANCIENT_HISTORY',
-  ARCHAEOLOGY = 'ARCHAEOLOGY',
-  AVIATION = 'AVIATION',
-  CHILDREN_EDUCATION = 'CHILDREN_EDUCATION',
-  CONTEMPORARY_ART = 'CONTEMPORARY_ART',
-  ENVIRONMENTAL_SCIENCE = 'ENVIRONMENTAL_SCIENCE',
-  FASHION_AND_DESIGN = 'FASHION_AND_DESIGN',
-  FILM_AND_MEDIA = 'FILM_AND_MEDIA',
-  FINE_ARTS = 'FINE_ARTS',
-  INDIGENOUS_CULTURES = 'INDIGENOUS_CULTURES',
-  LITERARY_ARTS = 'LITERARY_ARTS',
-  MARITIME = 'MARITIME',
-  MEDIEVAL_HISTORY = 'MEDIEVAL_HISTORY',
-  MILITARY_HISTORY = 'MILITARY_HISTORY',
-  MODERN_HISTORY = 'MODERN_HISTORY',
-  MUSIC_HISTORY = 'MUSIC_HISTORY',
-  NATURAL_HISTORY = 'NATURAL_HISTORY',
-  PHOTOGRAPHY = 'PHOTOGRAPHY',
-  SCULPTURE = 'SCULPTURE',
-  SCIENCE_AND_TECHNOLOGY = 'SCIENCE_AND_TECHNOLOGY',
-  SEASONAL = 'SEASONAL',
-  SPACE_EXPLORATION = 'SPACE_EXPLORATION',
-  WORLD_CULTURES = 'WORLD_CULTURES'
+  ANCIENT_HISTORY = 'Ancient History',
+  ARCHAEOLOGY = 'Archaeology',
+  AVIATION = 'Aviation',
+  CHILDREN_EDUCATION = 'Children Education',
+  CONTEMPORARY_ART = 'Contemporary Art',
+  ENVIRONMENTAL_SCIENCE = 'Environmental Science',
+  FASHION_AND_DESIGN = 'Fashion and Design',
+  FILM_AND_MEDIA = 'Film and Media',
+  FINE_ARTS = 'Fine Arts',
+  INDIGENOUS_CULTURES = 'Indigenous Cultures',
+  LITERARY_ARTS = 'Literary Arts',
+  MARITIME = 'Maritime',
+  MEDIEVAL_HISTORY = 'Medieval History',
+  MILITARY_HISTORY = 'Military History',
+  MODERN_HISTORY = 'Modern History',
+  MUSIC_HISTORY = 'Music History',
+  NATURAL_HISTORY = 'Natural History',
+  PHOTOGRAPHY = 'Photography',
+  SCULPTURE = 'Sculpture',
+  SCIENCE_AND_TECHNOLOGY = 'Science and Technology',
+  SEASONAL = 'Seasonal',
+  SPACE_EXPLORATION = 'Space Exploration',
+  WORLD_CULTURES = 'World Cultures'
 }
 
 
@@ -123,8 +123,7 @@ export interface ExhibitionProposalRequest {
 
 export interface ExhibitionSearchRequestDTO {
   name?: string;
-  shortDescription?: string;
-  longDescription?: string;
+  description?: string;
   theme?: ExhibitionTheme;
   status?: ExhibitionStatus;
   startDate?: string;
@@ -142,23 +141,23 @@ export interface ExhibitionSearchRequestDTO {
 }
 
 export enum ExhibitionStatus {
-  READY_TO_OPEN = 'READY_TO_OPEN',
-  OPENED = 'open',
-  CLOSED = 'CLOSED'
+  READY_TO_OPEN = 'Ready to Open',
+  OPENED = 'Opened',
+  CLOSED = 'Closed'
 }
 
 export enum ItemCategory {
-  PAINTING = 'PAINTING',
-  DRAWING = 'DRAWING',
-  SCULPTURE = 'SCULPTURE',
-  PRINT = 'PRINT',
-  PHOTOGRAPH = 'PHOTOGRAPH',
-  ARTIFACT = 'ARTIFACT',
-  CLOTHING = 'CLOTHING',
-  SPECIMEN = 'SPECIMEN',
-  FOSSIL = 'FOSSIL',
-  ANIMAL = 'ANIMAL',
-  MINERAL = 'MINERAL',
-  POTTERY = 'POTTERY',
-  JEWELRY = 'JEWELRY'
+  PAINTING = 'Painting',
+  DRAWING = 'Drawing',
+  SCULPTURE = 'Sculpture',
+  PRINT = 'Print',
+  PHOTOGRAPH = 'Photograph',
+  ARTIFACT = 'Artifact',
+  CLOTHING = 'Clothing',
+  SPECIMEN = 'Specimen',
+  FOSSIL = 'Fossil',
+  ANIMAL = 'Animal',
+  MINERAL = 'Mineral',
+  POTTERY = 'Pottery',
+  JEWELRY = 'Jewelry'
 }

@@ -23,26 +23,10 @@ export class ExhibitionsViewComponent {
   itemsInfoFiltersCount: number = 0;
   reviewsInfoFiltersCount: number = 0;
 
-  searchCriteria: {
-    name: string;
-    description: string;
-    theme: ExhibitionTheme | undefined;
-    startDate: string;
-    endDate: string;
-    organizer: string;
-    curator: string;
-    itemName: string;
-    itemDescription: string;
-    itemAuthorsName: string;
-    itemPeriod: string;
-    itemCategory: ItemCategory | undefined;
-    minRating: number;
-    comment: string;
-    guest: string;
-  } = {
+  searchCriteria: Partial<ExhibitionSearchRequestDTO> = {
     name: '',
     description: '',
-    theme: undefined,  // Allow theme to be undefined
+    theme: undefined,
     startDate: '',
     endDate: '',
     organizer: '',
@@ -51,11 +35,12 @@ export class ExhibitionsViewComponent {
     itemDescription: '',
     itemAuthorsName: '',
     itemPeriod: '',
-    itemCategory: undefined,  // Allow itemCategory to be undefined
+    itemCategory: undefined,
     minRating: 0,
     comment: '',
     guest: ''
   };
+  
 
   constructor(private dialog: MatDialog, private exhibitionService: ExhibitionsService, private notificationService: NotificationService){
 
@@ -144,66 +129,120 @@ export class ExhibitionsViewComponent {
 
   resetFilters(): void {
     this.searchCriteria = {
-      name: '',
-      description: '',
-      theme: undefined,
-      startDate: '',
-      endDate: '',
-      organizer: '',
-      curator: '',
-      itemName: '',
-      itemDescription: '',
-      itemAuthorsName: '',
-      itemPeriod: '',
-      itemCategory: undefined,
-      minRating: 0,
-      comment: '',
-      guest: ''
-  };
-    this.exhibitionInfoFiltersCount = 0;
-    this.itemsInfoFiltersCount = 0;
-    this.reviewsInfoFiltersCount = 0;
-  }
+        name: '',
+        description: '',
+        theme: undefined,
+        startDate: '',
+        endDate: '',
+        organizer: '',
+        curator: '',
+        itemName: '',
+        itemDescription: '',
+        itemAuthorsName: '',
+        itemPeriod: '',
+        itemCategory: undefined,
+        minRating: 0,
+        comment: '',
+        guest: ''
+    };
+    this.updateFilterCounts();  // Poziv ovde
+
+    this.loadExhibitions();
+}
+
 
   onExhibitionInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
     this.searchCriteria = { ...this.searchCriteria, ...criteria };
-    this.exhibitionInfoFiltersCount = Object.keys(criteria)
-        .filter(key => criteria[key as keyof ExhibitionSearchRequestDTO] !== undefined && criteria[key as keyof ExhibitionSearchRequestDTO] !== '').length;
+    this.updateFilterCounts();  // Poziv ovde
+  }
+
+
+
+
+  onItemsInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
+    this.searchCriteria = { ...this.searchCriteria, ...criteria };
+    this.updateFilterCounts();  // Poziv ovde
 }
 
-
-
-onItemsInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
-  this.searchCriteria = { ...this.searchCriteria, ...criteria };
-  this.itemsInfoFiltersCount = Object.keys(criteria)
-      .filter(key => {
-          const typedKey = key as keyof ExhibitionSearchRequestDTO;
-          return criteria[typedKey] !== undefined && criteria[typedKey] !== '';
-      }).length;
-}
 
 
 onReviewsInfoCriteriaChanged(criteria: Partial<ExhibitionSearchRequestDTO>) {
   this.searchCriteria = { ...this.searchCriteria, ...criteria };
-  this.reviewsInfoFiltersCount = Object.keys(criteria)
-      .filter(key => {
-          const typedKey = key as keyof ExhibitionSearchRequestDTO;
-          return criteria[typedKey] !== undefined && criteria[typedKey] !== '';
-      }).length;
+  this.updateFilterCounts();  // Poziv ovde
 }
 
 
-  searchExhibitions(): void {
-    this.exhibitionService.searchExhibitions(this.searchCriteria).subscribe({
+
+searchExhibitions(): void {
+  // Kreiraj kopiju searchCriteria objekta
+  const searchCriteriaCopy = { ...this.searchCriteria };
+
+  // Formatiraj datume u dd.MM.yyyy format ako su prisutni
+  if (searchCriteriaCopy.startDate) {
+      searchCriteriaCopy.startDate = moment(searchCriteriaCopy.startDate).format('DD.MM.YYYY.');
+  }
+  if (searchCriteriaCopy.endDate) {
+      searchCriteriaCopy.endDate = moment(searchCriteriaCopy.endDate).format('DD.MM.YYYY.');
+  }
+
+  // Pošalji kopiju searchCriteria objekta sa formatiranim datumima
+  console.log(searchCriteriaCopy)
+  this.exhibitionService.searchExhibitions(searchCriteriaCopy).subscribe({
       next: (result: Exhibition[]) => {
-        this.filteredExhibitions = result;
-        this.activeDropdown = null;
+          console.log("Resultat search-a: ", result);
+          this.exhibitions = result;
+          this.applyFilter();
+          this.activeDropdown = null;
       },
       error: (err) => {
-        console.error("Search failed", err);
+          console.error("Search failed", err);
       }
-    });
+  });
+}
+
+
+updateFilterCounts(): void {
+  const exhibitionKeys = ['name', 'description', 'theme', 'startDate', 'endDate', 'organizer', 'curator'];
+  const itemsKeys = ['itemName', 'itemDescription', 'itemAuthorsName', 'itemPeriod', 'itemCategory'];
+  const reviewsKeys = ['comment', 'guest'];
+
+  this.exhibitionInfoFiltersCount = exhibitionKeys.filter(key => {
+      const criteriaKey = key as keyof ExhibitionSearchRequestDTO;
+      return (
+          this.searchCriteria[criteriaKey] !== undefined &&
+          this.searchCriteria[criteriaKey] !== '' &&
+          this.searchCriteria[criteriaKey] !== null
+      );
+  }).length;
+
+  this.itemsInfoFiltersCount = itemsKeys.filter(key => {
+      const criteriaKey = key as keyof ExhibitionSearchRequestDTO;
+      return (
+          this.searchCriteria[criteriaKey] !== undefined &&
+          this.searchCriteria[criteriaKey] !== '' &&
+          this.searchCriteria[criteriaKey] !== null
+      );
+  }).length;
+
+  this.reviewsInfoFiltersCount = reviewsKeys.filter(key => {
+      const criteriaKey = key as keyof ExhibitionSearchRequestDTO;
+      return (
+          this.searchCriteria[criteriaKey] !== undefined &&
+          this.searchCriteria[criteriaKey] !== '' &&
+          this.searchCriteria[criteriaKey] !== null
+      );
+  }).length;
+
+  // Posebna provera za minRating
+  if (this.searchCriteria.minRating && this.searchCriteria.minRating > 0) {
+      this.reviewsInfoFiltersCount += 1;
   }
+}
+
+
+
+  
+
 
 
 }

@@ -25,25 +25,35 @@
                 Reviews Info 
                 <span class="filter-count">{{ reviewsInfoFiltersCount }}</span>
             </button>
+            <img src="assets/clear-filter1.png" alt="Clear Filters" class="clear-icon" (click)="resetFilters()"/>
             <button class="search-btn" (click)="searchExhibitions()">
                 Search
                 <img src="assets/search3.png" alt="Search" class="search-icon-btn"/>
             </button>
-            <button class="remove-filters-btn" (click)="resetFilters()">
-                <img src="assets/clear-filter.png" alt="Clear Filters" class="clear-icon"/>
-            </button>
+            
         </div>
     
         <!-- Dropdown Menus -->
+        <!-- Dropdown Menus -->
         <div *ngIf="activeDropdown === 'exhibitionInfo'" class="dropdown-menu">
-            <app-exhibition-search (searchCriteriaChanged)="onExhibitionInfoCriteriaChanged($event)"></app-exhibition-search>
+            <app-exhibition-search 
+                [searchCriteria]="searchCriteria"
+                (searchCriteriaChanged)="onExhibitionInfoCriteriaChanged($event)">
+            </app-exhibition-search>
         </div>
         <div *ngIf="activeDropdown === 'itemsInfo'" class="dropdown-menu">
-            <app-item-search (searchCriteriaChanged)="onItemsInfoCriteriaChanged($event)"></app-item-search>
+            <app-item-search 
+                [searchCriteria]="searchCriteria"
+                (searchCriteriaChanged)="onItemsInfoCriteriaChanged($event)">
+            </app-item-search>
         </div>
         <div *ngIf="activeDropdown === 'reviewsInfo'" class="dropdown-menu">
-            <app-review-search (searchCriteriaChanged)="onReviewsInfoCriteriaChanged($event)"></app-review-search>
+            <app-review-search 
+                [searchCriteria]="searchCriteria"
+                (searchCriteriaChanged)="onReviewsInfoCriteriaChanged($event)">
+            </app-review-search>
         </div>
+
     </div>
     
     <div class="card-container">

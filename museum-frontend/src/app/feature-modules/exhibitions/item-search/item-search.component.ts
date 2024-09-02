@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ExhibitionSearchRequestDTO, ItemCategory } from '../model/exhibition.model';
 
 @Component({
@@ -7,10 +7,9 @@ import { ExhibitionSearchRequestDTO, ItemCategory } from '../model/exhibition.mo
   styleUrls: ['./item-search.component.css']
 })
 export class ItemSearchComponent {
+  @Input() searchCriteria: ExhibitionSearchRequestDTO = {};
   @Output() searchCriteriaChanged = new EventEmitter<ExhibitionSearchRequestDTO>();
-  @Output() clearFilters = new EventEmitter<void>();
 
-  searchCriteria: ExhibitionSearchRequestDTO = {};
 
   itemCategories = Object.values(ItemCategory);
 
@@ -19,8 +18,13 @@ export class ItemSearchComponent {
   }
 
   onClearFilters() {
-    this.searchCriteria = {};
-    this.clearFilters.emit();
-    this.searchCriteriaChanged.emit(this.searchCriteria); // Emit empty criteria to clear search
-  }
+    this.searchCriteria.itemName = '';
+    this.searchCriteria.itemDescription = '';
+    this.searchCriteria.itemAuthorsName = '';
+    this.searchCriteria.itemPeriod = '';
+    this.searchCriteria.itemCategory = undefined;
+
+    this.searchCriteriaChanged.emit(this.searchCriteria);
+}
+
 }
