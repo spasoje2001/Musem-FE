@@ -2,15 +2,28 @@
   position: relative;
   width: 100%;
   height: clamp(30rem, 60%, 50rem);
-  height: 175%;
+  height: 200%;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  background: url('https://img.freepik.com/free-photo/abstract-smooth-brown-wall-background-layout-design-studio-room-web-template-business-report-with-smooth-circle-gradient-color_1258-53138.jpg?t=st=1725323206~exp=1725326806~hmac=60acd665423bd7304d78313a6f8ae13872a438d8561d29c44f8ac7d23333549f&w=2000') no-repeat;
+  background: url('/assets/background.jpg') no-repeat;
   background-position: center;
   background-size: cover;
   transition: background-size 0.3s ease;
+  background-attachment: fixed;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(7px); /* Dodaje blagi blur */
+  z-index: -1; /* Stavlja pozadinu iza sadržaja */
 }
 
 .overlay {
@@ -22,13 +35,15 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  background: rgba(27, 27, 27, 0.5); /* Dark semi-transparent background */
+  background: rgba(27, 27, 27, 0.7); /* Tamnija pozadina sa manjom transparentnošću */
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(27, 27, 27, 0.7)); /* Gradijent za lepši efekat */
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Malo jača senka za bolji kontrast */
   color: #fff;
   border-radius: 10px;
 }
+
 
 .museum-info-container {
   display: flex;
@@ -58,11 +73,16 @@
 }
 
 .museum-description p {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: #f5f5f5; /* Light color for the text */
-  line-height: 1.5;
+  line-height: 1.7;
   text-align: center; /* Center the text */
 }
+
+.museum-description h1, .museum-description p {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add this for better contrast */
+}
+
 
 .banner h1 {
   font-family: "Poppins", sans-serif;
@@ -73,11 +93,11 @@
 .banner p {
   max-width: 70ch;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .wrapper {
-  background: rgba(27, 27, 27, 0.5);
+  background: rgba(27, 27, 27, 0.7);
   border: 2px solid rgba(255, 255, 255, .2);
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -90,12 +110,14 @@
   width: 100%;
 }
 
+
+
 h2 {
   margin: 0;
 }
 
 .card-container-headers {
-  margin-top: 5%;
+  margin-top: 10%;
   margin-bottom: 3%;
   align-self: center;
   display: flex;
@@ -132,21 +154,21 @@ h2 {
 .btn {
   width: 100%;
   height: 20%;
-  background: #fff;
+  background: linear-gradient(145deg, #d4a017, #e3c67c);
   border: none;
   outline: none;
   border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  font-size: 16px;
-  color: #333;
+  font-size: 20px;
+  color: white;
   font-weight: 600;
   margin-top: -3%;
 }
 
 .btn:hover {
   background-color: #f2f2f2; 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); 
   transform: scale(1.03);
   transition: transform 300ms ease;
 }
@@ -347,6 +369,8 @@ h2 {
   background-size: cover;
   background-position: center;
 }
+
+
 
 .card-group:hover > .big-card:nth-child(2) {
   transform: translate(-75%, 16%) rotate(-24deg);
