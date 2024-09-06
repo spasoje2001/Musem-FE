@@ -51,19 +51,44 @@
       <h3>{{ viewMode === 'comments' ? 'Comments' : 'Selected Works' }}</h3>
       <div *ngIf="viewMode === 'comments'; else works" class="comments-and-form">
         <div  class = "comments-container">
-          <div *ngFor="let comment of comments" class="review-item">
+          <div *ngFor="let comment of comments" class="comment-item">
             <img [src]="comment.userPicture" alt="{{ comment.userFirstName }}" class="guest-picture">
-            <div class="review-details">
+            <div class="comment-details">
               <p><strong>{{ comment.userFirstName }} {{ comment.userLastName }}</strong></p>
-              <p class="review-comment">{{ comment.text }}</p>
-              <p class="review-date">{{ comment.commentDate }}</p>
+              <p class="comment-text">{{ comment.text }}</p>
+              <p class="comment-date">{{ comment.commentDate | date: 'mediumDate'}}</p>
+              
+              <div *ngIf="comment.responses && comment.responses.length > 0" class="replies-button">
+                <button (click)="toggleReplies(comment.id)">
+                  {{ comment.responses.length }} {{ comment.responses.length > 1 ? 'Replies' : 'Reply' }} <span [class]="comment.showReplies ? 'arrow-up' : 'arrow-down'"></span>
+                </button>
+              </div>
+
+              <div *ngIf="comment.showReplies" class="replies-container">
+                <div *ngFor="let reply of comment.responses" class="reply-item">
+                  <img [src]="reply.userPicture || 'default-avatar.png'" alt="{{ reply.userFirstName }}" class="guest-picture">
+                  <div class="reply-details">
+                    <p><strong>{{ reply.userFirstName }} {{ reply.userLastName || 'Anonymous' }}</strong></p>
+                    <p class="comment-text">{{ reply.text }}</p>
+                    <p class="comment-date">{{ reply.commentDate | date: 'mediumDate' }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <button class="reply-button" (click)="toggleReplyForm(comment.id)">Reply</button>
+              
+              <div *ngIf="comment.showReplyForm" class="reply-form">
+                <textarea [(ngModel)]="replyText" placeholder="Write your reply here..."></textarea>
+                <button (click)="submitReply(comment.id)">Submit Reply</button>
+              </div>
+
             </div>
           </div>
         </div>
-        <div class="review-form">
+        <div class="comment-form">
           <h3>Leave a comment</h3>
           <textarea [(ngModel)]="newComment" placeholder="Write your comment here..."></textarea>
-          <button (click)="submitReview()">Submit</button>
+          <button (click)="submitComment()">Comment</button>
         </div>
       </div>
       <ng-template #works>

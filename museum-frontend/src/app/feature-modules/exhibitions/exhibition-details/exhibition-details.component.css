@@ -192,11 +192,10 @@
 
   .comments-container {
     max-width: 60%; /* Restrict to central 60% */
-    margin-left: auto; /* Center horizontally */
-    margin-right: auto; /* Center horizontally */
+    margin: 0 auto;
     max-height: 300px; /* Limit the height for scrolling */
     overflow-y: scroll; /* Allow vertical scroll */
-    padding-right: 10px; /* Ensure scrollbar doesn't overlap content */
+    padding: 20px;
   }
   
   .items-grid {
@@ -465,20 +464,87 @@
       cursor: pointer;
     }
 
-    .review-item {
+    .comment-item {
       display: flex;
-      align-items: flex-start; /* Aligns items to the top */
+      align-items: flex-start;
       margin-bottom: 20px;
       padding-bottom: 20px;
-      border-bottom: 1px solid #ddd; /* Light grey horizontal line between reviews */
+      border-bottom: 1px solid #ddd;
+      width: 100%; /* Komentari zauzimaju punu širinu */
+    }
+
+    .reply-item {
+      margin-top: 10px;
+      margin-left: 40px; /* Manje uvlačenje za odgovore */
+    }
+
+    .reply-details {
+      margin-left: 60px;
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .comment-details {
+      margin-left: 15px;
+      flex-grow: 1;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    
+    .reply-button {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      margin-top: 10px;
+    } 
+    
+    .reply-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .reply-form button {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .arrow-up::after {
+      content: '▲';
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    
+    .arrow-down::after {
+      content: '▼';
+      font-size: 12px;
+      margin-left: 5px;
+    }
+    
+    .replies-button {
+      margin-top: 10px;
+    }
+    
+    .replies-container {
+      margin-top: 10px;
     }
     
     /* Image of the guest */
     .guest-picture {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      margin-right: 15px;
     }
     
     /* Review details */
@@ -509,17 +575,19 @@
       margin-left: auto; /* Push the date to the right */
   }
 
-    .review-form {
+    .comment-form {
       max-width: 60%;
-      margin: 20px auto;
+      margin: 30px auto;
       padding: 20px;
       background-color: #f9f9f9;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+
     
     /* Heading for the review form */
-    .review-form h3 {
+    .comment-form h3 {
       margin-bottom: 20px;
       font-size: 24px;
     }
@@ -540,7 +608,7 @@
     }
     
     /* Textarea for comment */
-    .review-form textarea {
+    .comment-form textarea {
       width: 100%;
       min-height: 100px;
       padding: 10px;
@@ -551,7 +619,7 @@
     }
     
     /* Submit button styling */
-    .review-form button {
+    .comment-form button {
       margin-top: 20px;
       padding: 10px 20px;
       background-color: #0066cc;
@@ -563,7 +631,7 @@
       transition: background-color 0.3s ease;
     }
     
-    .review-form button:hover {
+    .comment-form button:hover {
       background-color: #005bb5;
     }    
 

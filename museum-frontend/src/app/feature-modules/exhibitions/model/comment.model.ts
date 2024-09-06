@@ -11,6 +11,8 @@ export interface Comment {
     responses: Comment[];  // Lista odgovora na ovaj komentar
     text: string;
     commentDate: string;
+    showReplies: boolean;
+    showReplyForm: boolean;
 }
 
 export interface CreateComment {

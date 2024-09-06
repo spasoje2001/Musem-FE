@@ -12,7 +12,7 @@ import { ReviewService } from '../review.service';
 import { NotificationService } from '../../notifications/notification.service';
 import { GuestService } from '../../stakeholder/services/guest.service';
 import { CommentService } from '../comment.service';
-import { Comment } from '../model/comment.model';
+import { Comment, CreateComment } from '../model/comment.model';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -34,7 +34,8 @@ export class ExhibitionDetailsComponent {
   totalCost = 0;
   currentRating = 0;       // Track the rating selected by the user
   newComment = '';         // Track the user's comment
- 
+  replyText = '';
+
   hasReviewed = false;
   hasTicket: boolean = false;
 
@@ -58,6 +59,7 @@ ngOnInit() {
   this.authService.user$.subscribe(user => {
     this.user = user;
     if (this.user && this.user.role === 'GUEST') {
+      console.log(this.user)
       this.checkIfUserHasTicket(id);
     }
   });
@@ -230,8 +232,13 @@ setViewMode(mode: string) {
 fetchComments() {
   this.commentService.getCommentsByExhibitionId(this.exhibition.id).subscribe({
     next: (comments: Comment[]) => {
-      console.log(comments);
-      this.comments = comments;
+      this.comments = comments.map(comment => ({
+        ...comment,
+        showReplies: false, // Initially hide replies
+        showReplyForm: false, // Initially hide the reply form
+      }));
+
+      console.log("fetchovani komentari: ", this.comments);
     },
     error: (err) => {
       console.error('Error fetching reviews:', err);
@@ -239,8 +246,73 @@ fetchComments() {
   });
 }
 
+toggleReplies(commentId: number) {
+  const comment = this.comments.find(c => c.id === commentId);
+  if (comment) {
+    comment.showReplies = !comment.showReplies;
+  }
+}
+
+toggleReplyForm(commentId: number) {
+  const comment = this.comments.find(c => c.id === commentId);
+  if (comment) {
+    comment.showReplyForm = !comment.showReplyForm;
+  }
+}
+
 setRating(rating: number) {
   this.currentRating = rating;
+}
+
+submitReply(parentCommentId: number) {
+  if (this.replyText === '') {
+    alert('Reply cannot be empty');
+    return;
+  }
+
+  const reply: CreateComment = {
+    userId: this.isLoggedIn() ? this.user!.id : null,
+    exhibitionId: this.exhibition.id,
+    comment: this.replyText,
+    parentCommentId
+  };
+
+  this.commentService.addComment(reply).subscribe({
+    next: () => {
+      this.replyText = ''; // Reset the reply text
+      this.fetchComments(); // Refresh comments
+    },
+    error: () => {
+      alert('Failed to submit reply. Please try again.');
+    }
+  });
+}
+
+submitComment() {
+  if (this.newComment == '') {
+    alert('Please insert a comment.');
+    return;
+  }
+
+  const newComment: CreateComment = {
+    userId: this.isLoggedIn() ? this.user!.id : null,  // Ako je korisnik ulogovan, uzmi njegov ID, inače prosledi null
+    exhibitionId: this.exhibition.id,
+    comment: this.newComment,
+    parentCommentId: null
+  };
+  
+  console.log(newComment);
+
+  // Assuming reviewService.addReview() sends the review to the backend
+  this.commentService.addComment(newComment).subscribe({
+    next: () => {
+      this.newComment = '';
+      this.fetchComments();
+    },
+    error: () => {
+      alert('Failed to submit the comment. Please try again.');
+    }
+  });
 }
 
 submitReview() {
