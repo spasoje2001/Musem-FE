@@ -20,4 +20,10 @@ export class ReviewService {
   addReview(newReview: CreateReview): Observable<Review> {
     return this.http.post<Review>(this.apiUrl, newReview);
   }
+
+  hasUserReviewedExhibition(exhibitionId: number, userId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/exhibition/${exhibitionId}/has-reviewed`, {
+      params: { userId: userId.toString() }
+    });
+  }
 }

@@ -48,36 +48,22 @@
       </div>
     </div>
     <div class="selected-works">
-      <h3>{{ viewMode === 'comments' ? 'Reviews' : 'Selected Works' }}</h3>
+      <h3>{{ viewMode === 'comments' ? 'Comments' : 'Selected Works' }}</h3>
       <div *ngIf="viewMode === 'comments'; else works" class="comments-and-form">
         <div  class = "comments-container">
-          <div *ngFor="let review of reviews" class="review-item">
-            <img [src]="review.guestPicture" alt="{{ review.guestFirstName }}" class="guest-picture">
+          <div *ngFor="let comment of comments" class="review-item">
+            <img [src]="comment.userPicture" alt="{{ comment.userFirstName }}" class="guest-picture">
             <div class="review-details">
-              <p><strong>{{ review.guestFirstName }} {{ review.guestLastName }}</strong></p>
-              <p class="rating">
-                <span *ngFor="let star of [1,2,3,4,5]; let i = index" class="star"
-                      [class.filled]="i < review.rating">★</span>
-              </p>
-              <p class="review-comment">{{ review.comment }}</p>
-              <p class="review-date">{{ review.reviewDate }}</p>
+              <p><strong>{{ comment.userFirstName }} {{ comment.userLastName }}</strong></p>
+              <p class="review-comment">{{ comment.text }}</p>
+              <p class="review-date">{{ comment.commentDate }}</p>
             </div>
           </div>
         </div>
-        <div *ngIf="shouldShowReviewForm()" class="review-form">
-          <h3>Leave a review</h3>
-          <div class="stars">
-            <span *ngFor="let star of [1,2,3,4,5]; let i = index" class="star"
-                  [class.filled]="i < currentRating" (click)="setRating(i + 1)">★</span>
-          </div>
+        <div class="review-form">
+          <h3>Leave a comment</h3>
           <textarea [(ngModel)]="newComment" placeholder="Write your comment here..."></textarea>
           <button (click)="submitReview()">Submit</button>
-        </div>
-        <div *ngIf="shouldShowReviewMessage()" class="no-review-message">
-          <p>Only guests who visited the exhibition can leave a review.</p>
-        </div>
-        <div *ngIf="shouldShowAlreadyReviewedMessage()" class="no-review-message">
-          <p>You've already left a review for this exhibition.</p>
         </div>
       </div>
       <ng-template #works>

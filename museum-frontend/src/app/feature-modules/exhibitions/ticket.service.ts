@@ -21,4 +21,8 @@ export class TicketService {
   getTicketsByUserId(guestId: number): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(`${this.apiUrl}/guest/${guestId}`);
   }
+
+  hasUserPurchasedTicket(exhibitionId: number, guestId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/exhibition/${exhibitionId}/guest/${guestId}/has-ticket`);
+  }
 }

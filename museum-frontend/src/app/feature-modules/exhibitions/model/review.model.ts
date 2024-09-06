@@ -7,7 +7,6 @@ export interface Review {
     exhibitionId: number;
     exhibitionName: string;
     rating: number;
-    comment: string;
     reviewDate: string;
 }
 
@@ -15,5 +14,4 @@ export interface CreateReview {
     guestId: number;
     exhibitionId: number;
     rating: number;
-    comment: string;
 }

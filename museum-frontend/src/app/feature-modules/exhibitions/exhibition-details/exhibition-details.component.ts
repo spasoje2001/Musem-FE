@@ -11,6 +11,8 @@ import { CreateReview, Review } from '../model/review.model';
 import { ReviewService } from '../review.service';
 import { NotificationService } from '../../notifications/notification.service';
 import { GuestService } from '../../stakeholder/services/guest.service';
+import { CommentService } from '../comment.service';
+import { Comment } from '../model/comment.model';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -18,13 +20,12 @@ import { GuestService } from '../../stakeholder/services/guest.service';
   styleUrls: ['./exhibition-details.component.css']
 })
 export class ExhibitionDetailsComponent {
-
   exhibition!: Exhibition;
   visibleItems: any[] = [];
   itemsToShow = 3;
   selectedItem: any = null;
   user: User | undefined;
-  reviews: Review[] = [];  // Store the fetched reviews
+  comments: Comment[] = [];  // Store the fetched comments
   viewMode: string = 'highlights';
   
   isBookingModalOpen = false;
@@ -33,14 +34,12 @@ export class ExhibitionDetailsComponent {
   totalCost = 0;
   currentRating = 0;       // Track the rating selected by the user
   newComment = '';         // Track the user's comment
-  hasUserReviewed = false;
-
+ 
+  hasReviewed = false;
   hasTicket: boolean = false;
 
   fullStars: number = 0;
   hasHalfStar: boolean = false;
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -49,20 +48,17 @@ export class ExhibitionDetailsComponent {
     private snackBar: MatSnackBar,
     private ticketService: TicketService,
     private reviewService: ReviewService,
+    private commentService: CommentService, 
     private notificationService: NotificationService
   ) {}
 
   
 ngOnInit() {
-  
-
   const id = this.route.snapshot.params['id'];
-  console.log(this.hasTicket);
   this.authService.user$.subscribe(user => {
     this.user = user;
     if (this.user && this.user.role === 'GUEST') {
       this.checkIfUserHasTicket(id);
-      
     }
   });
   this.exhibitionService.getExhibitionById(id).subscribe({
@@ -70,7 +66,7 @@ ngOnInit() {
       this.exhibition = exhibition;
       this.calculateStars();
       this.visibleItems = this.exhibition.itemReservations.slice(0, this.itemsToShow);
-      this.checkIfUserHasReviewed();
+      this.checkIfUserHasReviewed(id);
     },
     error: (err) => {
       console.error('Error fetching exhibition:', err);
@@ -78,33 +74,37 @@ ngOnInit() {
   });
 }
 
-checkIfUserHasReviewed(): void {
-  if (this.user && this.reviews) {
-    console.log("tu sam");
-    console.log(this.hasUserReviewed);
-    console.log("Reviewovi: ", this.reviews);
-    console.log("Id korisnika: ", this.user!.id);
-    this.hasUserReviewed = this.reviews.some(review => review.guestId === this.user!.id);
-    console.log(this.hasUserReviewed);
-  }
-}
 
 calculateStars() {
-  // Računanje broja punih zvezdica i poluzvezdice na osnovu prosečne ocene
   this.fullStars = Math.floor(this.exhibition.averageRating);
   this.hasHalfStar = (this.exhibition.averageRating - this.fullStars) >= 0.5;
 }
 
 checkIfUserHasTicket(exhibitionId: number) {
-  console.log('Checking tickets for exhibitionId:', exhibitionId);
-  this.ticketService.getTicketsByUserId(this.user!.id).subscribe({
-    next: (tickets: Ticket[]) => {
-      console.log('Fetched tickets:', tickets);
-      this.hasTicket = tickets.some(ticket => ticket.exhibitionId === +exhibitionId);
+  console.log('Checking if user has ticket for exhibitionId:', exhibitionId);
+  // Poziv metode koja proverava da li korisnik ima kartu za izložbu
+  this.ticketService.hasUserPurchasedTicket(exhibitionId, this.user!.id).subscribe({
+    next: (hasTicket: boolean) => {
+      this.hasTicket = hasTicket;
       console.log('Has ticket:', this.hasTicket);
     },
     error: (err) => {
-      console.error('Error checking tickets:', err);
+      console.error('Error checking ticket:', err);
+    }
+  });
+}
+
+checkIfUserHasReviewed(exhibitionId: number): void {
+  console.log('Checking if user has reviewed exhibitionId:', exhibitionId);
+
+  // Poziv metode koja proverava da li je korisnik ostavio recenziju za izložbu
+  this.reviewService.hasUserReviewedExhibition(exhibitionId, this.user!.id).subscribe({
+    next: (hasReviewed: boolean) => {
+      this.hasReviewed = hasReviewed;
+      console.log('Has reviewed:', this.hasReviewed);
+    },
+    error: (err) => {
+      console.error('Error checking review:', err);
     }
   });
 }
@@ -223,16 +223,15 @@ setViewMode(mode: string) {
   this.viewMode = mode;
 
   if (mode === 'comments') {
-    this.fetchReviews();
+    this.fetchComments();
   }
 }
 
-fetchReviews() {
-  this.reviewService.getReviewsByExhibitionId(this.exhibition.id).subscribe({
-    next: (reviews: Review[]) => {
-      console.log(reviews);
-      this.reviews = reviews;
-      this.checkIfUserHasReviewed();
+fetchComments() {
+  this.commentService.getCommentsByExhibitionId(this.exhibition.id).subscribe({
+    next: (comments: Comment[]) => {
+      console.log(comments);
+      this.comments = comments;
     },
     error: (err) => {
       console.error('Error fetching reviews:', err);
@@ -245,8 +244,8 @@ setRating(rating: number) {
 }
 
 submitReview() {
-  if (this.currentRating === 0 || this.newComment.trim() === '') {
-    alert('Please provide a rating and a comment.');
+  if (this.currentRating === 0) {
+    alert('Please provide a rating.');
     return;
   }
 
@@ -254,22 +253,12 @@ submitReview() {
     guestId: this.user?.id ?? 0, // Adjust according to your actual user object structure
     exhibitionId: this.exhibition.id,
     rating: this.currentRating,
-    comment: this.newComment,
   };
 
   // Assuming reviewService.addReview() sends the review to the backend
   this.reviewService.addReview(newReview).subscribe({
-    next: (review: Review) => {
-      this.fetchReviews(); // Add the new review to the list
-      this.resetForm();
-      this.notificationService.notifyNewReview(review.id).subscribe(
-        () => {
-          console.log('Review notification sent successfully');
-        },
-        (error) => {
-          console.error('Error sending review notification:', error);
-        }
-      );
+    next: () => {
+      this.checkIfUserHasReviewed(this.exhibition.id);
     },
     error: () => {
       alert('Failed to submit the review. Please try again.');
@@ -278,7 +267,6 @@ submitReview() {
 }
 
 resetForm() {
-  this.currentRating = 0;
   this.newComment = '';
 }
 
@@ -286,7 +274,7 @@ isLoggedIn(): boolean{
     return this.user!.role === 'GUEST' || this.user!.role === 'ORGANIZER' || 
     this.user!.role === 'ADMIN' || this.user!.role === 'CURATOR';
 }
-
+/*
 shouldShowReviewForm(): boolean {
   return this.exhibition! && 
          (this.exhibition.status === 'OPENED' || this.exhibition.status === 'CLOSED') && 
@@ -317,5 +305,6 @@ shouldHideReviewSection(): boolean {
   return this.isLoggedIn() && 
          (this.user!.role !== 'GUEST');
 }
+         */
 
 }
