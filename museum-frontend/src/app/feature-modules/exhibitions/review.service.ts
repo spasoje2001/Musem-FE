@@ -26,4 +26,10 @@ export class ReviewService {
       params: { userId: userId.toString() }
     });
   }
+
+  getUserRatingForExhibition(exhibitionId: number, userId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/exhibition/${exhibitionId}/user-rating`, {
+      params: { userId: userId.toString() }
+    });
+  }
 }

@@ -46,6 +46,24 @@
           <p>This exhibition is closed. Ticket booking is no longer available.</p>
         </div>
       </div>
+      <!-- Proveravamo da li korisnik ima kartu i da li je već ocenio izložbu -->
+      <div *ngIf="hasTicket">
+        <!-- Ako je korisnik već ocenio izložbu -->
+        <div *ngIf="hasReviewed" class="rating-container">
+          <p>Your rating</p>
+          <div class="user-rating">
+            <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
+                  [ngClass]="{'filled': i < userRating}">
+              ★
+            </span>
+          </div>
+        </div>
+        
+        <!-- Ako korisnik ima kartu, ali nije ocenio izložbu -->
+        <div *ngIf="!hasReviewed">
+          <button class="rate-exhibition-button" (click)="openRatingModal()">Rate Exhibition</button>
+        </div>
+      </div>
     </div>
     <div class="selected-works">
       <h3>{{ viewMode === 'comments' ? 'Comments' : 'Selected Works' }}</h3>

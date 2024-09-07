@@ -139,6 +139,33 @@
   cursor: not-allowed; /* Kursur koji pokazuje da dugme nije klikabilno */
 }
 
+  .rating-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .user-rating span {
+    font-size: 30px;
+    color: gold;
+    margin-right: 5px;
+  }
+
+  .rate-exhibition-button {
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .rate-exhibition-button:hover {
+    background-color: #005bb5;
+  }
+
+
 .content-container {
   display: flex;
   flex-direction: row;

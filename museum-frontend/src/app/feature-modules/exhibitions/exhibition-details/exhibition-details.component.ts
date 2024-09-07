@@ -38,6 +38,7 @@ export class ExhibitionDetailsComponent {
 
   hasReviewed = false;
   hasTicket: boolean = false;
+  userRating: number = 0;
 
   fullStars: number = 0;
   hasHalfStar: boolean = false;
@@ -69,6 +70,7 @@ ngOnInit() {
       this.calculateStars();
       this.visibleItems = this.exhibition.itemReservations.slice(0, this.itemsToShow);
       this.checkIfUserHasReviewed(id);
+      
     },
     error: (err) => {
       console.error('Error fetching exhibition:', err);
@@ -104,11 +106,33 @@ checkIfUserHasReviewed(exhibitionId: number): void {
     next: (hasReviewed: boolean) => {
       this.hasReviewed = hasReviewed;
       console.log('Has reviewed:', this.hasReviewed);
+      if (this.hasReviewed) {
+        console.log("Provera ocene");
+        this.getUserRating(exhibitionId);
+      }
     },
     error: (err) => {
       console.error('Error checking review:', err);
     }
   });
+}
+
+getUserRating(exhibitionId: number) {
+  this.reviewService.getUserRatingForExhibition(exhibitionId, this.user!.id).subscribe({
+    next: (rating: number) => {
+      this.userRating = rating;
+      console.log("rating: ", this.userRating);
+    },
+    error: (err) => {
+      console.error('Error fetching user rating:', err);
+    }
+  });
+}
+
+// Otvori modal za ocenjivanje
+openRatingModal() {
+  // Ova metoda će otvoriti modal gde korisnik može oceniti izložbu
+  // To ćemo kreirati u sledećem koraku
 }
 
 showMore() {
