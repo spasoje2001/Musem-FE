@@ -230,21 +230,39 @@ setViewMode(mode: string) {
 }
 
 fetchComments() {
+  // Sačuvaj trenutno stanje `showReplies` i `showReplyForm` za svaki komentar
+  const repliesState = this.comments.map(comment => ({
+    id: comment.id,
+    showReplies: comment.showReplies,
+    showReplyForm: comment.showReplyForm
+  }));
+
+  // Fetch the comments from the backend
   this.commentService.getCommentsByExhibitionId(this.exhibition.id).subscribe({
     next: (comments: Comment[]) => {
       this.comments = comments.map(comment => ({
         ...comment,
-        showReplies: false, // Initially hide replies
-        showReplyForm: false, // Initially hide the reply form
+        showReplies: false, // Set default false when fetched
+        showReplyForm: false, // Set default false when fetched
       }));
 
-      console.log("fetchovani komentari: ", this.comments);
+      console.log(this.comments);
+
+      // Nakon što su komentari osveženi, obnovi prethodno stanje
+      this.comments.forEach(comment => {
+        const savedState = repliesState.find(state => state.id === comment.id);
+        if (savedState) {
+          comment.showReplies = savedState.showReplies;
+          comment.showReplyForm = savedState.showReplyForm;
+        }
+      });
     },
     error: (err) => {
-      console.error('Error fetching reviews:', err);
+      console.error('Error fetching comments:', err);
     }
   });
 }
+
 
 toggleReplies(commentId: number) {
   const comment = this.comments.find(c => c.id === commentId);
@@ -278,9 +296,14 @@ submitReply(parentCommentId: number) {
   };
 
   this.commentService.addComment(reply).subscribe({
-    next: () => {
+    next: (newReply) => {
       this.replyText = ''; // Reset the reply text
-      this.fetchComments(); // Refresh comments
+      // Ažuriraj lokalno odgovore bez poziva fetchComments()
+      const parentComment = this.comments.find(c => c.id === parentCommentId);
+      if (parentComment) {
+        parentComment.responses.push(newReply); // Dodaj novi odgovor lokalno
+        parentComment.showReplies = true; // Održi da je dropdown otvoren
+      }
     },
     error: () => {
       alert('Failed to submit reply. Please try again.');
@@ -288,32 +311,40 @@ submitReply(parentCommentId: number) {
   });
 }
 
+
 submitComment() {
-  if (this.newComment == '') {
+  if (this.newComment === '') {
     alert('Please insert a comment.');
     return;
   }
 
   const newComment: CreateComment = {
-    userId: this.isLoggedIn() ? this.user!.id : null,  // Ako je korisnik ulogovan, uzmi njegov ID, inače prosledi null
+    userId: this.isLoggedIn() ? this.user!.id : null,
     exhibitionId: this.exhibition.id,
     comment: this.newComment,
     parentCommentId: null
   };
-  
-  console.log(newComment);
 
-  // Assuming reviewService.addReview() sends the review to the backend
+  // Sačuvaj trenutno stanje `showReplies` za svaki komentar
+  const repliesState = this.comments.map(comment => ({
+    id: comment.id,
+    showReplies: comment.showReplies,
+    showReplyForm: comment.showReplyForm,
+  }));
+
   this.commentService.addComment(newComment).subscribe({
     next: () => {
       this.newComment = '';
-      this.fetchComments();
+
+      // Ponovo dohvati komentare, ali zadrži stanje
+      this.fetchComments();  // fetchComments će sada obnoviti prethodno stanje
     },
     error: () => {
       alert('Failed to submit the comment. Please try again.');
     }
   });
 }
+
 
 submitReview() {
   if (this.currentRating === 0) {

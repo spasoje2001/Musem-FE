@@ -4,8 +4,8 @@ export interface Comment {
     userPicture: string;
     userFirstName: string;
     userLastName: string;
-    isUserCurator: boolean;
-    isUserOrganizer: boolean;
+    userCurator: boolean;
+    userOrganizer: boolean;
     exhibitionId: number;
     exhibitionName: string;
     responses: Comment[];  // Lista odgovora na ovaj komentar

@@ -54,13 +54,22 @@
           <div *ngFor="let comment of comments" class="comment-item">
             <img [src]="comment.userPicture" alt="{{ comment.userFirstName }}" class="guest-picture">
             <div class="comment-details">
-              <p><strong>{{ comment.userFirstName }} {{ comment.userLastName }}</strong></p>
-              <p class="comment-text">{{ comment.text }}</p>
+              <p><strong>{{ comment.userFirstName }} {{ comment.userLastName }} 
+                <span *ngIf="comment.userCurator" class="verified-badge curator-badge">
+                  <img src="assets/icons/verify.png" alt="Verified Icon" class="verify-icon"> Verified Curator
+                </span>
+                <span *ngIf="comment.userOrganizer" class="verified-badge organizer-badge">
+                  <img src="assets/icons/verify.png" alt="Verified Icon" class="verify-icon"> Verified Organizer
+                </span>
+              </strong></p>
+            
               <p class="comment-date">{{ comment.commentDate | date: 'mediumDate'}}</p>
+              <p class="comment-text">{{ comment.text }}</p>
               
-              <div *ngIf="comment.responses && comment.responses.length > 0" class="replies-button">
+              <div class="replies-button">
                 <button (click)="toggleReplies(comment.id)">
-                  {{ comment.responses.length }} {{ comment.responses.length > 1 ? 'Replies' : 'Reply' }} <span [class]="comment.showReplies ? 'arrow-up' : 'arrow-down'"></span>
+                  {{ comment.responses.length }} {{ comment.responses.length > 1 ? 'Replies' : 'Replies' }}
+                  <span [class]="comment.showReplies ? 'arrow-up' : 'arrow-down'"></span>
                 </button>
               </div>
 
@@ -68,18 +77,25 @@
                 <div *ngFor="let reply of comment.responses" class="reply-item">
                   <img [src]="reply.userPicture || 'default-avatar.png'" alt="{{ reply.userFirstName }}" class="guest-picture">
                   <div class="reply-details">
-                    <p><strong>{{ reply.userFirstName }} {{ reply.userLastName || 'Anonymous' }}</strong></p>
+                    <p><strong>{{ reply.userFirstName }} {{ reply.userLastName }} 
+                      <span *ngIf="reply.userCurator" class="verified-badge curator-badge">
+                          <img src="assets/icons/verify.png" alt="Verified Icon" class="verify-icon"> Verified Curator
+                      </span>
+                      <span *ngIf="reply.userOrganizer" class="verified-badge organizer-badge">
+                          <img src="assets/icons/verify.png" alt="Verified Icon" class="verify-icon"> Verified Organizer
+                      </span>
+                    </strong></p>
+                    <p class="comment-date">{{ reply.commentDate | date:'mediumDate' }}</p>
                     <p class="comment-text">{{ reply.text }}</p>
-                    <p class="comment-date">{{ reply.commentDate | date: 'mediumDate' }}</p>
+                    <p class="reply-date">{{ reply.commentDate | date:'mediumDate' }}</p>
                   </div>
                 </div>
-              </div>
-
-              <button class="reply-button" (click)="toggleReplyForm(comment.id)">Reply</button>
-              
-              <div *ngIf="comment.showReplyForm" class="reply-form">
-                <textarea [(ngModel)]="replyText" placeholder="Write your reply here..."></textarea>
-                <button (click)="submitReply(comment.id)">Submit Reply</button>
+      
+                <!-- Reply form under the last reply -->
+                <div class="reply-form">
+                  <textarea [(ngModel)]="replyText" placeholder="Write your reply here..."></textarea>
+                  <button (click)="submitReply(comment.id)">Submit Reply</button>
+                </div>
               </div>
 
             </div>

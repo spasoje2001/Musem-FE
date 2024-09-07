@@ -14,20 +14,18 @@
   text-align: center;
   min-height: 500px; /* Ensure the header has a sufficient height */
   width: 100%; /* Make the header span the full width of the viewport */
-  left: 50%; /* Center the header */
-  transform: translateX(-50%); /* Adjust for the full-width positioning */
 }
   
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-  
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
   
 .header-content {
   position: relative;
@@ -43,7 +41,36 @@
   font-size: 48px; /* Larger title font size */
   color: #fff;
 }
-  
+
+.rating1 {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.rating1 .filled {
+  color: gold; /* Zlata boja za pune zvezde */
+}
+
+.rating1 .half-filled::before {
+  content: "★";
+  color: gold;
+  position: absolute;
+  width: 50%;
+  overflow: hidden;
+}
+
+.rating1 .half-filled {
+  color: black; /* Crna boja za prazne zvezde */
+  position: relative;
+}
+
+.rating1 span {
+  font-size: 20px; /* Veličina zvezda */
+  color: black; /* Crna boja za prazne zvezde */
+  margin-right: 5px; /* Razmak između zvezdica */
+}
+
   
 .date {
   margin-top: 25px; /* Add margin to separate date from the title */
@@ -72,14 +99,22 @@
 }
 
 .booking-container .location {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
 .booking-container .price {
-  font-size: 1.1em;
+  font-size: 1.2em;
   margin-bottom: 10px;
+}
+
+.closed-exhibition-message {
+  text-align: center;
+  font-size: 1.1em;
+  color: #d9534f; /* Crvena boja za upozorenje */
+  margin-top: 10px;
+  font-weight: bold;
 }
   
 .book-tickets {
@@ -95,7 +130,6 @@
   transition: background-color 0.3s ease;
 }
 
-
 .book-tickets:hover {
   background-color: #c9302c; /* Darken the button color on hover */
 }
@@ -105,28 +139,15 @@
   cursor: not-allowed; /* Kursur koji pokazuje da dugme nije klikabilno */
 }
 
-
-.booking-container .price {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.booking-container .location {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-}
-  
 .content-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 40px;
   padding: 0 20px;
   position: relative; /* Ensure children can use absolute positioning */
   max-width: 80%; /* Limit width of the content area */
   margin: 40px auto; /* Center the content area */
 }
-
 
 .content {
   flex-grow: 1;
@@ -151,11 +172,6 @@
   margin-bottom: 20px;
 }
 
-.content .long-description {
-  margin-bottom: 40px;
-  line-height: 1.6;
-}
-
 .long-description {
   margin-bottom: 40px;
   line-height: 1.6;
@@ -168,558 +184,523 @@
   margin-top: 30px;
 }
   
-  .details {
-    background-color: #f8f8f8;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
+.details {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
 
-  .selected-works {
-    margin-top: 60px;
-    padding: 0 20px;
-  }
+.selected-works {
+  margin-top: 60px;
+  padding: 0 20px;
+}
   
-  .selected-works h3 {
-    font-size: 24px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
+.selected-works h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
 
-  .comments-container {
-    max-width: 60%; /* Restrict to central 60% */
-    margin: 0 auto;
-    max-height: 300px; /* Limit the height for scrolling */
-    overflow-y: scroll; /* Allow vertical scroll */
-    padding: 20px;
-  }
+.comments-container {
+  max-width: 60%; /* Restrict to central 60% */
+  margin: 0 auto;
+  max-height: 500px; /* Limit the height for scrolling */
+  overflow-y: scroll; /* Allow vertical scroll */
+  padding: 20px;
+}
   
-  .items-grid {
+.items-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.item {
+  flex: 1 1 30%;
+  max-width: 30%;
+  text-align: center;
+}
+  
+.item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.item img:hover {
+  transform: scale(1.05);
+}
+
+.item p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+.room-info, .floor-info, .room-number {
+  font-weight: normal;
+  padding-right: 5px; /* Add space between the information */
+}
+
+.show-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.show-more button {
+  padding: 10px 20px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 10%;
+}
+
+.show-more button:hover {
+  background-color: #005bb5;
+}
+
+.item-details-modal, .booking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.booking-modal-content {
+  background: #fff; /* Ensure the modal content has a white background */
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 500px; /* Make this smaller than the item details modal */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.booking-modal-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.booking-modal-content h1 strong,
+.booking-modal-content .ticket-type,
+.booking-modal-content .subtotal span {
+  color: #555; /* Softer gray color */
+  font-weight: bold;
+}
+
+.subtotal {
+  font-weight: bold;
+}
+
+.ticket-selection {
+  margin-top: 20px;
+}
+
+.ticket-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd; /* Add horizontal line */
+}
+
+.ticket-type {
+  font-weight: bold;
+}
+
+.ticket-controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push the controls to the far right */
+}
+
+.ticket-controls button {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ticket-quantity {
+  margin: 0 10px;
+  width: 20px;
+  text-align: center;
+}
+
+.ticket-price {
+  font-weight: bold;
+  margin-right: 10px; /* Add space between price and controls */
+  margin-left: 50%;
+}
+
+.total-cost {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+    
+.finish-booking {
+  padding: 12px 20px;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+}
+
+.finish-booking:hover {
+  background-color: #c9302c; /* Change to a darker shade on hover */
+}
+
+.finish-booking:disabled {
+  background-color: #ccc; /* Light gray background */
+  cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+}
+    
+.modal-content {
+  background: #fff;
+  padding: 40px;
+  max-width: 1200px;
+  width: 90%;
+  display: flex;
+  gap: 40px;
+  position: relative;
+  border-radius: 8px;
+  height: 600px; /* Set a fixed height for the modal */
+  overflow: hidden; /* Hide overflow content */
+}
+    
+.modal-left {
+  flex: 2;
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: 100%; /* Ensure it takes up the full height */
+  padding-right: 20px; /* Add padding to avoid text touching the scrollbar */
+}
+
+.modal-left h1 {
+  font-size: 38px; /* Veća veličina fonta za naziv stavke */
+  margin-bottom: 10px;
+  color: #333; /* Tamnija boja za bolje čitanje */
+}
+
+.modal-left p strong {
+  font-size: 20px; /* Veća veličina fonta za ime autora */
+  color: #555; /* Svetlija boja za ime autora */
+}
+    
+.modal-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.modal-right img {
+  max-width: 100%; /* Ensure the image doesn’t overflow its container */
+  max-height: 500px; /* Limit the height of the image */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+}
+    
+.item-details-table {
+  margin-top: 30px;
+  line-height: 1.6;
+}
+
+.item-details-table p {
+  font-size: 14px;
+  color: #666;
+}
+
+.item-details-table .label {
+  font-weight: bold;
+  width: 150px; /* Adjust width as needed */
+  display: inline-block;
+  vertical-align: top;
+}
+
+.item-details-table .value {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px; /* Space above the buttons */
+  padding-left: 0; /* Align with the content */
+}
+
+
+.toggle-buttons button {
+  background: none;
+  border: none;
+  color: #333; /* Default text color */
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 5px; /* Space for underline */
+}
+
+
+.toggle-buttons button.active {
+  color: #ff4081; /* Highlight color */
+  font-weight: bold;
+}
+
+.toggle-buttons button.active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #ff4081; /* Underline color */
+  position: absolute;
+  bottom: 0; /* Adjust this value to change underline position */
+  left: 0;
+}
+
+  .comment-item {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
   }
-  
-  .item {
-    flex: 1 1 30%;
-    max-width: 30%;
-    text-align: center;
+
+  .comment-details {
+    margin-left: 15px;
+    flex-grow: 1;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
   }
-  
-  .item img {
-    width: 100%;
-    height: auto;
+
+  .comment-date {
+    position: absolute;
+    right: 20px; /* Pomeranje od desne ivice */
+    top: 10px; /* Pomeranje od gornje ivice */
+    font-size: 12px;
+    color: #888;
+}
+
+
+  .comment-form {
+    max-width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
   }
   
-  .item img:hover {
-    transform: scale(1.05);
+  /* Heading for the review form */
+  .comment-form h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
   }
   
-  .item p {
-    margin-top: 10px;
+
+  /* Textarea for comment */
+  .comment-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     font-size: 16px;
-    color: #555;
+    resize: none; /* Prevent resizing */
+  }
+  
+  /* Submit button styling */
+  .comment-form button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 90%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .comment-form button:hover {
+    background-color: #005bb5;
+  }
+
+  .verified-badge {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px; /* Razmak između imena i bedža */
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.verify-icon {
+    width: 14px; /* Prilagodi širinu ikone */
+    height: 14px; /* Prilagodi visinu ikone */
+    margin-right: 5px; /* Razmak između ikone i teksta */
+    vertical-align: middle; /* Postavi ikonu na istu liniju sa tekstom */
+}
+
+.curator-badge {
+    background-color: gold;
+    color: black;
+}
+
+.organizer-badge {
+    background-color: darkorange;
+    color: black;
+}
+
+
+  
+  
+  .guest-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+
+
+  .reply-button {
+    margin-top: 10px;
+    float: right;
+  }
+
+  .reply-form {
+    width: calc(100% - 60px); /* Širina ista kao i reply-ovi, uzmimo u obzir padding */
+    margin-left: 60px; /* Poravnaj formu sa reply-ovima */
+    position: relative; /* Omogućava apsolutno pozicioniranje dugmeta unutar ove forme */
+  }
+
+  .reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+  }
+
+  .reply-form button {
+    margin-top: 10px;
+    float: right; /* Postavlja dugme u desni donji ugao ispod text area */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .arrow-up::after {
+    content: '▲';
+    font-size: 12px;
+    margin-left: 5px;
+  }
+  
+  .arrow-down::after {
+    content: '▼';
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
+  .reply-item {
+    display: flex;
+    align-items: flex-start; /* Osigurava da slika i tekst budu u liniji */
+    margin-top: 10px;
+    margin-left: 0; /* Smanji marginu ako je previše pomerala */
+  }
+  
+  .reply-details {
+    margin-left: 10px; /* Smanji marginu između slike i teksta odgovora */
+    background-color: #f1f1f1;
+    padding: 10px;
+    padding-bottom: 0;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .reply-date {
+    font-size: 12px;
+    color: #888;
+    margin-top: 10px;
+    text-align: left;
   }
   
 
-  .room-info,
-    .floor-info,
-    .room-number {
-        font-weight: normal;
-        padding-right: 5px; /* Add space between the information */
-    }
-
-    .show-more {
-      text-align: center;
-      margin-top: 20px;
-    }
-    
-    .show-more button {
-      padding: 10px 20px;
-      background-color: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 10%;
-    }
-    
-    .show-more button:hover {
-      background-color: #005bb5;
-    }
-
-    .item-details-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .booking-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.2); /* Dark semi-transparent background */
-      backdrop-filter: blur(10px); /* Optional: add blur to background */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .booking-modal-content {
-      background: #fff; /* Ensure the modal content has a white background */
-      padding: 30px;
-      border-radius: 8px;
-      max-width: 500px; /* Make this smaller than the item details modal */
-      width: 100%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .booking-modal-content h1 {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-
-    .booking-modal-content h1 strong,
-    .booking-modal-content .ticket-type,
-    .booking-modal-content .subtotal span {
-      color: #555; /* Softer gray color */
-      font-weight: bold;
-    }
-
-    .subtotal {
-      font-weight: bold;
-    }
-
-    .ticket-selection {
-      margin-top: 20px;
-    }
-    
-    .ticket-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ddd; /* Add horizontal line */
-    }
-    
-    .ticket-type {
-      font-weight: bold;
-    }
-    
-    .ticket-controls {
-      display: flex;
-      align-items: center;
-      margin-left: auto; /* Push the controls to the far right */
-    }
-    
-    .ticket-controls button {
-      width: 30px;
-      height: 30px;
-      background-color: #ddd;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    .ticket-quantity {
-      margin: 0 10px;
-      width: 20px;
-      text-align: center;
-    }
-    
-    .ticket-price {
-      font-weight: bold;
-      margin-right: 10px; /* Add space between price and controls */
-      margin-left: 50%;
-    }
-    
-    .total-cost {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .finish-booking {
-      padding: 12px 20px;
-      background-color: #d9534f;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
-    }
-    
-    .finish-booking:hover {
-      background-color: #c9302c; /* Change to a darker shade on hover */
-    }
-
-    .finish-booking:disabled {
-      background-color: #ccc; /* Light gray background */
-      cursor: not-allowed; /* Change cursor to indicate it's not clickable */
-    }
-    
-    .modal-content {
-      background: #fff;
-      padding: 40px;
-      max-width: 1200px;
-      width: 90%;
-      display: flex;
-      gap: 40px;
-      position: relative;
-      border-radius: 8px;
-      height: 600px; /* Set a fixed height for the modal */
-      overflow: hidden; /* Hide overflow content */
-    }
-    
-    .modal-left {
-      flex: 2;
-      overflow-y: auto; /* Enable vertical scrolling */
-      height: 100%; /* Ensure it takes up the full height */
-      padding-right: 20px; /* Add padding to avoid text touching the scrollbar */
-    }
-
-    .modal-left h1 {
-      font-size: 38px; /* Veća veličina fonta za naziv stavke */
-      margin-bottom: 10px;
-      color: #333; /* Tamnija boja za bolje čitanje */
-    }
-    
-    .modal-left p strong {
-      font-size: 20px; /* Veća veličina fonta za ime autora */
-      color: #555; /* Svetlija boja za ime autora */
-    }
-    
-    .modal-right {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    
-    .modal-right img {
-      max-width: 100%; /* Ensure the image doesn’t overflow its container */
-      max-height: 500px; /* Limit the height of the image */
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      position: absolute;
-    }
-    
-    .item-details-table {
-      margin-top: 30px;
-      line-height: 1.6;
-    }
-    
-    .item-details-table p {
-      font-size: 14px;
-      color: #666;
-    }
-    
-    .item-details-table .label {
-      font-weight: bold;
-      width: 150px; /* Adjust width as needed */
-      display: inline-block;
-      vertical-align: top;
-    }
-    
-    .item-details-table .value {
-      display: inline-block;
-      vertical-align: top;
-    }
-    
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .comment-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-      width: 100%; /* Komentari zauzimaju punu širinu */
-    }
-
-    .reply-item {
-      margin-top: 10px;
-      margin-left: 40px; /* Manje uvlačenje za odgovore */
-    }
-
-    .reply-details {
-      margin-left: 60px;
-      background-color: #f1f1f1;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .comment-details {
-      margin-left: 15px;
-      flex-grow: 1;
-      background-color: #f9f9f9;
-      padding: 15px;
-      border-radius: 8px;
-    }
-
-    
-    .reply-button {
-      background: none;
-      border: none;
-      color: #007bff;
-      cursor: pointer;
-      margin-top: 10px;
-    } 
-    
-    .reply-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .reply-form button {
-      margin-top: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .arrow-up::after {
-      content: '▲';
-      font-size: 12px;
-      margin-left: 5px;
-    }
-    
-    .arrow-down::after {
-      content: '▼';
-      font-size: 12px;
-      margin-left: 5px;
-    }
-    
-    .replies-button {
-      margin-top: 10px;
-    }
-    
-    .replies-container {
-      margin-top: 10px;
-    }
-    
-    /* Image of the guest */
-    .guest-picture {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
-    
-    /* Review details */
-    .review-details {
-      flex-grow: 1;
-      position: relative;
-    }
-    
-    .rating .star {
-      color: #ccc;
-      font-size: 20px;
-    }
-    
-    .rating .star.filled {
-      color: #ffcc00;
-    }
-    
-    .review-comment {
-      max-width: 90%; /* Limit the width of the comment to prevent overlap */
-      word-wrap: break-word; /* Break long words to prevent overflow */
-      margin-bottom: 10px; /* Space between comment and date */
+  .replies-button button {
+    background: none;
+    border: none;
+    color: #007bff; /* Use a blue color similar to a hyperlink */
+    cursor: pointer;
+    font-size: 14px;
   }
   
-  .review-date {
-      font-size: 0.9em;
-      color: #777;
-      text-align: right;
-      margin-left: auto; /* Push the date to the right */
+  .replies-button button:hover{
+    text-decoration: underline;
   }
+  
+  .replies-button {
+    margin-top: 10px;
+  }
+  
+  .replies-container {
+    margin-top: 10px;
+  }
+  
+  /* Image of the guest */
+  
+  
 
-    .comment-form {
-      max-width: 60%;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-
-    
-    /* Heading for the review form */
-    .comment-form h3 {
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-    
-    /* Star rating in the form */
-    .review-form .stars {
-      display: flex;
-      margin-bottom: 20px;
-    }
-    
-    .review-form .stars .star {
-      font-size: 30px;
-      cursor: pointer;
-    }
-    
-    .review-form .stars .star.filled {
-      color: #ffcc00;
-    }
-    
-    /* Textarea for comment */
-    .comment-form textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-      resize: none; /* Prevent resizing */
-    }
-    
-    /* Submit button styling */
-    .comment-form button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #0066cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 90%;
-      transition: background-color 0.3s ease;
-    }
-    
-    .comment-form button:hover {
-      background-color: #005bb5;
-    }    
-
-    .show-reviews {
-      text-align: left; /* Aligns the button to the left */
-      margin-top: 20px; /* Add some space above the button */
-      margin-left: 15%; /* Adjust the position */
-    }
-
-    .toggle-buttons {
-      display: flex;
-      gap: 30px;
-      margin-top: 20px; /* Space above the buttons */
-      padding-left: 0; /* Align with the content */
-    }
-    
-
-    .toggle-buttons button {
-      background: none;
-      border: none;
-      color: #333; /* Default text color */
-      font-size: 18px;
-      cursor: pointer;
-      position: relative;
-      padding-bottom: 5px; /* Space for underline */
-    }
+  
     
     
-    .toggle-buttons button.active {
-      color: #ff4081; /* Highlight color */
-      font-weight: bold;
-    }
-    
-    .toggle-buttons button.active::after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: #ff4081; /* Underline color */
-      position: absolute;
-      bottom: 0; /* Adjust this value to change underline position */
-      left: 0;
-    }
-
-    .no-review-message {
-      text-align: center;
-      font-size: 24px; /* Adjust this value to match the size of the "REVIEWS" heading */
-      color: #333; /* Use a similar color as the "REVIEWS" heading */
-      font-weight: bold;
-      margin-top: 20px; /* Adjust the margin to your liking */
-    }
-
-    .rating1 {
-      display: flex;
-      margin-top: 10px;
-      justify-content: center;
-    }
-    
-    .rating1 .filled {
-      color: gold; /* Zlata boja za pune zvezde */
-    }
-    
-    .rating1 .half-filled::before {
-      content: "★";
-      color: gold;
-      position: absolute;
-      width: 50%;
-      overflow: hidden;
-    }
-    
-    .rating1 .half-filled {
-      color: black; /* Crna boja za prazne zvezde */
-      position: relative;
-    }
-    
-    .rating1 span {
-      font-size: 20px; /* Veličina zvezda */
-      color: black; /* Crna boja za prazne zvezde */
-      margin-right: 5px; /* Razmak između zvezdica */
-    }
-
-    .closed-exhibition-message {
-      text-align: center;
-      font-size: 1.1em;
-      color: #d9534f; /* Crvena boja za upozorenje */
-      margin-top: 10px;
-      font-weight: bold;
-    }
     
     
     
