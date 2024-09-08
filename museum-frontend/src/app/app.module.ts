@@ -29,6 +29,7 @@ import { ExhibitionsModule } from './feature-modules/exhibitions/exhibitions.mod
 import { MatNativeDateModule } from '@angular/material/core';
 import { DeleteConfirmationDialogComponent } from './feature-modules/stakeholder/components/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { DateTransformPipe } from './feature-modules/exhibitions/date-transform.pipe';
 
 
 
@@ -46,6 +47,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AdministratorEditProfileComponent,
     AdministratorProfileComponent,
     DeleteConfirmationDialogComponent,
+    DateTransformPipe
   ],
   imports: [
     BrowserModule,

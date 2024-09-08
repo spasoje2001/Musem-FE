@@ -18,6 +18,7 @@ import { ExhibitionSearchComponent } from './exhibition-search/exhibition-search
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { ReviewSearchComponent } from './review-search/review-search.component';
 import { RateExhibitionModalComponent } from './rate-exhibition-modal/rate-exhibition-modal.component';
+import { DateTransformPipe } from './date-transform.pipe';
 
 
 
@@ -35,7 +36,8 @@ import { RateExhibitionModalComponent } from './rate-exhibition-modal/rate-exhib
     ExhibitionSearchComponent,
     ItemSearchComponent,
     ReviewSearchComponent,
-    RateExhibitionModalComponent
+    RateExhibitionModalComponent,
+    DateTransformPipe
   ],
   imports: [
     ReactiveFormsModule,

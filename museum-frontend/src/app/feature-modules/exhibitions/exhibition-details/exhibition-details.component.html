@@ -83,7 +83,8 @@
                 </span>
               </strong></p>
             
-              <p class="comment-date">{{ comment.commentDate | date: 'mediumDate'}}</p>
+              <p class="comment-date">{{ comment.commentDate | dateTransform | date: 'mediumDate' }}</p>
+
               <p class="comment-text">{{ comment.text }}</p>
               
               <div class="replies-button">
@@ -105,9 +106,8 @@
                           <img src="assets/icons/verify.png" alt="Verified Icon" class="verify-icon"> Verified Organizer
                       </span>
                     </strong></p>
-                    <p class="comment-date">{{ reply.commentDate | date:'mediumDate' }}</p>
                     <p class="comment-text">{{ reply.text }}</p>
-                    <p class="reply-date">{{ reply.commentDate | date:'mediumDate' }}</p>
+                    <p class="reply-date">{{ reply.commentDate |dateTransform | date:'mediumDate' }}</p>
                   </div>
                 </div>
       
