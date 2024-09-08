@@ -139,31 +139,52 @@
   cursor: not-allowed; /* Kursur koji pokazuje da dugme nije klikabilno */
 }
 
-  .rating-container {
-    margin-top: 20px;
+  .rating-section {
+    margin-top: 40px;
     text-align: center;
+    width: 15%; /* Isto kao booking container */
+    margin: 40px auto;
   }
+
+
+  .rating-container {
+    position: absolute; /* Postavi apsolutnu poziciju */
+    top: 250px; /* Pomeri ga ispod booking containera */
+    right: -497px; /* Poravnaj ga desno u odnosu na booking container */
+    width: 100%; /* Ostavi širinu da ostane fleksibilna */
+    text-align: center; /* Centriraj tekst unutar containera */
+    z-index: 1; /* Obezbedi da se prikaže iznad ostalih elemenata */
+  }
+  
 
   .user-rating span {
     font-size: 30px;
-    color: gold;
+    color: lightgray; /* Boja praznih zvezdica */
     margin-right: 5px;
   }
 
+  .user-rating .filled {
+    color: gold; /* Boja popunjenih zvezdica */
+  }
+  
+
   .rate-exhibition-button {
-    padding: 10px 20px;
-    background-color: #0066cc;
+    width: 12.5%; /* Da dugme bude iste širine kao i booking dugme */
+    padding: 12px;
+    background-color: #d9534f; /* Boja kao Book tickets */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 20px;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .rate-exhibition-button:hover {
-    background-color: #005bb5;
-  }
+  
+.rate-exhibition-button:hover {
+  background-color: #c9302c;
+}
 
 
 .content-container {

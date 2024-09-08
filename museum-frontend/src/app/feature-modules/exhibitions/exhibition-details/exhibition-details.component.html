@@ -47,20 +47,22 @@
         </div>
       </div>
       <!-- Proveravamo da li korisnik ima kartu i da li je već ocenio izložbu -->
-      <div *ngIf="hasTicket">
+      <div class = "rating-section"*ngIf="hasTicket">
         <!-- Ako je korisnik već ocenio izložbu -->
         <div *ngIf="hasReviewed" class="rating-container">
-          <p>Your rating</p>
+          <strong><p>Your rating</p></strong>
           <div class="user-rating">
             <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
-                  [ngClass]="{'filled': i < userRating}">
+                  [class.filled]="i < userRating">
               ★
             </span>
           </div>
         </div>
         
+        
+        
         <!-- Ako korisnik ima kartu, ali nije ocenio izložbu -->
-        <div *ngIf="!hasReviewed">
+        <div *ngIf="!hasReviewed" class="rating-container">
           <button class="rate-exhibition-button" (click)="openRatingModal()">Rate Exhibition</button>
         </div>
       </div>

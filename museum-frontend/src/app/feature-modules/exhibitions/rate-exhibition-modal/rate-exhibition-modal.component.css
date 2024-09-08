@@ -1,0 +1,62 @@
+.rate-exhibition-modal {
+    width: 400px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .star-widget {
+    margin-bottom: 20px;
+  }
+  
+  .star {
+    font-size: 40px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .star.filled {
+    color: #ffcc00;
+  }
+  
+  .review-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    height: 24px; /* Dodaj visinu da zadrži prostor i kad nema poruke */
+    visibility: visible; /* Prikazuje se ako ocena postoji */
+    transition: visibility 0.2s ease;
+  }
+  
+  .review-message.hidden {
+    visibility: hidden; /* Kada ocena nije izabrana */
+  }
+  
+  .btn {
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: #ffcc00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e6b800;
+  }
+  

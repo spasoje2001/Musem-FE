@@ -13,6 +13,8 @@ import { NotificationService } from '../../notifications/notification.service';
 import { GuestService } from '../../stakeholder/services/guest.service';
 import { CommentService } from '../comment.service';
 import { Comment, CreateComment } from '../model/comment.model';
+import { RateExhibitionModalComponent } from '../rate-exhibition-modal/rate-exhibition-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-exhibition-details',
@@ -51,7 +53,8 @@ export class ExhibitionDetailsComponent {
     private ticketService: TicketService,
     private reviewService: ReviewService,
     private commentService: CommentService, 
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private dialog: MatDialog
   ) {}
 
   
@@ -130,10 +133,65 @@ getUserRating(exhibitionId: number) {
 }
 
 // Otvori modal za ocenjivanje
-openRatingModal() {
-  // Ova metoda će otvoriti modal gde korisnik može oceniti izložbu
-  // To ćemo kreirati u sledećem koraku
+openRatingModal(): void {
+  const dialogRef = this.dialog.open(RateExhibitionModalComponent, {
+    width: '400px',
+    data: { /* prosledi podatke ako su potrebni */ }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result && result.rating) {
+      console.log('Rating submitted:', result.rating);
+
+      // Kreiraj objekat za slanje na backend
+      const newReview: CreateReview = {
+        guestId: this.user!.id, // Pretpostavljam da imaš user objekat sa guestId
+        exhibitionId: this.exhibition.id, // exhibitionId pretpostavljam da već imaš u komponenti
+        rating: result.rating
+      };
+
+      // Pozovi metodu iz review servisa da pošalješ ocenu na backend
+      this.reviewService.addReview(newReview).subscribe({
+        next: (response) => {
+          console.log('Review successfully created:', response);
+
+          // Osveži podatke o izložbi kako bi se prikazala nova prosečna ocena
+          this.exhibitionService.getExhibitionById(this.exhibition.id).subscribe({
+            next: (updatedExhibition: Exhibition) => {
+              this.exhibition = updatedExhibition;
+              this.calculateStars(); // Ažuriraj zvezdice nakon osvežavanja izložbe
+            },
+            error: (err) => {
+              console.error('Error refreshing exhibition:', err);
+            }
+          });
+
+          // Ponovo proveri da li je korisnik ocenio izložbu
+          this.checkIfUserHasReviewed(this.exhibition.id);
+
+          // Prikaži snackbar za uspešnu ocenu
+          this.snackBar.open('Thank you for your rating!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: ['success-snackbar']
+          });
+        },
+        error: (error) => {
+          console.error('Error creating review:', error);
+          this.snackBar.open('Failed to submit rating. Please try again.', 'Close', {
+            duration: 3000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'right',
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    }
+  });
 }
+
+
 
 showMore() {
   const nextItems = this.exhibition.itemReservations.slice(this.visibleItems.length, this.visibleItems.length + this.itemsToShow);

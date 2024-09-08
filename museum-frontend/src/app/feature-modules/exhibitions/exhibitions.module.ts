@@ -17,6 +17,7 @@ import { ProposalDetailsComponent } from './proposal-details/proposal-details.co
 import { ExhibitionSearchComponent } from './exhibition-search/exhibition-search.component';
 import { ItemSearchComponent } from './item-search/item-search.component';
 import { ReviewSearchComponent } from './review-search/review-search.component';
+import { RateExhibitionModalComponent } from './rate-exhibition-modal/rate-exhibition-modal.component';
 
 
 
@@ -33,7 +34,8 @@ import { ReviewSearchComponent } from './review-search/review-search.component';
     ProposalDetailsComponent,
     ExhibitionSearchComponent,
     ItemSearchComponent,
-    ReviewSearchComponent
+    ReviewSearchComponent,
+    RateExhibitionModalComponent
   ],
   imports: [
     ReactiveFormsModule,

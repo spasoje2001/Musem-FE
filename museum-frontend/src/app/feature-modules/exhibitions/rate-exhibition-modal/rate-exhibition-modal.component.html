@@ -1,0 +1,21 @@
+<div class="rate-exhibition-modal">
+    <h2>Rate Exhibition</h2>
+  
+    <div class="star-widget">
+      <span class="star" [class.filled]="rating >= 1" (click)="setRating(1)">&#9733;</span>
+      <span class="star" [class.filled]="rating >= 2" (click)="setRating(2)">&#9733;</span>
+      <span class="star" [class.filled]="rating >= 3" (click)="setRating(3)">&#9733;</span>
+      <span class="star" [class.filled]="rating >= 4" (click)="setRating(4)">&#9733;</span>
+      <span class="star" [class.filled]="rating >= 5" (click)="setRating(5)">&#9733;</span>
+    </div>
+  
+    <!-- Div za review message postoji uvek, samo je nevidljiv dok nije selektovana ocena -->
+    <div class="review-message" [ngClass]="{'hidden': rating === 0}">
+      <p>{{ getRatingMessage(rating) }}</p>
+    </div>
+  
+    <div class="btn">
+      <button (click)="submitRating()">Submit</button>
+    </div>
+  </div>
+  
