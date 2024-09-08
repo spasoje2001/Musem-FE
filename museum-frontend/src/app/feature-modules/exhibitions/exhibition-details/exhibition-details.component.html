@@ -47,7 +47,7 @@
         </div>
       </div>
       <!-- Proveravamo da li korisnik ima kartu i da li je već ocenio izložbu -->
-      <div class = "rating-section"*ngIf="hasTicket">
+      <div class = "rating-section"*ngIf="hasTicket && exhibition.status != 'READY_TO_OPEN'">
         <!-- Ako je korisnik već ocenio izložbu -->
         <div *ngIf="hasReviewed" class="rating-container">
           <strong><p>Your rating</p></strong>

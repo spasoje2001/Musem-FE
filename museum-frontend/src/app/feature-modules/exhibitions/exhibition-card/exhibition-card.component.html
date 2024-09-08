@@ -10,7 +10,7 @@
       <div class="info-row">
         <p class="exhibition-dates">{{exhibition.proposal.startDate }} - {{exhibition.proposal.endDate }}</p>
       </div>
-      <div class="info-row rating">
+      <div class="info-row rating" *ngIf="exhibition.status != 'READY_TO_OPEN'">
         <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
               [ngClass]="{'filled': i < fullStars, 'half-filled': i === fullStars && hasHalfStar}">
           ★

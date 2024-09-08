@@ -46,8 +46,7 @@ import { DateTransformPipe } from './feature-modules/exhibitions/date-transform.
     OrganizerEditProfileComponent,
     AdministratorEditProfileComponent,
     AdministratorProfileComponent,
-    DeleteConfirmationDialogComponent,
-    DateTransformPipe
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,

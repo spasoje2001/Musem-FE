@@ -89,7 +89,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: -50px; /* Position it above the content */
-  right: 12%;
+  right: 16%;
 }
 
 .booking-container hr {
@@ -149,8 +149,8 @@
 
   .rating-container {
     position: absolute; /* Postavi apsolutnu poziciju */
-    top: 250px; /* Pomeri ga ispod booking containera */
-    right: -497px; /* Poravnaj ga desno u odnosu na booking container */
+    top: -10px; /* Pomeri ga ispod booking containera */
+    right: -790px; /* Poravnaj ga desno u odnosu na booking container */
     width: 100%; /* Ostavi širinu da ostane fleksibilna */
     text-align: center; /* Centriraj tekst unutar containera */
     z-index: 1; /* Obezbedi da se prikaže iznad ostalih elemenata */
