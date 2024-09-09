@@ -6,7 +6,7 @@
   }
   
   .prompt h1 {
-    margin-top: 9%;
+    margin-top: 2%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin-top: 10%;
+    margin-top: 11%;
     gap: 30px;
     height: auto;
   }
@@ -63,13 +63,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1001;
-    background-color: rgba(255, 255, 255, .1);
+    background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);  /* Light gradient */
     padding: 20px;
-    backdrop-filter: blur(15px);
-    color: #fff;
-    border: 3px solid rgba(255, 255, 255, .2);
-    border-radius: 10px;
-  }
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);  /* Subtle shadow for depth */
+    color: #333;  /* Darker text for contrast */
+    border: 1px solid #ddd;  /* Thin, light-colored border */
+    border-radius: 12px;
+    width: 700px;  /* Maintain width */
+    max-width: 90%;  /* Responsive width */
+}
+
   
   .curator-choosing{
     margin-top: 25px;

@@ -120,7 +120,7 @@
 .book-tickets {
   width: 100%;
   padding: 12px;
-  background-color: #d9534f; /* Change button color to a more appealing red */
+  background-color: #d4a017; /* Change button color to a more appealing red */
   color: white;
   border: none;
   border-radius: 5px;
@@ -131,7 +131,7 @@
 }
 
 .book-tickets:hover {
-  background-color: #c9302c; /* Darken the button color on hover */
+  background-color: #B8860B; /* Darken the button color on hover */
 }
 
 .book-tickets:disabled {
@@ -171,7 +171,7 @@
   .rate-exhibition-button {
     width: 12.5%; /* Da dugme bude iste širine kao i booking dugme */
     padding: 12px;
-    background-color: #d9534f; /* Boja kao Book tickets */
+    background-color: #d4a017; /* Boja kao Book tickets */
     color: white;
     border: none;
     border-radius: 5px;
@@ -183,7 +183,7 @@
 
   
 .rate-exhibition-button:hover {
-  background-color: #c9302c;
+  background-color: #B8860B;
 }
 
 
@@ -305,7 +305,7 @@
 
 .show-more button {
   padding: 10px 20px;
-  background-color: #0066cc;
+  background-color: #d4a017;
   color: white;
   border: none;
   border-radius: 5px;
@@ -315,7 +315,7 @@
 }
 
 .show-more button:hover {
-  background-color: #005bb5;
+  background-color: #B8860B;
 }
 
 .item-details-modal, .booking-modal {
@@ -604,7 +604,7 @@
   .comment-form button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #0066cc;
+    background-color: #d4a017;
     color: white;
     border: none;
     border-radius: 5px;
@@ -614,7 +614,7 @@
   }
   
   .comment-form button:hover {
-    background-color: #005bb5;
+    background-color: #B8860B;
   }
 
   .verified-badge {
@@ -678,13 +678,14 @@
   .reply-form button {
     margin-top: 10px;
     float: right; /* Postavlja dugme u desni donji ugao ispod text area */
-    background-color: #007bff;
+    background-color: #d4a017;
     color: white;
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
   }
+
 
   .arrow-up::after {
     content: '▲';
@@ -725,7 +726,7 @@
   .replies-button button {
     background: none;
     border: none;
-    color: #007bff; /* Use a blue color similar to a hyperlink */
+    color: #5aa8fc; /* Use a blue color similar to a hyperlink */
     cursor: pointer;
     font-size: 14px;
   }

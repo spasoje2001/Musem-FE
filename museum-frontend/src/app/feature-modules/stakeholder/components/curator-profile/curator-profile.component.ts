@@ -7,6 +7,7 @@ import { Exhibition, ExhibitionProposal } from 'src/app/feature-modules/exhibiti
 import { ProposalService } from 'src/app/feature-modules/exhibitions/proposal.service';
 import { ExhibitionsService } from 'src/app/feature-modules/exhibitions/exhibitions.service';
 import { Router } from '@angular/router';
+import { PdfOrganizerExhibitionsPromptComponent } from 'src/app/feature-modules/exhibitions/pdf-organizer-exhibitions-prompt/pdf-organizer-exhibitions-prompt.component';
 
 @Component({
   selector: 'app-curator-profile',
@@ -136,23 +137,17 @@ getExhibitionStatusText(status: string): string {
   }
 }
 
+openReport(): void {
+  this.requestsReportButtonState = 'clicked';
+  setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
+  this.dialogRef = this.dialog.open(PdfCuratorExhibitionsPromptComponent, {
+  });
 
-
-
-
-/*
-  openOrganizerExhibitionsReportDialogue(): void {
-    this.requestsReportButtonState = 'clicked';
-    setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
-    this.dialogRef = this.dialog.open(PdfCuratorExhibitionsPromptComponent, {
+  if (this.dialogRef) {
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      this.loadData();
     });
-
-    if (this.dialogRef) {
-      this.dialogRef.afterClosed().subscribe((result: any) => {
-        this.loadData();
-      });
-    }
   }
-    */
+}
 
 }

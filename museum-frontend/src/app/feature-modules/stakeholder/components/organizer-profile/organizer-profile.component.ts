@@ -116,7 +116,7 @@ parseDate(dateString: string): Date {
     });
   }
 
-  openOrganizerExhibitionsReportDialogue(): void {
+  openReport(): void {
     this.requestsReportButtonState = 'clicked';
     setTimeout(() => { this.requestsReportButtonState = 'idle'; }, 200);
     this.dialogRef = this.dialog.open(PdfOrganizerExhibitionsPromptComponent, {
