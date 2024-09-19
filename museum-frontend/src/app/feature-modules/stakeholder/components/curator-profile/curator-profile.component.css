@@ -256,6 +256,10 @@
     transform: translateX(-50%);
 }
 
+.find-out-more-button:hover {
+    background-color: #4a4a4a; /* Svetlija nijansa sive */
+}
+
 .exhibitions-grid {
     align-items: center; /* Vertikalno centrira kartice unutar grid-a */
     justify-content: center; /* Horizontalno centrira grid unutar containera */
@@ -361,7 +365,7 @@
     width: 24px;
     cursor: pointer;
     position: absolute; /* Apsolutno pozicioniranje */
-    top: 10px; /* Udaljenost od vrha */
+    top: 62px; /* Udaljenost od vrha */
     right: 10px; /* Udaljenost od desnog ivica */
 }
 

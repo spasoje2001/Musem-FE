@@ -78,7 +78,29 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 kolone u mreži */
   gap: 20px;
+  max-height: 760px; /* 3 rows, adjust based on actual card height including gap */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px;
 }
+
+.items-grid::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+}
+
+.items-grid::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the part the scrollbar can move within */
+}
+
+.items-grid::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar itself */
+}
+
+.items-grid::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovered over */
+}
+
+
+
 
 .item-card {
   width: 100%; /* Kartica će automatski zauzeti 1/4 širine kontejnera */

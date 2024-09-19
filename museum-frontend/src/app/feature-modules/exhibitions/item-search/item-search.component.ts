@@ -11,7 +11,11 @@ export class ItemSearchComponent {
   @Output() searchCriteriaChanged = new EventEmitter<ExhibitionSearchRequestDTO>();
 
 
-  itemCategories = Object.values(ItemCategory);
+  itemCategories: { key: string, value: string }[] = []; // Adjusted property type
+
+  constructor() {
+    this.itemCategories = Object.entries(ItemCategory).map(([key, value]) => ({ key, value }));
+  }
 
   onSearchChange() {
     this.searchCriteriaChanged.emit(this.searchCriteria);

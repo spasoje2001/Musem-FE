@@ -29,9 +29,11 @@
       <div class="form-group">
         <label for="theme">Theme</label>
         <select id="theme" [(ngModel)]="searchCriteria.theme" name="theme" (change)="onSearchChange()">
-          <option *ngFor="let theme of themes" [value]="theme">{{ theme }}</option>
+          <option [ngValue]="undefined" selected>Choose a theme</option>
+          <option *ngFor="let theme of themes" [ngValue]="theme.key">{{ theme.value }}</option>
         </select>
       </div>
+      
       
 
     

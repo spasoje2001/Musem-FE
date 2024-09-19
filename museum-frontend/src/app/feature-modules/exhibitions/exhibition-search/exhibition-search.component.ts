@@ -11,7 +11,11 @@ export class ExhibitionSearchComponent {
   @Output() searchCriteriaChanged = new EventEmitter<ExhibitionSearchRequestDTO>();
 
 
-  themes = Object.values(ExhibitionTheme);
+  themes: { key: string, value: string }[] = [];
+
+  constructor() {
+    this.themes = Object.entries(ExhibitionTheme).map(([key, value]) => ({ key, value }));
+  }
 
   ngOnInit(): void {
     console.log("init")

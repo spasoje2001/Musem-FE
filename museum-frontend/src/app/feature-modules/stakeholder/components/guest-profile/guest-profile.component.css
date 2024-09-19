@@ -102,6 +102,7 @@
     max-height: 80vh;
     overflow-y: auto;
     padding-right: 10px;
+    min-height: calc(3 * 30vh + 2 * 20px);
 }
 
 .ticket-card {

@@ -25,6 +25,10 @@ export class GuestProfileComponent implements OnInit {
     this.guestService.getLoggedInGuest().subscribe(guest => {
       this.guest = guest;
       if (guest) {
+        console.log('Gost: ', guest);
+        if(!guest.picture){
+          guest.picture = 'assets/default-profile-picture.png';
+        }
         this.loadTickets(guest.id);
       }
     });

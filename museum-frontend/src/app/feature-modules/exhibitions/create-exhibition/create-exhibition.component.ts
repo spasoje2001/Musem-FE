@@ -20,7 +20,8 @@ import { NotificationService } from '../../notifications/notification.service';
 })
 export class CreateExhibitionComponent implements OnInit {
   exhibitionForm: FormGroup;
-  themes = Object.values(ExhibitionTheme); // Replace with actual enum values
+  themes: { key: string, value: string }[] = []; // Initialize here to an empty array
+  themeLabels = Object.values(ExhibitionTheme); // Ovo će dati vrednosti za prikaz u dropdown
   allItems: Item[] = []; // Ovo će sadržavati sve iteme
   filteredItems: Item[] = []; // This will be populated with items filtered based on search
   proposal!: ExhibitionProposal;
@@ -32,6 +33,7 @@ export class CreateExhibitionComponent implements OnInit {
   selectedItems: number[] = [];
   user: User | undefined;
   isEditMode = false;
+  ExhibitionTheme = ExhibitionTheme;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +53,7 @@ export class CreateExhibitionComponent implements OnInit {
       picture: ['', Validators.required],
       longDescription: ['', Validators.required]
     });
+    this.themes = Object.entries(ExhibitionTheme).map(([key, value]) => ({ key, value }));
   }
 
   ngOnInit(): void {

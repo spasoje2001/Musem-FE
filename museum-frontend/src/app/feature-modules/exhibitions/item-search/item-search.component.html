@@ -23,9 +23,15 @@
       <div class="form-group">
         <label for="itemCategory">Category</label>
         <select id="itemCategory" [(ngModel)]="searchCriteria.itemCategory" name="itemCategory" (change)="onSearchChange()">
-          <option *ngFor="let category of itemCategories" [value]="category">{{ category }}</option>
+          <!-- Default option that allows users to select a category -->
+          <option [ngValue]="undefined" selected>Select a Category</option>
+          <!-- Loop through itemCategories and display each with the readable value while binding the enum key -->
+          <option *ngFor="let category of itemCategories" [ngValue]="category.key">
+            {{ category.value }}
+          </option>
         </select>
       </div>
+      
 
       <div class="form-group">
         <label for="itemDescription">Description</label>
