@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Exhibition } from '../model/exhibition.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExhibitionsService } from '../exhibitions.service';
 import { AuthService } from 'src/app/infrastructure/auth/auth.service';
 import { User } from 'src/app/infrastructure/auth/model/user.model';
@@ -30,6 +30,7 @@ export class ExhibitionDetailsComponent {
   comments: Comment[] = [];  // Store the fetched comments
   viewMode: string = 'highlights';
   
+  
   isBookingModalOpen = false;
   adultTickets = 0;
   minorTickets = 0;
@@ -54,7 +55,8 @@ export class ExhibitionDetailsComponent {
     private reviewService: ReviewService,
     private commentService: CommentService, 
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router,
   ) {}
 
   
@@ -285,6 +287,7 @@ finishBooking() {
       this.notificationService.notifyPurchaseConfirmation(ticket.id).subscribe(
         () => {
           console.log('Purchase notification sent successfully');
+          this.notificationService.refreshNotifications();
         },
         (error) => {
           console.error('Error sending purchase notification:', error);
@@ -352,6 +355,12 @@ toggleReplies(commentId: number) {
     comment.showReplies = !comment.showReplies;
   }
 }
+
+goToLogin() {
+  this.router.navigate(['/login']); // Navigacija na profilnu stranicu
+}
+
+
 
 toggleReplyForm(commentId: number) {
   const comment = this.comments.find(c => c.id === commentId);

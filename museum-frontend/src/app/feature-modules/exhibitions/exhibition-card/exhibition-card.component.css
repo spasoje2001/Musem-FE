@@ -65,6 +65,10 @@
     transform: translateX(-50%);
 }
 
+.find-out-more-button:hover {
+  background-color: #4a4a4a; /* Svetlija nijansa sive */
+}
+
 .rating {
   display: flex;
   margin-top: 10px;

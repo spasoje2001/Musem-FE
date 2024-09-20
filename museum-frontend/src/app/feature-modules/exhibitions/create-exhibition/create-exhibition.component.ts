@@ -202,6 +202,7 @@ openProposalDetails(): void {
             this.notificationService.notifyExhibitionUpdate(this.exhibitionId!).subscribe(() => {
               console.log('Notification for exhibition update sent successfully.');
             });
+            this.router.navigate(['/profile']);
             //this.router.navigate(['/exhibitions-view']);
           },
           error => {

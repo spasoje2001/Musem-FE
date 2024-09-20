@@ -41,7 +41,7 @@
         <p class="price">minors ${{ exhibition.proposal.priceList.minorPrice }}</p>
         <hr>
         <button class="book-tickets" *ngIf="user && user.role === 'GUEST'" (click)="openBookingModal()" [disabled]="exhibition.status === 'CLOSED'">Book tickets</button>
-        <button class="book-tickets" *ngIf="user && user.role === '' ">Log in to book tickets</button>
+        <button class="book-tickets" *ngIf="user && user.role === '' " (click)="goToLogin()">Log in to book tickets</button>
         <div *ngIf="exhibition.status === 'CLOSED'" class="closed-exhibition-message">
           <p>This exhibition is closed. Ticket booking is no longer available.</p>
         </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/env/environment';
 import { NotificationResponse } from './model/notification.model';
 
@@ -11,8 +11,18 @@ import { NotificationResponse } from './model/notification.model';
 export class NotificationService {
 
   private baseUrl = `${environment.apiHost}notifications`;
+  private notificationRefreshNeeded = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  refreshNotifications() {
+    this.notificationRefreshNeeded.next(true);
+  }
+
+  // Observable to subscribe to for refresh triggers
+  get notificationRefreshNeeded$() {
+    return this.notificationRefreshNeeded.asObservable();
+  }
 
   getNotificationsByUserId(userId: number): Observable<NotificationResponse[]> {
     return this.http.get<NotificationResponse[]>(`${this.baseUrl}/user/${userId}`);

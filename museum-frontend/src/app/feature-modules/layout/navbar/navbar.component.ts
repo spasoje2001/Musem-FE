@@ -24,6 +24,7 @@ import {
 import { NotificationService } from '../../notifications/notification.service';
 import { NotificationResponse, NotificationType } from '../../notifications/model/notification.model';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -37,8 +38,17 @@ export class NavbarComponent {
   user: User | undefined;
   notifications: NotificationResponse[] = [];
   unreadNotificationsCount = 0;
+  private notificationSubscription: Subscription;
 
-  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {}
+  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router) {
+    this.notificationSubscription = this.notificationService.notificationRefreshNeeded$.subscribe(
+      (needRefresh) => {
+        if (needRefresh) {
+          this.loadNotifications();  // Call your method to load or refresh notifications
+        }
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
@@ -110,6 +120,10 @@ export class NavbarComponent {
         });
       });
     }
+  }
+  
+  ngOnDestroy(): void {
+    this.notificationSubscription.unsubscribe();  // Prevent memory leaks
   }
 
   
